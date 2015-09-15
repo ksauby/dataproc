@@ -12,4 +12,7 @@ mysum1(x)
 \description{
 Return NA for sums below 1
 }
+\references{
+inspired by: http://tolstoy.newcastle.edu.au/R/help/02a/3218.html
+}
 

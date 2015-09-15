@@ -12,4 +12,7 @@ mysum2(x)
 \description{
 Return 1 for sums greater than 0.
 }
+\references{
+inspired by: http://tolstoy.newcastle.edu.au/R/help/02a/3218.html
+}
 
