@@ -6,3 +6,4 @@ Description: Data processing and other miscellaneous functions (personal R packa
 Depends: R (>= 3.2.2)
 License: What license is it under?
 LazyData: true
+Imports: dplyr, magrittr

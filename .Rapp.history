@@ -1,0 +1,85 @@
+21.4*.813
+21.4 -21.4*.813
+library(lubridaste)
+library(lubrida=te)
+library(lubridate)
+-v
+install.packages("rgeos", repos="http://R-Forge.R-project.org")#
+require(rgeos)
+library(rgeos)
+require(rgeos)
+library(rgeos)
+install.packages("rgdal", repos="http://R-Forge.R-project.org")#
+require(rgdal)
+R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config#
+ --with-proj-include=/Library/Frameworks/PROJ.framework/Headers#
+ --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
+R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config--with-proj-include=/Library/Frameworks/PROJ.framework/Headers--with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
+library(lme3)
+library(lme4)
+300/241
+.244*30
+1.25*300
+1.25*240
+7*12
+7849-7527
+322/1353
+8028-7527
+501/1353
+8028-7957
+1353-501
+852/71
+7956-7878
+8176-8029
+8176-8092
+250*.75
+250*.25
+42*2 + 17*2
+118/19
+21/6.2
+59.5*.75
+59.5*.5 + 59.5
+71/12
+597/80
+597/8
+432/8
+15*8 + 9*3
+?seq_len
+7.25/3
+7.25/4
+for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
+install.packages("ProjectTemplate")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("data.table")
+install.packages("corrgram")
+install.packages("survival")
+install.packages("shapefiles")
+install.packages("rgdal")
+install.packages("PBSmapping")
+install.packages("sp")
+install.packages("gdistance")
+install.packages("chron")
+install.packages("unmarked")
+install.packages("lme4")
+install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
+require(rgeos)
+install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
+library(rgdal)
+install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
+library(dataproc)
+library(moderesproc)
+library(modresproc)
+library(dplr)
+library(dplyr)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./modresproc")#
+devtools::document()#
+devtools::install()
+library(modresproc)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()#
+devtools::install()
+library(dataproc)
