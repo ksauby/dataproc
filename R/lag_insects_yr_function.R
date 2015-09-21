@@ -1,5 +1,7 @@
 #' Calculate insect presence during the previous year
 #' @param x
+#' @description calculate lag insects during the previous year.
+
 lag_insects_yr_function <- function(x=x){
 	x %>% 
 		arrange(Date) %>%

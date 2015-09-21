@@ -1,5 +1,6 @@
 #' Calculate lag dates: Previous_Survey_Date, DaysSincePrevSurvey, DaysSinceStart
 #' @param x
+#' @description calculate lag dates.
 lag_dates_function <- function(x=x){
 	x %<>% 
 		arrange(Date) %>%

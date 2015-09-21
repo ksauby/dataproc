@@ -10,6 +10,6 @@ lag_size_fruit_function(x = x)
 \item{x}{}
 }
 \description{
-Calculate size and fruit production variables at the previous time step
+calculate lag size and fruit.
 }
 

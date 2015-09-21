@@ -10,6 +10,6 @@ lag_insects_yr_function(x = x)
 \item{x}{}
 }
 \description{
-Calculate insect presence during the previous year
+calculate lag insects during the previous year.
 }
 

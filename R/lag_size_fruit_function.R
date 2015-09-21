@@ -1,5 +1,7 @@
 #' Calculate size and fruit production variables at the previous time step
 #' @param x
+#' @description calculate lag size and fruit.
+
 lag_size_fruit_function <- function(x=x){
 	x %>% 
 		arrange(Date) %>%

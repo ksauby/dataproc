@@ -10,6 +10,6 @@ lag_insects_function(x = x)
 \item{x}{}
 }
 \description{
-Calculate insect presence at previous time step
+calculate lag insects.
 }
 

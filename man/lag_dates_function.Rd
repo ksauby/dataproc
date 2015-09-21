@@ -10,6 +10,6 @@ lag_dates_function(x = x)
 \item{x}{}
 }
 \description{
-Calculate lag dates: Previous_Survey_Date, DaysSincePrevSurvey, DaysSinceStart
+calculate lag dates.
 }
 
