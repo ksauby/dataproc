@@ -1,8 +1,8 @@
 # Create a Scale Bar for a ggmap
 #' @description Return a list whose elements are:
-#' rectangle: a data.frame containing the coordinates to draw the first rectangle
-#' rectangle2: a data.frame containing the coordinates to draw the second rectangle
-#' legend: a data.frame containing the coordinates of the legend texts, and the texts as well
+#' rectangle - a data.frame containing the coordinates to draw the first rectangle
+#' rectangle2 - a data.frame containing the coordinates to draw the second rectangle
+#' legend - a data.frame containing the coordinates of the legend texts, and the texts as well
 
 #' @param lon longitude of the bottom left point of the first rectangle to draw #' @param lat latitude of the bottom left point of the first rectangle to draw
 #' @param distanceLon length of each rectangle

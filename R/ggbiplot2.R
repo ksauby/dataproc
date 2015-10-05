@@ -241,9 +241,9 @@ ggbiplot2 <- function (
 	u.axis.labs <- paste(
 		"PC Var.: ", 
 		round(100 * pcobj$sdev[choices[1]]^2/sum(pcobj$sdev^2),0), 
-		" + ", 
+		"+", 
 		round(100 * pcobj$sdev[choices[2]]^2/sum(pcobj$sdev^2),0), 
-		" = ", 
+		"=", 
 		u.axis.labs.tot, sep="")
 	# eigenvectors
 	eigenvectors <- paste(
@@ -278,12 +278,12 @@ ggbiplot2 <- function (
 			#x = xlim[2]-pct_x_buffer, 
 			y = ylim[1]+pct_y_buffer, 
 			label = u.axis.labs,
-			size=6) +
+			size=7) +
 		annotate("text", 
 			x = 0.1, 
 			y = ylim[1]+pct_y_buffer+0.75, 
 			label = eigenvectors,
-			size=6) # + # PC1
+			size=7) # + # PC1
 		#annotate("text", 
 		#	x = xlim[1]+pct_x_buffer, 
 	#		y = ylim[2]-pct_y_buffer, 
