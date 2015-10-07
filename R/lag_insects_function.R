@@ -4,9 +4,9 @@
 
 lag_insects_function <- function(x=x){
 	x %>% 
-		arrange(Date) %>%
-		group_by(PlantID) %>%
-		mutate(
+		dplyr::arrange(Date) %>%
+		dplyr::group_by(PlantID) %>%
+		dplyr::mutate(
 			# new insect variables
 			Insect_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
 			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),

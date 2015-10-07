@@ -6,7 +6,7 @@ PCA_table_function <- function(x, data.type) {
 	y = x$rotation[,1:2] %>%
 		as.data.frame %>%
 		round(3) %>%
-		mutate(
+		dplyr::mutate(
 			V = rownames(.)
 		) %>%
 		dplyr::select(V, everything()) %>%
@@ -18,7 +18,7 @@ PCA_table_function <- function(x, data.type) {
 			"Proportion of Variance Explained",
 			summary(x)$importance[2, 1:2] %>% round(3)
 		)) %>%
-		setnames("PC1", paste(data.type, "PC1")) %>%
-		setnames("PC2", paste(data.type, "PC2"))		
+		data.table::setnames("PC1", paste(data.type, "PC1")) %>%
+		data.table::setnames("PC2", paste(data.type, "PC2"))		
 	return(y)
 }

@@ -11,7 +11,7 @@
 
 #' scale by DaysSincePrevTime
 RGR_function <- function(x=x){
-	x %<>% mutate(
+	x %<>% dplyr::mutate(
 		RGR_Height 			= (Height_t - Height_t_1) /
 								(DaysSincePrevSurvey*Height_t_1), 
 	 	RGR_Size 			= (Size_t - Size_t_1) / 

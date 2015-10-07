@@ -4,9 +4,9 @@
 
 lag_size_fruit_function <- function(x=x){
 	x %>% 
-		arrange(Date) %>%
-		group_by(PlantID) %>%
-		mutate(
+		dplyr::arrange(Date) %>%
+		dplyr::group_by(PlantID) %>%
+		dplyr::mutate(
 			# size
 			Size_t_1 			= c(NA, head(Size_t, -1)),
 			Height_t_1 			= c(NA, head(Height_t, -1)),

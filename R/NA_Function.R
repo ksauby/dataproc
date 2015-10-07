@@ -1,5 +1,8 @@
 #' Replace values with NA.
 #' @param x Vector of data.
+#' @example
+#' x = c(1,2,3,4," ", "Not Recorded")
+#' NA_Function(x)
 NA_Function <- function(x){	
 	x[which(
 		x == "Not Recorded" | 
