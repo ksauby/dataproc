@@ -6,5 +6,5 @@ PCA_filter_function <- function(x=x, species=species, restriction_list=restricti
 	x %>%
 		as.data.frame %>%
 		filter(Species==species) %>%
-		.[complete.cases(.[, restriction_list]), ]
+		.[complete.cases(.), ]
 }

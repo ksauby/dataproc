@@ -12,4 +12,8 @@ NA_Function(x)
 \description{
 Replace values with NA.
 }
+\examples{
+x = c(1,2,3,4," ", "Not Recorded")
+NA_Function(x)
+}
 

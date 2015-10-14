@@ -2,6 +2,7 @@
 % Please edit documentation in R/createScaleBar.R
 \name{createScaleBar}
 \alias{createScaleBar}
+\title{Create a Scale Bar for a ggmap}
 \usage{
 createScaleBar(lon, lat, distanceLon, distanceLat, distanceLegend,
   dist.units = "km")

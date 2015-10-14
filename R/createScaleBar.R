@@ -1,4 +1,4 @@
-# Create a Scale Bar for a ggmap
+#' Create a Scale Bar for a ggmap
 #' @description Return a list whose elements are:
 #' rectangle - a data.frame containing the coordinates to draw the first rectangle
 #' rectangle2 - a data.frame containing the coordinates to draw the second rectangle
