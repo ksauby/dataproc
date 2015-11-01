@@ -2,7 +2,7 @@
 #' @param x output of the \code{prcomp} function.
 #' Label to append to PC 1 and PC 2 column headers; particularly useful if one wants to display data from multiple PCAs.
 
-PCA_table_function <- function(x, data.type) {
+prcomp_PCA_table_function <- function(x, data.type) {
 	y = x$rotation[,1:2] %>%
 		as.data.frame %>%
 		round(3) %>%
