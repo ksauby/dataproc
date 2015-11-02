@@ -1,2032 +1,52 @@
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	reshape::dcast(modelVars+Species+Weather+Axis+variable ~ variable, value.var="value")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	reshape2::dcast(modelVars+Species+Weather+Axis+variable ~ variable, value.var="value")
-?dcast
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	as.data.table %>%#
-	unique
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	as.data.table %>%#
-	unique %>%#
-	reshape2::dcast(modelVars+Species+Weather+Axis+variable ~ variable, value.var="value")
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	as.data.table %>%#
-	unique %>%#
-	reshape2::dcast(modelVars+Species+Weather+Axis ~ variable, value.var="value")
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	as.data.table %>%#
-	unique %>%#
-	reshape2::dcast(modelVars+Species+Weather+Axis ~ variable, value.var="value") %>% #
-	filter(Species=="O. humifusa" & Weather=="Precipitation")
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ]
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(X)#
-# which columns are numeric?		#
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	as.data.table %>%#
-	unique %>%#
-	reshape2::dcast(modelVars+Species+Weather+Axis ~ variable, value.var="value") %>% #
-	filter(Species=="O. humifusa" & Weather=="Precipitation")
-Z
-?unique
-DT <- data.table(A = rep(1:3, each=4), B = rep(1:4, each=3), C = rep(1:2, 6), key = "A,B")#
-duplicated(DT)
-unique(DT)
-DRT
-DT
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.eigenvalues %>%#
-	filter(Number < 3 & Eigenvalue >= 1) %>%		#
-	mutate(#
-		EigenNum = paste("Eigen", Number, sep=""),#
-		PropNum = paste("Prop", Number, sep="")	#
-	) %>%#
-	.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]#
-Eigens <- dcast(X, modelVars ~ EigenNum, value.var=c("Eigenvalue"))#
-PropExpl <- dcast(X, modelVars ~ PropNum, value.var=c("Proportion"))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- list()#
-for (i in 1:n.axes) {#
-	FactorVals <- dcast(#
-		PCA.all.surveys.factor.pattern, #
-		modelVars ~ Variable, #
-		value.var = paste("Factor", i, sep="")#
-	)#
-	Y[[i]] <- #
-		merge(#
-			FactorVals,#
-			Eigens[, c("modelVars", paste("Eigen", i, sep=""))], #
-			by="modelVars"#
-		) %>%#
-		merge(#
-			PropExpl[, c("modelVars", paste("Prop", i, sep=""))], #
-			by="modelVars"#
-		) %>%#
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) #
-	names(Y[[i]])[names(Y[[i]])==paste("Eigen", i, sep="")] <- "Eigenvalue"		#
-	names(Y[[i]])[names(Y[[i]])==paste("Prop", i, sep="")] <- "Proportion"		#
-}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Z <- rbind.fill(Y)
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(Z, is.numeric)#
-Z[, nums] %<>% round(round_n)#
-# filter out Axes that had Eigenvalues less than 1#
-Z %<>% filter(!is.na(Eigenvalue))#
-for (i in 1:dim(Z)[2]) {#
-	if (substr(names(Z)[i],1,3)=="log") {#
-		Z[, i] <- paste(Z[, i], "(log)")#
-		names(Z)[i] <- substring(names(Z)[i], 4)#
-	}#
-	if (substr(names(Z)[i],1,4)=="sqrt") {#
-		Z[, i] <- paste(Z[, i], "(sqrt)")#
-		names(Z)[i] <- substring(names(Z)[i], 5)#
-	}#
-}#
-Z %<>% #
-	melt(id.vars=c("modelVars", "Species", "Weather", "Axis")) %>%#
-	filter(!is.na(value)) %>%		#
-	.[which(grepl("NA", .$value)==FALSE), ] %>%#
-	as.data.table %>%#
-	unique %>%#
-	reshape2::dcast(modelVars+Species+Weather+Axis ~ variable, value.var="value") %>% #
-	filter(Species=="O. humifusa" & Weather=="Precipitation")
-Z
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern
-i-1
-i=1
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% filter(modelVars==unique(modelVars)[i])
-j=1
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-			filter(modelVars==unique(modelVars)[i]) %>%#
-			dplyr::select(variable, modelVars, eval(parse(text=paste("Factor", j, sep=""))))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-			filter(modelVars==unique(modelVars)[i]) %>%#
-			dplyr::select(Variable, modelVars, eval(parse(text=paste("Factor", j, sep=""))))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-			filter(modelVars==unique(modelVars)[i]) %>%#
-			t
-list(structure(list(V1 = 1:5, V2 = 21:25, timestamp = 1:5), .Names = c("V1", #
-"V2", "timestamp"), row.names = c(NA, -5L), class = "data.frame"), #
-structure(list(V1 = 1:10, V2 = 21:30, timestamp = 1:10), .Names = c("V1", #
-"V2", "timestamp"), row.names = c(NA, -10L), class = "data.frame"), #
-structure(list(V1 = 1:30, V2 = 21:50, timestamp = 1:30), .Names = c("V1", #
-"V2", "timestamp"), row.names = c(NA, -30L), class = "data.frame"))
-names <- c("Cycling1.opr", "Cycling2.opr", "Cycling3.opr")#
-mydf1 <- data.frame(V1=c(1:5), V2=c(21:25)) #
-mydf2 <- data.frame(V1=c(1:10), V2=c(21:30))#
-mydf3 <- data.frame(V1=c(1:30), V2=c(21:50))#
-opr <- list(mydf1,mydf2,mydf3)#
-mydf4 <- data.frame(timestamp=c(1:5))#
-mydf5 <- data.frame(timestamp=c(1:10))#
-mydf6 <- data.frame(timestamp=c(1:30))#
-timestamp <- list(mydf4,mydf5,mydf6)#
-names(opr) <- names#
-names(timestamp) <- names
-cbind(opr, timestamp)
-cbind(opr, timestamp, SIMPLIFY=FALSE)
-mapply(cbind, opr, timestamp, SIMPLIFY=FALSE)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-			filter(modelVars==unique(modelVars)[i]) %>%#
-			mutate(#
-				Species = factor(ifelse(#
-					substr(modelVars,1,7) == "HUMIFUS",#
-					"O. humifusa",#
-					"O. stricta"#
-				)),#
-				Weather = factor(ifelse(#
-					str_sub(modelVars, -4, -1) == "ECIP",#
-					"Precipitation",#
-					"Temperature"#
-				)),#
-				Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-			)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-			filter(modelVars==unique(modelVars)[i]) %>%#
-			mutate(#
-				Species = factor(ifelse(#
-					substr(modelVars,1,7) == "HUMIFUS",#
-					"O. humifusa",#
-					"O. stricta"#
-				)),#
-				Weather = factor(ifelse(#
-					str_sub(modelVars, -4, -1) == "ECIP",#
-					"Precipitation",#
-					"Temperature"#
-				)),#
-				Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-			) dplyr::select(-modelVars)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-			filter(modelVars==unique(modelVars)[i]) %>%#
-			mutate(#
-				Species = factor(ifelse(#
-					substr(modelVars,1,7) == "HUMIFUS",#
-					"O. humifusa",#
-					"O. stricta"#
-				)),#
-				Weather = factor(ifelse(#
-					str_sub(modelVars, -4, -1) == "ECIP",#
-					"Precipitation",#
-					"Temperature"#
-				)),#
-				Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-			) %>%#
-			dplyr::select(-modelVars)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))
-)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep=""))) %>%#
-			mutate(#
-				Factor1 = ifelse(#
-					substr(names(Z)[i],1,3)=="log",#
-					paste(Factor1, "(log)"),#
-					Factor1#
-					)#
-				)
-)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))
-)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			))),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep=""))) %>%#
-			mutate(#
-				Factor1 = ifelse(#
-					substr(names(Z)[i],1,3)=="log",#
-					paste(Factor1, "(log)"),#
-					Factor1#
-					)#
-				)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(names(Z)[i],1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-				)#
-			)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-				)#
-			)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			)	#
-		)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		dcast(Factor1+Factor2+modelVars+Species+Weather+Axis ~ Variable, value.var="Factor1")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 5),#
-				Variable#
-			)#
-		) %>%#
-		dcast(Factor1+Factor2+modelVars+Species+Weather+Axis ~ Variable, value.var="Factor1")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 5),#
-				Variable#
-			)#
-		) %>%#
-		dcast(Factor2+modelVars+Species+Weather+Axis ~ Variable, value.var="Factor1")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 5),#
-				Variable#
-			)#
-		) %>%#
-		dcast(modelVars+Species+Weather+Axis ~ Variable, value.var="Factor1")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 5),#
-				Variable#
-			)#
-		)#
-		Factor1 <- dcast(modelVars ~ Variable, value.var="Factor1")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 5),#
-				Variable#
-			)#
-		)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 5),#
-				Variable#
-			)#
-		)#
-		Factor1 <- dcast(modelVars ~ Variable, value.var="Factor1")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-		mutate(#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			)),#
-			Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-		) %>%#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				paste(Factor2, "(sqrt)"),#
-				Factor1#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,4)=="sqrt",#
-				substring(Variable, 5),#
-				Variable#
-			)#
-		)#
-		Factor1 <- dcast(X, modelVars ~ Variable, value.var="Factor1")
-Factor1
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Factor2 <- dcast(X, modelVars ~ Variable, value.var="Factor2")
-Factor2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Factor1 <- dcast(X, modelVars ~ Variable, value.var="Factor1")#
-Factor2 <- dcast(X, modelVars ~ Variable, value.var="Factor2")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-head(X)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-head(X)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-)
-head(X)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X = PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep="")))#
-)
-head(X)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-head(X)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Factor1 <- dcast(X, modelVars + Species + Weather + Axis ~ Variable, value.var="Factor1")#
-Factor2 <- dcast(X, modelVars ~ Variable, value.var="Factor2")
-Factor1
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dcast(X, modelVars + Species + Weather + Axis ~ Variable, value.var="Factor1") %>%#
-merge(dcast(X, modelVars ~ Variable, value.var="Factor2"))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-Factor1 <- dcast(X, modelVars + Species + Weather + Axis ~ Variable, value.var="Factor1") %>%#
-merge(dcast(X, modelVars ~ Variable, value.var="Factor2"), all=T)
-Factor1
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dcast(X, modelVars ~ Variable, value.var="Factor2"
-)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.eigenvalues
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-head(X)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-head(X)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars + Species + Weather + Axis ~ Variable, value.var="Factor1") %>%
-)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars + Species + Weather + Axis ~ Variable, value.var="Factor1") %>%#
-merge(dcast(X, modelVars ~ Variable, value.var="Factor2"), all=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-Y <- dcast(X, modelVars + Species + Weather + Axis ~ Variable, #
-		value.var="Factor1") %>%#
-	merge(dcast(X, modelVars ~ Variable, value.var="Factor2"), all=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars + Species + Weather + Axis ~ Variable, #
-		value.var="Factor1")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-Y <- dcast(X, modelVars + Species + Weather ~ Variable, #
-		value.var="Factor1") %>%#
-	merge(dcast(X, modelVars ~ Variable, value.var="Factor2"), all=T)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars + Species + Weather ~ Variable, #
-		value.var="Factor1") %>%#
-		mutate(Axis = 1)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		)),#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-temp <- dcast(X, modelVars + Species + Weather ~ Variable, #
-		value.var="Factor1") %>%#
-	mutate(Axis = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Axis = 2) %>%#
-	merge(temp)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Axis = 2) %>%#
-	merge(temp, all=T)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Axis = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Axis = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))
-)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.eigenvalues
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) merge(PCA.all.surveys.eigenvalues[, c("Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	)
-head(Y)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-filter(Y, modelVars=="HUMIFUSATEMP")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor1#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-filter(Y, modelVars=="HUMIFUSATEMP")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		) )
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-filter(Y, modelVars=="HUMIFUSATEMP")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)#
-	filter(Y, modelVars=="HUMIFUSATEMP")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
+8028-7527
+501/1353
+8028-7957
+1353-501
+852/71
+7956-7878
+8176-8029
+8176-8092
+250*.75
+250*.25
+42*2 + 17*2
+118/19
+21/6.2
+59.5*.75
+59.5*.5 + 59.5
+71/12
+597/80
+597/8
+432/8
+15*8 + 9*3
+?seq_len
+7.25/3
+7.25/4
+for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
+install.packages("ProjectTemplate")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("data.table")
+install.packages("corrgram")
+install.packages("survival")
+install.packages("shapefiles")
+install.packages("rgdal")
+install.packages("PBSmapping")
+install.packages("sp")
+install.packages("gdistance")
+install.packages("chron")
+install.packages("unmarked")
+install.packages("lme4")
+install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
+require(rgeos)
+install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
+library(rgdal)
+install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
+18/1.618
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
+library(ProjectTemplate)#
+setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
+# load project#
+load.project()
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
 nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
 PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
@@ -2067,12 +87,15 @@ X <- PCA.all.surveys.factor.pattern %>% #
 			Variable#
 		)#
 	)
-X
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", .$value)==TRUE), ]$Factor2
+n.axes=2
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", .$value)==TRUE), ]
+round_n=3
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dataset_type="all"
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
 X <- PCA.all.surveys.factor.pattern %>% #
 	mutate(#
 		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
@@ -2111,4 +134,2149 @@ X <- PCA.all.surveys.factor.pattern %>% #
 		)#
 	)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", .$value)==TRUE), ]
+X[which(grepl("NA", .$value)==TRUE), ]$Factor2#
+temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+	mutate(Number = 1)#
+Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+	mutate(Number = 2) %>%#
+	merge(temp, all=T) %>%#
+	mutate(		#
+		Species = factor(ifelse(#
+			substr(modelVars,1,7) == "HUMIFUS",#
+			"O. humifusa",#
+			"O. stricta"#
+		)),#
+		Weather = factor(ifelse(#
+			str_sub(modelVars, -4, -1) == "ECIP",#
+			"Precipitation",#
+			"Temperature"#
+		))#
+	) %>%#
+	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[which(grepl("NA", X$value)==TRUE), ]$Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	mutate(#
+		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
+		#Number = i,#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			substring(Variable, 5),#
+			Variable#
+		)#
+	)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[which(grepl("NA", X$value)==TRUE), ]
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[which(grepl("NA", X$Factor2)==TRUE), ]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+	mutate(Number = 1)#
+Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+	mutate(Number = 2) %>%#
+	merge(temp, all=T) %>%#
+	mutate(		#
+		Species = factor(ifelse(#
+			substr(modelVars,1,7) == "HUMIFUS",#
+			"O. humifusa",#
+			"O. stricta"#
+		)),#
+		Weather = factor(ifelse(#
+			str_sub(modelVars, -4, -1) == "ECIP",#
+			"Precipitation",#
+			"Temperature"#
+		))#
+	) %>%#
+	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
+Y
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+filter(Y, modelVars=="HUMIFUSATEMP")
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
+reload.project()
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			substring(Variable, 5),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+n.axes=2
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
+reload.project()
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+n.axes=2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+round_n=3
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dataset_type="all"
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,4)=="sqrt",#
+			substring(Variable, 5),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,4)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,4)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,4)=="sqr",#
+			substring(Variable, 5),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
+PCA.all.surveys.factor.pattern
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
+reload.project()
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+n.axes=2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+round_n=3
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dataset_type="all"
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)
+X
+?substring
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, -4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, -4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			gsub('.{3}$', '', Variable), # remove last three characters#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			substring(Variable, -4),#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			#gsub('.{3}$', '', Variable),#
+			substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			#gsub('.{3}$', '', Variable),#
+			substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="125",#
+			gsub('.{3}$', '', Variable),#
+			#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+gsub('.{3}$', '', Variable)
+gsub('.{3}$', '', "Variable")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			gsub('.{3}$', '', Variable),#
+			#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="075",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)#
+	# why doesn't this work? I
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
+PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
+X <- PCA.all.surveys.factor.pattern %>% #
+	# edit cells so they reflect transformations#
+	# log#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor1, "(log)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="log",#
+			paste(Factor2, "(log)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="log",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	) %>%#
+	# 1.25 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor1, "(^1.25)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			paste(Factor2, "(^1.25)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			str_sub(Variable, -3, -1)=="125",#
+			gsub('.{3}$', '', Variable),#
+			#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+			Variable#
+		)#
+	) %>%	#
+	# 0.75 power#
+	mutate(#
+		Factor1 = ifelse(#
+			str_sub(Variable, -3, -1)=="075",#
+			paste(Factor1, "(^0.75)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			str_sub(Variable, -3, -1)=="075",#
+			paste(Factor2, "(^0.75)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			str_sub(Variable, -3, -1)=="075",#
+			gsub('.{3}$', '', Variable),#
+			Variable#
+		)#
+	) %>%#
+	# sqrt#
+	mutate(#
+		Factor1 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor1, "(sqrt)"),#
+			Factor1#
+		),#
+		Factor2 = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			paste(Factor2, "(sqrt)"),#
+			Factor2#
+		),#
+		Variable = ifelse(#
+			substr(Variable,1,3)=="sqr",#
+			substring(Variable, 4),#
+			Variable#
+		)#
+	)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+# why doesn't this work? I want to filter out NAs#
+	X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+	mutate(Number = 1)#
+Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+	mutate(Number = 2) %>%#
+	merge(temp, all=T) %>%#
+	mutate(		#
+		Species = factor(ifelse(#
+			substr(modelVars,1,7) == "HUMIFUS",#
+			"O. humifusa",#
+			"O. stricta"#
+		)),#
+		Weather = factor(ifelse(#
+			str_sub(modelVars, -4, -1) == "ECIP",#
+			"Precipitation",#
+			"Temperature"#
+		))#
+	) %>%#
+	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+filter(Y, modelVars=="HUMIFUSATEMP")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+	mutate(Number = 2) %>%#
+	merge(temp, all=T) %>%#
+	mutate(		#
+		Species = factor(ifelse(#
+			substr(modelVars,1,7) == "HUMIFUS",#
+			"O. humifusa",#
+			"O. stricta"#
+		)),#
+		Weather = factor(ifelse(#
+			str_sub(modelVars, -4, -1) == "ECIP",#
+			"Precipitation",#
+			"Temperature"#
+		))#
+	) %>%#
+	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
+	filter(Eigenvalue >= 1)
+Y
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
+	nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+		mutate(Number = 1)#
+	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+		mutate(Number = 2) %>%#
+		merge(temp, all=T) %>%#
+		mutate(		#
+			Species = factor(ifelse(#
+				substr(modelVars,1,7) == "HUMIFUS",#
+				"O. humifusa",#
+				"O. stricta"#
+			)),#
+			Weather = factor(ifelse(#
+				str_sub(modelVars, -4, -1) == "ECIP",#
+				"Precipitation",#
+				"Temperature"#
+			))#
+		) %>%#
+		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
+		filter(Eigenvalue >= 1)#
+	return(Y)#
+}
+ls()
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.factor.pattern)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.rotated.factor.pattern)
+PCA.all.surveys.rotated.factor.pattern
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.spring.eigenvalues, PCA.spring.factor.pattern)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.spring.eigenvalues, PCA.spring.factor.pattern)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.winter.eigenvalues, PCA.winter.factor.pattern)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.rotated.factor.pattern)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
+	nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+		mutate(Number = 1)#
+	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+		mutate(Number = 2) %>%#
+		merge(temp, all=T) %>%#
+		mutate(		#
+			Species = factor(ifelse(#
+				substr(modelVars,1,7) == "HUMIFUS",#
+				"O. humifusa",#
+				"O. stricta"#
+			)),#
+			Weather = factor(ifelse(#
+				str_sub(modelVars, -4, -1) == "ECIP",#
+				"Precipitation",#
+				"Temperature"#
+			))#
+		) %>%#
+		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
+		filter(Eigenvalue >= 1)#
+	return(Y)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.spring.eigenvalues, PCA.spring.factor.pattern)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.factor.pattern)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(#
+	eigenvalue.data = PCA.all.surveys.eigenvalues, #
+	factor.pattern.data = PCA.all.surveys.factor.pattern#
+)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(#
+	eigenvalue.data = PCA.spring.eigenvalues, #
+	factor.pattern.data = PCA.spring.factor.pattern#
+)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+eigenvalue.data = PCA.spring.eigenvalues
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+factor.pattern.data = PCA.spring.factor.pattern
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs
+X
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
+reload.project()
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+n.axes=2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+round_n=3
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dataset_type="all"
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(#
+	eigenvalue.data = PCA.spring.eigenvalues, #
+	factor.pattern.data = PCA.spring.factor.pattern,#
+	dataset_type = "spring"#
+)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
+	nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+		mutate(Number = 1)#
+	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+		mutate(Number = 2) %>%#
+		merge(temp, all=T) %>%#
+		mutate(		#
+			Species = factor(ifelse(#
+				substr(modelVars,1,7) == "HUMIFUS",#
+				"O. humifusa",#
+				"O. stricta"#
+			)),#
+			Weather = factor(ifelse(#
+				str_sub(modelVars, -4, -1) == "ECIP",#
+				"Precipitation",#
+				"Temperature"#
+			))#
+		) %>%#
+		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
+		filter(Eigenvalue >= 1)#
+	return(Y)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(#
+	eigenvalue.data = PCA.spring.eigenvalues, #
+	factor.pattern.data = PCA.spring.factor.pattern,#
+	dataset_type = "spring"#
+)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+eigenvalue.data = PCA.spring.eigenvalues
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+factor.pattern.data = PCA.spring.factor.pattern
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+dataset_type = "spring"
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+n.axes=2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+round_n=3
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+		mutate(Number = 1)
+X
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[which(grepl("NA", X$Factor2)==TRUE), ]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dim(X[which(grepl("NA", X$Factor2)==TRUE), ])
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
+	nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		if (dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0) {#
+			X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+		}#
+	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+		mutate(Number = 1)#
+	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+		mutate(Number = 2) %>%#
+		merge(temp, all=T) %>%#
+		mutate(		#
+			Species = factor(ifelse(#
+				substr(modelVars,1,7) == "HUMIFUS",#
+				"O. humifusa",#
+				"O. stricta"#
+			)),#
+			Weather = factor(ifelse(#
+				str_sub(modelVars, -4, -1) == "ECIP",#
+				"Precipitation",#
+				"Temperature"#
+			))#
+		) %>%#
+		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
+		filter(Eigenvalue >= 1)#
+	return(Y)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(#
+	eigenvalue.data = PCA.spring.eigenvalues, #
+	factor.pattern.data = PCA.spring.factor.pattern,#
+	dataset_type = "spring"#
+)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(#
+	eigenvalue.data = PCA.winter.eigenvalues, #
+	factor.pattern.data = PCA.winter.factor.pattern,#
+	dataset_type = "winter"#
+)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
+reload.project()
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
+	nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		if (dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0) {#
+			X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+		}#
+	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+		mutate(Number = 1)#
+	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+		mutate(Number = 2) %>%#
+		merge(temp, all=T) %>%#
+		mutate(		#
+			Species = factor(ifelse(#
+				substr(modelVars,1,7) == "HUMIFUS",#
+				"O. humifusa",#
+				"O. stricta"#
+			)),#
+			Weather = factor(ifelse(#
+				str_sub(modelVars, -4, -1) == "ECIP",#
+				"Precipitation",#
+				"Temperature"#
+			))#
+		) %>%#
+		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
+		filter(Eigenvalue >= 1)#
+	return(Y)#
+}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+n.axes=2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+round_n=3
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+sas_prcomp_PCA_table_function(#
+	eigenvalue.data = PCA.winter.eigenvalues, #
+	factor.pattern.data = PCA.winter.factor.pattern,#
+	dataset_type = "winter"#
+)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+PCA.winter.rotated.factor.pattern
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+eigenvalue.data = PCA.winter.eigenvalues
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+factor.pattern.data = PCA.winter.rotated.factor.pattern
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
+dataset_type = "winter"
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+nums <- sapply(factor.pattern.data, is.numeric)#
+	factor.pattern.data[, nums] %<>% round(round_n)#
+	X <- factor.pattern.data %>% #
+		# edit cells so they reflect transformations#
+		# log#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor1, "(log)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="log",#
+				paste(Factor2, "(log)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="log",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		) %>%#
+		# 1.25 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor1, "(^1.25)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				paste(Factor2, "(^1.25)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="125",#
+				gsub('.{3}$', '', Variable),#
+				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
+				Variable#
+			)#
+		) %>%	#
+		# 0.75 power#
+		mutate(#
+			Factor1 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor1, "(^0.75)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				paste(Factor2, "(^0.75)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				str_sub(Variable, -3, -1)=="075",#
+				gsub('.{3}$', '', Variable),#
+				Variable#
+			)#
+		) %>%#
+		# sqrt#
+		mutate(#
+			Factor1 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor1, "(sqrt)"),#
+				Factor1#
+			),#
+			Factor2 = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				paste(Factor2, "(sqrt)"),#
+				Factor2#
+			),#
+			Variable = ifelse(#
+				substr(Variable,1,3)=="sqr",#
+				substring(Variable, 4),#
+				Variable#
+			)#
+		)#
+		# filter out NAs#
+		if (dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0) {#
+			X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
+		mutate(Number = 1)#
+	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
+		mutate(Number = 2) %>%#
+		merge(temp, all=T) %>%#
+		mutate(		#
+			Species = factor(ifelse(#
+				substr(modelVars,1,7) == "HUMIFUS",#
+				"O. humifusa",#
+				"O. stricta"#
+			)),#
+			Weather = factor(ifelse(#
+				str_sub(modelVars, -4, -1) == "ECIP",#
+				"Precipitation",#
+				"Temperature"#
+			))#
+		) %>%#
+		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
+		filter(Eigenvalue >= 1)
+Y

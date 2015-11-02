@@ -1,13 +1,23 @@
-sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {
-	# for rotated factor pattern data, check that there are two sets of data for stricta and two sets for humifusa
-	
-	# for those not in the rotated factor pattern data
-	
-	
-	nums <- sapply(factor.pattern.data, is.numeric)
-	factor.pattern.data[, nums] %<>% round(round_n)
-	X <- factor.pattern.data %>% 
-		# edit cells so they reflect transformations
+sas_prcomp_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all", round_n=3, n.axes=2) {
+	# which models are NOT in the rotated factor pattern data? merge them with the rotated factor pattern data
+	factors %<>% 
+		filter(!(modelVars %in% rfactors$modelVars)) %>%
+		mutate(Rotated = "No")
+	if (dim(factors)[1] > 0) {
+		X <- rfactors %>%
+			mutate(Rotated = "Yes") %>%
+			rbind.fill(factors)
+	} else {
+		X <- rfactors %>%
+			mutate(Rotated = "Yes")
+	}	
+	# round numeric values
+	nums <- sapply(X, is.numeric)
+	X[, nums] %<>% round(round_n)
+	nums <- sapply(eigens, is.numeric)
+	eigens[, nums] %<>% round(round_n)
+	# edit cells so they indicate transformations
+	Y <- X %>% 
 		# log
 		mutate(
 			Factor1 = ifelse(
@@ -82,12 +92,12 @@ sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, 
 			)
 		)
 		# filter out NAs
-		if (dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0) {
-			X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA
+		if (dim(Y[which(grepl("NA", Y$Factor2)==TRUE), ])[1] > 0) {
+			Y[which(grepl("NA", Y$Factor2)==TRUE), ]$Factor2 <- NA
 		}
-	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%
+	temp <- dcast(Y, Rotated + modelVars ~ Variable, value.var="Factor1") %>%
 		mutate(Number = 1)
-	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%
+	Z <- dcast(Y, Rotated + modelVars ~ Variable, value.var="Factor2") %>%
 		mutate(Number = 2) %>%
 		merge(temp, all=T) %>%
 		mutate(		
@@ -102,7 +112,19 @@ sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, 
 				"Temperature"
 			))
 		) %>%
-		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%
-		filter(Eigenvalue >= 1)
-	return(Y)
+		merge(
+			eigens[, c("Number", "Eigenvalue", "Proportion", "modelVars")], 
+			by=c("Number", "modelVars"), 
+			all.x=T
+		) %>%
+		filter(Eigenvalue >= 1) %>%
+		arrange(modelVars) %>%
+		mutate(Axis = paste(dataset_type, "PC", Number)) %>%
+		dplyr::select(-c(modelVars, Number)) %>%
+		dplyr::select_(.dots=c("Axis", "A1", "A2", "B", "C1", "C2", "C3", "D1", 
+			"D2", "D3", "E1", "E2", "F", "G", "H1", "H2", "Eigenvalue", 
+			"Proportion", "Rotated", "Species", "Weather"))
+	names(Z)[names(Z)=="Proportion"] <- "Proportion of Variance Explained"		
+	names(Z)[names(Z)=="Variable"] <- "Var"		
+	return(Z)
 }
