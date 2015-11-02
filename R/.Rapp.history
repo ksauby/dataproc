@@ -1,2278 +1,897 @@
-unique(new$Sampling)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch = cactus.realizations %>% filter(n.networks==unique(cactus.realizations$n.networks)[4])
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch$Design="ACS"#
-	new = rbind.fill(patch, sampling_example)#
-#
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(1,20,5,0)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(5,0,1,20)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(5,0,20,1)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling), size=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(5,0,20,1)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(5,0,20,1)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(20,1,5,0)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(1,20,,5,0)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=2) +#
-scale_shape_manual(values=c(1,20,5,0)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=7) +#
-scale_shape_manual(values=c(1,20,5,0)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=7) +#
-scale_shape_manual(values=c(1,20,4,0)) +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus))) +#
-geom_point(aes(shape=factor(Sampling)), size=7) +#
-scale_shape_manual(values=c(1,20,4,0), name="Legend") +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot(new, aes(x,y)) +#
-geom_point(aes(size=factor(Cactus), shape=factor(Cactus)), show_guide=F) +#
-geom_point(aes(shape=factor(Sampling)), size=7) +#
-scale_shape_manual(values=c(1,20,4,0), name="Legend") +#
-facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,5,0)) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch = cactus.realizations %>% filter(n.networks==unique(cactus.realizations$n.networks)[4])
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,5,0)) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-rmarkdown::render('Manuscript.Rmd')
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-# unrestricted ACS#
-simulation_data_subset <- simulation_data_ %>% #
-	filter(Plots=="Horvitz Thompson Mean (All Plots)") %>%#
-	dplyr::select(#
-		n.networks, #
-		N.SRSWOR.plots, #
-		Stricta_mean_observed, #
-		Pusilla_mean_observed, #
-		Cactus_mean_observed, #
-		Stricta_var_observed, #
-		Pusilla_var_observed, #
-		Cactus_var_observed#
-	) %>%#
-	group_by(n.networks, N.SRSWOR.plots) %>%#
-	summarise_each(#
-		funs(#
-			mean(., na.rm=T), #
-			var(., na.rm=T)#
-		)#
-	) %>%#
-	as.data.frame %>%#
-	mutate(#
-		Stricta_var_bias = #
-			Stricta_var_observed_mean - Stricta_mean_observed_var,#
-		Pusilla_var_bias = #
-			Pusilla_var_observed_mean - Pusilla_mean_observed_var,#
-		Cactus_var_bias = #
-			Cactus_var_observed_mean - Cactus_mean_observed_var,#
-		Plots = "HT",#
-		Sampling = "ACS"#
-	) %>%#
-	merge(patch_data_summary, by="n.networks")#
-#
-	# RESTRICTED ACS#
-simulation_data_subset_RACS <- simulation_data_RACS %>% #
-	filter(Plots=="Horvitz Thompson Mean (All Plots)") %>%#
-	dplyr::select(#
-		n.networks, #
-		N.SRSWOR.plots, #
-		Stricta_mean_observed, #
-		Pusilla_mean_observed, #
-		Cactus_mean_observed, #
-		Stricta_var_observed, #
-		Pusilla_var_observed, #
-		Cactus_var_observed#
-	) %>%#
-	group_by(n.networks, N.SRSWOR.plots) %>%#
-	summarise_each(#
-		funs(#
-			mean(., na.rm=T), #
-			var(., na.rm=T)#
-		)#
-	) %>%#
-	as.data.frame %>%#
-	mutate(#
-		Stricta_var_bias = #
-			Stricta_var_observed_mean - Stricta_mean_observed_var,#
-		Pusilla_var_bias = #
-			Pusilla_var_observed_mean - Pusilla_mean_observed_var,#
-		Cactus_var_bias = #
-			Cactus_var_observed_mean - Cactus_mean_observed_var,#
-		Plots = "HT",#
-		Sampling = "Restricted ACS"#
-	) %>%#
-	merge(patch_data_summary, by="n.networks")#
-simulation_data_var_bias = rbind(simulation_data_subset, simulation_data_subset_RACS)#
-# Stricta plot#
-x = simulation_data_var_bias %>% #
-	as.data.table %>%#
-	setnames("Stricta_var_bias", "variable.error") %>%#
-	setnames("Stricta_mean", "true.variable") %>%#
-	setnames('N.SRSWOR.plots', "grouping.variable") %>%#
-	as.data.frame %>%#
-	filter(variable.error!=-Inf) %>%#
-	group_by(Plots, true.variable, grouping.variable, Sampling) %>%#
-	summarise(#
-		variable_error_estimate 	= mean(variable.error, na.rm=T),#
-		ymax 						= mean(variable.error, na.rm=T) +#
-										sd(variable.error, na.rm=T),#
-		ymin 						= mean(variable.error, na.rm=T) - #
-										sd(variable.error, na.rm=T),#
-		nsims 						= length(variable.error)#
-	)#
-pd <- position_dodge(0.1)#
-stricta_plot = ggplot(#
-		x, #
-		aes(#
-			x 		= true.variable, #
-			y 		= variable_error_estimate, #
-			shape 	= factor(grouping.variable), #
-			group 	= factor(grouping.variable), #
-			ymax 	= max(ymax)*1.05#
-		)#
-) +#
-	geom_hline(aes(yintercept=0)) +  #
-	geom_point(alpha=0.6, size=8, position="dodge", na.rm=T) + #
-	geom_line(aes(linetype=factor(grouping.variable)), position="dodge",#
-		na.rm=T) +#
-	guides(shape=guide_legend(title="Intial Sample Size (SRSWOR)"),#
-		linetype=guide_legend(title="Intial Sample Size (SRSWOR)")) +#
-	xlab("O. stricta occupancy population mean") +#
-	ylab("Bias of the HT Variance Estimator") +#
-	facet_wrap(~Sampling) +#
-	scale_x_continuous(breaks=c(0.05,0.1,0.15))#
-# Pusilla plot#
-x = simulation_data_var_bias %>% #
-	as.data.table %>%#
-	setnames("Pusilla_var_bias", "variable.error") %>%#
-	setnames("Pusilla_mean", "true.variable") %>%#
-	setnames('N.SRSWOR.plots', "grouping.variable") %>%#
-	as.data.frame %>%#
-	filter(variable.error!=-Inf) %>%#
-	group_by(Plots, true.variable, grouping.variable, Sampling) %>%#
-	summarise(#
-		variable_error_estimate 	= mean(variable.error, na.rm=T),#
-		ymax 						= mean(variable.error, na.rm=T) + #
-										sd(variable.error, na.rm=T),#
-		ymin 						= mean(variable.error, na.rm=T) - #
-										sd(variable.error, na.rm=T),#
-		nsims 						= length(variable.error)#
-	)#
-pd <- position_dodge(0.1)#
-pusilla_plot = ggplot(#
-		x, #
-		aes(#
-			x 		= true.variable, #
-			y 		= variable_error_estimate, #
-			shape 	= factor(grouping.variable), #
-			group 	= factor(grouping.variable), #
-			ymax 	= max(ymax)*1.05#
-	)#
-) +#
-	geom_hline(aes(yintercept=0)) +  #
-	geom_point(alpha=0.6, size=8, position="dodge", na.rm=T) + #
-	geom_line(aes(linetype=factor(grouping.variable)), position="dodge",#
-		na.rm=T) +#
-		guides(shape=guide_legend(title="Intial Sample Size (SRSWOR)"),#
-			linetype=guide_legend(title="Intial Sample Size (SRSWOR)")) +#
-		xlab("O. pusilla occupancy population mean") +#
-		ylab("Bias of the HT Variance Estimator") +#
-		facet_wrap(~Sampling) +#
-		scale_x_continuous(breaks=c(0.04,0.08,0.12), limits=c(0,0.12))#
-#
-# Cactus Plot#
-x = simulation_data_var_bias %>% #
-	as.data.table %>%#
-	setnames("Cactus_var_bias", "variable.error") %>%#
-	setnames("Cactus_mean", "true.variable") %>%#
-	setnames('N.SRSWOR.plots', "grouping.variable") %>%#
-	as.data.frame %>%#
-	filter(variable.error!=-Inf) %>%#
-	group_by(Plots, true.variable, grouping.variable, Sampling) %>%#
-	summarise(#
-		variable_error_estimate 	= mean(variable.error, na.rm=T),#
-		ymax 						= mean(variable.error, na.rm=T) + #
-										sd(variable.error, na.rm=T),#
-		ymin 						= mean(variable.error, na.rm=T) - #
-										sd(variable.error, na.rm=T),#
-		nsims 						= length(variable.error)#
-	)#
-pd <- position_dodge(0.1)#
-Cactus_plot = ggplot(#
-	x, #
-	aes(#
-		x 		= true.variable, #
-		y 		= variable_error_estimate, #
-		shape 	= factor(grouping.variable), #
-		group 	= factor(grouping.variable), #
-		ymax 	= max(ymax)*1.05#
-	)#
-) +#
-	geom_hline(aes(yintercept=0)) +  #
-	geom_point(alpha=0.6, size=8, position="dodge", na.rm=T) + #
-	geom_line(aes(linetype=factor(grouping.variable)), position="dodge",#
-		na.rm=T) +#
-	guides(shape=guide_legend(title="Intial Sample Size (SRSWOR)"),#
-		linetype=guide_legend(title="Intial Sample Size (SRSWOR)")) +#
-	xlab("Cactus occupancy population mean") +#
-	ylab("Bias of the HT Variance Estimator") +#
-	facet_wrap(~Sampling) +#
-	scale_x_continuous(breaks=c(0.08,0.16,0.24))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-rmarkdown::render('Manuscript.Rmd')
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(".",20,4,0)) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3)))#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-rmarkdown::render('Manuscript.Rmd')
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position="bottom")
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position=c(0, 30))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position=c(2, 28))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position=c(15,15))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	theme(legend.position=c(15,15)) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7, name=#
-		Legend) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	theme(legend.position=c(15,15)) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7, name=#
-		"Legend") +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	theme(legend.position=c(15,15)) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), colour=factor(Sampling)), #
-		size=7, name=#
-		"Legend") +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F,  name="Legend") +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7, name="Legend") +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position="bottom")
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position="bottom") +#
-	guide_legend(title="")
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position="bottom") +#
-	guide_legend(title=NULL)
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position="bottom") +#
-	guides(shape=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position="bottom") +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(legend.position="bottom", legend.key=element_blank()) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		#legend.position="bottom", #
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,0),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(5,0), #
-		legend.justification=c(1,0),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,0),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(0,0),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,1),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,-1),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,-5),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,-4),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,-3.75),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(0,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(-1,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(2,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(1.75,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(2.75,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.75,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.5,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.6,-3.8),#
-		legend.key=element_blank()#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.6,-3.8),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.6,-3.8),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.6,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-rmarkdown::render('Manuscript.Rmd')
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-rmarkdown::render('Manuscript.Rmd')
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ACS_RACS_illustration
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.1,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.05,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.08,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.1,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.09,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.095,-3.9),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.095,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch = cactus.realizations %>% filter(n.networks==unique(cactus.realizations$n.networks)[4])#
-patch[patch$"Cactus" == 0]$Cactus <- "Absent"#
-patch[patch$"Cactus" == 1]$Cactus <- "Present"
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch[patch$Cactus == 0]$Cactus <- "Absent"
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch[patch$Cactus == 0]$Cactus
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch[patch$Cactus == 0,]$Cactus
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch = cactus.realizations %>% filter(n.networks==unique(cactus.realizations$n.networks)[4])#
-patch[patch$Cactus == 0,]$Cactus <- "Absent"#
-patch[patch$Cactus == 1,]$Cactus <- "Present"
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.095,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-patch = cactus.realizations %>% filter(n.networks==unique(cactus.realizations$n.networks)[4])#
-patch[patch$Cactus == 0,]$Cactus <- "Cacti Absent"#
-patch[patch$Cactus == 1,]$Cactus <- "Cacti Present"
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.095,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.095,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL)) +#
-	scale_x_continuous(limits=c(0,30))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.095,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL)) +#
-	scale_x_continuous(limits=c(0,30)) +#
-   	scale_y_continuous(limits=c(0,30))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.0955,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL)) +#
-	scale_x_continuous(limits=c(0,30)) +#
-   	scale_y_continuous(limits=c(0,30))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.09,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL)) +#
-	scale_x_continuous(limits=c(0,30)) +#
-   	scale_y_continuous(limits=c(0,30))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.088,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL)) +#
-	scale_x_continuous(limits=c(0,30)) +#
-   	scale_y_continuous(limits=c(0,30))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.085,-3.88),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL)) +#
-	scale_x_continuous(limits=c(0,30)) +#
-   	scale_y_continuous(limits=c(0,30))
-setwd('/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/Manuscript')
-ggplot() +#
-	geom_point(data=patch, aes(x,y, size=factor(Cactus),#
-		shape=factor(Cactus), colour=factor(Cactus)), show_guide=F) +#
-#	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=sampling_example, aes(x,y, shape=factor(Sampling), #
-		colour=factor(Sampling)), size=7) +#
-	scale_shape_manual(values=c(1,20,4,0)) +#
-	scale_colour_manual(values=c("white", rep("black", 3))) +#
-	facet_wrap(~Design) + #
-	theme(#
-		legend.position=c(1,0), #
-		legend.justification=c(3.085,-3.85),#
-		legend.key=element_blank(),#
-		legend.background = element_rect(linetype="solid", colour="black")#
-	) +#
-	guides(shape=guide_legend(title=NULL), colour=guide_legend(title=NULL)) +#
-	scale_x_continuous(limits=c(0,30)) +#
-   	scale_y_continuous(limits=c(0,30))
-?rescale
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Rescale Function#
-#
-#' @description Only rescale once the dataset is final (missing values have been removed)#
-#
-rescale_function <- function(x=x){#
-	mutate(x, #
-		# plant síze#
-		Ln_Size_t_1_st = arm::rescale(log(Size_t_1)),#
-		Ln_Cone_t_1_st = arm::rescale(log(Cone_t_1)),#
-		Ln_Cylinder_Tall_t_1_st = arm::rescale(log(Cylinder_Tall_t_1))#
-)}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-library(ProjectTemplate)#
-#
-# load project#
-load.project()
-library(dataproc)
-library(ACSampling)
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste(Eigenvalue, "Number", sep=""))
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Rescale Function#
-#
-#' @description Only rescale once the dataset is final (missing values have been removed)#
-#
-rescale_function <- function(x=x){#
-	mutate(x, #
-		# plant síze#
-		Ln_Size_t_1_st = arm::rescale(log(Size_t_1)),#
-		Ln_Cone_t_1_st = arm::rescale(log(Cone_t_1)),#
-		Ln_Cylinder_Tall_t_1_st = arm::rescale(log(Cylinder_Tall_t_1))#
-)}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-library(ProjectTemplate)#
-#
-# load project#
-load.project()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-colours <- c("#000000", "#2121D9", "#9999FF", "#D92121", "#FF9326")#
-colours2 <- c("#009e73", "#D92121", "#FF9326", "#000000", "#000000") #  9999FF#
-#
-colours3 <- c("#B103B2", "#00C6FF", "#FF7E00", "#AD1CB2","#FF270E", "#163EB2", "#47B200", "#000000", "#000000") #  9999FF#
-colours_barplots <- c("#BEC5F0", "#FFF797", "#FF6662", "#B103B2","#3E87B2", "#FFA108", "#B28373", "#000000") #  9999FF#
-#
-colours_stricta_insects_scatterplots <- c("#B103B2","#3E87B2", "#FFA108", "#000000") #  9999FF#
-#
-colours_humifusa_insects_scatterplots <- c("#B103B2","#7F93B2", "#FFA108", "#4C3831", "#202D5A", "#FF1129", "#069932", "#000000") #  9999FF#
-cbbPalette <- c("#000000","#009E73", "#0072B2", "#D55E00", "#CC79A7")#
-#
-years <- c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02")#
-# CACA#
-#
-insect_barplot <- c("#FFAE63", "#9CCC50", "#FFDF44", "#3DDAFF", "#C0C0C0","#C0C0C0","#C0C0C0","#C0C0C0")#
-CACA_boxplot <- c("#C0C0C0", "#D92121")#
-CACA_boxplot_flipped <- c("#FFAE63", "#C0C0C0")#
-CACA_scatterplot <- c("#000000", "#D92121")#
-CHVI_boxplot <- c("#C0C0C0", "#62B20D")#
-CHVI_boxplot_flipped <- c("#9CCC50", "#C0C0C0")#
-CHVI_scatterplot <- c("#000000", "#62B20D")#
-#
-DACT_boxplot <- c("#C0C0C0", "#FFDF44")#
-DACT_boxplot_flipped <- c("#FFDF44", "#C0C0C0")#
-DACT_scatterplot <- c("#000000", "#FF7500")#
-#
-MEPR_boxplot <- c("#C0C0C0", "#9111FF")#
-MEPR_boxplot_flipped <- c("#3DDAFF", "#C0C0C0")#
-MEPR_scatterplot <- c("#000000", "#9111FF")#
-## Function for arranging ggplots. use png(); arrange(p1, p2, ncol=1); dev.off() to save.#
-#	from http://gettinggeneticsdone.blogspot.com/2010/03/arrange-multiple-ggplot2-plots-in-same.html#
-#	accessed 15 April 2014#
-vp.layout <- function(x, y) viewport(layout.pos.row=x, layout.pos.col=y)#
-arrange_ggplot2 <- function(..., nrow=NULL, ncol=NULL, as.table=FALSE, col_width=col_width) {#
-	dots <- list(...)#
-	n <- length(dots)#
-	if(is.null(nrow) & is.null(ncol)) { nrow = floor(n/2) ; ncol = ceiling(n/nrow)}#
-	if(is.null(nrow)) { nrow = ceiling(n/ncol)}#
-	if(is.null(ncol)) { ncol = ceiling(n/nrow)}#
-        ## NOTE see n2mfrow in grDevices for possible alternative#
-grid.newpage()#
-pushViewport(viewport(layout=grid.layout(nrow,ncol,widths = unit(rep_len(col_width, ncol), "cm") ) ) )#
-	ii.p <- 1#
-	for(ii.row in seq(1, nrow)){#
-	ii.table.row <- ii.row	#
-	if(as.table) {ii.table.row <- nrow - ii.table.row + 1}#
-		for(ii.col in seq(1, ncol)){#
-			ii.table <- ii.p#
-			if(ii.p > n) break#
-			print(dots[[ii.table]], vp=vp.layout(ii.table.row, ii.col))#
-			ii.p <- ii.p + 1#
-		}#
-	}#
-}#
-KEStheme <- function(base_size = 10, base_family = "") {#
-    theme_grey(base_size = base_size, base_family = base_family) %+replace% #
-        theme(#
-			axis.text = element_text(size = rel(0.8)), #
-			axis.ticks = element_line(colour = "black"), #
-            legend.key = element_rect(colour = "grey80"), #
-			panel.background = element_rect(fill = "white", #
-                colour = NA), #
-                panel.border =      element_rect(colour="black", size=1.2),#
-            panel.grid.major =  element_blank(),#
-            panel.grid.minor =  element_blank(),#
-			strip.background = element_rect(fill = "grey80", colour = "grey50", size = 0.2))#
-}#
-KEStheme <- function(base_size = 10, base_family = "") {#
-	theme_bw(base_size = base_size, base_family = base_family) %+replace% #
-    theme( #
-        axis.line =         element_blank(),#
-        axis.text.x =       element_text(size = base_size * 1.3, #
-							lineheight = 1, colour = "black", vjust = 1,#
-							face="bold"),#
-        axis.text.y =       element_text(size = base_size * 1.3, #
-							lineheight = 1.3, colour = "black", hjust = 1, #
-							face="bold"),#
-        axis.ticks =        element_line(colour = "black"),#
-        axis.title.x =      element_text(size = base_size * 1.9, face="bold"),#
-        axis.title.y =      element_text(size = base_size * 1.9, angle = 90, #
-							face="bold"),#
-        axis.ticks.length = unit(0.1, "cm"),#
-        axis.ticks.margin = unit(0.1, "cm"),#
-#
-        legend.background = element_rect(colour="white"),#
-        legend.key =        element_rect(fill = "white", colour = "white"),#
-        legend.key.size =   unit(1.7, "lines"),#
-        legend.text =       element_text(size = base_size * 2),#
-        legend.title =      element_text(size = base_size * 2, face = "bold", #
-							hjust = 0),#
-        legend.position =   "right",#
-        panel.background =  element_rect(fill = "white", colour = NA),#
-        panel.border =      element_rect(fill=NA, colour="black", size=1.2),#
-        panel.grid.major =  element_blank(),#
-        panel.grid.minor =  element_blank(),#
-        panel.margin =      unit(0.25, "lines"),#
-        strip.background =  element_rect(fill = "white", colour = NA),#
-        strip.text.y =      element_text(size = base_size * 2, angle = -90),#
-        plot.background =   element_rect(fill = NA, colour = NA),#
-        plot.title =        element_text(size = base_size * 3),#
-        plot.margin =       unit(c(1, 1, 0.5, 0.5), "lines")#
-	)#
-}#
-#
-KEStheme_BoldItalicStripText <- function(base_size = 10, base_family = "") {#
-	KEStheme(base_size = base_size, base_family = base_family) %+replace% #
-    theme( #
-        strip.text.x = element_text(size = base_size * 2, face = "bold.italic")#
-	)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-################################################################################
-#-----------------------------------------------------------------------------##
-# timeseries#
-#-----------------------------------------------------------------------------##
-################################################################################
-#
-# read in data#
-timeseries <- timeseries.KS.mod %>%#
-	# create PlantID variable (unique plant ID)#
-	mutate(PlantID = paste(Location, ID, sep="")) %>%#
-	as.data.table#
-#
-# rename Mexico Beach#
-timeseries[Location == "MexicoBeach", Location := "Mexico Beach"]#
-#
-# remame column namesnames#
-timeseries %<>%#
-	setnames("Height", "Height_t") %>%#
-	setnames("Pads", "Size_t") %>%#
-	setnames("MEPR", "ME_t") %>%#
-	setnames("CACA", "CA_t") %>%#
-	setnames("DACT", "DA_t") %>%#
-	setnames("CHVI", "CH_t") %>%#
-	setnames("Width", "Width_t") %>%#
-	setnames("Fruit", "Fruit_t")#
-# Rename Species factor labels#
-timeseries[Species == "humifusa", Species := "Opuntia humifusa"]#
-timeseries[Species == "stricta", Species := "Opuntia stricta"]#
-#
-# format as factor#
-timeseries$Location %<>% as.factor#
-timeseries$Species %<>% as.factor#
-#
-# Change Zeros to NAs#
-	# timeseries[timeseries$PlantSize_t==0, ]#
-	# timeseries[timeseries$PlantHeight_t==0, ]#
-	# timeseries[timeseries$Width_t==0, ]#
-#
-	# There should never be observations of 0 pads, 0 height, or 0 width#
-	# replace 0 with NA#
-cnames <- c("Size_t", "Height_t", "Width_t")#
-for (cname in cnames) {#
-	timeseries[, cname := Zero_is_NA_Function(timeseries[[cname]]), with=FALSE]#
-}#
-#
-################################################################################
-# Process TIME#
-################################################################################
-#
-timeseries$Date %<>% as.Date("%m/%d/%y")#
-#
-timeseries %<>% #
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep=""))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("Eigenvalue", "Number", "Proportion", "modelVars")]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Number", "Proportion", "modelVars")]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Proportion", "modelVars")] %>%#
+		dcast(~EigenNum)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Proportion", "modelVars")]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(Eigenvalue + Proportion + EigenNum ~ modelVars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(Eigenvalue + Proportion + modelVars ~ EigenNum)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(Eigenvalue ~ EigenNum)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(Eigenvalue + Proportion ~ EigenNum)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(Eigenvalue + Proportion ~ EigenNum + modelVars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(Eigenvalue + Proportion ~ EigenNum)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(Eigenvalue ~ EigenNum)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(EigenNum ~ Eigenvalue)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		melt(id.vars=c("modelVars", "EigenNum"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		melt(id.vars=c("modelVars", "EigenNum", "Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		melt(id.vars=c("modelVars", "Eigenvalue", "Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		melt(id.vars=c("EigenNum"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		melt(id.vars=c("Eigenvalue", "Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast("Eigenvalue" ~ "EigenNum")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast("Eigenvalue" ~ "EigenNum")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast("modelVars" ~ "EigenNum", value.var=c("Eigenvalue", "Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(~ "EigenNum", value.var=c("Eigenvalue", "Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(~ "EigenNum", value.var="Eigenvalue")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(modelVars ~ EigenNum, value.var=c("Eigenvalue", "Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(modelVars ~ EigenNum, value.var=c("Eigenvalue"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(modelVars + Proportion ~ EigenNum, value.var=c("Eigenvalue"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(modelVars ~ Proportion + EigenNum, value.var=c("Eigenvalue"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")] %>%#
+		dcast(modelVars ~ EigenNum, value.var=c("Eigenvalue"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(EigenNum = paste("Eigenvalue", Number, sep="")) %>%#
+		.[, c("EigenNum", "Eigenvalue", "Proportion", "modelVars")]
+Y
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(#
+			EigenNum = paste("Eigenvalue", Number, sep=""),#
+			PropNum = paste("Proportion", Number, sep=""),			#
+		) %>%#
+		.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(#
+			EigenNum = paste("Eigenvalue", Number, sep=""),#
+			PropNum = paste("Proportion", Number, sep="")	#
+		) %>%#
+		.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]
+Y
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(Y, modelVars ~ EigenNum, value.var=c("Eigenvalue"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(Y, modelVars ~ PropNum, value.var=c("Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+rbind(PCA.all.surveys.factor.pattern, Eigens, PropExpl)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+		filter(Number < 3) %>%		#
+		mutate(#
+			EigenNum = paste("Eigenvalue", Number, sep=""),#
+			PropNum = paste("Proportion", Number, sep="")	#
+		) %>%#
+		.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]#
+	Eigens <- dcast(Y, modelVars ~ EigenNum, value.var=c("Eigenvalue"))#
+	PropExpl <- dcast(Y, modelVars ~ PropNum, value.var=c("Proportion"))#
+	rbind(PCA.all.surveys.factor.pattern, Eigens, PropExpl)
+head(PCA.all.surveys.factor.pattern)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+melt(PCA.all.surveys.factor.pattern, id.vars=c(modelVars))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+melt(PCA.all.surveys.factor.pattern, id.vars=c("modelVars"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, value.var=c("Factor1"))
+head(PCA.all.surveys.factor.pattern)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(Y, modelVars ~ EigenNum, value.var=c("Eigenvalue"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, value.var=c("Factor1"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(Y, modelVars ~ PropNum, value.var=c("Proportion"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+merge(#
+		FactorVals1, #
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")]#
+	)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+FactorVals1 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, value.var=c("Factor1"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+merge(#
+		FactorVals1, #
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")]#
+	)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+merge(#
+		FactorVals1, #
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Eigens[, c("modelVars", "Eigenvalue1")]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PropExpl[, c("modelVars", "Proportion1")]
+?cbind
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+merge(#
+		FactorVals1, #
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	)
+?merge
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals1, #
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+FactorVals1 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, value.var=c("Factor1"))
+FactorVals1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		# FactorVals1, #
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	melt(id.vars="modelVars")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	t
+?t
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	base::t
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	t %>%#
+	as.data.frame
+?as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	t %>%#
+	as.data.frame#
+names(Factor1) <- Factor1[1,]
+Factor1
+?as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars")
+Factor1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix(row.names=.$modelVars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix(rownames=.$modelVars)
+?matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix#
+	rownames(Factor1) <- Factor1$$modelVars
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix#
+	rownames(Factor1) <- Factor1$modelVars
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix#
+	rownames(Factor1) <- Factor1[1,]
+Factor1[1,]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix#
+	rownames(Factor1) <- Factor1[, 1]
+Factor1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix#
+	rownames(Factor1) <- Factor1[, 1]#
+	Factor1 %>% .[, -1] %>%#
+	t
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		PropExpl[, c("modelVars", "Proportion1")],#
+		by="modelVars"#
+	) %>%#
+	base::merge(FactorVals1, by="modelVars") %>%#
+	as.matrix#
+rownames(Factor1) <- Factor1[, 1]#
+Factor1 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor1) <- Factor1[, 1]#
+Factor1 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, #
+	value.var=c("Factor2"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+	filter(Number < 3) %>%		#
 	mutate(#
-		Month=month(Date),#
-		MonthYear=as.character(as.yearmon(Date)),#
-		DaysSinceStart=as.numeric(Date - min(Date)),#
-		VisitNum=0#
-	)	 #
-#
-#-----------------------------------------------------------------------------##
-# create "Visit Number" field#
-#-----------------------------------------------------------------------------##
-timeseries[Date >= "2009-01-21" & Date <= "2009-01-26", VisitNum := 1]#
-timeseries[Date >= "2009-04-25" & Date <= "2009-04-30", VisitNum := 2]#
-timeseries[Date >= "2009-07-23" & Date <= "2009-07-28", VisitNum := 3]#
-timeseries[Date >= "2009-10-23" & Date <= "2009-10-28", VisitNum := 4]#
-timeseries[Date >= "2010-05-14" & Date <= "2010-05-19", VisitNum := 5]#
-timeseries[Date >= "2010-11-15" & Date <= "2010-11-20", VisitNum := 6]#
-timeseries[Date >= "2011-05-12" & Date <= "2011-05-17", VisitNum := 7]#
-timeseries[Date >= "2011-12-15" & Date <= "2012-01-17", VisitNum := 8]#
-timeseries[Date >= "2012-05-13" & Date <= "2012-05-16", VisitNum := 9]#
-timeseries[Date >= "2012-12-14" & Date <= "2012-12-19", VisitNum := 10]#
-timeseries[Date >= "2013-05-18" & Date <= "2013-05-23", VisitNum := 11]#
-timeseries[Date >= "2014-01-12" & Date <= "2014-01-17", VisitNum := 12]#
-#
-#-----------------------------------------------------------------------------##
-# check for erroneous dates#
-#-----------------------------------------------------------------------------##
-print("Surveys where visit number = 0")#
-print(filter(timeseries, VisitNum=="0"))#
-# timeseries <- timeseries[which(timeseries$VisitNum!="0"), ]#
-################################################################################
-# Fruit Presence#
-################################################################################
-#
-# make FruitPres variable#
-timeseries %<>% #
-	mutate(FruitPres_t = ifelse(Fruit_t>0, 1, 0)) %>%#
-	# add NAs#
-	.[is.na(Fruit_t), FruitPres_t := NA]#
-################################################################################
-# Classify sites as coastal or inland#
-################################################################################
-#
-timeseries %<>%#
-	mutate(Coastal = as.integer(NA)) %>%#
-	# Nokuse and Sweetwater are given 0 because they are not coastal#
-	.[Location=="Nokuse" | Location=="Sweetwater", Coastal := 0] %>%#
-	.[Location!="Nokuse" & Location!="Sweetwater", Coastal := 1]#
-timeseries$Coastal %<>% as.factor#
-#
-################################################################################
-# Insect presence during entire study#
-################################################################################
-#
-#-----------------------------------------------------------------------------##
-# INSECT ever present?#
-#-----------------------------------------------------------------------------##
-#
-timeseries %<>%#
-	group_by(PlantID) %>%#
+		EigenNum = paste("Eigenvalue", Number, sep=""),#
+		PropNum = paste("Proportion", Number, sep="")	#
+	) %>%#
+	.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]#
+Eigens <- dcast(Y, modelVars ~ EigenNum, value.var=c("Eigenvalue"))#
+PropExpl <- dcast(Y, modelVars ~ PropNum, value.var=c("Proportion"))#
+FactorVals1 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, 	value.var=c("Factor1"))#
+FactorVals2 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, #
+	value.var=c("Factor2"))#
+Factor1 <- #
+	base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor1) <- Factor1[, 1]#
+Factor1 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor2) <- Factor1[, 1]#
+Factor2 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor2) <- Factor2[, 1]#
+Factor2 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor2) <- Factor2[, 1]#
+Factor2 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.eigenvalues
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+	filter(Number < 3 & Eigenvalue < 1) %>%		#
 	mutate(#
-		CACAPresent = ifelse(sum(CA_t, na.rm=T) > 0, 1, 0),#
-		MEPRPresent = ifelse(sum(ME_t, na.rm=T) > 0, 1, 0),#
-		DACTPresent = ifelse(sum(DA_t, na.rm=T) > 0, 1, 0),#
-		CHVIPresent = ifelse(sum(CH_t, na.rm=T) > 0, 1, 0)#
-	)#
-#
-################################################################################
-# Insect presence during current survey#
-################################################################################
-#
-timeseries$NumInsectSpecies_t <- timeseries %>%#
-	dplyr::select(ME_t, CA_t, CH_t, DA_t) %>%#
-	apply(., 1, mysum#
-)#
-################################################################################
-# SEASON#
-################################################################################
-#
-timeseries$Season = "NA"#
-#
-# function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to#
-# solstice and equinox dates: http://en.wikipedia.org/wiki/Solstice#
-#
-timeseries[which(timeseries$Year==2009),]$Season <- getSeason2009(timeseries[which(timeseries$Year==2009),]$Date)#
-#
-timeseries[which(timeseries$Year==2010),]$Season <- getSeason2010(timeseries[which(timeseries$Year==2010),]$Date)#
-#
-timeseries[which(timeseries$Year==2011),]$Season <- getSeason2011(timeseries[which(timeseries$Year==2011),]$Date)#
-#
-timeseries[which(timeseries$Year==2012),]$Season <- getSeason2012(timeseries[which(timeseries$Year==2012),]$Date)#
-#
-timeseries[which(timeseries$Year==2013),]$Season <- getSeason2013(timeseries[which(timeseries$Year==2013),]$Date)#
-#
-timeseries[which(timeseries$Year==2014),]$Season <- getSeason2014(timeseries[which(timeseries$Year==2014),]$Date)#
-#
-################################################################################
-# Classify Surveys as Complete#
-################################################################################
-#
-timeseries$complete_insect_surveys <- ifelse(rowSums(is.na(#
-	timeseries[, .(ME_t, CA_t, CH_t, DA_t)]))==0, 1, 0#
-)#
-#
-timeseries$complete_surveys <- ifelse(rowSums(is.na(#
-	timeseries[, #
-	.(#
-	# insects#
-	ME_t,                #
-	CA_t,#
-	CH_t,#
-	DA_t,#
-	# number of segments#
-	Size_t,#
-	# flowers and fruit#
-	Fruit_t#
-	)]))==0, 1, 0#
-)#
-#
-################################################################################
-# Calculate Volume#
-################################################################################
-#
-timeseries %<>% #
+		EigenNum = paste("Eigenvalue", Number, sep=""),#
+		PropNum = paste("Proportion", Number, sep="")	#
+	) %>%#
+	.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]#
+Eigens <- dcast(Y, modelVars ~ EigenNum, value.var=c("Eigenvalue"))#
+PropExpl <- dcast(Y, modelVars ~ PropNum, value.var=c("Proportion"))#
+FactorVals1 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, 	value.var=c("Factor1"))#
+FactorVals2 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, #
+	value.var=c("Factor2"))#
+Factor1 <- #
+	base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor1) <- Factor1[, 1]#
+Factor1 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame#
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor2) <- Factor2[, 1]#
+Factor2 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+	filter(Number < 3 & Eigenvalue >= 1) %>%		#
 	mutate(#
-		# calculate volume#
-		Cone_t = pi * (((Width_t)/4)^2) * Height_t / 3,#
-		Cylinder_Tall_t = pi * ((Width_t/2)^2) * Height_t#
+		EigenNum = paste("Eigenvalue", Number, sep=""),#
+		PropNum = paste("Proportion", Number, sep="")	#
+	) %>%#
+	.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]#
+Eigens <- dcast(Y, modelVars ~ EigenNum, value.var=c("Eigenvalue"))#
+PropExpl <- dcast(Y, modelVars ~ PropNum, value.var=c("Proportion"))#
+FactorVals1 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, 	value.var=c("Factor1"))#
+FactorVals2 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, #
+	value.var=c("Factor2"))#
+Factor1 <- #
+	base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor1) <- Factor1[, 1]#
+Factor1 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame#
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor2) <- Factor2[, 1]#
+Factor2 %>% .[, -1] %>%#
+	t %>%#
+	as.data.frame
+?grep
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+grep(names(Factor2), "HUMIFUSA")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+grepl(names(Factor2), "HUMIFUSA")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+grepl("HUMIFUSA", names(Factor2))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+grep("HUMIFUSA", names(Factor2))
+?susstr
+?substr
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix#
+rownames(Factor2) <- Factor2[, 1]#
+Factor2 %<>% .[, -1] %>% t %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	as.matrix %>%#
+	mutate(Species = substr(modelVars,1,7))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(Species = substr(modelVars,1,7)) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = substr(modelVars, -1, -4)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = substr(modelVars, -1, 4)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = substr(modelVars, -4, -1)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1)#
+		) %>%#
+	as.matrix#
+rownames(Factor2) <- Factor2[, 1]#
+Factor2 %<>% .[, -1] %>% t %>% as.data.frame
+Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Dataset = sbustr(PCA.all.surveys.factor.pattern, 5, 7)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Dataset = substr(PCA.all.surveys.factor.pattern, 5, 7)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Dataset = rep(substr(PCA.all.surveys.factor.pattern, 5, 7), 4)#
+		) %>%#
+	as.matrix
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1)#
+		) #
+Factor2$Dataset = substr(PCA.all.surveys.factor.pattern, 5, 7)
+Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.factor.pattern
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dataset_type="all"
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1)#
+		) #
+Factor2$Dataset = dataset_type
+Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1)#
+		) #
+Factor2$Dataset = dataset_type
+Factor2
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+FactorVals1 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, 	value.var=c("Factor1"))#
+Factor1 <- #
+	base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1)#
 		)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-#-----------------------------------------------------------------------------##
-# remove data#
-#-----------------------------------------------------------------------------##
-#
-# (1) save removed data#
-#
-removed_data <- timeseries %>%#
-	as.data.frame %>%#
-	# not enough engelmannii observations for analysis#
-	filter(Species=="Opuntia engelmannii" |#
-	# remove surveys of these plants that occurred after 2011-05-16 because they #
-	#		were hacked by the USDA#
-		(PlantID == "HBSPOS10" & Date > "2011-05-16") | #
-		(PlantID == "HBSPOS11" & Date > "2011-05-16") |#
-		(PlantID == "HBSPOS12" & Date > "2011-05-16") |#
-		(PlantID == "HBSPOS15" & Date > "2011-05-16") |#
-		(PlantID == "HBSPOS16" & Date > "2011-05-16") |#
-		(PlantID == "HBSPOS17" & Date > "2011-05-16") |#
-		(PlantID == "HBSPOS18" & Date > "2011-05-16")|#
-		(PlantID == "HBSPOS5" & Date > "2011-05-16") |#
-	# Remove Mexico Beach OS3#
-	# 		I don't know if this is always the same plant being surveyed#
-	(PlantID == "MexicoBeachOS3"))#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("removed_data")#
-#
-# (2) then remove it from dataset#
-#
-timeseries %<>%#
-	as.data.frame %>%#
-	# not enough engelmannii observations for analysis#
-	filter(Species!="engelmannii") %>% #
-	# remove surveys of these plants that occurred after 2011-05-16 because they #
-	#		were hacked by the USDA#
-	filter(!(PlantID == "HBSPOS10" & Date > "2011-05-16")) %>%#
-	filter(!(PlantID == "HBSPOS11" & Date > "2011-05-16")) %>%#
-	filter(!(PlantID == "HBSPOS12" & Date > "2011-05-16")) %>%#
-	filter(!(PlantID == "HBSPOS15" & Date > "2011-05-16")) %>%#
-	filter(!(PlantID == "HBSPOS16" & Date > "2011-05-16")) %>%#
-	filter(!(PlantID == "HBSPOS17" & Date > "2011-05-16")) %>%#
-	filter(!(PlantID == "HBSPOS18" & Date > "2011-05-16")) %>%#
-	filter(!(PlantID == "HBSPOS5" & Date > "2011-05-16")) %>%#
-	# Remove Mexico Beach OS3#
-	# 		I don't know if this is always the same plant being surveyed#
-	filter(!(PlantID == "MexicoBeachOS3"))#
-#
-#-----------------------------------------------------------------------------##
-# Keep only first observation that a plant is dead#
-#-----------------------------------------------------------------------------##
-#
-timeseries_not_dead <- timeseries %>%#
-	filter(Dead==0)#
-#
-timeseries_dead <- timeseries %>%#
-	filter(Dead==1) %>%#
-	arrange(Date) %>%#
-	# keep only the first record that the plant was dead#
-	ddply("PlantID", function(z) head(z,1))#
-#
-# doublecheck that there is only one row per PlantID in timeseries_dead#
-length(unique(timeseries_dead$PlantID))#
-#
-# make all other fields NA so surveys when dead don't end up in an analysis#
-#
-timeseries_dead$Height_t <- NA#
-timeseries_dead$Width_t <- NA#
-timeseries_dead$Size_t <- NA#
-timeseries_dead$Fruit_t <- NA#
-timeseries_dead$ME_t <- NA#
-timeseries_dead$CA_t <- NA#
-timeseries_dead$CH_t <- NA#
-timeseries_dead$DA_t <- NA#
-#
-timeseries <- rbind(timeseries_not_dead, timeseries_dead)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-################################################################################
-# all surveys#
-################################################################################
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function %>%#
-							lag_dates_function %>%#
-							lag_insects_function %>%#
-							# RGR#
-							RGR_function#
-#
-# Save#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-#
-################################################################################
-# winter surveys#
-################################################################################
-timeseries_winter <- timeseries#
-#
-timeseries_winter$Visit <- "NA"#
-#
-timeseries_winter %<>% #
-	as.data.frame %>%#
-	group_by(Date) %>% #
-	mutate(#
-		Visit = replace(Visit, which(Date >= "2009-01-21" & Date < "2010-11-15"), "Year2010"),#
-		Visit = replace(Visit, which(Date >= "2010-11-15" & Date < "2011-12-15"), "Year2011"),#
-		Visit = replace(Visit, which(Date >= "2011-12-15" & Date < "2012-12-14"), "Year2012"),#
-		Visit = replace(Visit, which(Date >= "2012-12-14" & Date < "2014-01-12"), "Year2014"))#
-#
-new = timeseries_winter %>%#
-	dplyr::select(Visit, PlantID, ME_t, CA_t, CH_t, DA_t) %>%#
-	group_by(Visit, PlantID) %>%#
-	summarise(#
-		CAyr_t 			= ifelse(sum(CA_t, na.rm=T)>0, 1, 0),#
-		MEyr_t 			= ifelse(sum(ME_t, na.rm=T)>0, 1, 0),#
-		CHyr_t 			= ifelse(sum(CH_t, na.rm=T)>0, 1, 0),#
-		DAyr_t 			= ifelse(sum(DA_t, na.rm=T)>0, 1, 0),#
-		Insectyr_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),#
-		NatInsectyr_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)#
-	)#
-#
-# use only winter data#
-timeseries_winter %<>%#
-	mutate(Month=month(Date)) %>%#
-	arrange(Date) %>%#
-	filter(Month==10 | Month==11 | Month==12 | Month==1) %>%#
-	merge(new, by=c("Visit", "PlantID"), all.x=T)#
-# create lag and RGR variables#
-timeseries_winter %<>%#
-					# lag variables#
-					lag_size_fruit_function %>%#
-					lag_dates_function %>%#
-					lag_insects_yr_function %>%#
-					# RGR#
-					as.data.frame %>%#
-					RGR_function#
-#
-# Save#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-#
-################################################################################
-# spring surveys#
-################################################################################
-timeseries_spring <- timeseries#
-#
-timeseries_spring$Visit <- "NA"#
-#
-timeseries_spring %<>% #
-	as.data.frame %>%#
-	group_by(Date) %>% #
-	mutate(#
-		Visit = replace(Visit, which(Date >= "2009-04-01" & Date < "2010-05-01"), "Year1"),#
-		Visit = replace(Visit, which(Date >= "2010-05-01" & Date < "2011-05-01"), "Year2"),#
-		Visit = replace(Visit, which(Date >= "2011-05-01" & Date < "2012-05-01"), "Year3"),#
-		Visit = replace(Visit, which(Date >= "2012-05-01" & Date < "2013-05-01"), "Year4"),#
-		Visit = replace(Visit, which(Date > "2013-05-01" ), "Year5"))#
-#
-new = timeseries_spring %>%#
-	dplyr::select(Visit, PlantID, ME_t, CA_t, CH_t, DA_t) %>%#
-	group_by(Visit, PlantID) %>%#
-	summarise(#
-		CAyr_t 			= ifelse(sum(CA_t, na.rm=T)>0, 1, 0),#
-		MEyr_t 			= ifelse(sum(ME_t, na.rm=T)>0, 1, 0),#
-		CHyr_t 			= ifelse(sum(CH_t, na.rm=T)>0, 1, 0),#
-		DAyr_t 			= ifelse(sum(DA_t, na.rm=T)>0, 1, 0),#
-		Insectyr_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),#
-		NatInsectyr_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)#
-	)#
-#
-# use only winter data#
-timeseries_spring %<>%#
-	mutate(Month=month(Date)) %>%#
-	arrange(Date) %>%#
-	filter(Month==4 | Month==5) %>%#
-	merge(new, by=c("Visit", "PlantID"), all.x=T)#
-#
-# create lag and RGR variables#
-timeseries_spring %<>%#
-					# lag variables#
-					lag_size_fruit_function %>%#
-					lag_dates_function %>%#
-					lag_insects_yr_function %>%#
-					# RGR#
-					as.data.frame %>%#
-					RGR_function#
-#
-# Save#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function %>%#
-							lag_dates_function %>%#
-							lag_insects_function %>%#
-							# RGR#
-							RGR_function#
-#
-# Save#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_all_surveys <- timeseries
-str(timeseries)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Calculate size and fruit production variables at the previous time step#
-#' @param x#
-#' @description calculate lag size and fruit.#
-#
-lag_size_fruit_function <- function(x=x){#
-	x %>% #
-		arrange(Date) %>%#
-		group_by(PlantID) %>%#
-		mutate(#
-			# size#
-			Size_t_1 			= c(NA, head(Size_t, -1)),#
-			Height_t_1 			= c(NA, head(Height_t, -1)),#
-			Cone_t_1 			= c(NA, head(Cone_t, -1)),#
-			Cylinder_Tall_t_1 	= c(NA, head(Cylinder_Tall_t, -1)),#
-			# fruit#
-			Fruit_t_1 			= c(NA, head(Fruit_t, -1)),#
-			FruitPres_t_1 		= c(NA, head(FruitPres_t, -1))#
-		)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-################################################################################
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function %>%#
-							lag_dates_function %>%#
-							lag_insects_function %>%#
-							# RGR#
-							RGR_function
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./dataproc")#
-#setwd("./modresproc")#
-devtools::document()#
-devtools::install()
-library(dataproc)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function %>%#
-							lag_dates_function %>%#
-							lag_insects_function %>%#
-							# RGR#
-							RGR_function
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Calculate size and fruit production variables at the previous time step#
-#' @param x#
-#' @description calculate lag size and fruit.#
-#
-lag_size_fruit_function <- function(x=x){#
-	x %>% #
-		arrange(Date) %>%#
-		group_by(PlantID) %>%#
-		mutate(#
-			# size#
-			Size_t_1 			= c(NA, head(Size_t, -1)),#
-			Height_t_1 			= c(NA, head(Height_t, -1)),#
-			Cone_t_1 			= c(NA, head(Cone_t, -1)),#
-			Cylinder_Tall_t_1 	= c(NA, head(Cylinder_Tall_t, -1)),#
-			# fruit#
-			Fruit_t_1 			= c(NA, head(Fruit_t, -1)),#
-			FruitPres_t_1 		= c(NA, head(FruitPres_t, -1))#
-		)#
-}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Calculate insect presence during the previous year#
-#' @param x#
-#' @description calculate lag insects during the previous year.#
-#
-lag_insects_yr_function <- function(x=x){#
-	x %>% #
-		arrange(Date) %>%#
-		group_by(PlantID) %>%#
-		mutate(#
-			# new insect variables#
-			Insectyr_t 		= ifelse(sum(DAyr_t, CAyr_t, CHyr_t, MEyr_t, na.rm=T)>0, 1, 0),#
-			NatInsectyr_t 	= ifelse(sum(DAyr_t, CHyr_t, MEyr_t, na.rm=T)>0, 1, 0),#
-			# lagged insects#
-			CAyr_t_1 		= c(NA, head(CAyr_t, -1)),#
-			MEyr_t_1 		= c(NA, head(MEyr_t, -1)),#
-			CHyr_t_1 		= c(NA, head(CHyr_t, -1)),#
-			DAyr_t_1 		= c(NA, head(DAyr_t, -1)),#
-			Insectyr_t_1 		= c(NA, head(Insectyr_t, -1)),#
-			NatInsectyr_t_1 	= c(NA, head(NatInsectyr_t, -1))#
-		) %>%#
-		as.data.frame#
-}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Calculate insect presence at previous time step#
-#' @param x#
-#' @description calculate lag insects.#
-#
-lag_insects_function <- function(x=x){#
-	x %>% #
-		arrange(Date) %>%#
-		group_by(PlantID) %>%#
-		mutate(#
-			# new insect variables#
-			Insect_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),#
-			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),#
-			# lagged insects#
-			CA_t_1 		= c(NA, head(CA_t, -1)),#
-			ME_t_1 		= c(NA, head(ME_t, -1)),#
-			CH_t_1 		= c(NA, head(CH_t, -1)),#
-			DA_t_1 		= c(NA, head(DA_t, -1)),#
-			Insect_t_1 		= c(NA, head(Insect_t, -1)),#
-			NatInsect_t_1 	= c(NA, head(NatInsect_t, -1))#
-		) %>%#
-		as.data.frame#
-}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Calculate lag dates: Previous_Survey_Date, DaysSincePrevSurvey, DaysSinceStart#
-#' @param x#
-#' @description calculate lag dates.#
-lag_dates_function <- function(x=x){#
-	x %<>% #
-		arrange(Date) %>%#
-		group_by(PlantID) %>%#
-		mutate(#
-			# previous dates#
-			Previous_Survey_Date 	= as.Date(c(NA, head(Date, -1))),#
-			DaysSincePrevSurvey 	= Date - Previous_Survey_Date,#
-			DaysSinceStart 			= Date - Date[1]#
-		)#
-	x$DaysSincePrevSurvey 	%<>% as.numeric#
-	x$DaysSinceStart 		%<>% as.numeric#
-	return(x)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function %>%#
-							lag_dates_function %>%#
-							lag_insects_function %>%#
-							# RGR#
-							RGR_function
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-#' Calculate Relative Growth Rate#
-#' @param x#
-#' @description formula for relative growth rate is from Paine, C. E. T., Marthews, T. R., Vogt, D. R., Purves, D., Rees, M., Hector, A., & Turnbull, L. A. (2011). How to fit nonlinear plant growth models and calculate growth rates: an update for ecologists. Methods in Ecology and Evolution, no–no. doi:10.1111/j.2041-210X.2011.00155.x#
-#
-#' absolute growth rate (AGR) is the derivative with respect to time of the function used to predict biomass, and RGR is simply AGR divided by the current biomass#
-#
-#' RGR is (dM/dt)/M#
-#
-#' CURRENT FORMULA FOR RGR#
-#' after meeting with Mary and Bob (1 Dec 2014) Bob suggested that I divide by plant size at time t-1#
-#
-#' scale by DaysSincePrevTime#
-RGR_function <- function(x=x){#
-	x %<>% mutate(#
-		RGR_Height 			= (Height_t - Height_t_1) /#
-								(DaysSincePrevSurvey*Height_t_1), #
-	 	RGR_Size 			= (Size_t - Size_t_1) / #
-								(DaysSincePrevSurvey*Size_t_1),#
-		RGR_Cone 			= (Cone_t - Cone_t_1) / #
-								(DaysSincePrevSurvey*Cone_t_1),#
-		RGR_Cylinder_Tall 	= (Cylinder_Tall_t - Cylinder_Tall_t_1) / #
-								(DaysSincePrevSurvey*Cylinder_Tall_t_1),#
-		RGR_Size365 				= RGR_Size*365,#
-		RGR_Cone365 				= RGR_Cone*365,#
-		RGR_CylinderTall365 		= RGR_Cylinder_Tall*365,#
-		# lagged RGR#
-		RGR_Height_t_1 			= c(NA, head(RGR_Height, -1)),#
-		RGR_Size_t_1 			= c(NA, head(RGR_Size, -1)),#
-		RGR_Cone_t_1 			= c(NA, head(RGR_Cone, -1)),#
-		RGR_Cylinder_Tall_t_1 	= c(NA, head(RGR_Cylinder_Tall, -1))		#
+Factor1 <- #
+	base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
 	) %>%#
-	as.data.table#
-	# remove Inf values#
-	cnames <- c(#
-		"RGR_Height", #
-		"RGR_Size", #
-		"RGR_Cone",#
-		"RGR_Cylinder_Tall",#
-		"RGR_Size365",#
-		"RGR_Cone365",#
-		"RGR_CylinderTall365",#
-		"RGR_Height_t_1",#
-		"RGR_Size_t_1",#
-		"RGR_Cone_t_1",#
-		"RGR_Cylinder_Tall_t_1"#
-		)#
-	for (cname in cnames) {#
-		x[, cname := NA_Function(x[[cname]]), with=FALSE]#
-	}#
-	return(x)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function %>%#
-							lag_dates_function %>%#
-							lag_insects_function %>%#
-							# RGR#
-							RGR_function
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-################################################################################
-# all surveys#
-################################################################################
-timeseries_all_surveys <- timeseries#
-#
-timeseries_all_surveys %<>% #
-							# lag variables#
-							lag_size_fruit_function %>%#
-							lag_dates_function %>%#
-							lag_insects_function %>%#
-							# RGR#
-							RGR_function#
-#
-# Save#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-#
-################################################################################
-# winter surveys#
-################################################################################
-timeseries_winter <- timeseries#
-#
-timeseries_winter$Visit <- "NA"#
-#
-timeseries_winter %<>% #
-	as.data.frame %>%#
-	group_by(Date) %>% #
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
 	mutate(#
-		Visit = replace(Visit, which(Date >= "2009-01-21" & Date < "2010-11-15"), "Year2010"),#
-		Visit = replace(Visit, which(Date >= "2010-11-15" & Date < "2011-12-15"), "Year2011"),#
-		Visit = replace(Visit, which(Date >= "2011-12-15" & Date < "2012-12-14"), "Year2012"),#
-		Visit = replace(Visit, which(Date >= "2012-12-14" & Date < "2014-01-12"), "Year2014"))#
-#
-new = timeseries_winter %>%#
-	dplyr::select(Visit, PlantID, ME_t, CA_t, CH_t, DA_t) %>%#
-	group_by(Visit, PlantID) %>%#
-	summarise(#
-		CAyr_t 			= ifelse(sum(CA_t, na.rm=T)>0, 1, 0),#
-		MEyr_t 			= ifelse(sum(ME_t, na.rm=T)>0, 1, 0),#
-		CHyr_t 			= ifelse(sum(CH_t, na.rm=T)>0, 1, 0),#
-		DAyr_t 			= ifelse(sum(DA_t, na.rm=T)>0, 1, 0),#
-		Insectyr_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),#
-		NatInsectyr_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)#
-	)#
-#
-# use only winter data#
-timeseries_winter %<>%#
-	mutate(Month=month(Date)) %>%#
-	arrange(Date) %>%#
-	filter(Month==10 | Month==11 | Month==12 | Month==1) %>%#
-	merge(new, by=c("Visit", "PlantID"), all.x=T)#
-# create lag and RGR variables#
-timeseries_winter %<>%#
-					# lag variables#
-					lag_size_fruit_function %>%#
-					lag_dates_function %>%#
-					lag_insects_yr_function %>%#
-					# RGR#
-					as.data.frame %>%#
-					RGR_function#
-#
-# Save#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-#
-################################################################################
-# spring surveys#
-################################################################################
-timeseries_spring <- timeseries#
-#
-timeseries_spring$Visit <- "NA"#
-#
-timeseries_spring %<>% #
-	as.data.frame %>%#
-	group_by(Date) %>% #
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Dataset = dataset_type,#
+		Axis = paste(dataset_type, "PC1")#
+		)
+Factor1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Factor1 <- #
+	base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
 	mutate(#
-		Visit = replace(Visit, which(Date >= "2009-04-01" & Date < "2010-05-01"), "Year1"),#
-		Visit = replace(Visit, which(Date >= "2010-05-01" & Date < "2011-05-01"), "Year2"),#
-		Visit = replace(Visit, which(Date >= "2011-05-01" & Date < "2012-05-01"), "Year3"),#
-		Visit = replace(Visit, which(Date >= "2012-05-01" & Date < "2013-05-01"), "Year4"),#
-		Visit = replace(Visit, which(Date > "2013-05-01" ), "Year5"))#
-#
-new = timeseries_spring %>%#
-	dplyr::select(Visit, PlantID, ME_t, CA_t, CH_t, DA_t) %>%#
-	group_by(Visit, PlantID) %>%#
-	summarise(#
-		CAyr_t 			= ifelse(sum(CA_t, na.rm=T)>0, 1, 0),#
-		MEyr_t 			= ifelse(sum(ME_t, na.rm=T)>0, 1, 0),#
-		CHyr_t 			= ifelse(sum(CH_t, na.rm=T)>0, 1, 0),#
-		DAyr_t 			= ifelse(sum(DA_t, na.rm=T)>0, 1, 0),#
-		Insectyr_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),#
-		NatInsectyr_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)#
-	)#
-#
-# use only winter data#
-timeseries_spring %<>%#
-	mutate(Month=month(Date)) %>%#
-	arrange(Date) %>%#
-	filter(Month==4 | Month==5) %>%#
-	merge(new, by=c("Visit", "PlantID"), all.x=T)#
-#
-# create lag and RGR variables#
-timeseries_spring %<>%#
-					# lag variables#
-					lag_size_fruit_function %>%#
-					lag_dates_function %>%#
-					lag_insects_yr_function %>%#
-					# RGR#
-					as.data.frame %>%#
-					RGR_function#
-#
-# Save#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# survival#
-#
-timeseries_survival = timeseries %>%#
-	as.data.frame %>%#
-	filter(#
-		PlantID != "HBSPOS10" &#
-		PlantID != "HBSPOS11" &#
-		PlantID != "HBSPOS12" &#
-		PlantID != "HBSPOS15" &#
-		PlantID != "HBSPOS16" &#
-		PlantID != "HBSPOS17" &#
-		PlantID != "HBSPOS18" &#
-		PlantID != "HBSPOS5"#
-		) %>%#
-	arrange(desc(Date)) %>%#
-	group_by(PlantID) %>%#
-	summarise(#
-		Location = Location[1],#
-		Species = Species[1],#
-		Size_mean = mean(Size_t, na.rm=T),#
-		Size_t_1 = Size_t[2],#
-		Size_min = min(Size_t, na.rm=T),#
-		Fruit_t_1 = Fruit_t[2],#
-		ME = ifelse(sum(ME_t, na.rm=T)>0,1,0),#
-		CA = ifelse(sum(CA_t, na.rm=T)>0,1,0),#
-		CH = ifelse(sum(CH_t, na.rm=T)>0,1,0),#
-		DA = ifelse(sum(DA_t, na.rm=T)>0,1,0),#
-		Dead = ifelse(sum(Dead, na.rm=T)>0,1,0),#
-		DaysSinceStart = DaysSinceStart[1]#
-	) #
-#
-timeseries_survival[,c(#
-	"Size_mean", #
-	"Size_t_1",#
-	"Size_min"#
-	)] %<>% #
-	apply(2, NA_Function)#
-#
-timeseries_survival$Dead_numeric <- timeseries_survival$Dead#
-timeseries_survival$Dead %<>% #
-	as.factor %>% #
-	revalue(c("0"="Alive", "1"="Dead"))
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-climate_data
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys %<>% weather_function(climate_data)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-################################################################################
-# timeseries_winter#
-################################################################################
-timeseries_winter %<>% weather_function(climate_data)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-write.csv(timeseries_winter, "./data/timeseries_winter.csv")#
-#
-################################################################################
-# timeseries_spring#
-################################################################################
-timeseries_spring %<>% weather_function(climate_data)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")#
-write.csv(timeseries_spring, "./data/timeseries_spring.csv")
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Axis = paste(dataset_type, "PC1")#
+		) #
+# Factor 2#
+FactorVals2 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, #
+	value.var=c("Factor2"))#
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Axis = paste(dataset_type, "PC1")#
+		) #
+		rbind.fill(Factor1, Factor2)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-weather_function <- function(x=x, climate_data=climate_data){#
-	# get unique Date and DaysSincePrevSurvey combos#
-	# 		to reduce number of calculations to get sum of precip/number of days #
-	#		with precip#
-	A = as.data.frame(x) %>%#
-		group_by(Date, DaysSincePrevSurvey, Location) %>%#
-		# to make sure that this group all share the same Previous_Survey_Date Date#
-		summarise(Previous_Survey_Date = paste(unique(Previous_Survey_Date))) %>%#
-		as.data.frame %>%#
-		arrange(Location, Date)#
-	#------------------------ Fill in Missing Previous Survey Date for Survey 1 --##
-	# Generate fake "Previous_Survey_Date" based on the average number of days #
-	#		between surveys#
-	A$Previous_Survey_Date[A$Previous_Survey_Date=="NA" & year(A$Date)==2009] <- #
-		as.character(A$Date[A$Previous_Survey_Date=="NA" & year(A$Date)==2009] - #
-		round(mean(x$DaysSincePrevSurvey, na.rm=T)))#
-	A %<>% filter(Previous_Survey_Date!="NA")#
-	A$Previous_Survey_Date %<>% as.Date("%Y-%m-%d")#
-	# for new plants, assign previous visit based on previous visit to location#
-	# calculate climate variables#
-	for (i in 1:dim(A)[1]) {#
-		# subset data by time period and location#
-		#		date is equal to or greater than previous survey date#
-		temp = climate_data[which(climate_data$Date >= A$Previous_Survey_Date[i] & #
-			# 	date is less than current date#
-			climate_data$Date < A$Date[i] & #
-			#	and pull data for correct location #
-			climate_data$Location==A$Location[i]), ]#
-		# Climate Variable Calculations#
-		A$Daily_Precip_mean[i] = mean(temp$Precip, na.rm=T)#
-		A$Daily_Precip_SD[i] = sd(temp$Precip, na.rm=T)#
-		#		length of precip > 0 / length of precip != NA#
-		A$Perc_Days_w_Rain[i] = length(filter(temp, Precip>0)$Precip) / length(!is.na(temp$Precip))#
-		#		length of MinTemp <= 0 / length of MinTemp != NA#
-		A$Perc_Days_w_Freeze[i] = #
-			length(filter(temp, MinTemp<=0)$MinTemp) / length(!is.na(temp$MinTemp))#
-		A$mean_Max_Temp[i] = mean(temp$MaxTemp, na.rm=T)#
-		A$sd_Max_Temp[i] = sd(temp$MaxTemp, na.rm=T)#
-		A$MeanDegreeDay[i] = mean(temp$Daily.DD, na.rm=T)#
-		# consecutive days with rain#
-			# count identical consecutive values#
-			r = rle(temp$Precip_Presence)#
-			# get lengths for value=1#
-			A$Mean_Consecutive_Days_w_Rain[i] = mean(r$length[r$values == 1], na.rm=T)#
-			A$Max_Consecutive_Days_w_Rain[i] = max(r$length[r$values == 1], na.rm=T)#
-			A$sd_Consecutive_Days_w_Rain[i] = sd(r$length[r$values == 1], na.rm=T)#
-		# consecutive drought days#
-			A$Mean_Consecutive_Drought_Days[i] = mean(r$length[r$values == 0], na.rm=T)#
-			A$Max_Consecutive_Drought_Days[i] = max(r$length[r$values == 0], na.rm=T)#
-			A$sd_Consecutive_Drought_Days[i] = sd(r$length[r$values == 0], na.rm=T)#
-		# Consecutive Freezing Days#
-			# count identical consecutive values#
-			r = rle(temp$MinTemp_lt_equal_0)#
-			# get lengths for value=1#
-			#	if there was at least one freezing day:#
-			if (length(r$length[r$values == 1]) > 0) {#
-				A$Mean_Consecutive_Freezing_Days[i] = mean(r$length[r$values == 1], na.rm=T)#
-				A$Max_Consecutive_Freezing_Days[i] = max(r$length[r$values == 1], na.rm=T)#
-				# 	calculate sd if there is more than one value; otherwise sd=0#
-				A$sd_Consecutive_Freezing_Days[i] = ifelse(length(r$length[r$values == 1])>1, #
-					sd(r$length[r$values == 1], na.rm=T), 0)#
-			} else {#
-				A$Mean_Consecutive_Freezing_Days[i] = 0#
-				A$Max_Consecutive_Freezing_Days[i] = 0#
-				A$sd_Consecutive_Freezing_Days[i] = 0#
-			}#
-	}#
-	# replace NAs#
-	A %<>% as.data.frame#
-	A[,c(#
-		"Daily_Precip_mean",#
-		"Daily_Precip_SD",#
-		"Perc_Days_w_Rain",#
-		"Perc_Days_w_Freeze",#
-		"mean_Max_Temp",#
-		"sd_Max_Temp",#
-		"MeanDegreeDay",#
-		"Mean_Consecutive_Days_w_Rain",#
-		"Max_Consecutive_Days_w_Rain",#
-		"sd_Consecutive_Days_w_Rain",#
-		"Mean_Consecutive_Drought_Days",#
-		"Max_Consecutive_Drought_Days",#
-		"sd_Consecutive_Drought_Days",#
-		"Mean_Consecutive_Freezing_Days",#
-		"Max_Consecutive_Freezing_Days",#
-		"sd_Consecutive_Freezing_Days")] %<>% #
-		apply(., 2, NA_Function#
-	)#
-	A %<>% select(-Previous_Survey_Date)#
-	x %<>% merge(A, by=c("Date", "DaysSincePrevSurvey", "Location"), all.x=TRUE)#
-	return(x)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys %<>% weather_function(climate_data)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-################################################################################
-# timeseries_winter#
-################################################################################
-timeseries_winter %<>% weather_function(climate_data)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-write.csv(timeseries_winter, "./data/timeseries_winter.csv")#
-#
-################################################################################
-# timeseries_spring#
-################################################################################
-timeseries_spring %<>% weather_function(climate_data)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")#
-write.csv(timeseries_spring, "./data/timeseries_spring.csv")
-str(timeseries_spring)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries_spring %<>% weather_function(climate_data)
-A = as.data.frame(timeseries_spring) %>%#
-		group_by(Date, DaysSincePrevSurvey, Location) %>%#
-		# to make sure that this group all share the same Previous_Survey_Date Date#
-		summarise(Previous_Survey_Date = paste(unique(Previous_Survey_Date))) %>%#
-		as.data.frame %>%#
-		arrange(Location, Date)
+Factor1 <- #
+	base::merge(#
+		FactorVals1,#
+		Eigens[, c("modelVars", "Eigenvalue1")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion1")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Axis = paste(dataset_type, "PC1")#
+		) #
+# Factor 2#
+FactorVals2 <- dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, #
+	value.var=c("Factor2"))#
+Factor2 <- base::merge(#
+		FactorVals2,#
+		Eigens[, c("modelVars", "Eigenvalue2")], #
+		by="modelVars"#
+	) %>%#
+	base::merge(PropExpl[, c("modelVars", "Proportion2")], by="modelVars") %>%#
+	mutate(#
+		Species = substr(modelVars,1,7),#
+		Weather = str_sub(modelVars, -4, -1),#
+		Axis = paste(dataset_type, "PC2")#
+		) #
+		rbind.fill(Factor1, Factor2)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-A$Previous_Survey_Date[A$Previous_Survey_Date=="NA" & year(A$Date)==2009] <- #
-		as.character(A$Date[A$Previous_Survey_Date=="NA" & year(A$Date)==2009] - #
-		round(mean(x$DaysSincePrevSurvey, na.rm=T)))#
-	A %<>% filter(Previous_Survey_Date!="NA")#
-	A$Previous_Survey_Date %<>% as.Date("%Y-%m-%d")
+PCA.all.surveys.factor.pattern
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Y <- PCA.all.surveys.eigenvalues %>%#
+	filter(Number < 3 & Eigenvalue >= 1) %>%		#
+	mutate(#
+		EigenNum = paste("Eigenvalue", Number, sep=""),#
+		PropNum = paste("Proportion", Number, sep="")	#
+	) %>%#
+	.[, c("EigenNum", "PropNum", "Eigenvalue", "Proportion", "modelVars")]
+Y
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+PCA.all.surveys.factor.pattern
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+dcast(PCA.all.surveys.factor.pattern, modelVars ~ Variable, 	value.var=c("Factor1"))
