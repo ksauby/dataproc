@@ -5,7 +5,7 @@
 stricta_rescale_function <- function(x=x){
 	mutate(x, 
 		# plant síze
-		Ln_Size_t_st = rescale(log(Size_t)),
-		Ln_Cone_t_st = rescale(log(Cone_t)),
-		Ln_Cylinder_Tall_t_st = rescale(log(Cylinder_Tall_t))
+		Ln_Size_t_1_st = rescale(log(Size_t_1)),
+		Ln_Cone_t_1_st = rescale(log(Cone_t_1)),
+		Ln_Cylinder_Tall_t_1_st = rescale(log(Cylinder_Tall_t_1))
 )}

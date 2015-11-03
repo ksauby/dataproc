@@ -7,7 +7,7 @@ lag_dates_function <- function(x=x){
 		dplyr::group_by(PlantID) %>%
 		dplyr::mutate(
 			# previous dates
-			Previous_Survey_Date 	= as.Date(c(NA, head(Date, -1))),
+			Previous_Survey_Date 	= base::as.Date(c(NA, utils::head(Date, -1))),
 			DaysSincePrevSurvey 	= Date - Previous_Survey_Date,
 			DaysSinceStart 			= Date - Date[1]
 		)

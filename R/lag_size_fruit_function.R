@@ -8,12 +8,12 @@ lag_size_fruit_function <- function(x=x){
 		dplyr::group_by(PlantID) %>%
 		dplyr::mutate(
 			# size
-			Size_t_1 			= c(NA, head(Size_t, -1)),
-			Height_t_1 			= c(NA, head(Height_t, -1)),
-			Cone_t_1 			= c(NA, head(Cone_t, -1)),
-			Cylinder_Tall_t_1 	= c(NA, head(Cylinder_Tall_t, -1)),
+			Size_t_1 			= c(NA, utils::head(Size_t, -1)),
+			Height_t_1 			= c(NA, utils::head(Height_t, -1)),
+			Cone_t_1 			= c(NA, utils::head(Cone_t, -1)),
+			Cylinder_Tall_t_1 	= c(NA, utils::head(Cylinder_Tall_t, -1)),
 			# fruit
-			Fruit_t_1 			= c(NA, head(Fruit_t, -1)),
-			FruitPres_t_1 		= c(NA, head(FruitPres_t, -1))
+			Fruit_t_1 			= c(NA, utils::head(Fruit_t, -1)),
+			FruitPres_t_1 		= c(NA, utils::head(FruitPres_t, -1))
 		)
 }

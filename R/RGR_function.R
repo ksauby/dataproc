@@ -24,10 +24,10 @@ RGR_function <- function(x=x){
 		RGR_Cone365 				= RGR_Cone*365,
 		RGR_CylinderTall365 		= RGR_Cylinder_Tall*365,
 		# lagged RGR
-		RGR_Height_t_1 			= c(NA, head(RGR_Height, -1)),
-		RGR_Size_t_1 			= c(NA, head(RGR_Size, -1)),
-		RGR_Cone_t_1 			= c(NA, head(RGR_Cone, -1)),
-		RGR_Cylinder_Tall_t_1 	= c(NA, head(RGR_Cylinder_Tall, -1))		
+		RGR_Height_t_1 			= c(NA, utils::head(RGR_Height, -1)),
+		RGR_Size_t_1 			= c(NA, utils::head(RGR_Size, -1)),
+		RGR_Cone_t_1 			= c(NA, utils::head(RGR_Cone, -1)),
+		RGR_Cylinder_Tall_t_1 	= c(NA, utils::head(RGR_Cylinder_Tall, -1))		
 	) %>%
 	as.data.table
 	# remove Inf values

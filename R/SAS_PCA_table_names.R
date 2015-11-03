@@ -1,3 +1,8 @@
+#' Change PCA Table names
+#' @param table created with the \code{sas_prcomp_PCA_table_function} function.
+#' @description First create a table from SAS output, then use this function to change the values of a couple of columns.
+
+
 sas_PCA_table_names <- function(table) {
 	table %<>% 
 		mutate(`Summary Statistic` = Var) %>%
@@ -89,7 +94,7 @@ sas_PCA_table_names <- function(table) {
 			),	
 			`Summary Statistic` = replace(
 				`Summary Statistic`, 
-				which(`Summary Statistic`=="Proportion of Variance Explained"), 
+				which(`Summary Statistic`=="Cumulative Proportion of Variance Explained"), 
 				""
 			),	
 			`Summary Statistic` = replace(

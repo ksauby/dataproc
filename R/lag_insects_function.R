@@ -11,12 +11,12 @@ lag_insects_function <- function(x=x){
 			Insect_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
 			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
 			# lagged insects
-			CA_t_1 		= c(NA, head(CA_t, -1)),
-			ME_t_1 		= c(NA, head(ME_t, -1)),
-			CH_t_1 		= c(NA, head(CH_t, -1)),
-			DA_t_1 		= c(NA, head(DA_t, -1)),
-			Insect_t_1 		= c(NA, head(Insect_t, -1)),
-			NatInsect_t_1 	= c(NA, head(NatInsect_t, -1))
+			CA_t_1 		= c(NA, utils::head(CA_t, -1)),
+			ME_t_1 		= c(NA, utils::head(ME_t, -1)),
+			CH_t_1 		= c(NA, utils::head(CH_t, -1)),
+			DA_t_1 		= c(NA, utils::head(DA_t, -1)),
+			Insect_t_1 		= c(NA, utils::head(Insect_t, -1)),
+			NatInsect_t_1 	= c(NA, utils::head(NatInsect_t, -1))
 		) %>%
 		as.data.frame
 }

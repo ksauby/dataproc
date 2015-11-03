@@ -67,19 +67,29 @@ require(rgeos)
 install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
 library(rgdal)
 install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
-library(dataproc)
-library(moderesproc)
-library(modresproc)
-library(dplr)
-library(dplyr)
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./modresproc")#
-devtools::document()#
-devtools::install()
-library(modresproc)
+18/1.618
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
+library(ProjectTemplate)#
+setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
+# load project#
+load.project()
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
+timeseries_all_surveys <- timeseries#
+#
+timeseries_all_surveys %<>% #
+							# lag variables#
+							lag_size_fruit_function
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
+timeseries_all_surveys <- timeseries#
+#
+timeseries_all_surveys %<>% #
+							# lag variables#
+							lag_size_fruit_function %>%#
+							lag_dates_function
+?as.numeric
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./dataproc")#
 #setwd("./modresproc")#
 devtools::document()#
 devtools::install()
-library(dataproc)
+lag_dates_function

@@ -1,3 +1,12 @@
+#' Combine PCA results from SAS into a table
+#' @param eigens SAS output of eigenvalues and variance explained
+#' @param factors SAS output of factor pattern
+#' @param rfactors SAS output of rotated factor pattern
+#' @param dataset_type Default value is "all"
+#' @param round_n Default value is 3.
+#' @param n.axes Default value is 2.
+#' @description Process PCA results from SAS.
+
 sas_prcomp_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all", round_n=3, n.axes=2) {
 	# which models are NOT in the rotated factor pattern data? merge them with the rotated factor pattern data
 	factors %<>% 
@@ -113,7 +122,7 @@ sas_prcomp_PCA_table_function <- function(eigens, factors, rfactors, dataset_typ
 			))
 		) %>%
 		merge(
-			eigens[, c("Number", "Eigenvalue", "Proportion", "modelVars")], 
+			eigens[, c("Number", "Eigenvalue", "Cumulative", "modelVars")], 
 			by=c("Number", "modelVars"), 
 			all.x=T
 		) %>%
@@ -121,10 +130,13 @@ sas_prcomp_PCA_table_function <- function(eigens, factors, rfactors, dataset_typ
 		arrange(modelVars) %>%
 		mutate(Axis = paste(dataset_type, "PC", Number)) %>%
 		dplyr::select(-c(modelVars, Number)) %>%
-		dplyr::select_(.dots=c("Axis", "A1", "A2", "B", "C1", "C2", "C3", "D1", 
-			"D2", "D3", "E1", "E2", "F", "G", "H1", "H2", "Eigenvalue", 
-			"Proportion", "Rotated", "Species", "Weather"))
-	names(Z)[names(Z)=="Proportion"] <- "Proportion of Variance Explained"		
+		dplyr::select(Axis, everything())
+	names(Z)[names(Z)=="Cumulative"] <- "Cumulative Proportion of Variance Explained"		
 	names(Z)[names(Z)=="Variable"] <- "Var"		
 	return(Z)
+}
+
+
+movetolast <- function(data, move) {
+  data[c(setdiff(names(data), move), move)]
 }
