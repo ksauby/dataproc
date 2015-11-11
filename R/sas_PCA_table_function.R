@@ -7,7 +7,7 @@
 #' @param n.axes Default value is 2.
 #' @description Process PCA results from SAS.
 
-sas_prcomp_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all", round_n=3, n.axes=2) {
+sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all", round_n=3, n.axes=2) {
 	# which models are NOT in the rotated factor pattern data? merge them with the rotated factor pattern data
 	factors %<>% 
 		filter(!(modelVars %in% rfactors$modelVars)) %>%

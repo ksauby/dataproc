@@ -103,13 +103,13 @@ sas_PCA_table_names <- function(table) {
 				""
 			)
 		) %>%
-		mutate(
-			`All Data PC 2` = replace(
-				`All Data PC 2`, 
-				which(is.na(`All Data PC 2`)), 
-				""
-			)
-		) %>%
+	#	mutate(
+	#		`All Data PC 2` = replace(
+	#			`All Data PC 2`, 
+	#			which(is.na(`All Data PC 2`)), 
+	#			""
+	#		)
+	#	) %>%
 		mutate(
 			Var = replace(
 				Var, 

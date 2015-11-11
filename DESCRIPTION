@@ -7,6 +7,9 @@ Depends: R (>= 3.2.2)
 License: What license is it under?
 LazyData: true
 Imports: 
-	dplyr, 
-	magrittr, 
-	data.table
+    dplyr,
+    magrittr,
+    utils,
+    data.table,
+    reshape2
+Suggests: testthat
