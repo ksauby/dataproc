@@ -1,6 +1,14 @@
 weather_function <- function(x=x, climate_data=climate_data){
 	# get unique Date and DaysSincePrevSurvey combos
 	# to reduce number of calculations to get sum of precip/number of days with precip
+	if ("Mexico Beach" %in% climate_data$Location) {
+		climate_data[which(climate_data$Location=="Mexico Beach"), ]$Location <- 
+			"MB"
+		climate_data[which(climate_data$Location=="Nokuse"), ]$Location <- 
+			"N"	
+		climate_data[which(climate_data$Location=="Sweetwater"), ]$Location <- 
+			"TSP"
+	}
 	A = as.data.frame(x) %>%
 		group_by(Date, Location, Species) %>%
 		# to make sure that this group all share the same Previous_Survey_Date Date

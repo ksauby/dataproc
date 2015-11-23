@@ -12,6 +12,7 @@ sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all"
 	factors %<>% 
 		filter(!(modelVars %in% rfactors$modelVars)) %>%
 		mutate(Rotated = "No")
+	# if there are PCA analyses with unrotated axesm, merge with the rotated axis data	
 	if (dim(factors)[1] > 0) {
 		X <- rfactors %>%
 			mutate(Rotated = "Yes") %>%
@@ -20,6 +21,12 @@ sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all"
 		X <- rfactors %>%
 			mutate(Rotated = "Yes")
 	}	
+	# square the factor loadings
+	# X %<>%
+	# mutate(
+	#	Factor1 = Factor1^2,
+	#	Factor2 = Factor2^2
+	# )
 	# round numeric values
 	nums <- sapply(X, is.numeric)
 	X[, nums] %<>% round(round_n)
