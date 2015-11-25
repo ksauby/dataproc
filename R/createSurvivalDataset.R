@@ -1,4 +1,4 @@
-# Create the Survival Dataset
+#' Create the Survival Dataset
 
 #' @description Steps to the creation of the dataset:
 #' \itemize{
@@ -16,6 +16,7 @@
 #' }
 #'  \item summarize whether plant was every infested with an insect
 #'  \item summarize whether a plant died during the study
+#' }
 #' @param timeseries
 #' @export
 

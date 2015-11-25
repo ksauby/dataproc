@@ -14,7 +14,6 @@
 #' 			\item HBSPOS18
 #' 			\item HBSPOS5
 #' 		}
-#' 	}
 #'  \item all observations of the following plants:
 #' 		\itemize{
 #' 			\item MBOS3
@@ -22,8 +21,8 @@
 #' 			\item BLSPOH3
 #' 			\item NOH1A
 #' 		}
-#' 	}
 #'  \item duplicate observations of dead plants
+#' }
 #' @param timeseries
 #' @export
 

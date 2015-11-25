@@ -9,7 +9,6 @@
 #' 			\item to ensure that the appropriate columns are merged together, I will rename these columns by pasting the name with the name of the variable to which it refers
 #' 			\item e.g., the "Measurement.Flag" column directly after "PRCP" will become "PRCP.Measurement.Flag"
 #' 		}
-#' 	}
 #'  \item Filter data by quality
 #' 		\itemize{
 #' 			\item replace data with NA if it is of questionable quality (see \code{Quality_Flag_Function} function for details)
