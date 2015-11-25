@@ -1,5 +1,7 @@
 #' Publication-ready ggplot2 Theme
 #' @description My personal ggplot2 theme.
+#' @export
+
 KEStheme <- function(base_size = 10) {
         structure(list(
                 axis.line =         element_blank(),

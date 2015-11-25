@@ -6,6 +6,12 @@
 #' @param round_n Default value is 3.
 #' @param n.axes Default value is 2.
 #' @description Process PCA results from SAS.
+#' @export
+#' @importFrom magrittr %>% %<>% %$%
+#' @importFrom dplyr filter mutate arrange summarise desc select
+#' @importFrom plyr rbind.fill
+#' @importFrom reshape2 dcast
+#' @export
 
 sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all", round_n=3, n.axes=2) {
 	# which models are NOT in the rotated factor pattern data? merge them with the rotated factor pattern data
@@ -136,8 +142,8 @@ sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all"
 		filter(Eigenvalue >= 1) %>%
 		arrange(modelVars) %>%
 		mutate(Axis = paste(dataset_type, "PC", Number)) %>%
-		dplyr::select(-c(modelVars, Number)) %>%
-		dplyr::select(Axis, everything())
+		select(-c(modelVars, Number)) %>%
+		select(Axis, everything())
 	names(Z)[names(Z)=="Cumulative"] <- "Cumulative Proportion of Variance Explained"		
 	names(Z)[names(Z)=="Variable"] <- "Var"		
 	return(Z)

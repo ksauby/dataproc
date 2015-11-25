@@ -9,6 +9,7 @@
 #' @param distanceLat width of each rectangle
 #' @param distanceLegend distance between rectangles and legend texts
 #' @param dist.units units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
+#' @export
 
 createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.units = "km"){
 	# First rectangle

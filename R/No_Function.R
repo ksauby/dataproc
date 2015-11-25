@@ -1,5 +1,7 @@
 #' Change "No" values to 0.
 #' @param x Vector of data.
+#' @export
+
 No_Function <- function(x){	
 	x[which(
 		x == "None" | 

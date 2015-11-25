@@ -1,6 +1,8 @@
 #' Rescale Function
 
 #' @description Only rescale once the dataset is final (missing values have been removed)
+#' @param x
+#' @export
 
 rescale_function <- function(x=x){
 	mutate(x, 

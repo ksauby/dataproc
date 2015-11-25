@@ -6,6 +6,8 @@
 #' @param length desired length of the arrow
 #' @param distance distance between legend rectangles and the bottom of the arrow
 #' @param dist.units units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
+#' @export
+
 createOrientationArrow <- function(scaleBar, length, distance = 1, dist.units = "km"){
 	lon <- scaleBar$rectangle2[1,1]
 	lat <- scaleBar$rectangle2[1,2]

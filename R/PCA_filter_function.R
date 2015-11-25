@@ -2,6 +2,8 @@
 #' @param x
 #' @param species
 #' @param restriction_list
+#' @export
+
 PCA_filter_function <- function(x=x, species=species, restriction_list=restriction_list){
 	x %>%
 		as.data.frame %>%

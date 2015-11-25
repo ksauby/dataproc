@@ -2,6 +2,7 @@
 #' @param nrow=NULL
 #' @param ncol=NULL
 #' @param as.table=FALSE
+#' @export
 
 arrange_ggplot2 <- function(..., nrow=NULL, ncol=NULL, as.table=FALSE) {
 	dots <- list(...)

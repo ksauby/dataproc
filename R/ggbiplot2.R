@@ -37,6 +37,8 @@
 #' @param pct_y_buffer=0.5
 
 # @references edited from http://stackoverflow.com/questions/18039313/pca-scaling-with-ggbiplot, accessed 18 Sept. 15
+#' @export
+
 ggbiplot2 <- function (
 	pcobj, 
 	choices = 1:2, 

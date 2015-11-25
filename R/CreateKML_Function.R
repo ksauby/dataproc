@@ -16,6 +16,8 @@
 #' CreateKML(dataset=Unsurveyed, proj4stringdata="+proj=utm +zone=17 +datum=WGS84",
 #'	CRSdata="+proj=longlat +datum=WGS84", NameField="Tag_Number", 
 #'	filename="unsurveyed_7sept14")
+#' @export
+
 CreateKML_Function <- function(
 	dataset=dataset, 
 	proj4stringdata=proj4stringdata, 

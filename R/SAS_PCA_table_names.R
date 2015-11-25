@@ -1,7 +1,7 @@
 #' Change PCA Table names
 #' @param table created with the \code{sas_prcomp_PCA_table_function} function.
 #' @description First create a table from SAS output, then use this function to change the values of a couple of columns.
-
+#' @export
 
 sas_PCA_table_names <- function(table) {
 	table %<>% 
@@ -191,7 +191,7 @@ sas_PCA_table_names <- function(table) {
 				""
 			)
 		) %>%
-		dplyr::select(Var, `Summary Statistic`, everything())
+		select(Var, `Summary Statistic`, everything())
 	names(table)[names(table)=="Var"] <- "Variable"		
 	return(table)
 }

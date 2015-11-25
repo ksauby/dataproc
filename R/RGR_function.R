@@ -10,8 +10,10 @@
 #' after meeting with Mary and Bob (1 Dec 2014) Bob suggested that I divide by plant size at time t-1
 
 #' scale by DaysSincePrevTime
+#' @export
+
 RGR_function <- function(x=x){
-	x %<>% dplyr::mutate(
+	x %<>% mutate(
 		RGR_Height 			= (Height_t - Height_t_1) /
 								(DaysSincePrevSurvey*Height_t_1), 
 	 	RGR_Size 			= (Size_t - Size_t_1) / 
@@ -24,10 +26,10 @@ RGR_function <- function(x=x){
 		RGR_Cone365 				= RGR_Cone*365,
 		RGR_CylinderTall365 		= RGR_Cylinder_Tall*365,
 		# lagged RGR
-		RGR_Height_t_1 			= c(NA, utils::head(RGR_Height, -1)),
-		RGR_Size_t_1 			= c(NA, utils::head(RGR_Size, -1)),
-		RGR_Cone_t_1 			= c(NA, utils::head(RGR_Cone, -1)),
-		RGR_Cylinder_Tall_t_1 	= c(NA, utils::head(RGR_Cylinder_Tall, -1))		
+		RGR_Height_t_1 			= c(NA, head(RGR_Height, -1)),
+		RGR_Size_t_1 			= c(NA, head(RGR_Size, -1)),
+		RGR_Cone_t_1 			= c(NA, head(RGR_Cone, -1)),
+		RGR_Cylinder_Tall_t_1 	= c(NA, head(RGR_Cylinder_Tall, -1))		
 	) %>%
 	as.data.table
 	# remove Inf values

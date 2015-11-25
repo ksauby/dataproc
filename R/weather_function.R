@@ -1,3 +1,10 @@
+#' Function to process weather data
+
+#' @param x
+#' @param climate_data
+#' @export
+#' @importFrom dplyr group_by
+
 weather_function <- function(x=x, climate_data=climate_data){
 	# get unique Date and DaysSincePrevSurvey combos
 	# to reduce number of calculations to get sum of precip/number of days with precip

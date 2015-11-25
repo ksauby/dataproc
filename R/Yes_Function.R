@@ -1,5 +1,7 @@
 #' Standardize "Yes" values.
 #' @param x Vector of data.
+#' @export
+
 Yes_Function <- function(x){	
 	x[which(
 		x == "Yes" | 

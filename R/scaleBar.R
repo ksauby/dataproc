@@ -15,6 +15,7 @@
 #' @param arrow.length length of the arrow (default to 500 km)
 #' @param arrow.distance distance between the scale bar and the bottom of the arrow (default to 300 km)
 #' @param arrow.North.size size of the "N" letter (default to 6)
+#' @export
 
 scaleBar <- function(lon, lat, distanceLon, distanceLat, distanceLegend, dist.unit = "km", rec.fill = "white", rec.colour = "black", rec2.fill = "black", rec2.colour = "black", legend.colour = "black", legend.size = 3, orientation = TRUE, arrow.length = 500, arrow.distance = 300, arrow.North.size = 6){
 	laScaleBar <- createScaleBar(lon = lon, lat = lat, distanceLon = distanceLon, distanceLat = distanceLat, distanceLegend = distanceLegend, dist.unit = dist.unit)
