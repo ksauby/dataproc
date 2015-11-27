@@ -1,17 +1,18 @@
 #' Calculate log and sqrt transformations
+#' @description Transform variable.
 #' @param data Vector of data
 #' @param Name Name to give 
-#' @description Transform variable.
+#' @export
 
 Transform <- function(data, Name) {
 	data %<>%
 		mutate(
 			sqrt(.[, 1])
 		) %>%
-		setnames(., dim(.)[2], paste(Name, "_sqrt", sep="")) %>%
+		setnames(., dim(.)[2], paste("square root of ", Name, sep="")) %>%
 		mutate(
 			log(.[, 1])
 		) %>%
-		setnames(., dim(.)[2], paste(Name, "_log", sep=""))
+		setnames(., dim(.)[2], paste("ln(", Name, ")", sep=""))
 	return(data)
 }

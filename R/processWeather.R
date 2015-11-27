@@ -217,21 +217,29 @@ processWeather <- function() {
 	distance_matrix %<>% cbind(B)
 	# change distance matrix columns to one column
 	weather_station_info <- reshape2::melt(distance_matrix, id.vars=c("Name", "Station.ID", "Latitude", "Longitude", "Precipitation", "Temperature", "Used_in_Analysis", "Sampling_Site", "Near_Sampling_Site", "Date_Range"))
-	names(weather_station_info)[(dim(weather_station_info)[2]-1):dim(weather_station_info)[2]] <- c("Sampling_Location", "Distance")
+	names(weather_station_info)[(dim(weather_station_info)[2]-1) : 
+		dim(weather_station_info)[2]] <- c("Sampling_Location", "Distance")
 	# standardize Station IDs - remove "GHCND:" if the the ID has it
-	weather_station_info$Station.ID <- gsub("^.*\\:", "", weather_station_info$Station.ID)
+	weather_station_info$Station.ID <- 
+		gsub("^.*\\:", "", weather_station_info$Station.ID)
 	climate_data$STATION <- gsub("^.*\\:", "", climate_data$STATION)
 	# SELECT CLOSEST WEATHER STATIONS FOR EACH SAMPLING LOCATION
 	# merge distance data with climate_data
 	climate_data_temp <- weather_station_info %>% 
 		dplyr::select(Station.ID, Sampling_Location, Distance) %>%
 		merge(climate_data, by.x="Station.ID", by.y="STATION")
-	BLSP_stations <- climate_data_temp %>% filter(Sampling_Location=="BLSP" & Distance <= 85)
-	HBSP_stations <- climate_data_temp %>% filter(Sampling_Location=="HBSP" & Distance <= 85) %>% arrange(Date)
-	MB_stations <- climate_data_temp %>% filter(Sampling_Location=="MB" & Distance <= 85)
-	N_stations <- climate_data_temp %>% filter(Sampling_Location=="N" & Distance <= 85)
-	SASP_stations <- climate_data_temp %>% filter(Sampling_Location=="SASP" & Distance <= 85)
-	TSP_stations <- climate_data_temp %>% filter(Sampling_Location=="TSP" & Distance <= 85)
+	BLSP_stations <- climate_data_temp %>% 
+		filter(Sampling_Location=="BLSP" & Distance <= 85)
+	HBSP_stations <- climate_data_temp %>% 
+		filter(Sampling_Location=="HBSP" & Distance <= 85) %>% arrange(Date)
+	MB_stations <- climate_data_temp %>% 
+		filter(Sampling_Location=="MB" & Distance <= 85)
+	N_stations <- climate_data_temp %>% 
+		filter(Sampling_Location=="N" & Distance <= 85)
+	SASP_stations <- climate_data_temp %>% 
+		filter(Sampling_Location=="SASP" & Distance <= 85)
+	TSP_stations <- climate_data_temp %>% 
+		filter(Sampling_Location=="TSP" & Distance <= 85)
 	#Choose closest weather variable measurement for each Location/Date combo -#
 	X <- list()
 	# for each LOCATION
@@ -294,9 +302,9 @@ processWeather <- function() {
 					MaxTemp = MaxTemp
 				)
 			}
-			X[[i]][[1]]$Date %<>% as.Date
-			X[[i]][[2]]$Date %<>% as.Date
-			X[[i]][[3]]$Date %<>% as.Date
+			X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")
+			X[[i]][[2]]$Date %<>% as.Date(origin="1970-01-01")
+			X[[i]][[3]]$Date %<>% as.Date(origin="1970-01-01")
 			X[[i]][[1]]$Location = Location_list[i]
 			X[[i]][[2]]$Location = Location_list[i]
 			X[[i]][[3]]$Location = Location_list[i]

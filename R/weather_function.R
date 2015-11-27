@@ -5,11 +5,12 @@
 #' @export
 #' @importFrom dplyr group_by
 
-weather_function <- function(x=x, climate_data=climate_data){
+weather_function <- function(x=x, climate_data=climate_data) {
 	# get unique Date and DaysSincePrevSurvey combos
 	# to reduce number of calculations to get sum of precip/number of days with precip
 	if ("Mexico Beach" %in% climate_data$Location) {
-		climate_data[which(climate_data$Location=="Mexico Beach"), ]$Location <- 
+		climate_data[
+			which(climate_data$Location=="Mexico Beach"), ]$Location <- 
 			"MB"
 		climate_data[which(climate_data$Location=="Nokuse"), ]$Location <- 
 			"N"	
