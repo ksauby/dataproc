@@ -7,7 +7,8 @@
 WoodyTrunk_Function(x)
 }
 \arguments{
-\item{x}{Vector of data.}
+\item{x}{Vector of data.
+Standardize "WoodyTrunk" values.}
 }
 \description{
 Standardize "WoodyTrunk" values.

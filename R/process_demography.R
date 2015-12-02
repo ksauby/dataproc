@@ -6,7 +6,7 @@
 
 mergePlantSurveysPlantInfo <- function(Plant_Surveys, Plant_Info) {
 	Plant_Surveys <- Plant_Info %>%
-		select(
+		dplyr::select(
 			ClusterID, 
 			InDemographicStudy, 
 			PlotPlantID, 

@@ -1,4 +1,5 @@
 #' Assign season for 2009 dates
+#' @description Assign seasons for the 2012 calendar year. Function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to. I found solstice and equinox dates here: http://en.wikipedia.org/wiki/Solstice".
 #' @param DATES
 #' @export
 
@@ -18,6 +19,7 @@ getSeason2009 <- function(DATES) {
 }
 
 #' Assign season for 2010 dates
+#' @description Assign seasons for the 2012 calendar year. Function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to. I found solstice and equinox dates here: http://en.wikipedia.org/wiki/Solstice".
 #' @param DATES
 #' @export
 
@@ -37,6 +39,7 @@ getSeason2010 <- function(DATES) {
 }
 
 #' Assign season for 2011 dates
+#' @description Assign seasons for the 2012 calendar year. Function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to. I found solstice and equinox dates here: http://en.wikipedia.org/wiki/Solstice".
 #' @param DATES
 #' @export
 
@@ -57,6 +60,7 @@ getSeason2011 <- function(DATES) {
 
 
 #' Assign season for 2012 dates
+#' @description Assign seasons for the 2012 calendar year. Function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to. I found solstice and equinox dates here: http://en.wikipedia.org/wiki/Solstice".
 #' @param DATES
 #' @export
 
@@ -76,7 +80,9 @@ getSeason2012 <- function(DATES) {
 }
 
 
+
 #' Assign season for 2013 dates
+#' @description Assign seasons for the 2012 calendar year. Function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to. I found solstice and equinox dates here: http://en.wikipedia.org/wiki/Solstice".
 #' @param DATES
 #' @export
 
@@ -96,6 +102,7 @@ getSeason2013 <- function(DATES) {
 }
 
 #' Assign season for 2014 dates
+#' @description Assign seasons for the 2012 calendar year. Function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to. I found solstice and equinox dates here: http://en.wikipedia.org/wiki/Solstice".
 #' @param DATES
 #' @export
 

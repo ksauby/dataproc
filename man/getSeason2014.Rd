@@ -10,6 +10,6 @@ getSeason2014(DATES)
 \item{DATES}{}
 }
 \description{
-Assign season for 2014 dates
+Assign seasons for the 2012 calendar year. Function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to. I found solstice and equinox dates here: http://en.wikipedia.org/wiki/Solstice".
 }
 

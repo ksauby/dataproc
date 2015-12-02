@@ -10,7 +10,7 @@
 processPlantInfo <- function(Plant_Info, Plot_Info) {
 	# ----------------- ADD INFO FROM Plot_Info (Cluster, Network, Island, etc.)
 	Plant_Info <- Plot_Info %>%
-		select(
+		dplyr::select(
 			Island, 
 			Tag_Number, 
 			Cluster, 
@@ -68,7 +68,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		all=T
 	) 
 	temp_dead_missing$FirstDeadMissingObservation = 
-		select(
+		dplyr::select(
 			temp_dead_missing, 
 			FirstDeadObservation,
 			FirstMissingObservation
@@ -108,20 +108,20 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	# ------------------------------------------------------------ ADD ClusterID
 	#	do this because some clusters share plots
 	Plot_Info_Cluster <- Plot_Info %>%
-		select(Tag_Number, Cluster, Cluster2) %>%
+		dplyr::select(Tag_Number, Cluster, Cluster2) %>%
 		reshape2:::melt.data.frame(., id.vars=c("Tag_Number"), value.name="ClusterID") %>%
 		filter(ClusterID!=0) %>%
 		.[, -2] %>%
 		arrange(Tag_Number)
 	# CLUSTER ID FOR PLOTS *NOT* IN CLUSTERS
 	temp_A = Plot_Info %>%
-		select(Tag_Number, Cluster) %>%
+		dplyr::select(Tag_Number, Cluster) %>%
 		filter(Cluster==0)
 	temp_A$ClusterID <- temp_A$Tag_Number
 	temp_A %<>% .[, -2]
 	Plot_Info_Cluster %<>% rbind.fill(temp_A) %>% 
 		merge(Plot_Info, by="Tag_Number") %>%
-		select(ClusterID, Tag_Number)
+		dplyr::select(ClusterID, Tag_Number)
 	Plant_Info %<>% merge(Plot_Info_Cluster, by="Tag_Number", all.x=T)
 	return(Plant_Info)
 }
