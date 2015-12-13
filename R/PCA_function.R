@@ -1,4 +1,4 @@
-#' run PCA
+#' Run PCA in R
 #' @param x
 #' @param variable_list
 #' @export

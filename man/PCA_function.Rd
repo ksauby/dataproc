@@ -2,7 +2,7 @@
 % Please edit documentation in R/PCA_function.R
 \name{PCA_function}
 \alias{PCA_function}
-\title{run PCA}
+\title{Run PCA in R}
 \usage{
 PCA_function(x = x, variable_list = variable_list)
 }
@@ -12,6 +12,6 @@ PCA_function(x = x, variable_list = variable_list)
 \item{variable_list}{}
 }
 \description{
-run PCA
+Run PCA in R
 }
 

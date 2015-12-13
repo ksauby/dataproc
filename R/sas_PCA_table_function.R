@@ -149,7 +149,10 @@ sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all"
 	return(Z)
 }
 
-
+#' Move certain columns to the end of a dataframe
+#' @param data
+#' @param move
+#' @export
 movetolast <- function(data, move) {
   data[c(setdiff(names(data), move), move)]
 }

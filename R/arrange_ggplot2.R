@@ -25,3 +25,11 @@ pushViewport(viewport(layout=grid.layout(nrow,ncol) ) )
 		}
 	}
 }
+
+#' Layout
+#' @param x
+#' @param y
+#' @export
+vp.layout <- function(x, y) {
+	viewport(layout.pos.row=x, layout.pos.col=y)
+}
