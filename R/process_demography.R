@@ -14,7 +14,7 @@ mergePlantSurveysPlantInfo <- function(Plant_Surveys, Plant_Info) {
 			Island, 
 			Cluster2, 
 			Network, 
-			HostSpecies, 
+			Species, 
 			InBigPlantStudy, 
 			N.PlotPlantIDs, 
 			Easting, 

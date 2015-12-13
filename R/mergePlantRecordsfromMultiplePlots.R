@@ -18,7 +18,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		Z[[i]][, "ClusterID"] 	<- L$ClusterID[1]
 		Z[[i]][, "Network"] 	<- L$Network[1]
 		Z[[i]][, "Island"] 		<- L$Island[1]
-		Z[[i]][, "HostSpecies"] <- L$HostSpecies[1]
+		Z[[i]][, "Species"] <- L$Species[1]
 		Z[[i]][, "Easting"] 	<- L$Easting[1]
 		Z[[i]][, "Northing"] 	<- L$Northing[1]
 		# for each date
@@ -118,7 +118,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		Island,
 		Easting,
 		Northing, 
-		HostSpecies, 
+		Species, 
 		# insects
 		CA_t, 
 		ME_t, 

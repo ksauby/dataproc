@@ -19,7 +19,10 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			Sampling, 
 			SurveyOrder
 		) %>%
-		merge(Plant_Info, by = "Tag_Number", all.y=TRUE)
+		merge(Plant_Info, by = "Tag_Number", all.y=TRUE) %>%
+		as.data.table %>%
+		setnames("HostSpecies", "Species") %>%
+		as.data.frame
 	#---------------------------------------------------------- FORMAT PLANT IDs
 	Plant_Info %<>% Format_PlantIDs_Function
 	#---------------------- CALCULATE AND ADD NUMBER OF PlotPlantIDs PER PlantID
@@ -109,7 +112,8 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	#	do this because some clusters share plots
 	Plot_Info_Cluster <- Plot_Info %>%
 		dplyr::select(Tag_Number, Cluster, Cluster2) %>%
-		reshape2:::melt.data.frame(., id.vars=c("Tag_Number"), value.name="ClusterID") %>%
+		reshape2:::melt.data.frame(., id.vars=c("Tag_Number"), 
+			value.name="ClusterID") %>%
 		filter(ClusterID!=0) %>%
 		.[, -2] %>%
 		arrange(Tag_Number)

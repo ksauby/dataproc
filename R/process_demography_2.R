@@ -146,14 +146,14 @@ assignSeason <- function(Plant_Surveys) {
 renameSpecies <- function(Plant_Surveys) {
 	Plant_Surveys %>% 
 		mutate(
-			HostSpecies = replace(
-				HostSpecies, 
-				which(HostSpecies =="pusilla"), 
+			Species = replace(
+				Species, 
+				which(Species =="pusilla"), 
 				"Opuntia pusilla"
 			),
-			HostSpecies = replace(
-				HostSpecies, 
-				which(HostSpecies =="stricta"), 
+			Species = replace(
+				Species, 
+				which(Species =="stricta"), 
 				"Opuntia stricta"
 			)
 		)
@@ -195,7 +195,7 @@ formatasFactors <- function(Plant_Surveys) {
 	Plant_Surveys$ClusterID 		%<>% as.factor
 	Plant_Surveys$Network 			%<>% as.factor
 	Plant_Surveys$Island 			%<>% as.factor
-	Plant_Surveys$HostSpecies 		%<>% as.factor
+	Plant_Surveys$Species 			%<>% as.factor
 	Plant_Surveys$DemographicSurvey %<>% as.factor
 	Plant_Surveys$Visit 			%<>% as.factor
 	Plant_Surveys$Year 				%<>% as.factor

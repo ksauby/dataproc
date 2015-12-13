@@ -82,10 +82,7 @@ createFallWinterSurveysDataset <- function(timeseries) {
 	cache("timeseries_winter")
 	return(timeseries_winter)
 }	
-	
-	
-	
-	
+		
 #' Create Dataset with Spring/Summer Surveys
 #' @description Create dataset from spring/summer surveys and calculate:
 #' \itemize{
@@ -144,4 +141,146 @@ createSpringSummerSurveysDataset <- function(timeseries) {
 	setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")
 	cache("timeseries_spring")
 	return(timeseries_spring)
+}
+
+#' Create Dataset with Yearly Fruit Surveys
+#' @description Create a dataset with yearly observations of fruit, size, and insect observations. Each starts on the first day of spring of that calendar year, then ends on the last day of winter in the next calendar year (e.g., Spring 2009 - Winter 2010). Variables that are calculated included the maximum number of fruit observed, insect presence/absence during the year, and the maximum and minimum plant size that year. All years, except for 2009, have two observations per year.
+#' The years are defined as follows:
+#' \itemize{
+#'  \item Year 1 - Spring, Summer, Fall, Winter 2009, Winter 2010
+#'  \item Year 2 - Spring, Summer, Fall, Winter 2010, Winter 2011
+#'  \item Year 3 - Spring, Summer, Fall, Winter 2011, Winter 2012
+#'  \item Year 4 - Spring, Summer, Fall, Winter 2012, Winter 2013
+#'	\item Year 5 - Spring, Summer, Fall, Winter 2013, Winter 2014
+#' }
+#' The dataset is created according to the following steps:
+#' \itemize{
+#'  \item create a year variable (called "ObsYear")
+#'  \item determine if insect was ever observed during the ObsYear
+#'  \item calculate maximum and minimum plant size and volume
+#'  \item determine if surveys were complete for the entire year (no missing information)
+#' }
+#' @param timeseries
+#' @export
+
+createFruitYearDataset <- function(timeseries) {
+	timeseries_fruityear <- timeseries
+	timeseries_fruityear$ObsYear <- "NA"
+	timeseries_fruityear %>% 
+		as.data.frame %>%
+		group_by(Date) %>% 
+		mutate(
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					(Season 	== "Spring" | 
+					Season 	== "Summer" | 
+					Season 	== "Fall") &
+					Year 	== 2009 
+				), 
+				"Year2009"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					(Season 	== "Spring" | 
+					Season 	== "Summer" | 
+					Season 	== "Fall") &
+					Year 	== 2010 
+				), 
+				"Year2010"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					(Season 	== "Spring" | 
+					Season 	== "Summer" | 
+					Season 	== "Fall") &
+					Year 	== 2011
+				), 
+				"Year2011"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					(Season 	== "Spring" | 
+					Season 	== "Summer" | 
+					Season 	== "Fall") &
+					Year 	== 2012
+				), 
+				"Year2012"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					(Season 	== "Spring" | 
+					Season 	== "Summer" | 
+					Season 	== "Fall") &
+					Year 	== 2013
+				), 
+				"Year2013"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					Date 	>= "2009-12-21" &
+					Date 	< "2010-3-20"
+				), 
+				"Year2009"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					Date 	>= "2010-12-21" &
+					Date 	< "2011-3-20"
+				), 
+				"Year2010"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					Date 	>= "2011-12-22" &
+					Date 	< "2012-3-20"
+				), 
+				"Year2011"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					Date 	>= "2012-12-21" &
+					Date 	< "2013-3-20"
+				), 
+				"Year2012"
+			),
+			ObsYear = replace(
+				ObsYear, 
+				which(
+					Date 	>= "2013-12-21" &
+					Date 	< "2014-3-20"
+				), 
+				"Year2013"
+			)
+		) %>%
+		ungroup %>%
+		group_by(PlantID, ObsYear) %>%
+		summarise(
+			Location 				= Location[1],
+			Species					= Species[1],
+			Fruit_t 				= max(Fruit_t),
+			FruitPres_t 			= max(FruitPres_t),
+			ME_t 					= max(ME_t),
+			CA_t 					= max(CA_t),
+			CH_t 					= max(CH_t),
+			DA_t 					= max(DA_t),
+			Size_t_max 				= max(Size_t),
+			Cone_t_max 				= max(Cone_t), 
+			Cylinder_Tall_t_max 	= max(Cylinder_Tall_t),
+			Size_t_min 				= min(Size_t),
+			Cone_t_min 				= min(Cone_t), 
+			Cylinder_Tall_t_min 	= min(Cylinder_Tall_t),
+			complete_insect_surveys = min(complete_insect_surveys), 
+			complete_surveys		= min(complete_surveys)
+		) %>%
+	# lag variables
+	lag_size_fruit_function
 }
