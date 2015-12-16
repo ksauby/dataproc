@@ -1,3 +1,29 @@
+21.4*.813
+21.4 -21.4*.813
+library(lubridaste)
+library(lubrida=te)
+library(lubridate)
+-v
+install.packages("rgeos", repos="http://R-Forge.R-project.org")#
+require(rgeos)
+library(rgeos)
+require(rgeos)
+library(rgeos)
+install.packages("rgdal", repos="http://R-Forge.R-project.org")#
+require(rgdal)
+R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config#
+ --with-proj-include=/Library/Frameworks/PROJ.framework/Headers#
+ --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
+R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config--with-proj-include=/Library/Frameworks/PROJ.framework/Headers--with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
+library(lme3)
+library(lme4)
+300/241
+.244*30
+1.25*300
+1.25*240
+7*12
+7849-7527
+322/1353
 8028-7527
 501/1353
 8028-7957
@@ -48,2235 +74,1150 @@ setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time
 # load project#
 load.project()
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
+Quality_Flag_Function <- function(x, y){	#
+	x[which(y=="G" | y=="I" | y=="K" | y=="L" | y=="N" | y=="O")] <- NA#
+	return(x)#
+}#
+#
+#' Replace blank values (quality is okay) with "Okay"#
+#' @param x#
+#
+Replace_Blank_w_Okay_Function <- function(x){	#
+	x[which(x==" ")] <- "Okay"#
+	return(x)#
+}#
+#--------------------------------------------------------------------------##
+# Merge Files Into One#
+#--------------------------------------------------------------------------##
+# for each variable, NOAA uses generic column names "Measurement.Flag", #
+#		"Quality.Flag", "Source.Flag", "Time.of.Observation"#
+# to ensure that the appropriate columns are merged together, I will rename #
+#		these columns by pasting the name with the name of the variable to #
+#		which it refers#
+# e.g., the "Measurement.Flag" column directly after "PRCP" will become #
+#		"PRCP.Measurement.Flag"#
+# for each weather variable, take weather variable name and paste it to the #
+#		names of the 4 following columns #
+#
+	# list of climate files to fix#
+climate_file_names <- c("NOAA.ApalachicolaAirport", "NOAA.ApalachicolaAirport1", "NOAA.Bloxham", "NOAA.Bristol2", "NOAA.Callaway03", "NOAA.Callaway06S", "NOAA.Chipley", "NOAA.Clarksville2N", "NOAA.CrestviewBobSikesAirport", "NOAA.DeFuniakSprings", "NOAA.Destin1", "NOAA.DestinFortWaltonBeach", "NOAA.Freeport34", "NOAA.Freeport40SSW", "NOAA.Freeport44", "NOAA.Hosford27", "NOAA.Marianna7NE", "NOAA.NavalLiveOaks", "NOAA.NWFLBeaches", "NOAA.PanamaCity", "NOAA.PanamaCityBayCoAirport", "NOAA.PanamaCityBeach03", "NOAA.PanamaCityBeach12ESE", "NOAA.PensacolaForest", "NOAA.PensacolaRegionalAirport", "NOAA.PortStJoe06", "NOAA.PortStJoe81", "NOAA.Quincy3SSW", "NOAA.Sumatra", "NOAA.Telogia", "NOAA.ValparaisoEglinAFB", "NOAA.Vernon106", "NOAA.WestPensacola109", "NOAA.Wewahitchka", "NOAA.Wewahitchka16", "NOAA.Wilma", "NOAA.WoodruffDam", "NOAA.Bellview17", "NOAA.Pensacola92", "NOAA.MiramarBeach95", "NOAA.InletBeach07", "NOAA.PanamaCityBeach59", "NOAA.Apalachicola08WNW", "NOAA.NewHope", "NOAA.Destin15")#
+mergeClimateFiles <- function(climate_file_names) {#
+	X <- list()#
+	for (h in 1:length(climate_file_names)) {#
+		# PRCP, TMIN, TMAX name vectors#
+		TMIN_vector <- vector()#
+		TMAX_vector <- vector()#
+		PRCP_vector <- vector()#
+		# pull climate file#
+		Y <- eval(parse(text=climate_file_names[h]))#
+		X[[h]] <- list()#
+		# select weather station info to keep#
+		X[[h]][[1]] <- Y %>% select(#
+			STATION, #
+			STATION_NAME, #
+			ELEVATION, #
+			LATITUDE, #
+			LONGITUDE, #
+			DATE#
 		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
+		# counter for weather variable (have to count because not all files have all weather variables)#
+		k=2 # start at 2 because weather station info goes in [[1]]#
+		# fix PRCP flag column names#
+		if ("PRCP" %in% names(Y)) {#
+			X[[h]][[k]] <- Y[, (which(colnames(Y)=="PRCP")) : #
+				(which(colnames(Y)=="PRCP")+4)]#
+			for (i in 1:4) {#
+				PRCP_vector[i] <- paste(#
+					"PRCP", #
+					sub(#
+						"(.*?)[.].*", "\\1", #
+						names(X[[h]][[k]][which(colnames(X[[h]][[k]])=="PRCP") #
+							+ i])#
+					), #
+					"Flag", #
+					sep="."#
+				)#
+			}#
+			names(X[[h]][[k]])[2:5] <- PRCP_vector#
+			k <- k + 1#
+		}#
+		# fix TMIN flag column names#
+		if ("TMIN" %in% names(Y)) {#
+			X[[h]][[k]] <- Y[, (which(colnames(Y)=="TMIN")) : #
+				(which(colnames(Y)=="TMIN")+4)]#
+			for (i in 1:4) {#
+				TMIN_vector[i] <- paste(#
+					"TMIN", #
+					sub(#
+						"(.*?)[.].*", "\\1", #
+						names(X[[h]][[k]][which(colnames(X[[h]][[k]])=="TMIN") + i])#
+					), #
+					"Flag", #
+					sep="."#
+				)#
+			}#
+			names(X[[h]][[k]])[2:5] <- TMIN_vector#
+			k <- k + 1#
+		}#
+		# fix TMAX flag column names#
+		if ("TMAX" %in% names(Y)) {#
+			X[[h]][[k]] <- Y[, (which(colnames(Y)=="TMAX")) : #
+				(which(colnames(Y)=="TMAX")+4)]#
+			for (i in 1:4) {#
+				TMAX_vector[i] <- paste(#
+					"TMAX", #
+					sub(#
+						"(.*?)[.].*", "\\1", #
+						names(X[[h]][[k]][which(colnames(X[[h]][[k]])=="TMAX") + i])#
+					), #
+					"Flag", #
+					sep="."#
+				)		#
+			}#
+			names(X[[h]][[k]])[2:5] <- TMAX_vector#
+		}#
+	}#
+	# merge list of lists of lists#
+	data.array2 <- list()#
+	for (i in 1:length(unique(climate_file_names))) {#
+		data.array2[[i]] = as.data.frame(#
+			mapply(#
+				cbind, #
+				unlist(#
+					X[[i]], #
+					recursive=F#
+				)#
+			)#
 		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-n.axes=2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-round_n=3
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dataset_type="all"
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
+	}	#
+	do.call(rbind.fill, data.array2)#
+}#
+#'  \item Filter data by quality#
+#' 		\itemize{#
+#' 			\item replace data with NA if it is of questionable quality (see \code{Quality_Flag_Function} function for details)#
+#' 			\item replace blank values (quality is okay) with "Okay"#
+#' 			\item Replace -999 and blanks with NAs#
+#' 		}#
+#
+#--------------------------------------------------------------------------##
+# Filter data by quality#
+#--------------------------------------------------------------------------##
+# replace data with NA if it is of questionable quality#
+filterClimateDataByQuality <- function(climate_data) {#
+	climate_data$PRCP <- with(#
+		climate_data, #
+		Quality_Flag_Function(PRCP, PRCP.Quality.Flag)#
+	)#
+	climate_data$TMIN <- with(#
+		climate_data, #
+		Quality_Flag_Function(TMIN, TMIN.Quality.Flag)#
+	)#
+	climate_data$TMAX <- with(#
+		climate_data, #
+		Quality_Flag_Function(TMAX, TMAX.Quality.Flag)#
+	)#
+	# replace blank values (quality is okay) with "Okay"#
+	climate_data[,c(#
+		"PRCP.Quality.Flag", #
+		"TMIN.Quality.Flag",#
+		"TMAX.Quality.Flag"#
+	)] %<>% apply(., 2, Replace_Blank_w_Okay_Function)#
+	# Replace -999 and blanks with NAs#
+	climate_data[,c(#
+		"STATION", #
+		"STATION_NAME",#
+		"ELEVATION",#
+		"LATITUDE",#
+		"LONGITUDE",#
+		"DATE",#
+		"PRCP",#
+		"PRCP.Measurement.Flag",#
+		"PRCP.Quality.Flag",#
+		"PRCP.Source.Flag",#
+		"PRCP.Time.Flag",#
+		"TMIN",#
+		"TMIN.Measurement.Flag",#
+		"TMIN.Quality.Flag",#
+		"TMIN.Source.Flag",#
+		"TMIN.Time.Flag",#
+		"TMAX",#
+		"TMAX.Measurement.Flag",#
+		"TMAX.Quality.Flag",#
+		"TMAX.Source.Flag",#
+		"TMAX.Time.Flag"#
+	)] %<>% apply(., 2, NA_Function)#
+	return(climate_data)#
+}#
+#------------------------------------- Format/convert weather data -------##
+#'  \item Format/convert weather data#
+#' 		\itemize{#
+#' 			\item convert tenths of Celcius to Celsius#
+#' 			\item convert tenths of Celcius to Celsius#
+#' 			\item convert PRCP (in tenths of mm) to cm#
+#' 			\item replace NA for precip less than 0#
+#' 		}#
+formatconvertClimateData <- function(climate_data) {#
+	climate_data[,c(#
+		"PRCP",#
+		"TMIN",#
+		"TMAX"#
+	)] %<>% apply(., 2, as.numeric)#
+	climate_data %<>% mutate(#
+			MinTemp = TMIN/10, # convert tenths of Celcius to Celsius#
+			MaxTemp = TMAX/10, # convert tenths of Celcius to Celsius#
+			Precip = PRCP/100, # convert PRCP (in tenths of mm) to cm#
+			Date = as.Date(as.character(DATE), "%Y%m%d")#
 		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", .$value)==TRUE), ]$Factor2#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", X$value)==TRUE), ]$Factor2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	mutate(#
-		#Axis = factor(paste(dataset_type, paste("PC", i, sep=""))),#
-		#Number = i,#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", X$value)==TRUE), ]
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", X$Factor2)==TRUE), ]
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
-Y
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-filter(Y, modelVars=="HUMIFUSATEMP")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-reload.project()
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-n.axes=2
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-reload.project()
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-n.axes=2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-round_n=3
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dataset_type="all"
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqrt",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,4)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,4)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,4)=="sqr",#
-			substring(Variable, 5),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)
-PCA.all.surveys.factor.pattern
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-reload.project()
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-n.axes=2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-round_n=3
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dataset_type="all"
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-X
-?substring
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, -4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, -4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			gsub('.{3}$', '', Variable), # remove last three characters#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			substring(Variable, -4),#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			#gsub('.{3}$', '', Variable),#
-			substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			#gsub('.{3}$', '', Variable),#
-			substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="125",#
-			gsub('.{3}$', '', Variable),#
-			#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-gsub('.{3}$', '', Variable)
-gsub('.{3}$', '', "Variable")
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			gsub('.{3}$', '', Variable),#
-			#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-			Variable#
-		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="075",#
-			substring(Variable, 4),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
+	# replace NAs again just in case#
+	climate_data[,c("MinTemp","MaxTemp","Precip")] %<>% apply(., 2, NA_Function)#
+	# replace NA for precip#
+	climate_data$Precip[which(climate_data$Precip < 0)] <- NA#
+	return(climate_data)#
+}#
+	#-------------- Find closest weather stations to each sampling location -- ##
+	sites <- Marsico.Florida.data.collection.site.location.summary#
+	# distance - radius within which to look for nearby climate stations#
+findClosestWeatherStations <- function(sites, climate_data, Distance=85) {#
+	# merge sampling locations and weather station locations to calculate distance matrix (all pairwise distances among points)#
+	A <- sites %>%#
+		dplyr::select(Location.name, Latitude, Longitude) %>%#
+		rbind.fill(dplyr::select(wstations, Name, Latitude, Longitude))#
+	# first convert sampling locations and weather station coordinates to UTM#
+	coordinates(A) <- c("Longitude", "Latitude")#
+	proj4string(A) <- CRS("+proj=longlat +datum=WGS84")  ## for example#
+	# then calculate dist matrix (which will now be in m)#
+	A %<>% spTransform(CRS("+proj=utm +zone=16 ellps=WGS84"))#
+	# convert coordinates back to numeric#
+	A <- as.data.frame(cbind(A$Name, A@coords))#
+	names(A) <- c("Name", "Easting", "Northing")#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, as.numeric)#
+	# convert coordinate units to km#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, function(x) {x/1000})#
+	# calculate distance matrix#
+	distance_matrix <- as.data.frame(#
+		as.matrix(#
+			dist(#
+				cbind(A$Easting, A$Northing), #
+				method="euclidian"#
+			)#
 		)#
 	)#
-	# why doesn't this work? I
-X
+	# modify distance matrix#
+	# 		keep columns 1:6 (correspond to the 6 sampling locations)#
+	# 		keep rows 7:170 (correspond to the weather stations)#
+	distance_matrix <- distance_matrix[7:134, 1:6]#
+	names(distance_matrix) <- Location_list#
+	# merge distance matrix with weather station info#
+	B <- dplyr::select(#
+		wstations, #
+		Name, #
+		Station.ID, #
+		Latitude, #
+		Longitude, #
+		Precipitation, #
+		Temperature, #
+		Used_in_Analysis, #
+		Sampling_Site, #
+		Near_Sampling_Site, #
+		Date_Range#
+	)#
+	distance_matrix %<>% cbind(B)#
+	# change distance matrix columns to one column#
+	weather_station_info <- reshape2::melt(#
+		distance_matrix, #
+		id.vars=c(#
+			"Name", #
+			"Station.ID", #
+			"Latitude", #
+			"Longitude", #
+			"Precipitation", #
+			"Temperature", #
+			"Used_in_Analysis", #
+			"Sampling_Site", #
+			"Near_Sampling_Site", #
+			"Date_Range"#
+		)#
+	)#
+	names(weather_station_info)[(dim(weather_station_info)[2]-1) : #
+		dim(weather_station_info)[2]] <- c("Sampling_Location", "Distance")#
+	# standardize Station IDs - remove "GHCND:" if the the ID has it#
+	weather_station_info$Station.ID <- gsub(#
+		"^.*\\:", "", #
+		weather_station_info$Station.ID#
+	)#
+	climate_data$STATION <- gsub("^.*\\:", "", climate_data$STATION)#
+	# SELECT CLOSEST WEATHER STATIONS FOR EACH SAMPLING LOCATION#
+	# merge distance data with climate_data#
+	climate_data_temp <- weather_station_info %>% #
+		dplyr::select(Station.ID, Sampling_Location, Distance) %>%#
+		merge(climate_data, by.x="Station.ID", by.y="STATION")#
+	BLSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="BLSP" & Distance <= Distance)#
+	HBSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="HBSP" & Distance <= Distance) %>% #
+		arrange(Date)#
+	MB_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="MB" & Distance <= Distance)#
+	N_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="N" & Distance <= Distance)#
+	SASP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="SASP" & Distance <= Distance)#
+	TSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="TSP" & Distance <= Distance)#
+	# create list of climate stations per sampling location#
+	Dat = list(#
+		`climate_data`	= climate_data_temp,#
+		`BLSP_stations` = BLSP_stations,#
+		`HBSP_stations` = HBSP_stations,#
+		`MB_stations` 	= MB_stations,#
+		`N_stations` 	= N_stations,#
+		`SASP_stations` = SASP_stations,#
+		`TSP_stations` 	= TSP_stations#
+	)#
+	return(Dat)#
+}#
+calculateClimateVariables <- function(Datalist) {#
+	#Choose closest weather variable measurement for each Location/Date combo -##
+	X <- list()#
+	# for each LOCATION#
+	for (i in 1:length(Location_list)) {#
+		X[[i]] <- list()#
+		# pull climate data for that location and merge with station data to get distance from station to sampling location#
+		data = eval(parse(text=paste(#
+			"Datalist$", #
+			Location_list[i], #
+			"_stations", #
+			sep=""#
+		)))#
+		# for PRECIPITATION#
+		P <- data %>% filter(!is.na(Precip))#
+			X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[1]]) <- c("Precip_STATION_NAME", "Precip_STATION", #
+				"Precip_STATION_Distance", "Date", "Precip", "Location")#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[1]][j, ] = P %>% filter(Date==unique(Date)[j]) %>% #
+					filter(Distance==min(Distance)) %>%#
+					summarise(#
+					Precip_STATION_NAME = STATION_NAME,#
+					Precip_STATION = Station.ID,#
+					Precip_STATION_Distance = Distance,#
+					Date = Date[1],#
+					Precip = Precip#
+				)#
+			}#
+		# for MIN TEMPERATURE#
+		P <- data %>% filter(!is.na(MinTemp))#
+			X[[i]][[2]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[2]]) <- c("MinTemp_STATION_NAME", "MinTemp_STATION", #
+				"MinTemp_STATION_Distance", "Date", "MinTemp", "Location")#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[2]][j, ] = P %>% filter(Date==unique(Date)[j]) %>% #
+					filter(Distance==min(Distance)) %>%#
+					summarise(#
+					MinTemp_STATION_NAME = STATION_NAME,#
+					MinTemp_STATION = Station.ID,#
+					MinTemp_STATION_Distance = Distance,#
+					Date = Date,#
+					MinTemp = MinTemp#
+				)#
+			}#
+		# for MAX TEMPERATURE#
+		P <- data %>% filter(!is.na(MaxTemp))#
+			X[[i]][[3]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[3]]) <- c("MaxTemp_STATION_NAME", "MaxTemp_STATION", #
+				"MaxTemp_STATION_Distance", "Date", "MaxTemp", "Location")#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[3]][j, ] = P %>% filter(Date==unique(Date)[j]) %>% #
+					filter(Distance==min(Distance)) %>%#
+					summarise(#
+					MaxTemp_STATION_NAME = STATION_NAME,#
+					MaxTemp_STATION = Station.ID,#
+					MaxTemp_STATION_Distance = Distance,#
+					Date = Date,#
+					MaxTemp = MaxTemp#
+				)#
+			}#
+			X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[2]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[3]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[1]]$Location = Location_list[i]#
+			X[[i]][[2]]$Location = Location_list[i]#
+			X[[i]][[3]]$Location = Location_list[i]#
+	}#
+	# merge list of lists of lists#
+	data.array2 <- list()#
+	# for each density#
+	for (i in 1:length(Location_list)) {#
+	# for (i in 1:length(unique(patch_data$density))) {#
+		# compress list of statistics to dataframe#
+		data.array2[[i]] = join_all(X[[i]], by="Date", type="full")#
+	}	#
+	climate_data = do.call(rbind.fill, data.array2)#
+}
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(PCA.all.surveys.factor.pattern, is.numeric)#
-PCA.all.surveys.factor.pattern[, nums] %<>% round(round_n)#
-X <- PCA.all.surveys.factor.pattern %>% #
-	# edit cells so they reflect transformations#
-	# log#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor1, "(log)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="log",#
-			paste(Factor2, "(log)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="log",#
-			substring(Variable, 4),#
-			Variable#
+#' @export#
+wstations <- ghcnd.stations.NW.FL.current#
+Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+wstations$Start_Date <- sub(" .*", "", #
+		wstations$Date_Range)#
+	wstations$End_Date <- sub(".* ", "", #
+		wstations$Date_Range)#
+	# filter dates to study dates#
+	wstations %<>%#
+		filter(Start_Date <= "2014-01-17", End_Date >= "2008-01-20") %>%#
+		# merge with list of weather stations for which start/end date is not known#
+		rbind(filter(wstations, Start_Date == "", End_Date >= ""))#
+	#############################################################################
+	# MODIFY INDIVIDUAL WEATHER STATION FILES#
+	#############################################################################
+	climate_data <- mergeClimateFiles(climate_file_names) %>%#
+		filterClimateDataByQuality %>%#
+		formatconvertClimateData#
+	#---------------------------- Restrict start and end dates --------------- ##
+	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85)
+str(Datalist)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+#Choose closest weather variable measurement for each Location/Date combo -##
+	X <- list()#
+	# for each LOCATION#
+	for (i in 1:length(Location_list)) {#
+		X[[i]] <- list()#
+		# pull climate data for that location and merge with station data to get distance from station to sampling location#
+		data = eval(parse(text=paste(#
+			"Datalist$", #
+			Location_list[i], #
+			"_stations", #
+			sep=""#
+		)))#
+		# for PRECIPITATION#
+		P <- data %>% filter(!is.na(Precip))#
+			X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[1]]) <- c(#
+				"Precip_STATION_NAME", #
+				"Precip_STATION", #
+				"Precip_STATION_Distance", #
+				"Date", #
+				"Precip", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[1]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						Precip_STATION_NAME 	= STATION_NAME,#
+						Precip_STATION 			= Station.ID,#
+						Precip_STATION_Distance = Distance,#
+						Date 					= Date[1],#
+						Precip 					= Precip#
+					)#
+			}#
+		# for MIN TEMPERATURE#
+		P <- data %>% filter(!is.na(MinTemp))#
+			X[[i]][[2]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[2]]) <- c(#
+				"MinTemp_STATION_NAME", #
+				"MinTemp_STATION", #
+				"MinTemp_STATION_Distance", #
+				"Date", #
+				"MinTemp", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[2]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						MinTemp_STATION_NAME 		= STATION_NAME,#
+						MinTemp_STATION 			= Station.ID,#
+						MinTemp_STATION_Distance 	= Distance,#
+						Date 						= Date,#
+						MinTemp 					= MinTemp#
+					)#
+			}#
+		# for MAX TEMPERATURE#
+		P <- data %>% filter(!is.na(MaxTemp))#
+			X[[i]][[3]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[3]]) <- c(#
+				"MaxTemp_STATION_NAME", #
+				"MaxTemp_STATION", #
+				"MaxTemp_STATION_Distance", #
+				"Date", #
+				"MaxTemp", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[3]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j],#
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						MaxTemp_STATION_NAME 		= STATION_NAME,#
+						MaxTemp_STATION 			= Station.ID,#
+						MaxTemp_STATION_Distance 	= Distance,#
+						Date 						= Date,#
+						MaxTemp 					= MaxTemp#
+					)#
+			}#
+			X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[2]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[3]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[1]]$Location = Location_list[i]#
+			X[[i]][[2]]$Location = Location_list[i]#
+			X[[i]][[3]]$Location = Location_list[i]#
+	}#
+	# merge list of lists of lists#
+	data.array2 <- list()#
+	# for each density#
+	for (i in 1:length(Location_list)) {#
+	# for (i in 1:length(unique(patch_data$density))) {#
+		# compress list of statistics to dataframe#
+		data.array2[[i]] = join_all(X[[i]], by="Date", type="full")#
+	}	#
+	climate_data = do.call(rbind.fill, data.array2)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+A <- sites %>%#
+		dplyr::select(Location.name, Latitude, Longitude) %>%#
+		rbind.fill(dplyr::select(wstations, Name, Latitude, Longitude))#
+	# first convert sampling locations and weather station coordinates to UTM#
+	coordinates(A) <- c("Longitude", "Latitude")#
+	proj4string(A) <- CRS("+proj=longlat +datum=WGS84")  ## for example#
+	# then calculate dist matrix (which will now be in m)#
+	A %<>% spTransform(CRS("+proj=utm +zone=16 ellps=WGS84"))#
+	# convert coordinates back to numeric#
+	A <- as.data.frame(cbind(A$Name, A@coords))#
+	names(A) <- c("Name", "Easting", "Northing")#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, as.numeric)#
+	# convert coordinate units to km#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, function(x) {x/1000})#
+	# calculate distance matrix#
+	distance_matrix <- as.data.frame(#
+		as.matrix(#
+			dist(#
+				cbind(A$Easting, A$Northing), #
+				method="euclidian"#
+			)#
 		)#
-	) %>%#
-	# 1.25 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor1, "(^1.25)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			paste(Factor2, "(^1.25)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			str_sub(Variable, -3, -1)=="125",#
-			gsub('.{3}$', '', Variable),#
-			#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-			Variable#
+	)#
+	# modify distance matrix#
+	# 		keep columns 1:6 (correspond to the 6 sampling locations)#
+	# 		keep rows 7:170 (correspond to the weather stations)#
+	distance_matrix <- distance_matrix[7:134, 1:6]#
+	names(distance_matrix) <- Location_list#
+	# merge distance matrix with weather station info#
+	B <- dplyr::select(#
+		wstations, #
+		Name, #
+		Station.ID, #
+		Latitude, #
+		Longitude, #
+		Precipitation, #
+		Temperature, #
+		Used_in_Analysis, #
+		Sampling_Site, #
+		Near_Sampling_Site, #
+		Date_Range#
+	)#
+	distance_matrix %<>% cbind(B)#
+	# change distance matrix columns to one column#
+	weather_station_info <- reshape2::melt(#
+		distance_matrix, #
+		id.vars=c(#
+			"Name", #
+			"Station.ID", #
+			"Latitude", #
+			"Longitude", #
+			"Precipitation", #
+			"Temperature", #
+			"Used_in_Analysis", #
+			"Sampling_Site", #
+			"Near_Sampling_Site", #
+			"Date_Range"#
 		)#
-	) %>%	#
-	# 0.75 power#
-	mutate(#
-		Factor1 = ifelse(#
-			str_sub(Variable, -3, -1)=="075",#
-			paste(Factor1, "(^0.75)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			str_sub(Variable, -3, -1)=="075",#
-			paste(Factor2, "(^0.75)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			str_sub(Variable, -3, -1)=="075",#
-			gsub('.{3}$', '', Variable),#
-			Variable#
-		)#
-	) %>%#
-	# sqrt#
-	mutate(#
-		Factor1 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor1, "(sqrt)"),#
-			Factor1#
-		),#
-		Factor2 = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			paste(Factor2, "(sqrt)"),#
-			Factor2#
-		),#
-		Variable = ifelse(#
-			substr(Variable,1,3)=="sqr",#
-			substring(Variable, 4),#
-			Variable#
+	)#
+	names(weather_station_info)[(dim(weather_station_info)[2]-1) : #
+		dim(weather_station_info)[2]] <- c("Sampling_Location", "Distance")#
+	# standardize Station IDs - remove "GHCND:" if the the ID has it#
+	weather_station_info$Station.ID <- gsub(#
+		"^.*\\:", "", #
+		weather_station_info$Station.ID#
+	)#
+	climate_data$STATION <- gsub("^.*\\:", "", climate_data$STATION)#
+	# SELECT CLOSEST WEATHER STATIONS FOR EACH SAMPLING LOCATION#
+	# merge distance data with climate_data#
+	climate_data_temp <- weather_station_info %>% #
+		dplyr::select(Station.ID, Sampling_Location, Distance) %>%#
+		merge(climate_data, by.x="Station.ID", by.y="STATION")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+wstations <- ghcnd.stations.NW.FL.current#
+Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+wstations$Start_Date <- sub(" .*", "", #
+		wstations$Date_Range)#
+	wstations$End_Date <- sub(".* ", "", #
+		wstations$Date_Range)#
+	# filter dates to study dates#
+	wstations %<>%#
+		filter(Start_Date <= "2014-01-17", End_Date >= "2008-01-20") %>%#
+		# merge with list of weather stations for which start/end date is not known#
+		rbind(filter(wstations, Start_Date == "", End_Date >= ""))#
+	#############################################################################
+	# MODIFY INDIVIDUAL WEATHER STATION FILES#
+	#############################################################################
+	climate_data <- mergeClimateFiles(climate_file_names) %>%#
+		filterClimateDataByQuality %>%#
+		formatconvertClimateData#
+	#---------------------------- Restrict start and end dates --------------- ##
+	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+A <- sites %>%#
+		dplyr::select(Location.name, Latitude, Longitude) %>%#
+		rbind.fill(dplyr::select(wstations, Name, Latitude, Longitude))#
+	# first convert sampling locations and weather station coordinates to UTM#
+	coordinates(A) <- c("Longitude", "Latitude")#
+	proj4string(A) <- CRS("+proj=longlat +datum=WGS84")  ## for example#
+	# then calculate dist matrix (which will now be in m)#
+	A %<>% spTransform(CRS("+proj=utm +zone=16 ellps=WGS84"))#
+	# convert coordinates back to numeric#
+	A <- as.data.frame(cbind(A$Name, A@coords))#
+	names(A) <- c("Name", "Easting", "Northing")#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, as.numeric)#
+	# convert coordinate units to km#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, function(x) {x/1000})#
+	# calculate distance matrix#
+	distance_matrix <- as.data.frame(#
+		as.matrix(#
+			dist(#
+				cbind(A$Easting, A$Northing), #
+				method="euclidian"#
+			)#
 		)#
 	)
-X
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-# why doesn't this work? I want to filter out NAs#
-	X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-	mutate(Number = 1)#
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T)
+distance_matrix <- distance_matrix[7:134, 1:6]#
+	names(distance_matrix) <- Location_list#
+	# merge distance matrix with weather station info#
+	B <- dplyr::select(#
+		wstations, #
+		Name, #
+		Station.ID, #
+		Latitude, #
+		Longitude, #
+		Precipitation, #
+		Temperature, #
+		Used_in_Analysis, #
+		Sampling_Site, #
+		Near_Sampling_Site, #
+		Date_Range#
+	)#
+	distance_matrix %<>% cbind(B)#
+	# change distance matrix columns to one column#
+	weather_station_info <- reshape2::melt(#
+		distance_matrix, #
+		id.vars=c(#
+			"Name", #
+			"Station.ID", #
+			"Latitude", #
+			"Longitude", #
+			"Precipitation", #
+			"Temperature", #
+			"Used_in_Analysis", #
+			"Sampling_Site", #
+			"Near_Sampling_Site", #
+			"Date_Range"#
+		)#
+	)#
+	names(weather_station_info)[(dim(weather_station_info)[2]-1) : #
+		dim(weather_station_info)[2]] <- c("Sampling_Location", "Distance")#
+	# standardize Station IDs - remove "GHCND:" if the the ID has it#
+	weather_station_info$Station.ID <- gsub(#
+		"^.*\\:", "", #
+		weather_station_info$Station.ID#
+	)#
+	climate_data$STATION <- gsub("^.*\\:", "", climate_data$STATION)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-filter(Y, modelVars=="HUMIFUSATEMP")
+climate_data_temp <- weather_station_info %>% #
+		dplyr::select(Station.ID, Sampling_Location, Distance) %>%#
+		merge(climate_data, by.x="Station.ID", by.y="STATION")
+str(climate_data_temp)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-	mutate(Number = 2) %>%#
-	merge(temp, all=T) %>%#
-	mutate(		#
-		Species = factor(ifelse(#
-			substr(modelVars,1,7) == "HUMIFUS",#
-			"O. humifusa",#
-			"O. stricta"#
-		)),#
-		Weather = factor(ifelse(#
-			str_sub(modelVars, -4, -1) == "ECIP",#
-			"Precipitation",#
-			"Temperature"#
-		))#
-	) %>%#
-	merge(PCA.all.surveys.eigenvalues[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
-	filter(Eigenvalue >= 1)
-Y
+BLSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="BLSP" & Distance <= Distance)
+str(BLSP_stations)
+BLSP_stations$Sampling_Location %>% unique
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
+HBSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="HBSP" & Distance <= Distance) %>% #
+		arrange(Date)#
+	MB_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="MB" & Distance <= Distance)#
+	N_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="N" & Distance <= Distance)#
+	SASP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="SASP" & Distance <= Distance)#
+	TSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="TSP" & Distance <= Distance)
+str(TSP_stations)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+#-------------- Find closest weather stations to each sampling location -- ##
+	sites <- Marsico.Florida.data.collection.site.location.summary#
+	# distance - radius within which to look for nearby climate stations#
+findClosestWeatherStations <- function(sites, climate_data, Distance=85) {#
+	# merge sampling locations and weather station locations to calculate distance matrix (all pairwise distances among points)#
+	A <- sites %>%#
+		dplyr::select(Location.name, Latitude, Longitude) %>%#
+		rbind.fill(dplyr::select(wstations, Name, Latitude, Longitude))#
+	# first convert sampling locations and weather station coordinates to UTM#
+	coordinates(A) <- c("Longitude", "Latitude")#
+	proj4string(A) <- CRS("+proj=longlat +datum=WGS84")  ## for example#
+	# then calculate dist matrix (which will now be in m)#
+	A %<>% spTransform(CRS("+proj=utm +zone=16 ellps=WGS84"))#
+	# convert coordinates back to numeric#
+	A <- as.data.frame(cbind(A$Name, A@coords))#
+	names(A) <- c("Name", "Easting", "Northing")#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, as.numeric)#
+	# convert coordinate units to km#
+	A[,c("Easting", "Northing")] %<>% apply(., 2, function(x) {x/1000})#
+	# calculate distance matrix#
+	distance_matrix <- as.data.frame(#
+		as.matrix(#
+			dist(#
+				cbind(A$Easting, A$Northing), #
+				method="euclidian"#
 			)#
 		)#
-		# filter out NAs#
-		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
-	nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
+	)#
+	# modify distance matrix#
+	# 		keep columns 1:6 (correspond to the 6 sampling locations)#
+	# 		keep rows 7:170 (correspond to the weather stations)#
+	distance_matrix <- distance_matrix[7:134, 1:6]#
+	names(distance_matrix) <- Location_list#
+	# merge distance matrix with weather station info#
+	B <- dplyr::select(#
+		wstations, #
+		Name, #
+		Station.ID, #
+		Latitude, #
+		Longitude, #
+		Precipitation, #
+		Temperature, #
+		Used_in_Analysis, #
+		Sampling_Site, #
+		Near_Sampling_Site, #
+		Date_Range#
+	)#
+	distance_matrix %<>% cbind(B)#
+	# change distance matrix columns to one column#
+	weather_station_info <- reshape2::melt(#
+		distance_matrix, #
+		id.vars=c(#
+			"Name", #
+			"Station.ID", #
+			"Latitude", #
+			"Longitude", #
+			"Precipitation", #
+			"Temperature", #
+			"Used_in_Analysis", #
+			"Sampling_Site", #
+			"Near_Sampling_Site", #
+			"Date_Range"#
 		)#
-		# filter out NAs#
-		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-		mutate(Number = 1)#
-	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-		mutate(Number = 2) %>%#
-		merge(temp, all=T) %>%#
-		mutate(		#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			))#
-		) %>%#
-		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
-		filter(Eigenvalue >= 1)#
-	return(Y)#
-}
-ls()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.factor.pattern)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.rotated.factor.pattern)
-PCA.all.surveys.rotated.factor.pattern
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.spring.eigenvalues, PCA.spring.factor.pattern)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.spring.eigenvalues, PCA.spring.factor.pattern)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.winter.eigenvalues, PCA.winter.factor.pattern)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.rotated.factor.pattern)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
-	nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)#
-		# filter out NAs#
-		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-		mutate(Number = 1)#
-	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-		mutate(Number = 2) %>%#
-		merge(temp, all=T) %>%#
-		mutate(		#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			))#
-		) %>%#
-		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
-		filter(Eigenvalue >= 1)#
-	return(Y)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.spring.eigenvalues, PCA.spring.factor.pattern)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(PCA.all.surveys.eigenvalues, PCA.all.surveys.factor.pattern)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(#
-	eigenvalue.data = PCA.all.surveys.eigenvalues, #
-	factor.pattern.data = PCA.all.surveys.factor.pattern#
-)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(#
-	eigenvalue.data = PCA.spring.eigenvalues, #
-	factor.pattern.data = PCA.spring.factor.pattern#
-)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-eigenvalue.data = PCA.spring.eigenvalues
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-factor.pattern.data = PCA.spring.factor.pattern
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)#
-		# filter out NAs
-X
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-reload.project()
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-n.axes=2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-round_n=3
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dataset_type="all"
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(#
-	eigenvalue.data = PCA.spring.eigenvalues, #
-	factor.pattern.data = PCA.spring.factor.pattern,#
-	dataset_type = "spring"#
-)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
-	nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)#
-		# filter out NAs#
-		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-		mutate(Number = 1)#
-	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-		mutate(Number = 2) %>%#
-		merge(temp, all=T) %>%#
-		mutate(		#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			))#
-		) %>%#
-		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
-		filter(Eigenvalue >= 1)#
-	return(Y)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(#
-	eigenvalue.data = PCA.spring.eigenvalues, #
-	factor.pattern.data = PCA.spring.factor.pattern,#
-	dataset_type = "spring"#
-)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-eigenvalue.data = PCA.spring.eigenvalues
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-factor.pattern.data = PCA.spring.factor.pattern
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-dataset_type = "spring"
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-n.axes=2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-round_n=3
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)#
-		# filter out NAs#
-		X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-		mutate(Number = 1)
-X
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-X[which(grepl("NA", X$Factor2)==TRUE), ]
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dim(X[which(grepl("NA", X$Factor2)==TRUE), ])
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
-	nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)#
-		# filter out NAs#
-		if (dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0) {#
-			X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-		}#
-	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-		mutate(Number = 1)#
-	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-		mutate(Number = 2) %>%#
-		merge(temp, all=T) %>%#
-		mutate(		#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			))#
-		) %>%#
-		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
-		filter(Eigenvalue >= 1)#
-	return(Y)#
-}
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(#
-	eigenvalue.data = PCA.spring.eigenvalues, #
-	factor.pattern.data = PCA.spring.factor.pattern,#
-	dataset_type = "spring"#
-)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(#
-	eigenvalue.data = PCA.winter.eigenvalues, #
-	factor.pattern.data = PCA.winter.factor.pattern,#
-	dataset_type = "winter"#
-)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-reload.project()
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-sas_prcomp_PCA_table_function <- function(eigenvalue.data, factor.pattern.data, dataset_type="all", round_n=3, n.axes=2) {#
-	nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)#
-		# filter out NAs#
-		if (dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0) {#
-			X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-		}#
-	temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-		mutate(Number = 1)#
-	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-		mutate(Number = 2) %>%#
-		merge(temp, all=T) %>%#
-		mutate(		#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			))#
-		) %>%#
-		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
-		filter(Eigenvalue >= 1)#
-	return(Y)#
+	)#
+	names(weather_station_info)[(dim(weather_station_info)[2]-1) : #
+		dim(weather_station_info)[2]] <- c("Sampling_Location", "Distance")#
+	# standardize Station IDs - remove "GHCND:" if the the ID has it#
+	weather_station_info$Station.ID <- gsub(#
+		"^.*\\:", "", #
+		weather_station_info$Station.ID#
+	)#
+	climate_data$STATION <- gsub("^.*\\:", "", climate_data$STATION)#
+	# SELECT CLOSEST WEATHER STATIONS FOR EACH SAMPLING LOCATION#
+	# merge distance data with climate_data#
+	climate_data_temp <- weather_station_info %>% #
+		dplyr::select(Station.ID, Sampling_Location, Distance) %>%#
+		merge(climate_data, by.x="Station.ID", by.y="STATION")#
+	BLSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="BLSP" & Distance <= Distance)#
+	HBSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="HBSP" & Distance <= Distance) %>% #
+		arrange(Date)#
+	MB_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="MB" & Distance <= Distance)#
+	N_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="N" & Distance <= Distance)#
+	SASP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="SASP" & Distance <= Distance)#
+	TSP_stations <- climate_data_temp %>% #
+		filter(Sampling_Location=="TSP" & Distance <= Distance)#
+	# create list of climate stations per sampling location#
+	Dat = list(#
+		`climate_data`	= climate_data_temp,#
+		`BLSP_stations` = BLSP_stations,#
+		`HBSP_stations` = HBSP_stations,#
+		`MB_stations` 	= MB_stations,#
+		`N_stations` 	= N_stations,#
+		`SASP_stations` = SASP_stations,#
+		`TSP_stations` 	= TSP_stations#
+	)#
+	return(Dat)#
 }
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-n.axes=2
+#' @param timeseries#
+#' @export#
+wstations <- ghcnd.stations.NW.FL.current#
+Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-round_n=3
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-sas_prcomp_PCA_table_function(#
-	eigenvalue.data = PCA.winter.eigenvalues, #
-	factor.pattern.data = PCA.winter.factor.pattern,#
-	dataset_type = "winter"#
-)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-PCA.winter.rotated.factor.pattern
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-eigenvalue.data = PCA.winter.eigenvalues
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-factor.pattern.data = PCA.winter.rotated.factor.pattern
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript')
-dataset_type = "winter"
+wstations$Start_Date <- sub(" .*", "", #
+		wstations$Date_Range)#
+	wstations$End_Date <- sub(".* ", "", #
+		wstations$Date_Range)#
+	# filter dates to study dates#
+	wstations %<>%#
+		filter(Start_Date <= "2014-01-17", End_Date >= "2008-01-20") %>%#
+		# merge with list of weather stations for which start/end date is not known#
+		rbind(filter(wstations, Start_Date == "", End_Date >= ""))#
+	#############################################################################
+	# MODIFY INDIVIDUAL WEATHER STATION FILES#
+	#############################################################################
+	climate_data <- mergeClimateFiles(climate_file_names) %>%#
+		filterClimateDataByQuality %>%#
+		formatconvertClimateData
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-nums <- sapply(factor.pattern.data, is.numeric)#
-	factor.pattern.data[, nums] %<>% round(round_n)#
-	X <- factor.pattern.data %>% #
-		# edit cells so they reflect transformations#
-		# log#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor1, "(log)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="log",#
-				paste(Factor2, "(log)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="log",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		) %>%#
-		# 1.25 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor1, "(^1.25)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				paste(Factor2, "(^1.25)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="125",#
-				gsub('.{3}$', '', Variable),#
-				#substr(Variable,1,nchar(Variable)-3), # remove last three characters#
-				Variable#
-			)#
-		) %>%	#
-		# 0.75 power#
-		mutate(#
-			Factor1 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor1, "(^0.75)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				paste(Factor2, "(^0.75)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				str_sub(Variable, -3, -1)=="075",#
-				gsub('.{3}$', '', Variable),#
-				Variable#
-			)#
-		) %>%#
-		# sqrt#
-		mutate(#
-			Factor1 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor1, "(sqrt)"),#
-				Factor1#
-			),#
-			Factor2 = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				paste(Factor2, "(sqrt)"),#
-				Factor2#
-			),#
-			Variable = ifelse(#
-				substr(Variable,1,3)=="sqr",#
-				substring(Variable, 4),#
-				Variable#
-			)#
-		)#
-		# filter out NAs#
-		if (dim(X[which(grepl("NA", X$Factor2)==TRUE), ])[1] > 0) {#
-			X[which(grepl("NA", X$Factor2)==TRUE), ]$Factor2 <- NA#
-		}
+#---------------------------- Restrict start and end dates --------------- ##
+	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")#
+	Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85)
+str(Datalist)
+str(Datalist$SASP_stations)
+Datalist$SASP_stations$Sampling_Locations %>% unique
+Datalist$SASP_stations$Sampling_Location %>% unique
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-temp <- dcast(X, modelVars ~ Variable, value.var="Factor1") %>%#
-		mutate(Number = 1)#
-	Y <- dcast(X, modelVars ~ Variable, value.var="Factor2") %>%#
-		mutate(Number = 2) %>%#
-		merge(temp, all=T) %>%#
-		mutate(		#
-			Species = factor(ifelse(#
-				substr(modelVars,1,7) == "HUMIFUS",#
-				"O. humifusa",#
-				"O. stricta"#
-			)),#
-			Weather = factor(ifelse(#
-				str_sub(modelVars, -4, -1) == "ECIP",#
-				"Precipitation",#
-				"Temperature"#
-			))#
-		) %>%#
-		merge(eigenvalue.data[, c("Number", "Eigenvalue", "Proportion", "modelVars")], by=c("Number", "modelVars"), all.x=T) %>%#
-		filter(Eigenvalue >= 1)
-Y
+X <- list()#
+	# for each LOCATION#
+	for (i in 1:length(Location_list)) {#
+		X[[i]] <- list()#
+		# pull climate data for that location and merge with station data to get distance from station to sampling location#
+		data = eval(parse(text=paste(#
+			"Datalist$", #
+			Location_list[i], #
+			"_stations", #
+			sep=""#
+		)))#
+		# for PRECIPITATION#
+		P <- data %>% filter(!is.na(Precip))#
+			X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[1]]) <- c(#
+				"Precip_STATION_NAME", #
+				"Precip_STATION", #
+				"Precip_STATION_Distance", #
+				"Date", #
+				"Precip", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[1]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						Precip_STATION_NAME 	= STATION_NAME,#
+						Precip_STATION 			= Station.ID,#
+						Precip_STATION_Distance = Distance,#
+						Date 					= Date[1],#
+						Precip 					= Precip#
+					)#
+			}#
+		# for MIN TEMPERATURE#
+		P <- data %>% filter(!is.na(MinTemp))#
+			X[[i]][[2]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[2]]) <- c(#
+				"MinTemp_STATION_NAME", #
+				"MinTemp_STATION", #
+				"MinTemp_STATION_Distance", #
+				"Date", #
+				"MinTemp", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[2]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						MinTemp_STATION_NAME 		= STATION_NAME,#
+						MinTemp_STATION 			= Station.ID,#
+						MinTemp_STATION_Distance 	= Distance,#
+						Date 						= Date,#
+						MinTemp 					= MinTemp#
+					)#
+			}#
+		# for MAX TEMPERATURE#
+		P <- data %>% filter(!is.na(MaxTemp))#
+			X[[i]][[3]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[3]]) <- c(#
+				"MaxTemp_STATION_NAME", #
+				"MaxTemp_STATION", #
+				"MaxTemp_STATION_Distance", #
+				"Date", #
+				"MaxTemp", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[3]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j],#
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						MaxTemp_STATION_NAME 		= STATION_NAME,#
+						MaxTemp_STATION 			= Station.ID,#
+						MaxTemp_STATION_Distance 	= Distance,#
+						Date 						= Date,#
+						MaxTemp 					= MaxTemp#
+					)#
+			}#
+			X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[2]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[3]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[1]]$Location = Location_list[i]#
+			X[[i]][[2]]$Location = Location_list[i]#
+			X[[i]][[3]]$Location = Location_list[i]#
+	}#
+	# merge list of lists of lists#
+	data.array2 <- list()#
+	# for each density#
+	for (i in 1:length(Location_list)) {#
+	# for (i in 1:length(unique(patch_data$density))) {#
+		# compress list of statistics to dataframe#
+		data.array2[[i]] = join_all(X[[i]], by="Date", type="full")#
+	}	#
+	climate_data = do.call(rbind.fill, data.array2)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X <- list()
+i=1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[[i]] <- list()#
+		# pull climate data for that location and merge with station data to get distance from station to sampling location#
+		data = eval(parse(text=paste(#
+			"Datalist$", #
+			Location_list[i], #
+			"_stations", #
+			sep=""#
+		)))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+P <- data %>% filter(!is.na(Precip))#
+			X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[1]]) <- c(#
+				"Precip_STATION_NAME", #
+				"Precip_STATION", #
+				"Precip_STATION_Distance", #
+				"Date", #
+				"Precip", #
+				"Location"#
+			)#
+			# for each DATE
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+unique(P$Date)
+j=1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[[i]][[1]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						Precip_STATION_NAME 	= STATION_NAME,#
+						Precip_STATION 			= Station.ID,#
+						Precip_STATION_Distance = Distance,#
+						Date 					= Date[1],#
+						Precip 					= Precip#
+					)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[1]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						Precip_STATION_NAME 	= STATION_NAME,#
+						Precip_STATION 			= Station.ID,#
+						Precip_STATION_Distance = Distance,#
+						Date 					= Date[1],#
+						Precip 					= Precip#
+					)#
+			}
+j
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X[[i]][[1]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					)
+unique(P$Date)
+min(P$Distance)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+P %>% #
+					filter(#
+						Date == unique(Date)[j], #
+						Distance == min(Distance)#
+					)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+P %>% #
+					filter(Date == unique(Date)[j]) %>%#
+					filter(Distance == min(Distance))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+P %>% #
+					filter(#
+						Date == unique(Date)[j] &#
+						Distance == min(Distance)#
+					)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+P %>% #
+					filter(#
+						Date == unique(Date)[j],#
+						Distance == min(Distance)#
+					)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+P %>% #
+					filter(Date == unique(Date)[j]) %>%#
+					filter(Distance == min(Distance))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+X <- list()#
+	# for each LOCATION#
+	for (i in 1:length(Location_list)) {#
+		X[[i]] <- list()#
+		# pull climate data for that location and merge with station data to get distance from station to sampling location#
+		data = eval(parse(text=paste(#
+			"Datalist$", #
+			Location_list[i], #
+			"_stations", #
+			sep=""#
+		)))#
+		# for PRECIPITATION#
+		P <- data %>% filter(!is.na(Precip))#
+			X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[1]]) <- c(#
+				"Precip_STATION_NAME", #
+				"Precip_STATION", #
+				"Precip_STATION_Distance", #
+				"Date", #
+				"Precip", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[1]][j, ] = P %>% #
+					filter(Date == unique(Date)[j]) %>%#
+					filter(Distance == min(Distance)) %>%#
+					summarise(#
+						Precip_STATION_NAME 	= STATION_NAME,#
+						Precip_STATION 			= Station.ID,#
+						Precip_STATION_Distance = Distance,#
+						Date 					= Date[1],#
+						Precip 					= Precip#
+					)#
+			}#
+		# for MIN TEMPERATURE#
+		P <- data %>% filter(!is.na(MinTemp))#
+			X[[i]][[2]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[2]]) <- c(#
+				"MinTemp_STATION_NAME", #
+				"MinTemp_STATION", #
+				"MinTemp_STATION_Distance", #
+				"Date", #
+				"MinTemp", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[2]][j, ] = P %>% #
+					filter(Date == unique(Date)[j]) %>%#
+					filter(Distance == min(Distance)) %>%#
+					summarise(#
+						MinTemp_STATION_NAME 		= STATION_NAME,#
+						MinTemp_STATION 			= Station.ID,#
+						MinTemp_STATION_Distance 	= Distance,#
+						Date 						= Date,#
+						MinTemp 					= MinTemp#
+					)#
+			}#
+		# for MAX TEMPERATURE#
+		P <- data %>% filter(!is.na(MaxTemp))#
+			X[[i]][[3]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))#
+			names(X[[i]][[3]]) <- c(#
+				"MaxTemp_STATION_NAME", #
+				"MaxTemp_STATION", #
+				"MaxTemp_STATION_Distance", #
+				"Date", #
+				"MaxTemp", #
+				"Location"#
+			)#
+			# for each DATE#
+			for (j in 1:length(unique(P$Date))) {#
+				# pull climate data associated with that location#
+				X[[i]][[3]][j, ] = P %>% #
+					filter(#
+						Date == unique(Date)[j],#
+						Distance == min(Distance)#
+					) %>%#
+					summarise(#
+						MaxTemp_STATION_NAME 		= STATION_NAME,#
+						MaxTemp_STATION 			= Station.ID,#
+						MaxTemp_STATION_Distance 	= Distance,#
+						Date 						= Date,#
+						MaxTemp 					= MaxTemp#
+					)#
+			}#
+			X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[2]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[3]]$Date %<>% as.Date(origin="1970-01-01")#
+			X[[i]][[1]]$Location = Location_list[i]#
+			X[[i]][[2]]$Location = Location_list[i]#
+			X[[i]][[3]]$Location = Location_list[i]#
+	}#
+	# merge list of lists of lists#
+	data.array2 <- list()#
+	# for each density#
+	for (i in 1:length(Location_list)) {#
+	# for (i in 1:length(unique(patch_data$density))) {#
+		# compress list of statistics to dataframe#
+		data.array2[[i]] = join_all(X[[i]], by="Date", type="full")#
+	}	#
+	climate_data = do.call(rbind.fill, data.array2)
