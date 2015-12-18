@@ -48,7 +48,7 @@ processWeather <- function(wstations, Location_list) {
 	#---------------------------- Restrict start and end dates --------------- #
 	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")
 	Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) 
-	
+	climate_data <- getClimateDataByLocationDate(Datalist)
 
 
 	
@@ -63,30 +63,10 @@ processWeather <- function(wstations, Location_list) {
 			Precip_Presence = ifelse(Precip>0, 1, 0),
 			MinTemp_lt_equal_0 = ifelse(MinTemp<=0, 1, 0)
 		)			
-	############################################################################
-	# calculate growing degree days
-	############################################################################
-	# used this website to calculate growing degree days: http://www.ipm.ucdavis.edu/WEATHER/ddretrievetext.html
-	# merge UCD IPM files into one
-	DegreeDays = rbind.fill(
-	UCD.IPM.BLSPDegree.days,
-	UCD.IPM.HBSPDegree.days,
-	UCD.IPM.MexicoBeachDegree.days,
-	UCD.IPM.NokuseDegree.days,
-	UCD.IPM.SASPDegree.days,
-	UCD.IPM.SweetwaterDegree.days)
-	DegreeDays$Date %<>% as.Date("%m/%d/%y")
-	DegreeDays.unique = unique(DegreeDays[, 1:4])
-	DegreeDays %>% filter(Date=="2014-01-17")
-	DegreeDays.merged = merge(
-		DegreeDays.unique, 
-		climate_data, 
-		by.x=c("Date", "Temp.min", "Temp.max"), 
-		by.y=c("Date", "MinTemp", "MaxTemp"), 
-		all.y=T
-	)
-	names(DegreeDays.merged)[2:3] <- c("MinTemp", "MaxTemp")
-	DegreeDays.merged -> climate_data
+	climate_data <- calculateDegreeDays(DegreeDay_list, climate_data)
+	
+	
+	
 	############################################################################
 	# PROCESS MERGED CLIMATE DATA
 	############################################################################
@@ -474,7 +454,7 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 
 
 
-calculateClimateVariables <- function(Datalist) {
+getClimateDataByLocationDate <- function(Datalist) {
 	#Choose closest weather variable measurement for each Location/Date combo -#
 	X <- list()
 	# for each LOCATION
@@ -487,87 +467,87 @@ calculateClimateVariables <- function(Datalist) {
 			"_stations", 
 			sep=""
 		)))
-		# for PRECIPITATION
-		P <- data %>% filter(!is.na(Precip))
-			X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))
-			names(X[[i]][[1]]) <- c(
-				"Precip_STATION_NAME", 
-				"Precip_STATION", 
-				"Precip_STATION_Distance", 
-				"Date", 
-				"Precip", 
-				"Location"
-			)
-			# for each DATE
-			for (j in 1:length(unique(P$Date))) {
-				# pull climate data associated with that location
-				X[[i]][[1]][j, ] = P %>% 
-					filter(Date == unique(Date)[j]) %>%
-					filter(Distance == min(Distance)) %>%
-					summarise(
-						Precip_STATION_NAME 	= STATION_NAME,
-						Precip_STATION 			= Station.ID,
-						Precip_STATION_Distance = Distance,
-						Date 					= Date[1],
-						Precip 					= Precip
-					)
-			}
-		# for MIN TEMPERATURE
-		P <- data %>% filter(!is.na(MinTemp))
-			X[[i]][[2]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))
-			names(X[[i]][[2]]) <- c(
-				"MinTemp_STATION_NAME", 
-				"MinTemp_STATION", 
-				"MinTemp_STATION_Distance", 
-				"Date", 
-				"MinTemp", 
-				"Location"
-			)
-			# for each DATE
-			for (j in 1:length(unique(P$Date))) {
-				# pull climate data associated with that location
-				X[[i]][[2]][j, ] = P %>% 
-					filter(Date == unique(Date)[j]) %>%
-					filter(Distance == min(Distance)) %>%
-					summarise(
-						MinTemp_STATION_NAME 		= STATION_NAME,
-						MinTemp_STATION 			= Station.ID,
-						MinTemp_STATION_Distance 	= Distance,
-						Date 						= Date,
-						MinTemp 					= MinTemp
-					)
-			}
-		# for MAX TEMPERATURE
-		P <- data %>% filter(!is.na(MaxTemp))
-			X[[i]][[3]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))
-			names(X[[i]][[3]]) <- c(
-				"MaxTemp_STATION_NAME", 
-				"MaxTemp_STATION", 
-				"MaxTemp_STATION_Distance", 
-				"Date", 
-				"MaxTemp", 
-				"Location"
-			)
-			# for each DATE
-			for (j in 1:length(unique(P$Date))) {
-				# pull climate data associated with that location
-				X[[i]][[3]][j, ] = P %>% 
-					filter(Date == unique(Date)[j]) %>%
-					filter(Distance == min(Distance)) %>%
-					summarise(
-						MaxTemp_STATION_NAME 		= STATION_NAME,
-						MaxTemp_STATION 			= Station.ID,
-						MaxTemp_STATION_Distance 	= Distance,
-						Date 						= Date,
-						MaxTemp 					= MaxTemp
-					)
-			}
-			X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")
-			X[[i]][[2]]$Date %<>% as.Date(origin="1970-01-01")
-			X[[i]][[3]]$Date %<>% as.Date(origin="1970-01-01")
-			X[[i]][[1]]$Location = Location_list[i]
-			X[[i]][[2]]$Location = Location_list[i]
-			X[[i]][[3]]$Location = Location_list[i]
+		# PRECIPITATION
+		P 			<- data %>% filter(!is.na(Precip))
+		X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))
+		names(X[[i]][[1]]) <- c(
+			"Precip_STATION_NAME", 
+			"Precip_STATION", 
+			"Precip_STATION_Distance", 
+			"Date", 
+			"Precip", 
+			"Location"
+		)
+		# for each DATE
+		for (j in 1:length(unique(P$Date))) {
+			# pull climate data associated with that location
+			X[[i]][[1]][j, ] = P %>% 
+				filter(Date == unique(Date)[j]) %>%
+				filter(Distance == min(Distance)) %>%
+				summarise(
+					Precip_STATION_NAME 	= STATION_NAME,
+					Precip_STATION 			= Station.ID,
+					Precip_STATION_Distance = Distance,
+					Date 					= Date[1],
+					Precip 					= Precip
+				)
+		}
+		# MIN TEMPERATURE
+		Min 		<- data %>% filter(!is.na(MinTemp))
+		X[[i]][[2]] <- as.data.frame(matrix(NA, length(unique(Min$Date)), 6))
+		names(X[[i]][[2]]) <- c(
+			"MinTemp_STATION_NAME", 
+			"MinTemp_STATION", 
+			"MinTemp_STATION_Distance", 
+			"Date", 
+			"MinTemp", 
+			"Location"
+		)
+		# for each DATE
+		for (j in 1:length(unique(Min$Date))) {
+			# pull climate data associated with that location
+			X[[i]][[2]][j, ] = Min %>% 
+				filter(Date == unique(Date)[j]) %>%
+				filter(Distance == min(Distance)) %>%
+				summarise(
+					MinTemp_STATION_NAME 		= STATION_NAME,
+					MinTemp_STATION 			= Station.ID,
+					MinTemp_STATION_Distance 	= Distance,
+					Date 						= Date,
+					MinTemp 					= MinTemp
+				)
+		}
+		# MAX TEMPERATURE
+		Max <- data %>% filter(!is.na(MaxTemp))
+		X[[i]][[3]] <- as.data.frame(matrix(NA, length(unique(Max$Date)), 6))
+		names(X[[i]][[3]]) <- c(
+			"MaxTemp_STATION_NAME", 
+			"MaxTemp_STATION", 
+			"MaxTemp_STATION_Distance", 
+			"Date", 
+			"MaxTemp", 
+			"Location"
+		)
+		# for each DATE
+		for (j in 1:length(unique(Max$Date))) {
+			# pull climate data associated with that location
+			X[[i]][[3]][j, ] = Max %>% 
+				filter(Date == unique(Date)[j]) %>%
+				filter(Distance == min(Distance)) %>%
+				summarise(
+					MaxTemp_STATION_NAME 		= STATION_NAME,
+					MaxTemp_STATION 			= Station.ID,
+					MaxTemp_STATION_Distance 	= Distance,
+					Date 						= Date,
+					MaxTemp 					= MaxTemp
+				)
+		}
+		X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")
+		X[[i]][[2]]$Date %<>% as.Date(origin="1970-01-01")
+		X[[i]][[3]]$Date %<>% as.Date(origin="1970-01-01")
+		X[[i]][[1]]$Location = Location_list[i]
+		X[[i]][[2]]$Location = Location_list[i]
+		X[[i]][[3]]$Location = Location_list[i]
 	}
 	# merge list of lists of lists
 	data.array2 <- list()
@@ -578,4 +558,50 @@ calculateClimateVariables <- function(Datalist) {
 		data.array2[[i]] = join_all(X[[i]], by="Date", type="full")
 	}	
 	climate_data = do.call(rbind.fill, data.array2)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############################################################################
+# calculate growing degree days
+############################################################################
+# used this website to calculate growing degree days: http://www.ipm.ucdavis.edu/WEATHER/ddretrievetext.html
+# merge UCD IPM files into one
+DegreeDay_list <- c(
+	"UCD.IPM.BLSPDegree.days",
+	"UCD.IPM.HBSPDegree.days",
+	"UCD.IPM.MexicoBeachDegree.days",
+	"UCD.IPM.NokuseDegree.days",
+	"UCD.IPM.SASPDegree.days",
+	"UCD.IPM.SweetwaterDegree.days"
+)
+calculateDegreeDays <- function(DegreeDay_list, climate_data) {
+	X <- list()
+	for (i in 1:length(DegreeDay_list)) {
+		X[[i]] <- eval(parse(text=DegreeDay_list[i]))
+	}
+	DegreeDays <- do.call(rbind.fill, X)
+	DegreeDays$Date %<>% as.Date("%m/%d/%y")
+	DegreeDays.unique = unique(DegreeDays[, 1:4])
+	DegreeDays %>% filter(Date=="2014-01-17")
+	DegreeDays.merged = merge(
+		DegreeDays.unique, 
+		climate_data, 
+		by.x=c("Date", "Temp.min", "Temp.max"), 
+		by.y=c("Date", "MinTemp", "MaxTemp"), 
+		all.y=T
+	)
+	names(DegreeDays.merged)[2:3] <- c("MinTemp", "MaxTemp")
+	return(DegreeDays.merged)
 }

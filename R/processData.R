@@ -139,6 +139,20 @@ processData <- function(dataset) {
 	############################################################################
 	# SEASON
 	############################################################################
+	timeseries_all_surveys$Date %<>%
+		strptime("%Y-%m-%d") %>%
+		as.POSIXct(format="%Y-%m-%d")
+	timeseries_all_surveys %<>% as.data.frame %>% assignSeason
+
+	timeseries_all_surveys %>% 
+		dplyr::select(Date, Season) %>% 
+		group_by(Date) %>%
+		summarise(
+			n.Seasons = length(unique(Season)), 
+			Season = Season[1]
+	)
+
+
 	timeseries$Season = "NA"
 	# function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to
 	# solstice and equinox dates: http://en.wikipedia.org/wiki/Solstice
