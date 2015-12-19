@@ -1,98 +1,3 @@
-#' Process Weather Data
-#' 
-#' @description Steps:
-#' \itemize{
-#'  \item process weather station (\code{wstations}) list
-#'  \item for individual weather station files:
-#' 		\itemize{
-#' 			\item for each variable, NOAA uses generic column names: "Measurement.Flag", "Quality.Flag", "Source.Flag", "Time.of.Observation"
-#' 			\item to ensure that the appropriate columns are merged together, I will rename these columns by pasting the name with the name of the variable to which it refers
-#' 			\item e.g., the "Measurement.Flag" column directly after "PRCP" will become "PRCP.Measurement.Flag"
-#' 		}
-#'  \item Restrict start and end dates
-#'  \item Find closest weather stations to each sampling location
-#'  \item Choose closest weather variable measurement for each Location/Date combo
-#'  \item Format Time variables
-#'  \item calculate growing degree days
-#' 		\itemize{
-#' 			\item used this website to calculate growing degree days: http://www.ipm.ucdavis.edu/WEATHER/ddretrievetext.html
-#' 		}
-#'  \item save data
-#' }
-#' @param timeseries
-#' @export
-wstations <- ghcnd.stations.NW.FL.current
-Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")
-
-processWeather <- function(wstations, Location_list) {
-	#--------------------------------------------------------------------------#
-	# Weather Station Info
-	#--------------------------------------------------------------------------#
-	# columns for Start and End Dates of Weather Station
-	wstations$Start_Date <- sub(" .*", "", 
-		wstations$Date_Range)
-	wstations$End_Date <- sub(".* ", "", 
-		wstations$Date_Range)
-	# filter dates to study dates
-	wstations %<>%
-		filter(Start_Date <= "2014-01-17", End_Date >= "2008-01-20") %>%
-		# merge with list of weather stations for which start/end date is not known
-		rbind(filter(wstations, Start_Date == "", End_Date >= ""))
-	############################################################################
-	# MODIFY INDIVIDUAL WEATHER STATION FILES
-	############################################################################
-	
-	climate_data <- mergeClimateFiles(climate_file_names) %>%
-		filterClimateDataByQuality %>%
-		formatconvertClimateData
-	#---------------------------- Restrict start and end dates --------------- #
-	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")
-	Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) 
-	climate_data <- getClimateDataByLocationDate(Datalist)
-
-
-	
-
-	############################################################################
-	# Format Time variables
-	############################################################################
-	climate_data %<>% 
-		mutate(
-			Year = year(Date),
-			Day_of_year = as.numeric(strftime(Date, format = "%j")),
-			Precip_Presence = ifelse(Precip>0, 1, 0),
-			MinTemp_lt_equal_0 = ifelse(MinTemp<=0, 1, 0)
-		)			
-	climate_data <- calculateDegreeDays(DegreeDay_list, climate_data)
-	
-	
-	
-	############################################################################
-	# PROCESS MERGED CLIMATE DATA
-	############################################################################
-	# if MinTemp > MaxTemp, replace both with NA
-	temp = as.vector(which(climate_data$MinTemp > climate_data$MaxTemp))
-	climate_data[temp, ]$MinTemp <- NA
-	climate_data[temp, ]$MaxTemp <- NA
-	# if MinTemp == MaxTemp, replace both with NA
-	temp = as.vector(which(climate_data$MinTemp == climate_data$MaxTemp))
-	climate_data[temp, ]$MinTemp <- NA
-	climate_data[temp, ]$MaxTemp <- NA
-	############################################################################
-	# Misc
-	############################################################################
-	# rename Mexico Beach
-	# climate_data$Location[climate_data$Location == 'MexicoBeach'] <- 'Mexico Beach'
-	############################################################################
-	# SAVE
-	############################################################################
-	setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")
-	cache("climate_data")
-	write.csv(climate_data, "./data/climate_data_processed.csv")
-	return(climate_data)
-}
-
-
 #' Filter Data by Quality Flag
 #' @description If the quality flag from a NOAA dataset is G, I, K, L, N, O, then change the weather value to "NA"
 #' Table 2 (Quality Flag/Attribute) from the NOAA documentation:
@@ -107,43 +12,28 @@ processWeather <- function(wstations, Location_list) {
 #' 	}
 #' @param x
 #' @param y
+#' @export
+#' @importFrom dplyr select
 
-Quality_Flag_Function <- function(x, y){	
+Quality_Flag_Function <- function(x, y){
 	x[which(y=="G" | y=="I" | y=="K" | y=="L" | y=="N" | y=="O")] <- NA
 	return(x)
 }
 
 #' Replace blank values (quality is okay) with "Okay"
 #' @param x
+#' @export
 
 Replace_Blank_w_Okay_Function <- function(x){	
 	x[which(x==" ")] <- "Okay"
 	return(x)
 }
 
+#' Merge Weather Data Files and Format Column Names
+#' @param climate_data
+#' @description For each variable, NOAA uses generic column names "Measurement.Flag", "Quality.Flag", "Source.Flag", "Time.of.Observation" to ensure that the appropriate columns are merged together. This function renames these columns by pasting the name with the name of the variable to which it refers e.g., the "Measurement.Flag" column directly after "PRCP" will become "PRCP.Measurement.Flag" for each weather variable, take weather variable name and paste it to the names of the 4 following columns.
+#' @export
 
-
-
-
-
-
-
-#--------------------------------------------------------------------------#
-# Merge Files Into One
-#--------------------------------------------------------------------------#
-# for each variable, NOAA uses generic column names "Measurement.Flag", 
-#		"Quality.Flag", "Source.Flag", "Time.of.Observation"
-# to ensure that the appropriate columns are merged together, I will rename 
-#		these columns by pasting the name with the name of the variable to 
-#		which it refers
-# e.g., the "Measurement.Flag" column directly after "PRCP" will become 
-#		"PRCP.Measurement.Flag"
-# for each weather variable, take weather variable name and paste it to the 
-#		names of the 4 following columns 
-
-	# list of climate files to fix
-climate_file_names <- c("NOAA.ApalachicolaAirport", "NOAA.ApalachicolaAirport1", "NOAA.Bloxham", "NOAA.Bristol2", "NOAA.Callaway03", "NOAA.Callaway06S", "NOAA.Chipley", "NOAA.Clarksville2N", "NOAA.CrestviewBobSikesAirport", "NOAA.DeFuniakSprings", "NOAA.Destin1", "NOAA.DestinFortWaltonBeach", "NOAA.Freeport34", "NOAA.Freeport40SSW", "NOAA.Freeport44", "NOAA.Hosford27", "NOAA.Marianna7NE", "NOAA.NavalLiveOaks", "NOAA.NWFLBeaches", "NOAA.PanamaCity", "NOAA.PanamaCityBayCoAirport", "NOAA.PanamaCityBeach03", "NOAA.PanamaCityBeach12ESE", "NOAA.PensacolaForest", "NOAA.PensacolaRegionalAirport", "NOAA.PortStJoe06", "NOAA.PortStJoe81", "NOAA.Quincy3SSW", "NOAA.Sumatra", "NOAA.Telogia", "NOAA.ValparaisoEglinAFB", "NOAA.Vernon106", "NOAA.WestPensacola109", "NOAA.Wewahitchka", "NOAA.Wewahitchka16", "NOAA.Wilma", "NOAA.WoodruffDam", "NOAA.Bellview17", "NOAA.Pensacola92", "NOAA.MiramarBeach95", "NOAA.InletBeach07", "NOAA.PanamaCityBeach59", "NOAA.Apalachicola08WNW", "NOAA.NewHope", "NOAA.Destin15")
-	
 mergeClimateFiles <- function(climate_file_names) {
 	X <- list()
 	for (h in 1:length(climate_file_names)) {
@@ -155,7 +45,7 @@ mergeClimateFiles <- function(climate_file_names) {
 		Y <- eval(parse(text=climate_file_names[h]))
 		X[[h]] <- list()
 		# select weather station info to keep
-		X[[h]][[1]] <- Y %>% select(
+		X[[h]][[1]] <- Y %>% dplyr::select(
 			STATION, 
 			STATION_NAME, 
 			ELEVATION, 
@@ -236,23 +126,19 @@ mergeClimateFiles <- function(climate_file_names) {
 	do.call(rbind.fill, data.array2)
 }
 
-
-
-
-
-
-
-#'  \item Filter data by quality
+#' Filter data by quality
+#' @param climate_data
+#' @description Replace data with NA if it is of questionable quality.
+#' \itemize{ 
+#' 		\item Filter data by quality
 #' 		\itemize{
 #' 			\item replace data with NA if it is of questionable quality (see \code{Quality_Flag_Function} function for details)
 #' 			\item replace blank values (quality is okay) with "Okay"
 #' 			\item Replace -999 and blanks with NAs
 #' 		}
+#' }
+#' @export
 
-#--------------------------------------------------------------------------#
-# Filter data by quality
-#--------------------------------------------------------------------------#
-# replace data with NA if it is of questionable quality
 filterClimateDataByQuality <- function(climate_data) {
 	climate_data$PRCP <- with(
 		climate_data, 
@@ -299,20 +185,20 @@ filterClimateDataByQuality <- function(climate_data) {
 	return(climate_data)
 }
 
+#' Format and convert weather data
+#' @param climate_data
+#' @description For each location, compile weather data from the closest weather stations.
+#' \itemize{
+#' 	\item Format/convert weather data
+#' 	\itemize{
+#' 		\item convert tenths of Celcius to Celsius
+#' 		\item convert tenths of Celcius to Celsius
+#' 		\item convert PRCP (in tenths of mm) to cm
+#' 		\item replace NA for precip less than 0
+#' 	}
+#' }
+#' @export
 
-
-
-
-
-#------------------------------------- Format/convert weather data -------#
-#'  \item Format/convert weather data
-#' 		\itemize{
-#' 			\item convert tenths of Celcius to Celsius
-#' 			\item convert tenths of Celcius to Celsius
-#' 			\item convert PRCP (in tenths of mm) to cm
-#' 			\item replace NA for precip less than 0
-#' 		}
-	
 formatconvertClimateData <- function(climate_data) {
 	climate_data[,c(
 		"PRCP",
@@ -332,14 +218,13 @@ formatconvertClimateData <- function(climate_data) {
 	return(climate_data)
 }
 
+#' Find closest weather stations to each sampling location
+#' @description For each location, compile weather data from the closest weather stations.
+#' @param sites List of sampling locations with x, y coordinates.
+#' @param climate_data
+#' @param Distance Radius (km) within which to look for climate stations for a particular location. Defaults to 85 kilometers.
+#' @export
 
-
-
-
-
-	#-------------- Find closest weather stations to each sampling location -- #
-	sites <- Marsico.Florida.data.collection.site.location.summary
-	# distance - radius within which to look for nearby climate stations
 findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 	# merge sampling locations and weather station locations to calculate distance matrix (all pairwise distances among points)
 	A <- sites %>%
@@ -440,22 +325,12 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 	return(Dat)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#' Choose closest weather variable measurement for each Location/Date combo
+#' @description For each date and location, get weather data from the closest available weather station.
+#' @param Datalist Output (list format) from the \code{findClosestWeatherStations} function.
+#' @export
 
 getClimateDataByLocationDate <- function(Datalist) {
-	#Choose closest weather variable measurement for each Location/Date combo -#
 	X <- list()
 	# for each LOCATION
 	for (i in 1:length(Location_list)) {
@@ -560,33 +435,13 @@ getClimateDataByLocationDate <- function(Datalist) {
 	climate_data = do.call(rbind.fill, data.array2)
 }
 
+#' Calculate Growing Degree Days
+#' @description I used this website to calculate growing degree days: http://www.ipm.ucdavis.edu/WEATHER/ddretrievetext.html. This function merges them together with the \code{climate_data} dataframe.
+#' @param DegreeDay_list list of separate Degree Day files
+#' @param climate_data climate data
+#' @export
 
-
-
-
-
-
-
-
-
-
-
-
-
-############################################################################
-# calculate growing degree days
-############################################################################
-# used this website to calculate growing degree days: http://www.ipm.ucdavis.edu/WEATHER/ddretrievetext.html
-# merge UCD IPM files into one
-DegreeDay_list <- c(
-	"UCD.IPM.BLSPDegree.days",
-	"UCD.IPM.HBSPDegree.days",
-	"UCD.IPM.MexicoBeachDegree.days",
-	"UCD.IPM.NokuseDegree.days",
-	"UCD.IPM.SASPDegree.days",
-	"UCD.IPM.SweetwaterDegree.days"
-)
-calculateDegreeDays <- function(DegreeDay_list, climate_data) {
+calculateDegreeDays <- function(climate_data, DegreeDay_list) {
 	X <- list()
 	for (i in 1:length(DegreeDay_list)) {
 		X[[i]] <- eval(parse(text=DegreeDay_list[i]))
@@ -594,7 +449,7 @@ calculateDegreeDays <- function(DegreeDay_list, climate_data) {
 	DegreeDays <- do.call(rbind.fill, X)
 	DegreeDays$Date %<>% as.Date("%m/%d/%y")
 	DegreeDays.unique = unique(DegreeDays[, 1:4])
-	DegreeDays %>% filter(Date=="2014-01-17")
+	# DegreeDays %>% filter(Date=="2014-01-17")
 	DegreeDays.merged = merge(
 		DegreeDays.unique, 
 		climate_data, 

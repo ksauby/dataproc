@@ -1,5 +1,4 @@
 #' Rename Locations
-
 #' @param dat Dataframe
 #' @description Rename Mexico Beach, Nokuse, and Sweetwater in the dataset.
 #' @export
@@ -13,10 +12,7 @@ renameLocations <- function(dat) {
 	return(dat)
 }
 
-
-
 #' Calculate climate variables from weather data
-
 #' @param x survey data
 #' @param climate_data
 #' @param calculate_dates Default is \code{TRUE}. Either \code{x} is a dataframe of survey dates from which to calculate dates for climate variables or \code{x} is a list of pre-determined dates and their locations, in which case \code{calculate_dates} should be \code{FALSE}.
@@ -76,7 +72,7 @@ calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE") {
 			)
 		)
 	)
-	names(A)[((dim(A)[2] + 1) : (dim(A)[2] + length(Names))] <- Names
+	names(A)[ ((dim(A)[2] + 1) : (dim(A)[2] + length(Names)) ] <- Names
 	# for new plants, assign previous visit based on previous visit to location
 	# calculate climate variables
 	for (i in 1:dim(A)[1]) {
