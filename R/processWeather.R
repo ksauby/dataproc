@@ -24,9 +24,27 @@ Quality_Flag_Function <- function(x, y){
 #' @param x
 #' @export
 
-Replace_Blank_w_Okay_Function <- function(x){	
+Replace_Blank_w_Okay_Function <- function(x){
 	x[which(x==" ")] <- "Okay"
 	return(x)
+}
+
+#' Format Weather Station Info
+#' @param wstations List of weather stations, downloaded from the NOAA NCDC site
+#' @export
+
+formatWeatherStationInfo <- function(wstations) {
+	# create columns for Start and End Dates of Weather Station
+	wstations$Start_Date <- sub(" .*", "", 
+		wstations$Date_Range)
+	wstations$End_Date <- sub(".* ", "", 
+		wstations$Date_Range)
+	# filter dates to study dates
+	wstations %<>%
+		filter(Start_Date <= "2014-01-17", End_Date >= "2008-01-20") %>%
+		# merge with list of weather stations for which start/end date is not known
+		rbind(filter(wstations, Start_Date == "", End_Date >= ""))
+	return(wstations)
 }
 
 #' Merge Weather Data Files and Format Column Names

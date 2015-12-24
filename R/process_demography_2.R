@@ -123,22 +123,6 @@ determineInsectPresenceDuringStudy <- function(Plant_Surveys) {
 	Plant_Surveys %>% merge(Plant_Surveys.present, by="PlantID")
 }
 
-#' Assign the appropriate season for each sampling date
-#' @param Plant_Surveys
-#' @export
-
-assignSeason <- function(Plant_Surveys) {
-	Plant_Surveys$Year = year(Plant_Surveys$Date)
-	Plant_Surveys$Season = NA
-	Plant_Surveys[which(Plant_Surveys$Year==2012),]$Season <- 
-		getSeason2012(Plant_Surveys[which(Plant_Surveys$Year==2012),]$Date)
-	Plant_Surveys[which(Plant_Surveys$Year==2013),]$Season <- 
-		getSeason2013(Plant_Surveys[which(Plant_Surveys$Year==2013),]$Date)
-	Plant_Surveys[which(Plant_Surveys$Year==2014),]$Season <- 
-		getSeason2014(Plant_Surveys[which(Plant_Surveys$Year==2014),]$Date)
-	return(Plant_Surveys)
-}
-
 #' Rename Species levels
 #' @param Plant_Surveys
 #' @export
@@ -163,7 +147,7 @@ renameSpecies <- function(Plant_Surveys) {
 #' @param x
 #' @export
 
-Yes_No_from_1_0_Function <- function(x){	
+Yes_No_from_1_0_Function <- function(x){
 	x[x > 0] <- "Yes"
 	x[x == 0] <- "No"
 	return(x)

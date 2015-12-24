@@ -4,7 +4,7 @@
 \alias{KEStheme}
 \title{Publication-ready ggplot2 Theme}
 \usage{
-KEStheme(base_size = 10)
+KEStheme(base_size = 10, base_family = "")
 }
 \description{
 My personal ggplot2 theme.

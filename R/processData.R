@@ -144,30 +144,6 @@ processData <- function(dataset) {
 		as.POSIXct(format="%Y-%m-%d")
 	timeseries_all_surveys %<>% as.data.frame %>% assignSeason
 
-	timeseries_all_surveys %>% 
-		dplyr::select(Date, Season) %>% 
-		group_by(Date) %>%
-		summarise(
-			n.Seasons = length(unique(Season)), 
-			Season = Season[1]
-	)
-
-
-	timeseries$Season = "NA"
-	# function modified from http://stackoverflow.com/questions/9500114/find-which-season-a-particular-date-belongs-to
-	# solstice and equinox dates: http://en.wikipedia.org/wiki/Solstice
-	timeseries[which(timeseries$Year==2009),]$Season <- 
-		getSeason2009(timeseries[which(timeseries$Year==2009),]$Date)
-	timeseries[which(timeseries$Year==2010),]$Season <- 
-		getSeason2010(timeseries[which(timeseries$Year==2010),]$Date)
-	timeseries[which(timeseries$Year==2011),]$Season <- 
-		getSeason2011(timeseries[which(timeseries$Year==2011),]$Date)
-	timeseries[which(timeseries$Year==2012),]$Season <- 
-		getSeason2012(timeseries[which(timeseries$Year==2012),]$Date)
-	timeseries[which(timeseries$Year==2013),]$Season <- 
-		getSeason2013(timeseries[which(timeseries$Year==2013),]$Date)
-	timeseries[which(timeseries$Year==2014),]$Season <- 
-		getSeason2014(timeseries[which(timeseries$Year==2014),]$Date)
 	############################################################################
 	# Classify Surveys as Complete
 	############################################################################

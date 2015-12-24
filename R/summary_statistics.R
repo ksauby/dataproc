@@ -1,9 +1,29 @@
+#' Ifelse function that retains the original class of a variable
+#' @param cond
+#' @param yes
+#' @param no
+#' @description Retain the class of a variable when using ifelse. Copied from http://stackoverflow.com/questions/6668963/how-to-prevent-ifelse-from-turning-date-objects-into-numeric-objects.
+#' @export
+
+safe.ifelse <- function(cond, yes, no) {
+	structure(
+		ifelse(cond, yes, no), 
+		class = class(yes)
+	)
+}
+
 #' Return the maximum value of a vector, after removing NAs.
 #' @param x Vectors of data.
 #' @description Written for use in the tables::tabular function to create publication-ready tables.
 #' @export
 
-Maximum <- function(x) base::max(x, na.rm=TRUE)
+Maximum <- function(x) {
+	safe.ifelse(
+		!all(is.na(x)),
+		max(x, na.rm=TRUE),
+		NA
+	)
+}
 
 #' Return the mean of a vector with up to two decimal places, after removing NAs.
 #' @param x Vectors of data.
