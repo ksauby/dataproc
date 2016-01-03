@@ -74,3 +74,36 @@ removeData <- function(timeseries) {
 	timeseries <- rbind(timeseries_not_dead, timeseries_dead)
 	return(timeseries)
 }
+
+#' Keep USDA data
+#' 
+#' @description Save data on USDA managed plants including observations of the following plants after 2010-10-01 (first observed management by USDA on 2011-05-16):
+#' \itemize{
+#' 		\item HBSPOS10
+#' 		\item HBSPOS11
+#' 		\item HBSPOS12
+#' 		\item HBSPOS15
+#' 		\item HBSPOS16
+#' 		\item HBSPOS17
+#' 		\item HBSPOS18
+#' 		\item HBSPOS5
+#' }
+#' @param timeseries
+#' @export
+
+keepUSDAData <- function(timeseries) {
+	timeseries %<>% as.data.frame %>%
+		# not enough engelmannii observations for analysis
+		# remove surveys of these plants that occurred after 2011-05-16 because they were hacked by the USDA
+		filter( 
+			(PlantID == "HBSPOS10" & Date > "2010-10-01") |
+			(PlantID == "HBSPOS11" & Date > "2010-10-01") |
+			(PlantID == "HBSPOS12" & Date > "2010-10-01") |
+			(PlantID == "HBSPOS15" & Date > "2010-10-01") |
+			(PlantID == "HBSPOS16" & Date > "2010-10-01") |
+			(PlantID == "HBSPOS17" & Date > "2010-10-01") |
+			(PlantID == "HBSPOS18" & Date > "2010-10-01") |
+			(PlantID == "HBSPOS5" & Date > "2010-10-01") 
+		) 
+	return(timeseries)
+}

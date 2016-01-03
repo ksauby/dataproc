@@ -139,40 +139,48 @@ processData <- function(dataset) {
 	############################################################################
 	# SEASON
 	############################################################################
-	timeseries_all_surveys$Date %<>%
+	timeseries$Date %<>%
 		strptime("%Y-%m-%d") %>%
 		as.POSIXct(format="%Y-%m-%d")
-	timeseries_all_surveys %<>% as.data.frame %>% assignSeason
-
+	timeseries %<>% as.data.frame %>% assignSeason
+	timeseries$Date %<>% as.Date
 	############################################################################
 	# Classify Surveys as Complete
 	############################################################################
-	timeseries$complete_insect_surveys <- ifelse(rowSums(is.na(
-		timeseries[, .(ME_t, CA_t, CH_t, DA_t)]))==0, 1, 0
+	timeseries$complete_insect_surveys <- ifelse(
+		rowSums(
+			is.na(
+				timeseries[, c("ME_t", "CA_t", "CH_t", "DA_t")]
+			)
+		)==0, 1, 0
 	)
-	timeseries$complete_surveys <- ifelse(rowSums(is.na(
-		timeseries[, 
-		.(
-		# insects
-		ME_t,                
-		CA_t,
-		CH_t,
-		DA_t,
-		# number of segments
-		Size_t,
-		# flowers and fruit
-		Fruit_t
-		)]))==0, 1, 0
+	timeseries$complete_surveys <- ifelse(
+		rowSums(
+			is.na(
+				timeseries[, 
+					c(
+						# insects
+						"ME_t",                
+						"CA_t",
+						"CH_t",
+						"DA_t",
+						# number of segments
+						"Size_t",
+						# flowers and fruit
+						"Fruit_t"
+					)
+				]
+			)
+		)==0, 1, 0
 	)
 	############################################################################
 	# Calculate Volume
 	############################################################################
 	timeseries %<>% 
 		mutate(
-			# calculate volume
 			Cone_t = pi * (((Width_t)/4)^2) * Height_t / 3,
 			Cylinder_Tall_t = pi * ((Width_t/2)^2) * Height_t
-			)
+		)
 	############################################################################
 	#' Create PlantID2
 	############################################################################
@@ -348,8 +356,7 @@ processData <- function(dataset) {
 			"TSPOH20"
 		)
 	)	
-	levels(timeseries$PlantID2) <- 
-	c(
+	levels(timeseries$PlantID2) <- c(
 		paste("BLSP", 1:20),
 		paste("HBSP", 1:18),
 		paste("HBSP", 1:19),

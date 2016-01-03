@@ -112,24 +112,42 @@ sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all"
 				substring(Variable, 4),
 				Variable
 			)
+		) %>%
+		# ^2
+		mutate(
+			Factor1 = ifelse(
+				substrRight(Variable,3)=="sqr",
+				paste(Factor1, "(^2)"),
+				Factor1
+			),
+			Factor2 = ifelse(
+				substrRight(Variable,3)=="sqr",
+				paste(Factor2, "(^2)"),
+				Factor2
+			),
+			Variable = ifelse(
+				substrRight(Variable,3)=="sqr",
+				substr(Variable, 1, nchar(Variable)-3),
+				Variable
+			)
 		)
-		# filter out NAs
-		if (dim(Y[which(grepl("NA", Y$Factor2)==TRUE), ])[1] > 0) {
-			Y[which(grepl("NA", Y$Factor2)==TRUE), ]$Factor2 <- NA
-		}
+	# filter out NAs
+	if (dim(Y[which(grepl("NA", Y$Factor2)==TRUE), ])[1] > 0) {
+		Y[which(grepl("NA", Y$Factor2)==TRUE), ]$Factor2 <- NA
+	}
 	temp <- dcast(Y, Rotated + modelVars ~ Variable, value.var="Factor1") %>%
 		mutate(Number = 1)
 	Z <- dcast(Y, Rotated + modelVars ~ Variable, value.var="Factor2") %>%
 		mutate(Number = 2) %>%
 		merge(temp, all=T) %>%
-		mutate(		
+		mutate(
 			Species = factor(ifelse(
-				substr(modelVars,1,7) == "HUMIFUS",
+				grepl("HUMIFUS", modelVars),
 				"O. humifusa",
 				"O. stricta"
 			)),
 			Weather = factor(ifelse(
-				str_sub(modelVars, -4, -1) == "ECIP",
+				grepl("ECIP", modelVars),
 				"Precipitation",
 				"Temperature"
 			))

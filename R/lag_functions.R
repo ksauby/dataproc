@@ -80,6 +80,28 @@ lag_insects_yr_function <- function(x=x){
 }
 
 
+#' Calculate size variables at the previous time step
+#' @param x
+#' @description calculate lag size and fruit.
+#' @export
+
+lag_size_function <- function(x=x){
+	x %>% 
+		arrange(Date) %>%
+		group_by(PlantID) %>%
+		mutate(
+			# size
+			Size_t_1 			= c(NA, Size_t[-length(Size_t)]),
+			Height_t_1 			= c(NA, Height_t[-length(Height_t)]),
+			Cone_t_1 			= c(NA, Cone_t[-length(Cone_t)]),
+			Cylinder_Tall_t_1 	= c(NA, Cylinder_Tall_t[-length(Cylinder_Tall_t)]),
+			# fruit
+			Fruit_t_1 			= c(NA, Fruit_t[-length(Fruit_t)]),
+			FruitPres_t_1 		= c(NA, FruitPres_t[-length(FruitPres_t)])
+		)
+}
+
+
 #' Calculate size and fruit production variables at the previous time step
 #' @param x
 #' @description calculate lag size and fruit.
@@ -87,17 +109,16 @@ lag_insects_yr_function <- function(x=x){
 
 lag_size_fruit_function <- function(x=x){
 	x %>% 
-		arrange(Date) %>%
+		arrange(ObsYear) %>%
 		group_by(PlantID) %>%
 		mutate(
 			# size
-			Size_t_1 			= c(NA, head(Size_t, -1)),
-			Height_t_1 			= c(NA, head(Height_t, -1)),
-			Cone_t_1 			= c(NA, head(Cone_t, -1)),
-			Cylinder_Tall_t_1 	= c(NA, head(Cylinder_Tall_t, -1)),
+			Size_max_t_1 			= c(NA, Size_t_max[-length(Size_t_max)]),
+			Cone_max_t_1 			= c(NA, Cone_t_max[-length(Cone_t_max)]),
+			Cylinder_Tall_max_t_1 	= c(NA, Cylinder_Tall_t_max[-length(Cylinder_Tall_t_max)]),
 			# fruit
-			Fruit_t_1 			= c(NA, head(Fruit_t, -1)),
-			FruitPres_t_1 		= c(NA, head(FruitPres_t, -1))
+			Fruit_t_1 			= c(NA, Fruit_t[-length(Fruit_t)]),
+			FruitPres_t_1 		= c(NA, FruitPres_t[-length(FruitPres_t)])
 		)
 }
 

@@ -4,10 +4,40 @@
 #' @export
 
 process_precip_PCA_data <- function(data) {
+	data$Location %<>% factor
 	data$Date %<>% as.Date
 	data %>%
 		setnames("Factor1", "P1") %>%
 		setnames("Factor2", "P2") %>%
-		as.data.frame %>%
-		select(-c(A1, A2, B, C1, C2, C3, D1, D2, D3))
+		as.data.frame
+}
+
+#' Process Fall/Winter PCA Precipitation data before merging with survey data.
+#' @param x Output PCA data (from SAS).
+#' @description For use with SAS data.
+#' @export
+
+process_FWprecip_PCA_data <- function(data) {
+	data %<>% mutate(ObsYear = year(Date) - 1)
+	data$Location %<>% factor
+	data$Date %<>% as.Date
+	data %>%
+		setnames("Factor1", "P1.FW") %>%
+		setnames("Factor2", "P2.FW") %>%
+		as.data.frame
+}
+
+#' Process Spring/Summer PCA Precipitation data before merging with survey data.
+#' @param x Output PCA data (from SAS).
+#' @description For use with SAS data.
+#' @export
+
+process_SSprecip_PCA_data <- function(data) {
+	data %<>% mutate(ObsYear = year(Date))
+	data$Location %<>% factor
+	data$Date %<>% as.Date
+	data %>%
+		setnames("Factor1", "P1.SS") %>%
+		setnames("Factor2", "P2.SS") %>%
+		as.data.frame
 }
