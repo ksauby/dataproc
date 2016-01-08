@@ -22,8 +22,8 @@ process_FWprecip_PCA_data <- function(data) {
 	data$Location %<>% factor
 	data$Date %<>% as.Date
 	data %>%
-		setnames("Factor1", "P1.FW") %>%
-		setnames("Factor2", "P2.FW") %>%
+		setnames("Factor1", "P1_FW") %>%
+		setnames("Factor2", "P2_FW") %>%
 		as.data.frame
 }
 
@@ -37,7 +37,7 @@ process_SSprecip_PCA_data <- function(data) {
 	data$Location %<>% factor
 	data$Date %<>% as.Date
 	data %>%
-		setnames("Factor1", "P1.SS") %>%
-		setnames("Factor2", "P2.SS") %>%
+		setnames("Factor1", "P1_SS") %>%
+		setnames("Factor2", "P2_SS") %>%
 		as.data.frame
 }

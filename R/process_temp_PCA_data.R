@@ -22,8 +22,8 @@ process_FWtemp_PCA_data <- function(data) {
 	data$Date %<>% as.Date
 	data$Location %<>% factor
 	data %>%
-		setnames("Factor1", "T1.FW") %>%
-		setnames("Factor2", "T2.FW") %>%
+		setnames("Factor1", "T1_FW") %>%
+		setnames("Factor2", "T2_FW") %>%
 		as.data.frame
 }
 
@@ -37,7 +37,7 @@ process_SStemp_PCA_data <- function(data) {
 	data$Date %<>% as.Date
 	data$Location %<>% factor
 	data %>%
-		setnames("Factor1", "T1.SS") %>%
-		setnames("Factor2", "T2.SS") %>%
+		setnames("Factor1", "T1_SS") %>%
+		setnames("Factor2", "T2_SS") %>%
 		as.data.frame
 }

@@ -114,6 +114,7 @@ lag_size_fruit_function <- function(x=x){
 		mutate(
 			# size
 			Size_max_t_1 			= c(NA, Size_t_max[-length(Size_t_max)]),
+			Size_min_t_1 			= c(NA, Size_t_min[-length(Size_t_min)]),
 			Cone_max_t_1 			= c(NA, Cone_t_max[-length(Cone_t_max)]),
 			Cylinder_Tall_max_t_1 	= c(NA, Cylinder_Tall_t_max[-length(Cylinder_Tall_t_max)]),
 			# fruit
