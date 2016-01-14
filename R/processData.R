@@ -14,7 +14,7 @@
 #'  \item calculate plant volume
 #' 	\item create PlantID2
 #' }
-#' @param dataset
+#' @param dataset Dataset
 #' @export
 
 processData <- function(dataset) {

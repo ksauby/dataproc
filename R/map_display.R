@@ -1,4 +1,5 @@
 #' Create an Orientation Arrow
+#' 
 #' @description Returns a list containing:
 #' res : coordinates to draw an arrow
 #' coordinates of the middle of the arrow (where the "N" will be plotted)
@@ -38,6 +39,7 @@ createOrientationArrow <- function(scaleBar, length, distance = 1, dist.units = 
 }
 
 #' Create a Scale Bar for a ggmap
+#' 
 #' @description Return a list whose elements are:
 #' rectangle - a data.frame containing the coordinates to draw the first rectangle
 #' rectangle2 - a data.frame containing the coordinates to draw the second rectangle

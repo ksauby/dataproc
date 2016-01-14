@@ -6,7 +6,7 @@
 #'  \item lagged insect presence
 #'  \item relative growth rate
 #' }
-#' @param timeseries
+#' @param timeseries Dataset
 #' @export
 
 createAllSurveysDataset <- function(timeseries) {
@@ -34,7 +34,7 @@ createAllSurveysDataset <- function(timeseries) {
 #'  \item Year 4 - Spring, Summer, Fall, Winter 2012, Winter 2013
 #'	\item Year 5 - Spring, Summer, Fall, Winter 2013, Winter 2014
 #' }
-#' @param timeseries
+#' @param timeseries Dataset
 #' @export
 
 createObsYear <- function(timeseries) {
@@ -146,7 +146,7 @@ createObsYear <- function(timeseries) {
 #'  \item calculate maximum and minimum plant size and volume
 #'  \item determine if surveys were complete for the entire year (no missing information)
 #' }
-#' @param timeseries
+#' @param timeseries Dataset
 #' @export
 
 createFruitYearDataset <- function(timeseries) {
@@ -180,5 +180,6 @@ createFruitYearDataset <- function(timeseries) {
 			complete_surveys		= min(complete_surveys)
 		) %>%
 	# lag variables
-	lag_size_fruit_function
+	lag_size_fruit_function %>%
+	lag_insects_fecundity_function
 }

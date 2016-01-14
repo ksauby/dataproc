@@ -1,7 +1,9 @@
 #' arrange multiple ggplots into one window
-#' @param nrow=NULL
-#' @param ncol=NULL
-#' @param as.table=FALSE
+#' 
+#' @param nrow Number of rows of plots. Defaults to \codce{NULL}.
+#' @param ncol Number of columns of plots. Defaults to \codce{NULL}.
+#' @param as.table I don't remember what this means. Defaults to \codce{NULL}.
+#' @description Arrange multiple ggplot figures in one window.
 #' @export
 
 arrange_ggplot2 <- function(..., nrow=NULL, ncol=NULL, as.table=FALSE) {
@@ -27,8 +29,8 @@ pushViewport(viewport(layout=grid.layout(nrow,ncol) ) )
 }
 
 #' Layout
-#' @param x
-#' @param y
+#' @param x number of rows ?
+#' @param y Number of columns
 #' @export
 vp.layout <- function(x, y) {
 	viewport(layout.pos.row=x, layout.pos.col=y)

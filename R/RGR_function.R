@@ -1,5 +1,5 @@
 #' Calculate Relative Growth Rate
-#' @param x
+#' @param x Dataset to which RGR variables should be added.
 #' @description formula for relative growth rate is from Paine, C. E. T., Marthews, T. R., Vogt, D. R., Purves, D., Rees, M., Hector, A., & Turnbull, L. A. (2011). How to fit nonlinear plant growth models and calculate growth rates: an update for ecologists. Methods in Ecology and Evolution, no–no. doi:10.1111/j.2041-210X.2011.00155.x
 
 #' absolute growth rate (AGR) is the derivative with respect to time of the function used to predict biomass, and RGR is simply AGR divided by the current biomass
@@ -11,6 +11,9 @@
 
 #' scale by DaysSincePrevTime
 #' @export
+#' @importFrom dplyr mutate
+#' @import magrittr
+#' @import data.table
 
 RGR_function <- function(x=x){
 	x %<>% mutate(

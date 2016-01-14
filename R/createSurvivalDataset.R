@@ -17,7 +17,7 @@
 #'  \item summarize whether plant was every infested with an insect
 #'  \item summarize whether a plant died during the study
 #' }
-#' @param timeseries
+#' @param timeseries Dataset
 #' @export
 
 createSurvivalDataset <- function(timeseries) {

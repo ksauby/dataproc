@@ -1,40 +1,43 @@
 #'  PCA Plotting Function
-#' @param DATES
-#' @param pcobj
-#' @param choices = 1:2
-#' @param scale = 1
-#' @param pc.biplot = TRUE
-#' @param obs.scale = 1 - scale
-#' @param var.scale = scale
-#' @param groups = NULL
-#' @param ellipse = FALSE
-#' @param ellipse.prob = 0.68
-#' @param labels = NULL
-#' @param labels.size = 3
-#' @param alpha = 1
-#' @param var.axes = TRUE
-#' @param circle = FALSE
-#' @param circle.prob = 0.69
-#' @param varname.size = 3
-#' @param varname.adjust = 1.5
-#' @param varname.abbrev = FALSE
-#' @param color = muted("red")# <- add new arguments to the function
-#' @param linetype = "solid"
-#' @param alpha_arrow = 1
-#' @param unit.circle.color=muted("white")
-#' @param varname.color = "darkred"
-#' @param point.size=1
-#' @param line.size=line.size
-#' @param scale_shape_manual = scale_shape_manual
-#' @param scale_linetype_manual = scale_linetype_manual
-#' @param axis.text.size = 15
-#' @param axis.title.size = 20
-#' @param xlim = xlim
-#' @param ylim = ylim
-#' @param border.size=2
-#' @param point.color="black"
-#' @param pct_x_buffer=0.5
-#' @param pct_y_buffer=0.5
+#' @param DATES I don't remember what this is
+#' @param pcobj PCA objects?
+#' @param choices Defaults to \code{1:2}
+#' @param scale Defaults to \code{1}
+#' @param pc.biplot Defaults to \code{TRUE}
+#' @param obs.scale Defaults to \code{1 - scale}
+#' @param var.scale Defaults to \code{scale}
+#' @param groups Defaults to \code{NULL}
+#' @param ellipse Defaults to \code{FALSE}
+#' @param ellipse.prob Defaults to \code{0.68}
+#' @param labels Defaults to \code{NULL}
+#' @param labels.size Defaults to \code{3}
+#' @param alpha Defaults to \code{1}
+#' @param var.axes Defaults to \code{TRUE}
+#' @param circle Defaults to \code{FALSE}
+#' @param circle.prob Defaults to \code{0.69}
+#' @param varname.size Defaults to \code{3}
+#' @param varname.adjust Defaults to \code{1.5}
+#' @param varname.abbrev Defaults to \code{FALSE}
+#' @param color Defaults to \code{muted("red")# <- add new arguments to the function
+#' @param linetype Defaults to \code{"solid"}
+#' @param alpha_arrow Defaults to \code{1}
+#' @param unit.circle.color Defaults to \code{muted("white")}
+#' @param varname.color Defaults to \code{"darkred"}
+#' @param point.size Defaults to \code{1}
+#' @param line.size Defaults to \code{line.size}
+#' @param scale_shape_manual Defaults to \code{scale_shape_manual}
+#' @param scale_linetype_manual Defaults to \code{scale_linetype_manual}
+#' @param axis.text.size Defaults to \code{15}
+#' @param axis.title.size Defaults to \code{20}
+#' @param xlim Defaults to \code{xlim}
+#' @param ylim Defaults to \code{ylim}
+#' @param border.size Defaults to \code{2}
+#' @param point.color Defaults to \code{"black"}
+#' @param pct_x_buffer Defaults to \code{0.5}
+#' @param pct_y_buffer Defaults to \code{0.5}
+#' @importFrom ggplot2 geom_path
+#' @importFrom ggplot2 geom_segment
+#' @importFrom ggplot2 geom_text
 
 # @references edited from http://stackoverflow.com/questions/18039313/pca-scaling-with-ggbiplot, accessed 18 Sept. 15
 #' @export
@@ -78,10 +81,6 @@ ggbiplot2 <- function (
 	pct_y_buffer=0.5
 ) 
 {
-    library(ggplot2)
-    library(plyr)
-    library(scales)
-    library(grid)
     stopifnot(length(choices) == 2)
     if (inherits(pcobj, "prcomp")) {
         nobs.factor <- sqrt(nrow(pcobj$x) - 1)

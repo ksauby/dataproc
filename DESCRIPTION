@@ -2,18 +2,22 @@ Package: dataproc
 Title: Data processing functions.
 Version: 0.0.0.9000
 Authors@R: person("Kristen", "Sauby", email = "ksauby@gmail.com", role = c("aut", "cre"))
-Description: Data processing and other miscellaneous functions (personal R package).
-Depends: R (>= 3.2.2),
-	dplyr,
+Description: Data processing and other miscellaneous functions (personal R
+    package).
+Depends:
+    R (>= 3.2.2),
+    dplyr,
     magrittr,
     data.table,
     reshape2
 License: What license is it under?
 LazyData: true
-Imports: 
+Imports:
     dplyr,
     magrittr,
     utils,
     data.table,
     reshape2
-Suggests: testthat
+Suggests:
+    testthat
+RoxygenNote: 5.0.1

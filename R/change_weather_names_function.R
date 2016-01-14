@@ -1,5 +1,7 @@
 #' Abbreviate weather variable names
-#' @param y
+#' 
+#' @param y Dataset
+#' @description Abbreviate weather variable names
 #' @export
 
 change_weather_names_function1 <- function(y) {	
@@ -25,7 +27,9 @@ change_weather_names_function1 <- function(y) {
 }
 
 #' Abbreviate weather variable names to two characters
-#' @param y
+#' 
+#' @param y Dataset
+#' @description Abbreviate weather variable names to two characters
 #' @export
 
 change_weather_names_function2 <- function(y) {	
@@ -83,7 +87,9 @@ change_weather_names_function2 <- function(y) {
 }
 
 #' Abbreviate weather variable names
-#' @param y
+#' 
+#' @param y Dataset
+#' @description Abbreviate weather variable names
 #' @export
 
 change_weather_names_function3 <- function(y) {	

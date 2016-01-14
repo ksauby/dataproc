@@ -1,6 +1,7 @@
 #' Merge Plants from Multiple Plots
+#' 
 #' @description Only merge data collected on the same day. Merge survey data for individual plants in more than one plot. Then combine back into one file with surveys of plants in only one plot.
-#' @param Plant_Surveys
+#' @param Plant_Surveys Plant survey dataset
 #' @export
 
 mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {

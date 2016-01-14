@@ -1,9 +1,10 @@
 #' Calculate lag dates: Previous_Survey_Date, DaysSincePrevSurvey, DaysSinceStart
-#' @param x
+#' 
+#' @param x Dataset
 #' @description calculate lag dates.
 #' @importFrom utils head
-#' @export
 #' @import chron
+#' @export
 
 lag_dates_function <- function(x){
 	# print warning about duplicates in the dataset
@@ -31,7 +32,8 @@ lag_dates_function <- function(x){
 }
 
 #' Calculate insect presence at previous time step
-#' @param x
+#' 
+#' @param x Dataset
 #' @description calculate lag insects.
 #' @export
 
@@ -56,7 +58,8 @@ lag_insects_function <- function(x=x){
 
 
 #' Calculate insect presence during the previous year
-#' @param x
+#' 
+#' @param x Dataset
 #' @description calculate lag insects during the previous year.
 #' @export
 
@@ -81,7 +84,8 @@ lag_insects_yr_function <- function(x=x){
 
 
 #' Calculate size variables at the previous time step
-#' @param x
+#' 
+#' @param x Dataset
 #' @description calculate lag size and fruit.
 #' @export
 
@@ -103,7 +107,8 @@ lag_size_function <- function(x=x){
 
 
 #' Calculate size and fruit production variables at the previous time step
-#' @param x
+#' 
+#' @param x Dataset
 #' @description calculate lag size and fruit.
 #' @export
 
@@ -123,8 +128,34 @@ lag_size_fruit_function <- function(x=x){
 		)
 }
 
+#' Calculate insect presence at previous time step for fecundity data
+#' 
+#' @param x Dataset
+#' @description calculate lag insects.
+#' @export
+
+lag_insects_fecundity_function <- function(x=x){
+	x %>% 
+		arrange(ObsYear) %>%
+		group_by(PlantID) %>%
+		mutate(
+			# new insect variables
+			Insect_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
+			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
+			# lagged insects
+			CA_t_1 		= c(NA, head(CA_t, -1)),
+			ME_t_1 		= c(NA, head(ME_t, -1)),
+			CH_t_1 		= c(NA, head(CH_t, -1)),
+			DA_t_1 		= c(NA, head(DA_t, -1)),
+			Insect_t_1 		= c(NA, head(Insect_t, -1)),
+			NatInsect_t_1 	= c(NA, head(NatInsect_t, -1))
+		) %>%
+		as.data.frame
+}
+
 #' Calculate size and fruit production variables at the previous time step
-#' @param x
+#' 
+#' @param x Dataset
 #' @description calculate lag size and fruit.
 #' @export
 

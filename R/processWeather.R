@@ -1,4 +1,5 @@
 #' Filter Data by Quality Flag
+#' 
 #' @description If the quality flag from a NOAA dataset is G, I, K, L, N, O, then change the weather value to "NA"
 #' Table 2 (Quality Flag/Attribute) from the NOAA documentation:
 #' \itemize{
@@ -10,8 +11,8 @@
 #'  \item N = failed naught check
 #'  \item O = failed climatological outlier check
 #' 	}
-#' @param x
-#' @param y
+#' @param x Dataset with which to evaluate quality
+#' @param y Dataset containing quality information
 #' @export
 #' @importFrom dplyr select
 
@@ -21,7 +22,8 @@ Quality_Flag_Function <- function(x, y){
 }
 
 #' Replace blank values (quality is okay) with "Okay"
-#' @param x
+#' 
+#' @param x Dataset
 #' @export
 
 Replace_Blank_w_Okay_Function <- function(x){
@@ -30,6 +32,7 @@ Replace_Blank_w_Okay_Function <- function(x){
 }
 
 #' Format Weather Station Info
+#' 
 #' @param wstations List of weather stations, downloaded from the NOAA NCDC site
 #' @export
 
@@ -48,7 +51,8 @@ formatWeatherStationInfo <- function(wstations) {
 }
 
 #' Merge Weather Data Files and Format Column Names
-#' @param climate_data
+#' 
+#' @param climate_data Climate dataset
 #' @description For each variable, NOAA uses generic column names "Measurement.Flag", "Quality.Flag", "Source.Flag", "Time.of.Observation" to ensure that the appropriate columns are merged together. This function renames these columns by pasting the name with the name of the variable to which it refers e.g., the "Measurement.Flag" column directly after "PRCP" will become "PRCP.Measurement.Flag" for each weather variable, take weather variable name and paste it to the names of the 4 following columns.
 #' @export
 
@@ -145,7 +149,8 @@ mergeClimateFiles <- function(climate_file_names) {
 }
 
 #' Filter data by quality
-#' @param climate_data
+#' 
+#' @param climate_data Climate dataset
 #' @description Replace data with NA if it is of questionable quality.
 #' \itemize{ 
 #' 		\item Filter data by quality
@@ -204,7 +209,8 @@ filterClimateDataByQuality <- function(climate_data) {
 }
 
 #' Format and convert weather data
-#' @param climate_data
+#' 
+#' @param climate_data Climate dataset
 #' @description For each location, compile weather data from the closest weather stations.
 #' \itemize{
 #' 	\item Format/convert weather data
@@ -237,9 +243,10 @@ formatconvertClimateData <- function(climate_data) {
 }
 
 #' Find closest weather stations to each sampling location
+#' 
 #' @description For each location, compile weather data from the closest weather stations.
 #' @param sites List of sampling locations with x, y coordinates.
-#' @param climate_data
+#' @param climate_data Climate dataset
 #' @param Distance Radius (km) within which to look for climate stations for a particular location. Defaults to 85 kilometers.
 #' @export
 
@@ -344,6 +351,7 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 }
 
 #' Choose closest weather variable measurement for each Location/Date combo
+#' 
 #' @description For each date and location, get weather data from the closest available weather station.
 #' @param Datalist Output (list format) from the \code{findClosestWeatherStations} function.
 #' @export
@@ -454,9 +462,10 @@ getClimateDataByLocationDate <- function(Datalist) {
 }
 
 #' Calculate Growing Degree Days
+#' 
 #' @description I used this website to calculate growing degree days: http://www.ipm.ucdavis.edu/WEATHER/ddretrievetext.html. This function merges them together with the \code{climate_data} dataframe.
 #' @param DegreeDay_list list of separate Degree Day files
-#' @param climate_data climate data
+#' @param climate_data Climate dataset
 #' @export
 
 calculateDegreeDays <- function(climate_data, DegreeDay_list) {

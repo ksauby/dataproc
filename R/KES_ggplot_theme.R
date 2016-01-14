@@ -1,5 +1,7 @@
 #' Publication-ready ggplot2 Theme
 #' @description My personal ggplot2 theme.
+#' @param base_size Base font size. Defaults to 10.
+#' @param base_family Defaults to default.
 #' @export
 
 KEStheme <- function(base_size = 10, base_family = "") {

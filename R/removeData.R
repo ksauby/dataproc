@@ -23,7 +23,7 @@
 #' 		}
 #'  \item duplicate observations of dead plants
 #' }
-#' @param timeseries
+#' @param timeseries Dataset of plant surveys
 #' @export
 
 removeData <- function(timeseries) {
@@ -88,7 +88,7 @@ removeData <- function(timeseries) {
 #' 		\item HBSPOS18
 #' 		\item HBSPOS5
 #' }
-#' @param timeseries
+#' @param timeseries Dataset of plant surveys
 #' @export
 
 keepUSDAData <- function(timeseries) {
