@@ -1,6 +1,8 @@
 #' Build a table of PCA results.
+#'
 #' @param x output of the \code{prcomp} function.
-#' Label to append to PC 1 and PC 2 column headers; particularly useful if one wants to display data from multiple PCAs.
+#' @description Label to append to PC 1 and PC 2 column headers; particularly useful if one wants to display data from multiple PCAs.
+#'
 #' @export
 #' @import data.table
 

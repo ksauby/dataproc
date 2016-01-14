@@ -6,6 +6,9 @@
 \usage{
 removeData(timeseries)
 }
+\arguments{
+\item{timeseries}{Dataset of plant surveys}
+}
 \description{
 Remove from the dataset:
 \itemize{

@@ -1,4 +1,5 @@
 #' Combine PCA results from SAS into a table
+#'
 #' @param eigens SAS output of eigenvalues and variance explained
 #' @param factors SAS output of factor pattern
 #' @param rfactors SAS output of rotated factor pattern
@@ -6,12 +7,12 @@
 #' @param round_n Default value is 3.
 #' @param n.axes Default value is 2.
 #' @description Process PCA results from SAS.
+#'
 #' @export
 #' @importFrom magrittr %>% %<>% %$%
 #' @importFrom dplyr filter mutate arrange summarise desc select
 #' @importFrom plyr rbind.fill
 #' @importFrom reshape2 dcast
-#' @export
 
 sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all", round_n=3, n.axes=2) {
 	# which models are NOT in the rotated factor pattern data? merge them with the rotated factor pattern data
@@ -168,8 +169,10 @@ sas_PCA_table_function <- function(eigens, factors, rfactors, dataset_type="all"
 }
 
 #' Move certain columns to the end of a dataframe
-#' @param data
-#' @param move
+#'
+#' @param data Dataset
+#' @param move Variable to move? number of places to move?
+#'
 #' @export
 movetolast <- function(data, move) {
   data[c(setdiff(names(data), move), move)]

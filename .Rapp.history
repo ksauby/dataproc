@@ -110,900 +110,104 @@ dat = data.frame(#
             (0:10)*30, format="%Y-%m-%d" ))#
     )#
     dat %>% assignSeason
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-library(ProjectTemplate)#
-setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
-# load project#
-load.project()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries <- processData(timeseries.25Jan2015JK.mod)#
-timeseries <- removeData(timeseries)#
-#
-# climate_data <- processWeather()#
-#
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival	 	<- createSurvivalDataset(timeseries)#
-#
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
-#
-timeseries_survival_humifusa = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-#
-################################################################################
-# timeseries_winter#
-################################################################################
-timeseries_winter <- createFallWinterSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-write.csv(timeseries_winter, "./data/timeseries_winter.csv")#
-#
-################################################################################
-# timeseries_spring#
-################################################################################
-timeseries_spring <- createSpringSummerSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")#
-write.csv(timeseries_spring, "./data/timeseries_spring.csv")
+library(devtoolks)
+library(devtools)
+?install_github
+devtools::install_github("ksauby/ACSampling", auth_token="2ab30a602e52fae481f4249cc25e892c0a9ccfc7", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
+devtools::install_github("ksauby/ACSampling", auth_token="2794c3f10db92f525181a0b1f6c19064fe3a2ef3", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
+devtools::install("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="~/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+library(devtools)
+devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
+install.packages("devtools")
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./dataproc")#
 #setwd("./modresproc")#
 devtools::document()#
 devtools::install()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries <- processData(timeseries.25Jan2015JK.mod)#
-timeseries <- removeData(timeseries)#
-#
-# climate_data <- processWeather()#
-#
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival	 	<- createSurvivalDataset(timeseries)#
-#
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
-#
-timeseries_survival_humifusa = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-#
-################################################################################
-# timeseries_winter#
-################################################################################
-timeseries_winter <- createFallWinterSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-write.csv(timeseries_winter, "./data/timeseries_winter.csv")#
-#
-################################################################################
-# timeseries_spring#
-################################################################################
-timeseries_spring <- createSpringSummerSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")#
-write.csv(timeseries_spring, "./data/timeseries_spring.csv")
-library(dataproc)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries <- processData(timeseries.25Jan2015JK.mod)#
-timeseries <- removeData(timeseries)#
-#
-# climate_data <- processWeather()#
-#
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival	 	<- createSurvivalDataset(timeseries)#
-#
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
-#
-timeseries_survival_humifusa = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-#
-################################################################################
-# timeseries_winter#
-################################################################################
-timeseries_winter <- createFallWinterSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-write.csv(timeseries_winter, "./data/timeseries_winter.csv")#
-#
-################################################################################
-# timeseries_spring#
-################################################################################
-timeseries_spring <- createSpringSummerSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")#
-write.csv(timeseries_spring, "./data/timeseries_spring.csv")
-dataset <- timeseries.25Jan2015JK.mod
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-timeseries <- dataset %>% as.data.table#
-	# rename Mexico Beach and Sweetwater#
-	timeseries[Location == "MexicoBeach", 	Location := "MB"]#
-	timeseries[Location == "Sweetwater", 	Location := "TSP"]#
-	timeseries[Location == "Nokuse",	 	Location := "N"]#
-	# create unique PlantID variable#
-	timeseries %<>% mutate(PlantID = paste(Location, ID, sep=""))#
-	# remame column namesnames#
-	timeseries %<>%#
-		setnames("Height", "Height_t") %>%#
-		setnames("Pads", "Size_t") %>%#
-		setnames("MEPR", "ME_t") %>%#
-		setnames("CACA", "CA_t") %>%#
-		setnames("DACT", "DA_t") %>%#
-		setnames("CHVI", "CH_t") %>%#
-		setnames("Width", "Width_t") %>%#
-		setnames("Fruit", "Fruit_t")#
-	# Rename Species factor labels#
-	timeseries[Species == "humifusa", Species := "Opuntia humifusa"]#
-	timeseries[Species == "stricta", Species := "Opuntia stricta"]#
-	# format as factor#
-	timeseries$Location %<>% as.factor#
-	timeseries$Species %<>% as.factor#
-	# Change Zeros to NAs#
-		# timeseries[timeseries$PlantSize_t==0, ]#
-		# timeseries[timeseries$PlantHeight_t==0, ]#
-		# timeseries[timeseries$Width_t==0, ]#
-#
-		# There should never be observations of 0 pads, 0 height, or 0 width#
-		# replace 0 with NA#
-	cnames <- c("Size_t", "Height_t", "Width_t")#
-	for (cname in cnames) {#
-		timeseries[, cname := Zero_is_NA_Function(timeseries[[cname]]), with=FALSE]#
-	}#
-	#############################################################################
-	# Process TIME#
-	#############################################################################
-	timeseries$Date %<>% as.Date("%m/%d/%y")#
-	timeseries %<>% #
-		mutate(#
-			Month 			= month(Date),#
-			MonthYear 		= as.character(as.yearmon(Date)),#
-			DaysSinceStart 	= as.numeric(Date - min(Date)),#
-			VisitNum 		= 0#
-		)	 #
-	########################## ERROR MESSAGE#
-	# check first duplicate data entries#
-	dups <- timeseries %>% #
-		group_by(Location, ID, Date) %>%#
-		summarise(n.obs = length(Species)) %>%#
-		filter(n.obs > 1)#
-#
-	if (dim(dups)[1] > 0) {#
-			stop("Duplicates observations for a PlantID, Date combination are #
-				present in the dataset.")#
-	}#
-	#--------------------------------------------------------------------------##
-	# create "Visit Number" field#
-	#--------------------------------------------------------------------------##
-	timeseries[Date >= "2009-01-21" & Date <= "2009-01-26", VisitNum := 1]#
-	timeseries[Date >= "2009-04-25" & Date <= "2009-04-30", VisitNum := 2]#
-	timeseries[Date >= "2009-07-23" & Date <= "2009-07-28", VisitNum := 3]#
-	timeseries[Date >= "2009-10-23" & Date <= "2009-10-28", VisitNum := 4]#
-	timeseries[Date >= "2010-05-14" & Date <= "2010-05-19", VisitNum := 5]#
-	timeseries[Date >= "2010-11-15" & Date <= "2010-11-20", VisitNum := 6]#
-	timeseries[Date >= "2011-05-12" & Date <= "2011-05-17", VisitNum := 7]#
-	timeseries[Date >= "2011-12-15" & Date <= "2012-01-17", VisitNum := 8]#
-	timeseries[Date >= "2012-05-13" & Date <= "2012-05-16", VisitNum := 9]#
-	timeseries[Date >= "2012-12-14" & Date <= "2012-12-19", VisitNum := 10]#
-	timeseries[Date >= "2013-05-18" & Date <= "2013-05-23", VisitNum := 11]#
-	timeseries[Date >= "2014-01-12" & Date <= "2014-01-17", VisitNum := 12]#
-	########################## ERROR MESSAGE#
-	# check for erroneous dates#
-	date_errors <- filter(timeseries, VisitNum=="0")#
-	# timeseries <- timeseries[which(timeseries$VisitNum!="0"), ]#
-	if (dim(date_errors)[1] > 0) {#
-			stop("At least one observation was given a visit number of 0.")#
-	}#
-	#############################################################################
-	# Fruit Presence#
-	#############################################################################
-	# make FruitPres variable#
-	timeseries %<>% #
-		mutate(FruitPres_t = ifelse(Fruit_t>0, 1, 0)) %>%#
-		# add NAs#
-		.[is.na(Fruit_t), FruitPres_t := NA]#
-	#############################################################################
-	# Classify sites as coastal or inland#
-	#############################################################################
-	timeseries %<>%#
-		mutate(Coastal = as.integer(NA)) %>%#
-		# Nokuse and TSP are given 0 because they are not coastal#
-		.[Location=="N" | Location=="TSP", Coastal := 0] %>%#
-		.[Location!="N" & Location!="TSP", Coastal := 1]#
-	timeseries$Coastal %<>% as.factor#
-	#############################################################################
-	# Insect presence during entire study#
-	#############################################################################
-	#--------------------------------------------------------------------------##
-	# INSECT ever present?#
-	#--------------------------------------------------------------------------##
-	timeseries %<>%#
-		group_by(PlantID) %>%#
-		mutate(#
-			CACAPresent = ifelse(sum(CA_t, na.rm=T) > 0, 1, 0),#
-			MEPRPresent = ifelse(sum(ME_t, na.rm=T) > 0, 1, 0),#
-			DACTPresent = ifelse(sum(DA_t, na.rm=T) > 0, 1, 0),#
-			CHVIPresent = ifelse(sum(CH_t, na.rm=T) > 0, 1, 0)#
-		)#
-	#############################################################################
-	# Insect presence during current survey#
-	#############################################################################
-	timeseries$NumInsectSpecies_t <- timeseries %>%#
-		dplyr::select(ME_t, CA_t, CH_t, DA_t) %>%#
-		apply(., 1, mysum#
-	)#
-	#############################################################################
-	# SEASON#
-	#############################################################################
-	timeseries_all_surveys$Date %<>%#
-		strptime("%Y-%m-%d") %>%#
-		as.POSIXct(format="%Y-%m-%d")#
-	timeseries_all_surveys %<>% as.data.frame %>% assignSeason
-seasons
-?seasons
 setwd('/Users/KSauby/Documents/Projects')
-setwd("./dataproc")#
-#setwd("./modresproc")#
+setwd("./modresproc")#
 devtools::document()#
 devtools::install()
-assignSeason
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./dataproc")#
-#setwd("./modresproc")#
-devtools::document()#
-devtools::install()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-timeseries <- processData(timeseries.25Jan2015JK.mod)#
-timeseries <- removeData(timeseries)#
-#
-# climate_data <- processWeather()#
-#
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival	 	<- createSurvivalDataset(timeseries)#
-#
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
-#
-timeseries_survival_humifusa = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-#
-################################################################################
-# timeseries_winter#
-################################################################################
-timeseries_winter <- createFallWinterSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_winter")#
-write.csv(timeseries_winter, "./data/timeseries_winter.csv")#
-#
-################################################################################
-# timeseries_spring#
-################################################################################
-timeseries_spring <- createSpringSummerSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_spring")#
-write.csv(timeseries_spring, "./data/timeseries_spring.csv")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# list of climate files to fix#
-climate_file_names <- c("NOAA.ApalachicolaAirport", "NOAA.ApalachicolaAirport1", "NOAA.Bloxham", "NOAA.Bristol2", "NOAA.Callaway03", "NOAA.Callaway06S", "NOAA.Chipley", "NOAA.Clarksville2N", "NOAA.CrestviewBobSikesAirport", "NOAA.DeFuniakSprings", "NOAA.Destin1", "NOAA.DestinFortWaltonBeach", "NOAA.Freeport34", "NOAA.Freeport40SSW", "NOAA.Freeport44", "NOAA.Hosford27", "NOAA.Marianna7NE", "NOAA.NavalLiveOaks", "NOAA.NWFLBeaches", "NOAA.PanamaCity", "NOAA.PanamaCityBayCoAirport", "NOAA.PanamaCityBeach03", "NOAA.PanamaCityBeach12ESE", "NOAA.PensacolaForest", "NOAA.PensacolaRegionalAirport", "NOAA.PortStJoe06", "NOAA.PortStJoe81", "NOAA.Quincy3SSW", "NOAA.Sumatra", "NOAA.Telogia", "NOAA.ValparaisoEglinAFB", "NOAA.Vernon106", "NOAA.WestPensacola109", "NOAA.Wewahitchka", "NOAA.Wewahitchka16", "NOAA.Wilma", "NOAA.WoodruffDam", "NOAA.Bellview17", "NOAA.Pensacola92", "NOAA.MiramarBeach95", "NOAA.InletBeach07", "NOAA.PanamaCityBeach59", "NOAA.Apalachicola08WNW", "NOAA.NewHope", "NOAA.Destin15")#
-#
-wstations <- ghcnd.stations.NW.FL.current#
-Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")#
-#
-DegreeDay_list <- c(#
-	"UCD.IPM.BLSPDegree.days",#
-	"UCD.IPM.HBSPDegree.days",#
-	"UCD.IPM.MexicoBeachDegree.days",#
-	"UCD.IPM.NokuseDegree.days",#
-	"UCD.IPM.SASPDegree.days",#
-	"UCD.IPM.SweetwaterDegree.days"#
-)#
-sites <- Marsico.Florida.data.collection.site.location.summary#
-	wstations %<>% formatWeatherStationInfo#
-	climate_data <- mergeClimateFiles(climate_file_names) %>%#
-		filterClimateDataByQuality %>%#
-		formatconvertClimateData#
-	#---------------------------- Restrict start and end dates --------------- ##
-	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")#
-	Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) #
-	climate_data <- getClimateDataByLocationDate(Datalist)#
-	climate_data %<>% calculateDegreeDays(DegreeDay_list)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-calculate_dates="TRUE"
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# list of climate files to fix#
-climate_file_names <- c("NOAA.ApalachicolaAirport", "NOAA.ApalachicolaAirport1", "NOAA.Bloxham", "NOAA.Bristol2", "NOAA.Callaway03", "NOAA.Callaway06S", "NOAA.Chipley", "NOAA.Clarksville2N", "NOAA.CrestviewBobSikesAirport", "NOAA.DeFuniakSprings", "NOAA.Destin1", "NOAA.DestinFortWaltonBeach", "NOAA.Freeport34", "NOAA.Freeport40SSW", "NOAA.Freeport44", "NOAA.Hosford27", "NOAA.Marianna7NE", "NOAA.NavalLiveOaks", "NOAA.NWFLBeaches", "NOAA.PanamaCity", "NOAA.PanamaCityBayCoAirport", "NOAA.PanamaCityBeach03", "NOAA.PanamaCityBeach12ESE", "NOAA.PensacolaForest", "NOAA.PensacolaRegionalAirport", "NOAA.PortStJoe06", "NOAA.PortStJoe81", "NOAA.Quincy3SSW", "NOAA.Sumatra", "NOAA.Telogia", "NOAA.ValparaisoEglinAFB", "NOAA.Vernon106", "NOAA.WestPensacola109", "NOAA.Wewahitchka", "NOAA.Wewahitchka16", "NOAA.Wilma", "NOAA.WoodruffDam", "NOAA.Bellview17", "NOAA.Pensacola92", "NOAA.MiramarBeach95", "NOAA.InletBeach07", "NOAA.PanamaCityBeach59", "NOAA.Apalachicola08WNW", "NOAA.NewHope", "NOAA.Destin15")#
-#
-wstations <- ghcnd.stations.NW.FL.current#
-Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")#
-#
-DegreeDay_list <- c(#
-	"UCD.IPM.BLSPDegree.days",#
-	"UCD.IPM.HBSPDegree.days",#
-	"UCD.IPM.MexicoBeachDegree.days",#
-	"UCD.IPM.NokuseDegree.days",#
-	"UCD.IPM.SASPDegree.days",#
-	"UCD.IPM.SweetwaterDegree.days"#
-)#
-sites <- Marsico.Florida.data.collection.site.location.summary#
-	wstations %<>% formatWeatherStationInfo#
-	climate_data <- mergeClimateFiles(climate_file_names) %>%#
-		filterClimateDataByQuality %>%#
-		formatconvertClimateData#
-	#---------------------------- Restrict start and end dates --------------- ##
-	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")#
-	Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) #
-	climate_data <- getClimateDataByLocationDate(Datalist)#
-	climate_data %<>% calculateDegreeDays(DegreeDay_list)
-head(climate_data)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# list of climate files to fix#
-climate_file_names <- c("NOAA.ApalachicolaAirport", "NOAA.ApalachicolaAirport1", "NOAA.Bloxham", "NOAA.Bristol2", "NOAA.Callaway03", "NOAA.Callaway06S", "NOAA.Chipley", "NOAA.Clarksville2N", "NOAA.CrestviewBobSikesAirport", "NOAA.DeFuniakSprings", "NOAA.Destin1", "NOAA.DestinFortWaltonBeach", "NOAA.Freeport34", "NOAA.Freeport40SSW", "NOAA.Freeport44", "NOAA.Hosford27", "NOAA.Marianna7NE", "NOAA.NavalLiveOaks", "NOAA.NWFLBeaches", "NOAA.PanamaCity", "NOAA.PanamaCityBayCoAirport", "NOAA.PanamaCityBeach03", "NOAA.PanamaCityBeach12ESE", "NOAA.PensacolaForest", "NOAA.PensacolaRegionalAirport", "NOAA.PortStJoe06", "NOAA.PortStJoe81", "NOAA.Quincy3SSW", "NOAA.Sumatra", "NOAA.Telogia", "NOAA.ValparaisoEglinAFB", "NOAA.Vernon106", "NOAA.WestPensacola109", "NOAA.Wewahitchka", "NOAA.Wewahitchka16", "NOAA.Wilma", "NOAA.WoodruffDam", "NOAA.Bellview17", "NOAA.Pensacola92", "NOAA.MiramarBeach95", "NOAA.InletBeach07", "NOAA.PanamaCityBeach59", "NOAA.Apalachicola08WNW", "NOAA.NewHope", "NOAA.Destin15")#
-#
-wstations <- ghcnd.stations.NW.FL.current#
-Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")#
-#
-DegreeDay_list <- c(#
-	"UCD.IPM.BLSPDegree.days",#
-	"UCD.IPM.HBSPDegree.days",#
-	"UCD.IPM.MexicoBeachDegree.days",#
-	"UCD.IPM.NokuseDegree.days",#
-	"UCD.IPM.SASPDegree.days",#
-	"UCD.IPM.SweetwaterDegree.days"#
-)#
-sites <- Marsico.Florida.data.collection.site.location.summary#
-	wstations %<>% formatWeatherStationInfo#
-	climate_data <- mergeClimateFiles(climate_file_names) %>%#
-		filterClimateDataByQuality %>%#
-		formatconvertClimateData#
-	#---------------------------- Restrict start and end dates --------------- ##
-	climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")#
-	Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) #
-	climate_data <- getClimateDataByLocationDate(Datalist)#
-	climate_data %<>% calculateDegreeDays(DegreeDay_list)
-timeseries_all_surveys -> x
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-climate_data %<>% #
-		renameLocations %>%#
-		formatClimateDataYearDayofYear %>%#
-		mutate(#
-			Precip_Presence = ifelse(Precip>0, 1, 0),#
-			MinTemp_lt_equal_0 = ifelse(MinTemp<=0, 1, 0)#
-		)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-# get unique Date and DaysSincePrevSurvey combos#
-		A = as.data.frame(x) %>%#
-			group_by(Date, Location, Species) %>%#
-			# to make sure that this group all share the same Previous_Survey_Date Date#
-			summarise(PrevSurvD = paste(Maximum(Previous_Survey_Date))) %>%#
-			as.data.frame %>%#
-			arrange(Location, Date)#
-		#----------------- Fill in Missing Previous Survey Date for Survey 1 --##
-		# Generate fake "PrevSurvD" based on the average number of days #
-		#		between surveys#
-		A$PrevSurvD[A$PrevSurvD=="NA" & year(A$Date)==2009] <- #
-			as.character(A$Date[A$PrevSurvD=="NA" & year(A$Date)==2009] - #
-			round(mean(x$DaysSincePrevSurvey, na.rm=T)))#
-		A 			%<>% filter(PrevSurvD!="NA")#
-		A$PrevSurvD %<>% as.Date("%Y-%m-%d")#
-	} else {
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Names <- c(#
-		"Daily_Precip_mean",#
-		"Daily_Precip_SD",#
-		"Perc_Days_w_Rain",#
-		"Perc_Days_w_Freeze",#
-		"mean_Max_Temp",#
-		"sd_Max_Temp",#
-		"MeanDegreeDay",#
-		"Mean_Consecutive_Days_w_Rain",#
-		"Max_Consecutive_Days_w_Rain",#
-		"sd_Consecutive_Days_w_Rain",#
-		"Mean_Consecutive_Drought_Days",#
-		"Max_Consecutive_Drought_Days",#
-		"sd_Consecutive_Drought_Days",#
-		"Mean_Consecutive_Freezing_Days",#
-		"Max_Consecutive_Freezing_Days",#
-		"sd_Consecutive_Freezing_Days"#
-	)#
-	A1 <- A %>% cbind(#
-		as.data.frame(#
-			matrix(#
-				nrow=dim(A)[1], #
-				ncol=length(Names),#
-				data=NA#
-			)#
-		)#
-	)#
-	names(A1)[ (dim(A)[2] + 1) : (dim(A)[2] + length(Names)) ] <- Names#
-	# for new plants, assign previous visit based on previous visit to location
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-for (i in 1:dim(A1)[1]) {#
-		# subset data by time period and location#
-		#		date is equal to or greater than previous survey date#
-		temp = climate_data[which(#
-			climate_data$Date >= A1$PrevSurvD[i] & #
-			climate_data$Date < A1$Date[i] & # date is less than current date#
-			climate_data$Location==A1$Location[i]#
-		), ] # and pull data for correct location #
-		# Climate Variable Calculations#
-		A1$Daily_Precip_mean[i] 	<- mean(temp$Precip, na.rm=T)#
-		A1$Daily_Precip_SD[i] 	<- sd(temp$Precip, na.rm=T)#
-		#		length of precip > 0 / length of precip != NA#
-		A1$Perc_Days_w_Rain[i] 	<- #
-			length(filter(temp, Precip>0)$Precip) / length(!is.na(temp$Precip))#
-		#		length of MinTemp <= 0 / length of MinTemp != NA#
-		A1$Perc_Days_w_Freeze[i] <- #
-			length(filter(temp, MinTemp<=0)$MinTemp) / #
-			length(!is.na(temp$MinTemp))#
-		A1$mean_Max_Temp[i] 		<- mean(temp$MaxTemp, na.rm=T)#
-		A1$sd_Max_Temp[i] 		<- sd(temp$MaxTemp, na.rm=T)#
-		A1$MeanDegreeDay[i] 		<- mean(temp$Daily.DD, na.rm=T)#
-		# consecutive days with rain#
-		# count identical consecutive values#
-		r <- rle(temp$Precip_Presence)#
-		# get lengths for value=1#
-		r1 <- r$length[r$values == 1]#
-		A1$Mean_Consecutive_Days_w_Rain[i] 	<- mean(r1, na.rm=T)#
-		A1$Max_Consecutive_Days_w_Rain[i] 	<- max(r1, na.rm=T)#
-		A1$sd_Consecutive_Days_w_Rain[i] 	<- sd(r1, na.rm=T)#
-		# consecutive drought days#
-		r0 <- r$length[r$values == 0]#
-		A1$Mean_Consecutive_Drought_Days[i] 	<- mean(r0, na.rm=T)#
-		A1$Max_Consecutive_Drought_Days[i] 	<- max(r0, na.rm=T)#
-		A1$sd_Consecutive_Drought_Days[i] 	<- sd(r0, na.rm=T)#
-		# Consecutive Freezing Days#
-		# count identical consecutive values#
-		r <- rle(temp$MinTemp_lt_equal_0)#
-		# get lengths for value=1#
-		r1 <- r$length[r$values == 1]#
-		#	if there was at least one freezing day:#
-		if (length(r1) > 0) {#
-			A1$Mean_Consecutive_Freezing_Days[i] 	<- mean(r1, na.rm=T)#
-			A1$Max_Consecutive_Freezing_Days[i] 		<- max(r1, na.rm=T)#
-			# 	calculate sd if there is more than one value; otherwise sd=0#
-			A1$sd_Consecutive_Freezing_Days[i] 		<- ifelse(#
-				length(r1)>1, #
-				sd(r$length[r$values == 1], na.rm=T),#
-				0#
-			)#
-		} else {#
-			A1$Mean_Consecutive_Freezing_Days[i] 	<- 0#
-			A1$Max_Consecutive_Freezing_Days[i] 		<- 0#
-			A1$sd_Consecutive_Freezing_Days[i] 		<- 0#
-		}#
-	}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-# replace NAs#
-	A1 %<>% as.data.frame#
-	A1[,c(#
-		"Daily_Precip_mean",#
-		"Daily_Precip_SD",#
-		"Perc_Days_w_Rain",#
-		"Perc_Days_w_Freeze",#
-		"mean_Max_Temp",#
-		"sd_Max_Temp",#
-		"MeanDegreeDay",#
-		"Mean_Consecutive_Days_w_Rain",#
-		"Max_Consecutive_Days_w_Rain",#
-		"sd_Consecutive_Days_w_Rain",#
-		"Mean_Consecutive_Drought_Days",#
-		"Max_Consecutive_Drought_Days",#
-		"sd_Consecutive_Drought_Days",#
-		"Mean_Consecutive_Freezing_Days",#
-		"Max_Consecutive_Freezing_Days",#
-		"sd_Consecutive_Freezing_Days")] %<>% #
-		apply(., 2, NA_Function#
-	)#
-	A1 %<>% select(-PrevSurvD)
-head(A1)
-seasons
-cbind(seasons$SE, seasons$FE)
-rbind(seasons$SE, seasons$FE)
-c(seasons$SE, seasons$FE)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-data.frame(Date = c(seasons$SE, seasons$FE))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-data.frame(Date = c(seasons$SE, seasons$FE)) %>% arrange(Date)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_mont_dates <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% arrange(Date)
-c(NA, Date[-length(Date)]
-_)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% #
-arrange(Date) %>%#
-mutate(PrevSurvD = c(NA, Date[-length(Date)]))
-six_month_dates
-str(six_month_dates)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% #
-arrange(Date) %>%#
-mutate(PrevSurvD = as.POSIXct(c(NA, aDate[-length(Date)])))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% #
-arrange(Date) %>%#
-mutate(PrevSurvD = as.POSIXct(c(NA, Date[-length(Date)])))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% #
-arrange(Date) %>%#
-mutate(PrevSurvD = as.POSIXct(c(NA, Date[-length(Date)]), origin="1970-01-01"))
-six_month_dates
-seasons
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% #
-arrange(Date) %>%#
-(filter(Date <= "2013-03-20")) %>%#
-mutate(PrevSurvD = as.POSIXct(c(NA, Date[-length(Date)]), origin="1970-01-01"))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% #
-arrange(Date) %>%#
-filter(Date <= "2013-03-20") %>%#
-mutate(PrevSurvD = as.POSIXct(c(NA, Date[-length(Date)]), origin="1970-01-01"))
-six_month_dates
-expand.grid(Location_list, six_month_dates)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates[rep(1:nrow(six_month_dates)), times=length(Location_list), ]
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates[rep(1:nrow(six_month_dates), times=length(Location_list), ]
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-six_month_dates[rep(1:nrow(six_month_dates), times=length(Location_list)), ]
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-df = six_month_dates[rep(1:nrow(six_month_dates), times=length(Location_list)), ]
-str(df)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-df = six_month_dates[rep(1:nrow(six_month_dates), times=length(Location_list)), ]#
-df$Location = rep(Location, times=dim(six_month_dates)[1])
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-df = six_month_dates[rep(1:nrow(six_month_dates), times=length(Location_list)), ]#
-df$Location = rep(Location_list, times=dim(six_month_dates)[1])
-df
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-# dates for the starts of Spring and Fall#
-df <- data.frame(Date = c(seasons$SE, seasons$FE)) %>% #
-	arrange(Date) %>%#
-	filter(Date <= "2013-03-20") %>%#
-	mutate(PrevSurvD = as.POSIXct(c(NA, Date[-length(Date)]), origin="1970-01-01"))#
-#
-six_month_dates = df[rep(1:nrow(df), times=length(Location_list)), ]#
-six_month_dates$Location = rep(Location_list, times=dim(df)[1])
-six_month_dates
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-A = as.data.frame(x) %>%#
-			group_by(Date, Location, Species) %>%#
-			# to make sure that this group all share the same Previous_Survey_Date Date#
-			summarise(PrevSurvD = paste(Maximum(Previous_Survey_Date))) %>%#
-			as.data.frame %>%#
-			arrange(Location, Date)#
-		#----------------- Fill in Missing Previous S
-A
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Dates_dataframe <- six_month_dates
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-A <- Dates_dataframe
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Names <- c(#
-		"Daily_Precip_mean",#
-		"Daily_Precip_SD",#
-		"Perc_Days_w_Rain",#
-		"Perc_Days_w_Freeze",#
-		"mean_Max_Temp",#
-		"sd_Max_Temp",#
-		"MeanDegreeDay",#
-		"Mean_Consecutive_Days_w_Rain",#
-		"Max_Consecutive_Days_w_Rain",#
-		"sd_Consecutive_Days_w_Rain",#
-		"Mean_Consecutive_Drought_Days",#
-		"Max_Consecutive_Drought_Days",#
-		"sd_Consecutive_Drought_Days",#
-		"Mean_Consecutive_Freezing_Days",#
-		"Max_Consecutive_Freezing_Days",#
-		"sd_Consecutive_Freezing_Days"#
-	)#
-	A1 <- A %>% cbind(#
-		as.data.frame(#
-			matrix(#
-				nrow=dim(A)[1], #
-				ncol=length(Names),#
-				data=NA#
-			)#
-		)#
-	)#
-	names(A1)[ (dim(A)[2] + 1) : (dim(A)[2] + length(Names)) ] <- Names
-A1
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-for (i in 1:dim(A1)[1]) {#
-		# subset data by time period and location#
-		#		date is equal to or greater than previous survey date#
-		temp = climate_data[which(#
-			climate_data$Date >= A1$PrevSurvD[i] & #
-			climate_data$Date < A1$Date[i] & # date is less than current date#
-			climate_data$Location==A1$Location[i]#
-		), ] # and pull data for correct location #
-		# Climate Variable Calculations#
-		A1$Daily_Precip_mean[i] 	<- mean(temp$Precip, na.rm=T)#
-		A1$Daily_Precip_SD[i] 	<- sd(temp$Precip, na.rm=T)#
-		#		length of precip > 0 / length of precip != NA#
-		A1$Perc_Days_w_Rain[i] 	<- #
-			length(filter(temp, Precip>0)$Precip) / length(!is.na(temp$Precip))#
-		#		length of MinTemp <= 0 / length of MinTemp != NA#
-		A1$Perc_Days_w_Freeze[i] <- #
-			length(filter(temp, MinTemp<=0)$MinTemp) / #
-			length(!is.na(temp$MinTemp))#
-		A1$mean_Max_Temp[i] 		<- mean(temp$MaxTemp, na.rm=T)#
-		A1$sd_Max_Temp[i] 		<- sd(temp$MaxTemp, na.rm=T)#
-		A1$MeanDegreeDay[i] 		<- mean(temp$Daily.DD, na.rm=T)#
-		# consecutive days with rain#
-		# count identical consecutive values#
-		r <- rle(temp$Precip_Presence)#
-		# get lengths for value=1#
-		r1 <- r$length[r$values == 1]#
-		A1$Mean_Consecutive_Days_w_Rain[i] 	<- mean(r1, na.rm=T)#
-		A1$Max_Consecutive_Days_w_Rain[i] 	<- max(r1, na.rm=T)#
-		A1$sd_Consecutive_Days_w_Rain[i] 	<- sd(r1, na.rm=T)#
-		# consecutive drought days#
-		r0 <- r$length[r$values == 0]#
-		A1$Mean_Consecutive_Drought_Days[i] 	<- mean(r0, na.rm=T)#
-		A1$Max_Consecutive_Drought_Days[i] 	<- max(r0, na.rm=T)#
-		A1$sd_Consecutive_Drought_Days[i] 	<- sd(r0, na.rm=T)#
-		# Consecutive Freezing Days#
-		# count identical consecutive values#
-		r <- rle(temp$MinTemp_lt_equal_0)#
-		# get lengths for value=1#
-		r1 <- r$length[r$values == 1]#
-		#	if there was at least one freezing day:#
-		if (length(r1) > 0) {#
-			A1$Mean_Consecutive_Freezing_Days[i] 	<- mean(r1, na.rm=T)#
-			A1$Max_Consecutive_Freezing_Days[i] 		<- max(r1, na.rm=T)#
-			# 	calculate sd if there is more than one value; otherwise sd=0#
-			A1$sd_Consecutive_Freezing_Days[i] 		<- ifelse(#
-				length(r1)>1, #
-				sd(r$length[r$values == 1], na.rm=T),#
-				0#
-			)#
-		} else {#
-			A1$Mean_Consecutive_Freezing_Days[i] 	<- 0#
-			A1$Max_Consecutive_Freezing_Days[i] 		<- 0#
-			A1$sd_Consecutive_Freezing_Days[i] 		<- 0#
-		}#
-	}
 warnings()
-str(Dates_dataframe)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-df <- data.frame(Date = as.Date(c(seasons$SE, seasons$FE))) %>% #
-	arrange(Date) %>%#
-	filter(Date <= "2013-03-20") %>%#
-	mutate(PrevSurvD = as.Date(c(NA, Date[-length(Date)]), origin="1970-01-01"))#
-#
-six_month_dates = df[rep(1:nrow(df), times=length(Location_list)), ]#
-six_month_dates$Location = rep(Location_list, times=dim(df)[1])
-str(df)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Dates_dataframe <- six_month_dates
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-A <- Dates_dataframe
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Names <- c(#
-		"Daily_Precip_mean",#
-		"Daily_Precip_SD",#
-		"Perc_Days_w_Rain",#
-		"Perc_Days_w_Freeze",#
-		"mean_Max_Temp",#
-		"sd_Max_Temp",#
-		"MeanDegreeDay",#
-		"Mean_Consecutive_Days_w_Rain",#
-		"Max_Consecutive_Days_w_Rain",#
-		"sd_Consecutive_Days_w_Rain",#
-		"Mean_Consecutive_Drought_Days",#
-		"Max_Consecutive_Drought_Days",#
-		"sd_Consecutive_Drought_Days",#
-		"Mean_Consecutive_Freezing_Days",#
-		"Max_Consecutive_Freezing_Days",#
-		"sd_Consecutive_Freezing_Days"#
-	)#
-	A1 <- A %>% cbind(#
-		as.data.frame(#
-			matrix(#
-				nrow=dim(A)[1], #
-				ncol=length(Names),#
-				data=NA#
-			)#
-		)#
-	)#
-	names(A1)[ (dim(A)[2] + 1) : (dim(A)[2] + length(Names)) ] <- Names#
-	# for new plants, assign previous visit based on previous visit to location
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-for (i in 1:dim(A1)[1]) {#
-		# subset data by time period and location#
-		#		date is equal to or greater than previous survey date#
-		temp = climate_data[which(#
-			climate_data$Date >= A1$PrevSurvD[i] & #
-			climate_data$Date < A1$Date[i] & # date is less than current date#
-			climate_data$Location==A1$Location[i]#
-		), ] # and pull data for correct location #
-		# Climate Variable Calculations#
-		A1$Daily_Precip_mean[i] 	<- mean(temp$Precip, na.rm=T)#
-		A1$Daily_Precip_SD[i] 	<- sd(temp$Precip, na.rm=T)#
-		#		length of precip > 0 / length of precip != NA#
-		A1$Perc_Days_w_Rain[i] 	<- #
-			length(filter(temp, Precip>0)$Precip) / length(!is.na(temp$Precip))#
-		#		length of MinTemp <= 0 / length of MinTemp != NA#
-		A1$Perc_Days_w_Freeze[i] <- #
-			length(filter(temp, MinTemp<=0)$MinTemp) / #
-			length(!is.na(temp$MinTemp))#
-		A1$mean_Max_Temp[i] 		<- mean(temp$MaxTemp, na.rm=T)#
-		A1$sd_Max_Temp[i] 		<- sd(temp$MaxTemp, na.rm=T)#
-		A1$MeanDegreeDay[i] 		<- mean(temp$Daily.DD, na.rm=T)#
-		# consecutive days with rain#
-		# count identical consecutive values#
-		r <- rle(temp$Precip_Presence)#
-		# get lengths for value=1#
-		r1 <- r$length[r$values == 1]#
-		A1$Mean_Consecutive_Days_w_Rain[i] 	<- mean(r1, na.rm=T)#
-		A1$Max_Consecutive_Days_w_Rain[i] 	<- max(r1, na.rm=T)#
-		A1$sd_Consecutive_Days_w_Rain[i] 	<- sd(r1, na.rm=T)#
-		# consecutive drought days#
-		r0 <- r$length[r$values == 0]#
-		A1$Mean_Consecutive_Drought_Days[i] 	<- mean(r0, na.rm=T)#
-		A1$Max_Consecutive_Drought_Days[i] 	<- max(r0, na.rm=T)#
-		A1$sd_Consecutive_Drought_Days[i] 	<- sd(r0, na.rm=T)#
-		# Consecutive Freezing Days#
-		# count identical consecutive values#
-		r <- rle(temp$MinTemp_lt_equal_0)#
-		# get lengths for value=1#
-		r1 <- r$length[r$values == 1]#
-		#	if there was at least one freezing day:#
-		if (length(r1) > 0) {#
-			A1$Mean_Consecutive_Freezing_Days[i] 	<- mean(r1, na.rm=T)#
-			A1$Max_Consecutive_Freezing_Days[i] 		<- max(r1, na.rm=T)#
-			# 	calculate sd if there is more than one value; otherwise sd=0#
-			A1$sd_Consecutive_Freezing_Days[i] 		<- ifelse(#
-				length(r1)>1, #
-				sd(r$length[r$values == 1], na.rm=T),#
-				0#
-			)#
-		} else {#
-			A1$Mean_Consecutive_Freezing_Days[i] 	<- 0#
-			A1$Max_Consecutive_Freezing_Days[i] 		<- 0#
-			A1$sd_Consecutive_Freezing_Days[i] 		<- 0#
-		}#
-	}
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
 warnings()
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-# replace NAs#
-	A1 %<>% as.data.frame#
-	A1[,c(#
-		"Daily_Precip_mean",#
-		"Daily_Precip_SD",#
-		"Perc_Days_w_Rain",#
-		"Perc_Days_w_Freeze",#
-		"mean_Max_Temp",#
-		"sd_Max_Temp",#
-		"MeanDegreeDay",#
-		"Mean_Consecutive_Days_w_Rain",#
-		"Max_Consecutive_Days_w_Rain",#
-		"sd_Consecutive_Days_w_Rain",#
-		"Mean_Consecutive_Drought_Days",#
-		"Max_Consecutive_Drought_Days",#
-		"sd_Consecutive_Drought_Days",#
-		"Mean_Consecutive_Freezing_Days",#
-		"Max_Consecutive_Freezing_Days",#
-		"sd_Consecutive_Freezing_Days")] %<>% #
-		apply(., 2, NA_Function#
-	)#
-	A1 %<>% select(-PrevSurvD)
-head(A1)
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./dataproc")#
 #setwd("./modresproc")#
-devtools::document()#
-devtools::install()
+devtools::document()
+warnings()
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./dataproc")#
 #setwd("./modresproc")#
-devtools::document()#
-devtools::install()
-?seasons
+devtools::document()
+warnings()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")
+library(rgeos)
+install.packages("rgdal", repos="http://R-Forge.R-project.org", type="source")
+install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
+library(rgdal)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+?createAllSurveysDataset
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+?sweep
+?pmin
+?geom_path
+??geom_path
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()
+warnings
+warnings()

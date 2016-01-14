@@ -6,6 +6,9 @@
 \usage{
 keepUSDAData(timeseries)
 }
+\arguments{
+\item{timeseries}{Dataset of plant surveys}
+}
 \description{
 Save data on USDA managed plants including observations of the following plants after 2010-10-01 (first observed management by USDA on 2011-05-16):
 \itemize{

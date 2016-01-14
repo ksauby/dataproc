@@ -6,6 +6,9 @@
 \usage{
 fixErroneousTemps(climate_data)
 }
+\arguments{
+\item{climate_data}{climate data}
+}
 \description{
 If a date's minimum temperature record is greater than or equal to the maximum temperature record, replace both values with NA.
 }

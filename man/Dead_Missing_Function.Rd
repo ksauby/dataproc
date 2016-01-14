@@ -2,7 +2,7 @@
 % Please edit documentation in R/Dead_Missing_Function.R
 \name{Dead_Missing_Function}
 \alias{Dead_Missing_Function}
-\title{A plant has been obvserved to be dead/missing if there is at least 1 observation of it being dead or missing.}
+\title{Function to determine if plant was ever observed dead or missing}
 \usage{
 Dead_Missing_Function(x)
 }
@@ -10,6 +10,6 @@ Dead_Missing_Function(x)
 \item{x}{Vector of {0,1} data.}
 }
 \description{
-A plant has been obvserved to be dead/missing if there is at least 1 observation of it being dead or missing.
+A plant has been observed to be dead/missing if there is at least 1 observation of it being dead or missing.
 }
 

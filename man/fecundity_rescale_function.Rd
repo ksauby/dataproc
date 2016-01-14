@@ -6,6 +6,9 @@
 \usage{
 fecundity_rescale_function(x = x)
 }
+\arguments{
+\item{x}{}
+}
 \description{
 Only rescale once the fecundity dataset is final (missing values have been removed)
 }

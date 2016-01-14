@@ -1,4 +1,5 @@
 #'  PCA Plotting Function
+#' 
 #' @param DATES I don't remember what this is
 #' @param pcobj PCA objects?
 #' @param choices Defaults to \code{1:2}
@@ -35,12 +36,13 @@
 #' @param point.color Defaults to \code{"black"}
 #' @param pct_x_buffer Defaults to \code{0.5}
 #' @param pct_y_buffer Defaults to \code{0.5}
+#' Function to control graphics when plotting PCA results produced in R.
+# @references edited from http://stackoverflow.com/questions/18039313/pca-scaling-with-ggbiplot, accessed 18 Sept. 15#' 
+#' 
+#' @export
 #' @importFrom ggplot2 geom_path
 #' @importFrom ggplot2 geom_segment
 #' @importFrom ggplot2 geom_text
-
-# @references edited from http://stackoverflow.com/questions/18039313/pca-scaling-with-ggbiplot, accessed 18 Sept. 15
-#' @export
 
 ggbiplot2 <- function (
 	pcobj, 

@@ -6,6 +6,11 @@
 \usage{
 mergePlantSurveysPlantInfo(Plant_Surveys, Plant_Info)
 }
+\arguments{
+\item{Plant_Surveys}{Plant Survey Dataset}
+
+\item{Plant_Info}{Plant Information Dataset}
+}
 \description{
 Add Island, Cluster, and Host Species information to the Plant_Surveys dataset.
 }

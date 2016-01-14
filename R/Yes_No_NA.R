@@ -1,5 +1,7 @@
 #' Replace 0 with "No".
+#'
 #' @param x Vector of data.
+#'
 #' @export
 
 Replace_0_w_No_Function <- function(x){	
@@ -8,7 +10,9 @@ Replace_0_w_No_Function <- function(x){
 }
 
 #' Replace 1 with "Yes".
+#'
 #' @param x Vector of data.
+#'
 #' @export
 
 Replace_1_w_Yes_Function <- function(x){	
@@ -17,8 +21,10 @@ Replace_1_w_Yes_Function <- function(x){
 }
 
 #' Replace NA with a ".".
+#'
 #' @param x Vector of data.
 #' @description Replace NAs with no text so they are not printed on datasheets.
+#'
 #' @export
 
 Replace_NA_w_Period_Function <- function(x){
@@ -27,7 +33,9 @@ Replace_NA_w_Period_Function <- function(x){
 }
 
 #' Replace 0 with NA.
+#'
 #' @param x Vector of data.
+#'
 #' @export
 
 Zero_is_NA_Function <- function(x){	
@@ -36,7 +44,9 @@ Zero_is_NA_Function <- function(x){
 }
 
 #' Standardize "Yes" values.
+#'
 #' @param x Vector of data.
+#'
 #' @export
 
 Yes_Function <- function(x){	
@@ -52,10 +62,12 @@ Yes_Function <- function(x){
 }
 
 #' Replace values with NA.
+#'
 #' @param x Vector of data.
 #' @examples
 #' x = c(1,2,3,4," ", "Not Recorded")
 #' NA_Function(x)
+#'
 #' @export
 
 NA_Function <- function(x){	
@@ -80,7 +92,9 @@ NA_Function <- function(x){
 }
 
 #' Change NA values to 0.
+#'
 #' @param x Vector of data.
+#'
 #' @export
 
 NA_is_Zero_Function <- function(x){	
@@ -89,7 +103,9 @@ NA_is_Zero_Function <- function(x){
 }
 
 #' Change "No" values to 0.
+#'
 #' @param x Vector of data.
+#'
 #' @export
 
 No_Function <- function(x){	

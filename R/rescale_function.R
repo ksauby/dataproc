@@ -1,7 +1,8 @@
 #' Rescale Function
-
+#' 
 #' @description Only rescale once the dataset is final (missing values have been removed)
-#' @param x
+#' @param x Dataset
+#'
 #' @export
 
 rescale_function <- function(x=x){
@@ -13,9 +14,10 @@ rescale_function <- function(x=x){
 )}
 
 #' Fecundity Rescale Function
-
+#' 
 #' @description Only rescale once the fecundity dataset is final (missing values have been removed)
 #' @param x
+#'
 #' @export
 
 fecundity_rescale_function <- function(x=x){

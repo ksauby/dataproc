@@ -1,6 +1,8 @@
 #' Process PCA Temperature data before merging with survey data.
+#'
 #' @param x Output PCA data (from SAS).
 #' @description For use with SAS data.
+#'
 #' @export
 
 process_temp_PCA_data <- function(data) {
@@ -13,8 +15,10 @@ process_temp_PCA_data <- function(data) {
 }
 
 #' Process Fall/Winter PCA Temperature data before merging with survey data.
+#'
 #' @param x Output PCA data (from SAS).
 #' @description For use with SAS data.
+#'
 #' @export
 
 process_FWtemp_PCA_data <- function(data) {
@@ -28,8 +32,10 @@ process_FWtemp_PCA_data <- function(data) {
 }
 
 #' Process Spring/Summer PCA Temperature data before merging with survey data.
+#'
 #' @param x Output PCA data (from SAS).
 #' @description For use with SAS data.
+#'
 #' @export
 
 process_SStemp_PCA_data <- function(data) {

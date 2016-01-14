@@ -7,6 +7,7 @@
 #' @param length desired length of the arrow
 #' @param distance distance between legend rectangles and the bottom of the arrow
 #' @param dist.units units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
+#' 
 #' @export
 
 createOrientationArrow <- function(scaleBar, length, distance = 1, dist.units = "km"){
@@ -40,16 +41,16 @@ createOrientationArrow <- function(scaleBar, length, distance = 1, dist.units = 
 
 #' Create a Scale Bar for a ggmap
 #' 
-#' @description Return a list whose elements are:
-#' rectangle - a data.frame containing the coordinates to draw the first rectangle
-#' rectangle2 - a data.frame containing the coordinates to draw the second rectangle
-#' legend - a data.frame containing the coordinates of the legend texts, and the texts as well
-
 #' @param lon longitude of the bottom left point of the first rectangle to draw #' @param lat latitude of the bottom left point of the first rectangle to draw
 #' @param distanceLon length of each rectangle
 #' @param distanceLat width of each rectangle
 #' @param distanceLegend distance between rectangles and legend texts
 #' @param dist.units units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
+#' @description Return a list whose elements are:
+#' rectangle - a data.frame containing the coordinates to draw the first rectangle
+#' rectangle2 - a data.frame containing the coordinates to draw the second rectangle
+#' legend - a data.frame containing the coordinates of the legend texts, and the texts as well
+#' 
 #' @export
 
 createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.units = "km"){
@@ -79,7 +80,7 @@ createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.
 }
 
 #' Create a Scale Bar
-#' @description This function enables to draw a scale bar on a ggplot object, and optionally an orientation arrow
+#' 
 #' @param lon longitude of the bottom left point of the first rectangle to draw #' @param lat latitude of the bottom left point of the first rectangle to draw
 #' @param distanceLon length of each rectangle
 #' @param distanceLat width of each rectangle
@@ -95,6 +96,8 @@ createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.
 #' @param arrow.length length of the arrow (default to 500 km)
 #' @param arrow.distance distance between the scale bar and the bottom of the arrow (default to 300 km)
 #' @param arrow.North.size size of the "N" letter (default to 6)
+#' @description This function enables to draw a scale bar on a ggplot object, and optionally an orientation arrow
+#' 
 #' @export
 
 scaleBar <- function(lon, lat, distanceLon, distanceLat, distanceLegend, dist.unit = "km", rec.fill = "white", rec.colour = "black", rec2.fill = "black", rec2.colour = "black", legend.colour = "black", legend.size = 3, orientation = TRUE, arrow.length = 500, arrow.distance = 300, arrow.North.size = 6){

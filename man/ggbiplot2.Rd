@@ -84,7 +84,8 @@ ggbiplot2(pcobj, choices = 1:2, scale = 1, pc.biplot = TRUE,
 
 \item{pct_x_buffer}{Defaults to \code{0.5}}
 
-\item{pct_y_buffer}{Defaults to \code{0.5}}
+\item{pct_y_buffer}{Defaults to \code{0.5}
+Function to control graphics when plotting PCA results produced in R.}
 
 \item{DATES}{I don't remember what this is}
 }

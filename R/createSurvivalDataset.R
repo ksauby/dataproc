@@ -1,5 +1,6 @@
 #' Create the Survival Dataset
-
+#' 
+#' @param timeseries Dataset
 #' @description Steps to the creation of the dataset:
 #' \itemize{
 #'  \item restrict to plants that were first surveyed during the first survey of the study
@@ -17,7 +18,7 @@
 #'  \item summarize whether plant was every infested with an insect
 #'  \item summarize whether a plant died during the study
 #' }
-#' @param timeseries Dataset
+#' 
 #' @export
 
 createSurvivalDataset <- function(timeseries) {

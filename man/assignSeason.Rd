@@ -18,5 +18,6 @@ dat = data.frame(
         (0:10)*30, format="\%Y-\%m-\%d"))
 )
 dat \%>\% assignSeason
+
 }
 

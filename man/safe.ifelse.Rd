@@ -6,6 +6,13 @@
 \usage{
 safe.ifelse(cond, yes, no)
 }
+\arguments{
+\item{cond}{Condition}
+
+\item{yes}{action if variable meets condition}
+
+\item{no}{action if variable does not meet condition}
+}
 \description{
 Retain the class of a variable when using ifelse. Copied from http://stackoverflow.com/questions/6668963/how-to-prevent-ifelse-from-turning-date-objects-into-numeric-objects.
 }

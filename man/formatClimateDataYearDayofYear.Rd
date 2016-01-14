@@ -6,6 +6,9 @@
 \usage{
 formatClimateDataYearDayofYear(climate_data)
 }
+\arguments{
+\item{climate_data}{climate data}
+}
 \description{
 Create Year and Day of Year variables.
 }

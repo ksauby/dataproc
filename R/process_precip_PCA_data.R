@@ -1,6 +1,8 @@
 #' Process PCA Precipitation data before merging with survey data.
+#'
 #' @param x Output PCA data (from SAS).
 #' @description For use with SAS data.
+#'
 #' @export
 
 process_precip_PCA_data <- function(data) {
@@ -13,8 +15,10 @@ process_precip_PCA_data <- function(data) {
 }
 
 #' Process Fall/Winter PCA Precipitation data before merging with survey data.
+#'
 #' @param x Output PCA data (from SAS).
 #' @description For use with SAS data.
+#'
 #' @export
 
 process_FWprecip_PCA_data <- function(data) {
@@ -28,8 +32,10 @@ process_FWprecip_PCA_data <- function(data) {
 }
 
 #' Process Spring/Summer PCA Precipitation data before merging with survey data.
+#'
 #' @param x Output PCA data (from SAS).
 #' @description For use with SAS data.
+#'
 #' @export
 
 process_SSprecip_PCA_data <- function(data) {

@@ -1,22 +1,26 @@
 #' Multiple plot function
 #'
+#' @param plotlist Defaults to \code{NULL}.
+#' @param file Data
+#' @param cols Number of columns in layout. Defaults to \code{1}.
+#' @param layout A matrix specifying the layout. If present, 'cols' is ignored.. Defaults to \code{NULL}.
 #' @description ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
-#' - cols:   Number of columns in layout
-#' - layout: A matrix specifying the layout. If present, 'cols' is ignored.
 #'
 #' If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
 #' then plot 1 will go in the upper left, 2 will go in the upper right, and
 #' 3 will go all the way across the bottom.
+#'
 #' @export
+#' importFrom grid grid.newpage
+#' importFrom grid pushViewport
+#' importFrom grid viewport
+#' importFrom grid grid.layout
+#' importFrom grid viewport
 
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
-  library(grid)
-
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
-
   numPlots = length(plots)
-
   # If layout is NULL, then use 'cols' to determine layout
   if (is.null(layout)) {
     # Make the panel

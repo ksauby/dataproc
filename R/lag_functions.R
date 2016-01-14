@@ -2,6 +2,7 @@
 #' 
 #' @param x Dataset
 #' @description calculate lag dates.
+#' 
 #' @importFrom utils head
 #' @import chron
 #' @export
@@ -35,6 +36,7 @@ lag_dates_function <- function(x){
 #' 
 #' @param x Dataset
 #' @description calculate lag insects.
+#' 
 #' @export
 
 lag_insects_function <- function(x=x){
@@ -61,6 +63,7 @@ lag_insects_function <- function(x=x){
 #' 
 #' @param x Dataset
 #' @description calculate lag insects during the previous year.
+#' 
 #' @export
 
 lag_insects_yr_function <- function(x=x){
@@ -87,6 +90,7 @@ lag_insects_yr_function <- function(x=x){
 #' 
 #' @param x Dataset
 #' @description calculate lag size and fruit.
+#' 
 #' @export
 
 lag_size_function <- function(x=x){
@@ -110,6 +114,7 @@ lag_size_function <- function(x=x){
 #' 
 #' @param x Dataset
 #' @description calculate lag size and fruit.
+#' 
 #' @export
 
 lag_size_fruit_function <- function(x=x){
@@ -132,6 +137,7 @@ lag_size_fruit_function <- function(x=x){
 #' 
 #' @param x Dataset
 #' @description calculate lag insects.
+#' 
 #' @export
 
 lag_insects_fecundity_function <- function(x=x){
@@ -157,6 +163,7 @@ lag_insects_fecundity_function <- function(x=x){
 #' 
 #' @param x Dataset
 #' @description calculate lag size and fruit.
+#' 
 #' @export
 
 lag_size_fruit_function_GTMNERR <- function(x=x){

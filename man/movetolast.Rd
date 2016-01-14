@@ -6,6 +6,11 @@
 \usage{
 movetolast(data, move)
 }
+\arguments{
+\item{data}{Dataset}
+
+\item{move}{Variable to move? number of places to move?}
+}
 \description{
 Move certain columns to the end of a dataframe
 }

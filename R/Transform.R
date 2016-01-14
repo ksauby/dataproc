@@ -1,7 +1,9 @@
 #' Calculate log and sqrt transformations
+#'
 #' @description Transform variable.
 #' @param data Vector of data
 #' @param Name Name to give 
+#'
 #' @export
 
 Transform <- function(data, Name) {

@@ -1,4 +1,5 @@
 #' Create Dataset with All Surveys
+#' 
 #' @description Create dataset from all surveys and calculate:
 #' \itemize{
 #'  \item lagged fruit values
@@ -7,6 +8,7 @@
 #'  \item relative growth rate
 #' }
 #' @param timeseries Dataset
+#' 
 #' @export
 
 createAllSurveysDataset <- function(timeseries) {
@@ -25,6 +27,7 @@ createAllSurveysDataset <- function(timeseries) {
 }	
 
 #' Create Create a Fecundity Year Variable
+#' 
 #' @description Each starts on the first day of spring of that calendar year, then ends on the last day of winter in the next calendar year (e.g., Spring 2009 - Winter 2010).
 #' The years are defined as follows:
 #' \itemize{
@@ -35,6 +38,7 @@ createAllSurveysDataset <- function(timeseries) {
 #'	\item Year 5 - Spring, Summer, Fall, Winter 2013, Winter 2014
 #' }
 #' @param timeseries Dataset
+#' 
 #' @export
 
 createObsYear <- function(timeseries) {
@@ -138,6 +142,8 @@ createObsYear <- function(timeseries) {
 }
 
 #' Create Dataset with Yearly Fruit Surveys
+#' 
+#' @param timeseries Dataset
 #' @description Create a dataset with yearly observations of fruit, size, and insect observations. Each starts on the first day of spring of that calendar year, then ends on the last day of winter in the next calendar year (e.g., Spring 2009 - Winter 2010). Variables that are calculated included the maximum number of fruit observed, insect presence/absence during the year, and the maximum and minimum plant size that year. All years, except for 2009, have two observations per year.
 #' The dataset is created according to the following steps:
 #' \itemize{
@@ -146,7 +152,7 @@ createObsYear <- function(timeseries) {
 #'  \item calculate maximum and minimum plant size and volume
 #'  \item determine if surveys were complete for the entire year (no missing information)
 #' }
-#' @param timeseries Dataset
+#' 
 #' @export
 
 createFruitYearDataset <- function(timeseries) {

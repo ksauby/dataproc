@@ -6,6 +6,9 @@
 \usage{
 rescale_function(x = x)
 }
+\arguments{
+\item{x}{Dataset}
+}
 \description{
 Only rescale once the dataset is final (missing values have been removed)
 }

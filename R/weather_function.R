@@ -1,6 +1,8 @@
 #' Rename Locations
+#' 
 #' @param dat Dataframe
 #' @description Rename Mexico Beach, Nokuse, and Sweetwater in the dataset.
+#'
 #' @export
 
 renameLocations <- function(dat) {
@@ -13,8 +15,10 @@ renameLocations <- function(dat) {
 }
 
 #' Create Year and Day of Year Variables for Climate Data
-#' @param climate_data
+#' 
+#' @param climate_data climate data
 #' @description Create Year and Day of Year variables.
+#'
 #' @export
 
 formatClimateDataYearDayofYear <- function(climate_data) {
@@ -26,9 +30,11 @@ formatClimateDataYearDayofYear <- function(climate_data) {
 }
 
 #' Calculate climate variables from weather data
+#' 
 #' @param x survey data
-#' @param climate_data
+#' @param climate_data climate data
 #' @param calculate_dates Default is \code{TRUE}. Either \code{x} is a dataframe of survey dates from which to calculate dates for climate variables or \code{x} is a list of pre-determined dates and their locations, in which case \code{calculate_dates} should be \code{FALSE}.
+#'
 #' @export
 #' @importFrom dplyr group_by
 
@@ -176,8 +182,10 @@ calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", D
 }
 
 #' Fix Erroneous Temperature Data
-#' @param climate_data
+#' 
+#' @param climate_data climate data
 #' @description If a date's minimum temperature record is greater than or equal to the maximum temperature record, replace both values with NA.
+#'
 #' @export
 
 fixErroneousTemps <- function(climate_data) {

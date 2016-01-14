@@ -6,6 +6,9 @@
 \usage{
 addSamplingPeriods(Plant_Surveys)
 }
+\arguments{
+\item{Plant_Surveys}{Plant Survey Dataset}
+}
 \description{
 Add Sampling Period Variable
 }

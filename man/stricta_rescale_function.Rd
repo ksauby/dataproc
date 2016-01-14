@@ -6,6 +6,9 @@
 \usage{
 stricta_rescale_function(x = x)
 }
+\arguments{
+\item{x}{Dataset}
+}
 \description{
 Only rescale once the dataset is final (missing values have been removed); the rescale function is difference for stricta - it rescales current size rather than previous size due to the small size of the dataset.
 }

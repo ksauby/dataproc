@@ -32,6 +32,7 @@ CreateKML_Function(dataset=Unsurveyed.Plots, proj4stringdata="+proj=utm +zone=17
 CreateKML(dataset=Unsurveyed, proj4stringdata="+proj=utm +zone=17 +datum=WGS84",
 CRSdata="+proj=longlat +datum=WGS84", NameField="Tag_Number", 
 filename="unsurveyed_7sept14")
+
 }
 \references{
 # inspired by the answer from rcs on http://stackoverflow.com/questions/7813141/how-to-create-a-kml-file-using-r

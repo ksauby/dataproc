@@ -1,5 +1,5 @@
 #' Process Plant Survey Data
-
+#'
 #' @description Steps:
 #' \itemize{
 #'  \item Fix column names
@@ -12,6 +12,7 @@
 #'  \item add fruit count column
 #'  \item add fruit/flower count column
 #' 	}
+#'
 #' @export
 
 processPlantSurveys <- function(Plant_Surveys) {

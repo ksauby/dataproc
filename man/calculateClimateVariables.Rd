@@ -10,6 +10,8 @@ calculateClimateVariables(x, climate_data, calculate_dates = "TRUE",
 \arguments{
 \item{x}{survey data}
 
+\item{climate_data}{climate data}
+
 \item{calculate_dates}{Default is \code{TRUE}. Either \code{x} is a dataframe of survey dates from which to calculate dates for climate variables or \code{x} is a list of pre-determined dates and their locations, in which case \code{calculate_dates} should be \code{FALSE}.}
 }
 \description{

@@ -1,6 +1,8 @@
 #' Determine Fruit and Flower Presence
+#'
 #' @description Create separate variables indicating whether fruit and fruit and flowers were present.
 #' @param Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 calculateFruitPresence <- function(Plant_Surveys) {
@@ -12,8 +14,10 @@ calculateFruitPresence <- function(Plant_Surveys) {
 }
 
 #' Calculate Plant Volume
+#'
 #' @description Calculate plant volume as a cone, cylinder, and elliptic cylinder.
 #' @param Plant_Surveys Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 calculatePlantVolume <- function(Plant_Surveys) {
@@ -27,7 +31,9 @@ calculatePlantVolume <- function(Plant_Surveys) {
 }
 
 #' Determine if a survey was complete
+#'
 #' @param x Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 Complete_Surveys_function <- function(x){
@@ -36,6 +42,7 @@ Complete_Surveys_function <- function(x){
 }
 
 #' Determine whether a survey was complete
+#'
 #' @description Determine whether all data was collected during a survey.
 #' Determine complete surveys for:
 #' \itemize{
@@ -46,6 +53,7 @@ Complete_Surveys_function <- function(x){
 #'  \item all data
 #' 	}
 #' @param Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 determineCompleteSurveys <- function(Plant_Surveys) {
@@ -108,8 +116,10 @@ determineCompleteSurveys <- function(Plant_Surveys) {
 }
 
 #' Determine if an insect species was ever detected during the study period
+#'
 #' @description Determine if an insect species was ever detected during the study period.
 #' @param Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 determineInsectPresenceDuringStudy <- function(Plant_Surveys) {
@@ -124,7 +134,9 @@ determineInsectPresenceDuringStudy <- function(Plant_Surveys) {
 }
 
 #' Rename Species levels
+#'
 #' @param Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 renameSpecies <- function(Plant_Surveys) {
@@ -144,7 +156,9 @@ renameSpecies <- function(Plant_Surveys) {
 }
 
 #' Rename Convert 1/0 to Yes/No
+#'
 #' @param x Vector of 0/1 data
+#'
 #' @export
 
 Yes_No_from_1_0_Function <- function(x){
@@ -154,8 +168,10 @@ Yes_No_from_1_0_Function <- function(x){
 }
 
 #' Make Insect Factor Variables
+#'
 #' @description Make new insect variables with "yes"/"no" values instead of 0/1.
 #' @param Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 createInsectFactorVariables <- function(Plant_Surveys) {
@@ -171,8 +187,10 @@ createInsectFactorVariables <- function(Plant_Surveys) {
 }
 
 #' Format as Factors
+#'
 #' @description Format variables as factors.
 #' @param Plant_Surveys Plant Survey Dataset
+#'
 #' @export
 
 formatasFactors <- function(Plant_Surveys) {

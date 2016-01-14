@@ -2,7 +2,7 @@
 % Please edit documentation in R/Confirmed_Dead_Missing_Function.R
 \name{Confirmed_Dead_Missing_Function}
 \alias{Confirmed_Dead_Missing_Function}
-\title{A plant is confirmed dead/missing if there area at least 2 observations (> 1) of the plant being dead and/or missing.}
+\title{Confirm a Plant as Dead or Missing}
 \usage{
 Confirmed_Dead_Missing_Function(x)
 }

@@ -6,6 +6,9 @@
 \usage{
 addSamplingYear(Plant_Surveys)
 }
+\arguments{
+\item{Plant_Surveys}{Plant Survey Dataset}
+}
 \description{
 Add Sampling Year Variable
 }
