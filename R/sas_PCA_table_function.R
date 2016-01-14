@@ -10,7 +10,7 @@
 #'
 #' @export
 #' @importFrom magrittr %>% %<>% %$%
-#' @importFrom dplyr filter mutate arrange summarise desc select
+#' @importFrom dplyr filter mutate desc
 #' @importFrom plyr rbind.fill
 #' @importFrom reshape2 dcast
 

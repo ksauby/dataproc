@@ -1,8 +1,8 @@
 #' arrange multiple ggplots into one window
 #' 
-#' @param nrow Number of rows of plots. Defaults to \codce{NULL}.
-#' @param ncol Number of columns of plots. Defaults to \codce{NULL}.
-#' @param as.table I don't remember what this means. Defaults to \codce{NULL}.
+#' @param nrow Number of rows of plots. Defaults to \code{NULL}.
+#' @param ncol Number of columns of plots. Defaults to \code{NULL}.
+#' @param as.table I don't remember what this means. Defaults to \code{NULL}.
 #' @description Arrange multiple ggplot figures in one window.
 #' 
 #' @export

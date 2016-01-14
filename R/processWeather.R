@@ -15,7 +15,6 @@
 #' @param y Dataset containing quality information
 #'
 #' @export
-#' @importFrom dplyr select
 
 Quality_Flag_Function <- function(x, y){
 	x[which(y=="G" | y=="I" | y=="K" | y=="L" | y=="N" | y=="O")] <- NA

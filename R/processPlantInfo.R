@@ -3,10 +3,7 @@
 #' @description Process Plant Info
 #' @param Plant_Info Dataset with Plant Information
 #'
-#' @importFrom dplyr select
-#' @importFrom dplyr group_by
-#' @importFrom dplyr summarise
-#' @importFrom dplyr arrange
+#' @importFrom dplyr select summarise group_by arrange
 #' @export
 
 processPlantInfo <- function(Plant_Info, Plot_Info) {
@@ -133,8 +130,10 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 }
 	
 #' Save File with Confirmed Dead and Missing Plants
+#'
 #' @description write csv with dead/missing plants - remove them from the maps
 #' @param Plant_Info Dataset with Plant Information
+#'
 #' @export
 	
 saveConfirmedDeadMissing <- function(Plant_Info) {

@@ -36,7 +36,6 @@ formatClimateDataYearDayofYear <- function(climate_data) {
 #' @param calculate_dates Default is \code{TRUE}. Either \code{x} is a dataframe of survey dates from which to calculate dates for climate variables or \code{x} is a list of pre-determined dates and their locations, in which case \code{calculate_dates} should be \code{FALSE}.
 #'
 #' @export
-#' @importFrom dplyr group_by
 
 calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", Dates_dataframe=NULL) {
 	climate_data %<>% 

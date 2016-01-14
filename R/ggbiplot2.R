@@ -40,9 +40,7 @@
 # @references edited from http://stackoverflow.com/questions/18039313/pca-scaling-with-ggbiplot, accessed 18 Sept. 15#' 
 #' 
 #' @export
-#' @importFrom ggplot2 geom_path
-#' @importFrom ggplot2 geom_segment
-#' @importFrom ggplot2 geom_text
+#' @importFrom ggplot2 geom_path geom_segment geom_text
 
 ggbiplot2 <- function (
 	pcobj, 

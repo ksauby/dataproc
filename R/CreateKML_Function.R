@@ -20,8 +20,7 @@
 #'	filename="unsurveyed_7sept14")
 #' 
 #' @export
-#' @importFrom sp coordinates
-#' @importFrom sp spTransform
+#' @importFrom sp coordinates spTransform
 #' @importFrom rgdal writeOGR
 
 CreateKML_Function <- function(
