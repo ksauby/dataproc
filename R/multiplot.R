@@ -11,7 +11,7 @@
 #' 3 will go all the way across the bottom.
 #'
 #' @export
-#' importFrom grid grid.newpage viewport pushViewport grid.layout viewport
+#' @importFrom grid grid.newpage viewport pushViewport grid.layout viewport
 
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   # Make a list from the ... arguments and plotlist

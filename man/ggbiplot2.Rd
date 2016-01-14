@@ -54,6 +54,8 @@ ggbiplot2(pcobj, choices = 1:2, scale = 1, pc.biplot = TRUE,
 
 \item{varname.abbrev}{Defaults to \code{FALSE}}
 
+\item{color}{Defaults to \code{muted("red")} # <- add new arguments to the function}
+
 \item{linetype}{Defaults to \code{"solid"}}
 
 \item{alpha_arrow}{Defaults to \code{1}}

@@ -1,5 +1,6 @@
 #' Process dataset
 #' 
+#' @param dataset Dataset
 #' @description Process data:
 #' \itemize{
 #'  \item rename locations, variables, and species
@@ -14,7 +15,6 @@
 #'  \item calculate plant volume
 #' 	\item create PlantID2
 #' }
-#' @param dataset Dataset
 #'
 #' @export
 
@@ -183,7 +183,7 @@ processData <- function(dataset) {
 			Cylinder_Tall_t = pi * ((Width_t/2)^2) * Height_t
 		)
 	############################################################################
-	#' Create PlantID2
+	# Create PlantID2
 	############################################################################
 	timeseries$PlantID2 <- factor(timeseries$PlantID,
 		levels=c(

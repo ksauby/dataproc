@@ -7,11 +7,11 @@
 arrange_ggplot2(..., nrow = NULL, ncol = NULL, as.table = FALSE)
 }
 \arguments{
-\item{nrow}{Number of rows of plots. Defaults to \codce{NULL}.}
+\item{nrow}{Number of rows of plots. Defaults to \code{NULL}.}
 
-\item{ncol}{Number of columns of plots. Defaults to \codce{NULL}.}
+\item{ncol}{Number of columns of plots. Defaults to \code{NULL}.}
 
-\item{as.table}{I don't remember what this means. Defaults to \codce{NULL}.}
+\item{as.table}{I don't remember what this means. Defaults to \code{NULL}.}
 }
 \description{
 Arrange multiple ggplot figures in one window.

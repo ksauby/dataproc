@@ -9,7 +9,6 @@
 #' @description Process PCA results from SAS.
 #'
 #' @export
-#' @importFrom magrittr %>% %<>% %$%
 #' @importFrom dplyr filter mutate desc
 #' @importFrom plyr rbind.fill
 #' @importFrom reshape2 dcast

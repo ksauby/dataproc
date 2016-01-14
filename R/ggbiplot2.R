@@ -19,7 +19,7 @@
 #' @param varname.size Defaults to \code{3}
 #' @param varname.adjust Defaults to \code{1.5}
 #' @param varname.abbrev Defaults to \code{FALSE}
-#' @param color Defaults to \code{muted("red")# <- add new arguments to the function
+#' @param color Defaults to \code{muted("red")} # <- add new arguments to the function
 #' @param linetype Defaults to \code{"solid"}
 #' @param alpha_arrow Defaults to \code{1}
 #' @param unit.circle.color Defaults to \code{muted("white")}
