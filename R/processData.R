@@ -17,6 +17,7 @@
 #' }
 #'
 #' @export
+#' @importFrom zoo as.yearmon
 
 processData <- function(dataset) {
 	# read in data
