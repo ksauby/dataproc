@@ -42,11 +42,14 @@ lag_dates_function <- function(x){
 lag_insects_function <- function(x=x){
 	x %>% 
 		arrange(Date) %>%
-		group_by(PlantID) %>%
+		group_by(PlantID, Date) %>%
 		mutate(
 			# new insect variables
 			Insect_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
-			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
+			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)
+		) %>%
+		group_by(PlantID) %>%
+		mutate(
 			# lagged insects
 			CA_t_1 		= c(NA, head(CA_t, -1)),
 			ME_t_1 		= c(NA, head(ME_t, -1)),
