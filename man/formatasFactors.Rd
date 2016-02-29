@@ -4,7 +4,7 @@
 \alias{formatasFactors}
 \title{Format as Factors}
 \usage{
-formatasFactors(Plant_Surveys)
+formatasFactors(x)
 }
 \arguments{
 \item{Plant_Surveys}{Plant Survey Dataset}

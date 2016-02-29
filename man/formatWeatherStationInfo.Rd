@@ -4,7 +4,8 @@
 \alias{formatWeatherStationInfo}
 \title{Format Weather Station Info}
 \usage{
-formatWeatherStationInfo(wstations)
+formatWeatherStationInfo(wstations, Start_Date = "2014-01-17",
+  End_Date = "2008-01-20")
 }
 \arguments{
 \item{wstations}{List of weather stations, downloaded from the NOAA NCDC site}

@@ -20,7 +20,8 @@ mergePlantSurveysPlantInfo <- function(Plant_Surveys, Plant_Info) {
 			InBigPlantStudy, 
 			N.PlotPlantIDs, 
 			Easting, 
-			Northing
+			Northing,
+			ReproductiveMode
 		) %>%
 		merge(Plant_Surveys, by = "PlotPlantID")
 	return(Plant_Surveys)

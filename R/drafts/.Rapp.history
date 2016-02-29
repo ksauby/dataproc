@@ -1,0 +1,1520 @@
+formatasFactors <- function(x) {#
+	factors <- c("ClusterID", "Network", "Island", "Species", #
+		"DemographicSurvey", "Visit", "Year", "Season", "C_cactorum", #
+		"M_prodenialis")#
+	for (i in 1:length(factors)) {#
+		if (factors[i] %in% names(x)) {#
+			x[, factors[i]] %<>% as.factor#
+		}#
+	}#
+	return(x)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys <- Demographic.Plant.Surveys#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+# Plant_Surveys$Date %<>%#
+#	strptime("%Y-%m-%d") %>%#
+#	as.POSIXct(format="%Y-%m-%d")#
+# Plant_Surveys %<>% as.data.frame %>% assignSeason#
+# Plant_Surveys$Date %<>% as.Date#
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+Plant_Surveys %>%#
+group_by(PlantID, Date) %>%#
+summarise(n.surveys = length(Species)) %>%#
+filter(n.surveys > 1) %>%#
+as.data.frame
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys <- Demographic.Plant.Surveys#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+# Plant_Surveys$Date %<>%#
+#	strptime("%Y-%m-%d") %>%#
+#	as.POSIXct(format="%Y-%m-%d")#
+# Plant_Surveys %<>% as.data.frame %>% assignSeason#
+# Plant_Surveys$Date %<>% as.Date#
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+Plant_Surveys %>%#
+group_by(PlantID, Date) %>%#
+summarise(n.surveys = length(Species)) %>%#
+filter(n.surveys > 1) %>%#
+as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				assign(#
+					paste(sizes[i], "_t_1", sep=""), #
+					c(NA, temp[-length(temp)])#
+				)#
+			}#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+paste("x$", sizes[i], "_t_1", sep="")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+		sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				assign(#
+					paste("x$", sizes[i], "_t_1", sep=""), #
+					c(NA, temp[-length(temp)])#
+				)#
+			}#
+		}
+head(x)
+i
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes[i] %in% names(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+temp <- eval(parse(text=paste("x$", sizes[i], sep="")))
+head(temp)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+paste("x$", sizes[i], "_1", sep="")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+		sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				assign(#
+					paste("x$", sizes[i], "_1", sep=""), #
+					c(NA, temp[-length(temp)])#
+				)#
+			}#
+		}
+head(x)
+head(temp)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+assign(#
+					paste("x$", sizes[i], "_1", sep=""), #
+					c(NA, temp[-length(temp)])#
+				)
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+paste("x$", sizes[i], "_1", sep="")
+x$Cone_t_1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+c(NA, temp[-length(temp)])
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+paste("x$", sizes[i], "_1", sep="")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+c(NA, temp[-length(temp)])
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+assign(#
+					paste(sizes[i], "_1", sep=""), #
+					c(NA, temp[-length(temp)])#
+				)
+paste(sizes[i], "_1", sep="")
+Cone_t_1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				assign(#
+					x[paste(sizes[i], "_1", sep="")], #
+					c(NA, temp[-length(temp)])#
+				)#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+		sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				assign(#
+					x[, paste(sizes[i], "_1", sep="")], #
+					c(NA, temp[-length(temp)])#
+				)#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+		sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+					x[paste(sizes[i], "_1", sep="")] <- c(NA, temp[-length(temp)])#
+				)#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+		sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+					x[paste(sizes[i], "_1", sep="")] <- c(NA, temp[-length(temp)])#
+				)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+		sizes <- c("Size_t", "Height_t", "Cone_t")#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+					x[paste(sizes[i], "_1", sep="")] <- c(NA, temp[-length(temp)])#
+			}#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+					x %<>% mutate(.[paste(sizes[i], "_1", sep="")] = c(NA, temp[-length(temp)]))#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+					x %<>% mutate(#
+						paste(sizes[i], "_1", sep="") = c(NA, temp[-length(temp)])#
+					)#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+					x[paste(sizes[i], "_1", sep="")] <- c(NA, temp[-length(temp)])#
+			}#
+		}
+head(x)
+head(x) %>% as.data.frame
+x[which(x$PlantID=="8695"),]
+x[which(x$PlantID=="8695"),] %>% as.data.frame
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+require(dplyr)#
+data(iris)#
+iris <- tbl_df(iris)
+multipetal <- function(df, n) {#
+    varname <- paste("petal", n , sep=".")#
+    df <- mutate(df, varname = Petal.Width * n)  ## problem arises here#
+    df#
+}
+multipetal
+for(i in 2:5) {#
+    iris <- multipetal(df=iris, n=i)#
+}
+iris
+multipetal <- function(df, n) {#
+    varname <- paste("petal", n , sep=".")#
+    varval <- lazyeval::interp(~Petal.Width * n, n=n)#
+    mutate_(df, .dots= setNames(list(varval), varname))#
+}
+for(i in 2:5) {#
+    iris <- multipetal(df=iris, n=i)#
+}
+iris
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(df, .dots= setNames(list(varval), varname))#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				multipetal(df=x)#
+			}#
+		}
+head(x)
+head(x) %>% as.data.frame
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(df, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				multipetal(df=x)#
+			}#
+		}
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+head(x)
+head(x) %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(df, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				#temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				multipetal(df=x)#
+			}#
+		}
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+i=1
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(df, .dots= setNames(list(varval), varname))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				#temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				multipetal(df=x)#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				#temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				multipetal(x=x)#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				#temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				multipetal()#
+			}#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- c(NA, temp[-length(temp)])#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				#temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- multipetal()#
+			}#
+		}
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- lag(temp)#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				#temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- multipetal()#
+			}#
+		}	#
+}
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- lag(temp)#
+		    mutate_(x, .dots= setNames(list(varval), varname))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- lag(temp)#
+		    mutate_(x, .dots= setNames(list(varval), varname))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+varval
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+varname
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		multipetal <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- lag(temp)#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				#temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- multipetal()#
+			}#
+		}	#
+}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- lag(temp)#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+head(x)
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+?lag
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots= setNames(list(varval), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots= setNames(dplyr::lag(temp), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- dplyr::lag(temp)#
+		    mutate(x, setNames(dplyr::lag(temp), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		    varval <- dplyr::lag(temp)#
+		    mutate(x, setNames(dplyr::lag(sizes[i]), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+				temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate(x, setNames(dplyr::lag(sizes[i]), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+head(x)
+head(x) %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate(x, .dots = setNames(dplyr::lag(sizes[i]), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+head(x) %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots = setNames(dplyr::lag(sizes[i]), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+head(x) %>% as.data.frame
+x[which(x$PlantID=="8695"),] %>% as.data.frame %>% dplyr::select(Size_t, Size_t_1, Height_t, Height_t_1)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots = setNames(dplyr::lag(eval(parse(text=sizes[i]))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+varval <- lazyeval::interp(~Petal.Width * n, n=n)
+varval
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots = setNames(dplyr::lag(parse(text=sizes[i])), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+? lazyeval::interp
+interp(~ x + y, x = 10)
+lazyeval ::interp(~ x + y, x = 10)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots = setNames(dplyr::lag(parse(text=sizes[i])), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots = setNames(list(dplyr::lag(parse(text=sizes[i]))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    mutate_(x, .dots = setNames(list(dplyr::lag(eval(parse(text=sizes[i])))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate_(x, .dots = setNames(list(dplyr::lag(eval(parse(text=sizes[i])))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate_(x, .dots = setNames(dplyr::lag(eval(parse(text=sizes[i]))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+?mutate
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate(x, setNames(dplyr::lag(eval(parse(text=sizes[i]))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate(setNames(dplyr::lag(eval(parse(text=sizes[i]))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate(setNames(dplyr::lag(eval(parse(text=sizes[i]))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate(setNames(dplyr::lag(eval(parse(text=paste(".$", sizes[i], sep="")))), varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+paste(".$", sizes[i], sep="")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function(df, n) {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate(#
+				setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				varname))#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate(#
+				setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% mutate(#
+				setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(sizes[i], sep="")#
+							)#
+						)#
+					), #
+				varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate(#
+				setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+varname
+i
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes[i]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate(#
+				setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+i
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+paste(".$", sizes[i], sep="")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+varname
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate_(#
+				setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate_(#
+				.dots = setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				varname))#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate(#
+				#setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				#varname)#
+				)#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate(#
+				#setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				#varname)#
+				)#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate(#
+				#setNames(#
+					.[i] = dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					), #
+				#varname)#
+				)#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		lag_size <- function() {#
+		    varname <- paste(sizes[i], "_1", sep="")#
+		#    varval <- dplyr::lag(temp)#
+		    x %<>% group_by(PlantID) %>%#
+			mutate(#
+				#setNames(#
+					dplyr::lag(#
+						eval(#
+							parse(#
+								text=paste(".$", sizes[i], sep="")#
+							)#
+						)#
+					) #
+				#varname)#
+				)#
+		}#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+				x <- lag_size()#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+			    varname <- paste(sizes[i], "_1", sep="")#
+			#    varval <- dplyr::lag(temp)#
+			    x %<>% group_by(PlantID) %>%#
+				mutate(#
+					#setNames(#
+						dplyr::lag(#
+							eval(#
+								parse(#
+									text=paste(".$", sizes[i], sep="")#
+								)#
+							)#
+						) #
+					#varname)#
+					)#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+names(x)[dim(x)[2]]
+names(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+			  #  varname <- #
+			#    varval <- dplyr::lag(temp)#
+			    x %<>% group_by(PlantID) %>%#
+				mutate(#
+					#setNames(#
+						dplyr::lag(#
+							eval(#
+								parse(#
+									text=paste(".$", sizes[i], sep="")#
+								)#
+							)#
+						) #
+					#varname)#
+					)#
+			names(x)[dim(x)[2]] <- paste(sizes[i], "_1", sep="")#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+			}#
+		}
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID)#
+		sizes <- c(#
+			"Size_t", #
+			"Height_t", #
+			"Cone_t", #
+			"Cylinder_Tall_t_1", #
+			"Elliptic_Cylinder_t_1"#
+		)#
+		for (i in 1:length(sizes)) {#
+			if (sizes[i] %in% names(x)) {#
+			  #  varname <- #
+			#    varval <- dplyr::lag(temp)#
+			    x %<>% group_by(PlantID) %>%#
+				mutate(#
+					#setNames(#
+						dplyr::lag(#
+							eval(#
+								parse(#
+									text=paste(sizes[i], sep="")#
+								)#
+							)#
+						) #
+					#varname)#
+					)#
+			names(x)[dim(x)[2]] <- paste(sizes[i], "_1", sep="")#
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))#
+			}#
+		}
+head(x)
+head(x) %>% as.data.frame
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %<>% #
+					group_by(PlantID) %>%#
+					mutate(#
+					#setNames(#
+						dplyr::lag(Size_t)
+)
+head(x)
+head(x) %>% as.data.frame
+x[which(x$PlantID=="8695"), ]
+x[which(x$PlantID=="8695"), ] %>% dplyr::select(Size_t, Size_t_1)
+x[which(x$PlantID=="8695"), ] %>% dplyr::select(Size_t,`dplyr::lag(Size_t)`)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+sizes[i]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %<>% #
+					group_by(PlantID) %>%#
+					mutate(#
+					#setNames(#
+						dplyr::lag(eval(#
+								parse(#
+									text=paste("x$", sizes[i], sep="")#
+								)#
+							))
+)
+df = data.frame(x = 1:10, y = 2:11)#
+#
+f = function(df, s){#
+    eval(substitute(mutate(df, z = s)))#
+}#
+f(df, x-y)#
+f(df, x+y)

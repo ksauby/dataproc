@@ -38,7 +38,7 @@ Replace_Blank_w_Okay_Function <- function(x){
 #'
 #' @export
 
-formatWeatherStationInfo <- function(wstations) {
+formatWeatherStationInfo <- function(wstations, Start_Date = "2014-01-17", End_Date = "2008-01-20") {
 	# create columns for Start and End Dates of Weather Station
 	wstations$Start_Date <- sub(" .*", "", 
 		wstations$Date_Range)
@@ -46,7 +46,7 @@ formatWeatherStationInfo <- function(wstations) {
 		wstations$Date_Range)
 	# filter dates to study dates
 	wstations %<>%
-		filter(Start_Date <= "2014-01-17", End_Date >= "2008-01-20") %>%
+		filter(Start_Date <= Start_Date, End_Date >= End_Date) %>%
 		# merge with list of weather stations for which start/end date is not known
 		rbind(filter(wstations, Start_Date == "", End_Date >= ""))
 	return(wstations)

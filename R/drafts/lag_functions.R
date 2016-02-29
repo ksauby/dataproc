@@ -97,20 +97,41 @@ lag_insects_yr_function <- function(x=x){
 #' @export
 
 lag_size_function <- function(x=x){
-	x %>% 
+	x <- Plant_Surveys
+	x %<>% 
 		arrange(Date) %>%
-		group_by(PlantID) %>%
-		mutate(
-			# size
-			Size_t_1 			= c(NA, Size_t[-length(Size_t)]),
-			Height_t_1 			= c(NA, Height_t[-length(Height_t)]),
-			Cone_t_1 			= c(NA, Cone_t[-length(Cone_t)]),
-			Cylinder_Tall_t_1 	= c(NA, Cylinder_Tall_t[-length(Cylinder_Tall_t)]),
-			# fruit
-			Fruit_t_1 			= c(NA, Fruit_t[-length(Fruit_t)]),
-			FruitPres_t_1 		= c(NA, FruitPres_t[-length(FruitPres_t)])
+		group_by(PlantID)
+		sizes <- c(
+			"Size_t", 
+			"Height_t", 
+			"Cone_t", 
+			"Cylinder_Tall_t_1", 
+			"Elliptic_Cylinder_t_1"
 		)
-}
+		for (i in 1:length(sizes)) {
+			if (sizes[i] %in% names(x)) {
+			  #  varname <- 
+			#    varval <- dplyr::lag(temp)
+			    x %<>% 
+					group_by(PlantID) %>%
+					mutate(
+					#setNames(
+						dplyr::lag(Size_t)
+							
+							
+							
+						) 
+					#varname)
+					)
+			names(x)[dim(x)[2]] <- paste(sizes[i], "_1", sep="")
+		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))
+			}
+		}	
+		
+		
+
+"Fruit_t_1", 
+"FruitPres_t_1", 
 
 
 #' Calculate size and fruit production variables at the previous time step

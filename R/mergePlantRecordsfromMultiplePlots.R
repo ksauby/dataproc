@@ -14,15 +14,20 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		# pull all records for this Tag Number from plot surveys
 		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])
 		Z[[i]] 	<- as.data.frame(matrix(NA,length(unique(L$Date)),1))	
-		Z[[i]][, 1] 			<- L$PlantID[1]
-		Z[[i]][, "Date"] 		<- unique(L$Date)
+		Z[[i]][, 1] 					<- L$PlantID[1]
+		Z[[i]][, "Date"] 				<- unique(L$Date)
 		# can't include unique Tag_Number because some plants are in more than one plot
-		Z[[i]][, "ClusterID"] 	<- L$ClusterID[1]
-		Z[[i]][, "Network"] 	<- L$Network[1]
-		Z[[i]][, "Island"] 		<- L$Island[1]
-		Z[[i]][, "Species"] <- L$Species[1]
-		Z[[i]][, "Easting"] 	<- L$Easting[1]
-		Z[[i]][, "Northing"] 	<- L$Northing[1]
+		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]
+		Z[[i]][, "Network"] 			<- L$Network[1]
+		Z[[i]][, "Island"] 				<- L$Island[1]
+		Z[[i]][, "Species"] 			<- L$Species[1]
+		Z[[i]][, "Easting"] 			<- L$Easting[1]
+		Z[[i]][, "Northing"] 			<- L$Northing[1]
+		Z[[i]][, "ReproductiveMode"]	<- L$ReproductiveMode %>%
+												.[which(. != "NA")] %>%
+												.[which(!is.na(.))] %>%
+												unique(.) %>%
+												paste(collapse="")
 		# for each date
 		for (j in 1:length(unique(L$Date))) {
 			# pull all plant survey records for this date from plant surveys
@@ -121,6 +126,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		Easting,
 		Northing, 
 		Species, 
+		ReproductiveMode,
 		# insects
 		CA_t, 
 		ME_t, 

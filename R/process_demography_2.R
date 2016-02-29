@@ -193,17 +193,15 @@ createInsectFactorVariables <- function(Plant_Surveys) {
 #'
 #' @export
 
-formatasFactors <- function(Plant_Surveys) {
-	Plant_Surveys$ClusterID 		%<>% as.factor
-	Plant_Surveys$Network 			%<>% as.factor
-	Plant_Surveys$Island 			%<>% as.factor
-	Plant_Surveys$Species 			%<>% as.factor
-	Plant_Surveys$DemographicSurvey %<>% as.factor
-	Plant_Surveys$Visit 			%<>% as.factor
-	Plant_Surveys$Year 				%<>% as.factor
-	Plant_Surveys$Season 			%<>% as.factor
-	Plant_Surveys$C_cactorum 		%<>% as.factor
-	Plant_Surveys$M_prodenialis 	%<>% as.factor
-	return(Plant_Surveys)
+formatasFactors <- function(x) {
+	factors <- c("ClusterID", "Network", "Island", "Species", 
+		"DemographicSurvey", "Visit", "Year", "Season", "C_cactorum", 
+		"M_prodenialis")
+	for (i in 1:length(factors)) {
+		if (factors[i] %in% names(x)) {
+			x[, factors[i]] %<>% as.factor
+		}
+	}
+	return(x)
 }
 

@@ -2,6 +2,7 @@
 #'
 #' @description Process Plant Info
 #' @param Plant_Info Dataset with Plant Information
+#' @param Plot_Info Dataset with Plot Information
 #'
 #' @importFrom dplyr select summarise group_by arrange
 #' @export
@@ -9,7 +10,7 @@
 processPlantInfo <- function(Plant_Info, Plot_Info) {
 	# ----------------- ADD INFO FROM Plot_Info (Cluster, Network, Island, etc.)
 	Plant_Info <- Plot_Info %>%
-		dplyr::select(
+		select(
 			Island, 
 			Tag_Number, 
 			Cluster, 
@@ -116,6 +117,9 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		filter(ClusterID!=0) %>%
 		.[, -2] %>%
 		arrange(Tag_Number)
+	Plot_Info_Cluster %<>%
+		group_by(Tag_Number) %>%
+		summarise(ClusterID = paste(ClusterID, collapse=", "))
 	# CLUSTER ID FOR PLOTS *NOT* IN CLUSTERS
 	temp_A = Plot_Info %>%
 		dplyr::select(Tag_Number, Cluster) %>%
