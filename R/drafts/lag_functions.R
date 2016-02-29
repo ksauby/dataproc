@@ -111,18 +111,16 @@ lag_size_function <- function(x=x){
 		for (i in 1:length(sizes)) {
 			if (sizes[i] %in% names(x)) {
 			  #  varname <- 
-			#    varval <- dplyr::lag(temp)
+				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)
 			    x %<>% 
 					group_by(PlantID) %>%
 					mutate(
-					#setNames(
-						dplyr::lag(Size_t)
-							
-							
-							
-						) 
-					#varname)
-					)
+						.dots = setNames(
+							list(varval),
+							sizes[i]
+						)
+					)	
+				}			
 			names(x)[dim(x)[2]] <- paste(sizes[i], "_1", sep="")
 		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))
 			}
