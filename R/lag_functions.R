@@ -7,8 +7,8 @@
 	
 calculateLagGroupedDF <- function(
 	x, 
-	vars = vars, 
-	arrange.variable = "Date", 
+	vars, 
+	arrange.variable = "Date",
 	grouping.variable = "PlantID"
 ) {
 	x %<>% 
@@ -20,13 +20,13 @@ calculateLagGroupedDF <- function(
 	for (i in 1:length(vars)) {
 		if (vars[i] %in% names(x)) {
 			# select columns
-			mycols <- c("Date", vars[i])
+			mycols <- c(arrange.variable, vars[i])
 			z <- x %>% dplyr::select(match(mycols, names(.)))
 			# set new variable name
 			var.names <- setNames(vars[i], paste0(vars[i], "_1"))
 			# calculate new lag variable
 			z %<>% mutate_each_(funs(lag), var.names)
-			y <- merge(y, z, by=c("PlantID", "Date", vars[i]))
+			y <- merge(y, z, by=c(grouping.variable, arrange.variable, vars[i]))
 		}
 	}
 	return(y)
@@ -91,7 +91,8 @@ calculateInsectLags <- function(
 		"CHyr_t",
 		"DAyr_t",
 		"Insectyr_t",
-		"NatInsectyr_t"
+		"NatInsectyr_t",
+		"Old_Moth_Evidence_t"
 	)
 	x %>% calculateLagGroupedDF(
 		vars=vars, 
@@ -120,16 +121,18 @@ calculateSizeLags <- function(
 		"Cone_t", 
 		"Cylinder_Tall_t", 
 		"Cylinder_t", 
-		"Elliptic_Cylinder_t"
-		"Size_max_t",
-		"Size_min_t",
-		"Cone_max_t",
-		"Cylinder_Tall_max_t"
+		"Elliptic_Cylinder_t",
+		"Size_t_max",
+		"Size_t_min",
+		"Cone_t_max",
+		"Cone_t_min",
+		"Cylinder_Tall_t_max",
+		"Cylinder_Tall_t_min"
 	)
 	x %>% calculateLagGroupedDF(
-		vars=vars, 
-		arrange.variable=arrange.variable, 
-		grouping.variable=grouping.variable
+		vars, 
+		arrange.variable, 
+		grouping.variable
 	)
 }
 
@@ -148,16 +151,13 @@ calculateFruitLags <- function(
 	arrange.variable, 
 	grouping.variable
 ){
-	vars = c(
+	vars <- c(
 		"Fruit_t",
 		"FruitPres_t"
 	)
-	x %>% 
-		arrange_(.dots=arrange.variable) %>%
-		group_by_(.dots=grouping.variable) %>%
-		calculateLagGroupedDF(
-			vars=vars, 
-			arrange.variable=arrange.variable, 
-			grouping.variable=grouping.variable
-		)
+	x %>% calculateLagGroupedDF(
+		vars=vars, 
+		arrange.variable=arrange.variable, 
+		grouping.variable=grouping.variable
+	)
 }

@@ -17,42 +17,45 @@
 #' @import magrittr
 #' @import data.table
 
-RGR_function <- function(x=x){
-	x %<>% mutate(
-		RGR_Height 			= (Height_t - Height_t_1) /
-								(DaysSincePrevSurvey*Height_t_1), 
-	 	RGR_Size 			= (Size_t - Size_t_1) / 
-								(DaysSincePrevSurvey*Size_t_1),
-		RGR_Cone 			= (Cone_t - Cone_t_1) / 
-								(DaysSincePrevSurvey*Cone_t_1),
-		# RGR_Cylinder_Tall 	= (Cylinder_Tall_t - Cylinder_Tall_t_1) / 
-		#						(DaysSincePrevSurvey*Cylinder_Tall_t_1),
-		RGR_Size365 				= RGR_Size*365,
-		RGR_Cone365 				= RGR_Cone*365,
-		# RGR_CylinderTall365 		= RGR_Cylinder_Tall*365,
-		# lagged RGR
-		RGR_Height_t_1 			= c(NA, head(RGR_Height, -1)),
-		RGR_Size_t_1 			= c(NA, head(RGR_Size, -1)),
-		RGR_Cone_t_1 			= c(NA, head(RGR_Cone, -1)),
-		# RGR_Cylinder_Tall_t_1 	= c(NA, head(RGR_Cylinder_Tall, -1))		
-	) %>%
-	as.data.table
-	# remove Inf values
-	cnames <- c(
-		"RGR_Height", 
-		"RGR_Size", 
-		"RGR_Cone",
-		# "RGR_Cylinder_Tall",
-		"RGR_Size365",
-		"RGR_Cone365",
-		# "RGR_CylinderTall365",
-		"RGR_Height_t_1",
-		"RGR_Size_t_1",
-		"RGR_Cone_t_1"# ,
-		# "RGR_Cylinder_Tall_t_1"
+calculateRGR <- function(x=x){
+	vars <- c(
+		"Height_t",
+		"Size_t",
+		"Cone_t",
+		"Cylinder_Tall_t"
+	)
+	if ("Height_t" %in% names(x)) {
+		x %<>% mutate(
+			RGR_Height		= (Height_t - Height_t_1) /
+								(DaysSincePrevSurvey*Height_t_1),
+			RGR_Height365 	= RGR_Height*365		
 		)
-	for (cname in cnames) {
-		x[, cname := NA_Function(x[[cname]]), with=FALSE]
 	}
+	if ("Size_t" %in% names(x)) {
+		x %<>% mutate(
+			RGR_Size		= (Size_t - Size_t_1) /
+								(DaysSincePrevSurvey*Size_t_1),
+			RGR_Size365 	= RGR_Size*365				
+		)
+	}
+	if ("Cone_t" %in% names(x)) {
+		x %<>% mutate(
+			RGR_Cone		= (Cone_t - Cone_t_1) / 
+								(DaysSincePrevSurvey*Cone_t_1),
+			RGR_Cone365 	= RGR_Cone*365				
+		)
+	}
+	if ("Cylinder_Tall_t" %in% names(x)) {
+		x %<>% mutate(
+			RGR_Cylinder_Tall = (Cylinder_Tall_t - Cylinder_Tall_t_1) / 
+									(DaysSincePrevSurvey*Cylinder_Tall_t_1),
+			RGR_CylinderTall365 = RGR_Cylinder_Tall*365
+		)
+	}
+	
+	# remove Inf values
+	x[, names(x)] %<>%
+		apply(., 2, NA_Function
+	)
 	return(x)
 }

@@ -15,11 +15,17 @@ createAllSurveysDataset <- function(timeseries) {
 	timeseries_all_surveys <- timeseries
 	timeseries_all_surveys %<>% 
 								# lag variables
-								lag_size_function %>%
-								lag_dates_function %>%
-								lag_insects_function %>%
+								calculateSizeLags(
+									arrange.variable="Date", 
+									grouping.variable="PlantID"
+								) %>%
+								calculateDateLags %>%
+								calculateInsectLags(
+									arrange.variable="Date", 
+									grouping.variable="PlantID"
+								) %>%
 								# RGR
-								RGR_function
+								calculateRGR
 	# Save
 	setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")
 	cache("timeseries_all_surveys")
@@ -157,7 +163,7 @@ createObsYear <- function(timeseries) {
 
 createFruitYearDataset <- function(timeseries) {
 	timeseries_fruityear <- timeseries
-	timeseries_fruityear %>% 
+	timeseries_fruityear %<>% 
 		as.data.frame %>%
 		createObsYear %>%
 		filter(!(is.na(ObsYear))) %>%
@@ -185,7 +191,17 @@ createFruitYearDataset <- function(timeseries) {
 			complete_insect_surveys = min(complete_insect_surveys), 
 			complete_surveys		= min(complete_surveys)
 		) %>%
-	# lag variables
-	lag_size_fruit_function %>%
-	lag_insects_fecundity_function
+		# lag variables
+		calculateSizeLags(
+			arrange.variable="ObsYear", 
+			grouping.variable="PlantID"
+		) %>%
+		calculateFruitLags(
+			arrange.variable="ObsYear", 
+			grouping.variable="PlantID"
+		) %>%
+		calculateInsectLags(
+			arrange.variable="ObsYear", 
+			grouping.variable="PlantID"
+		)
 }
