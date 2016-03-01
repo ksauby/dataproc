@@ -39,54 +39,46 @@ lag_dates_function <- function(x){
 #' 
 #' @export
 
-lag_insects_function <- function(x=x){
+
+lag_insect_function
+
+Date or ObsYear
+
+calculateInsectLags <- function(
+	x=x,
+	arrange.variable, 
+	grouping.variable
+	){
+	vars = c(
+		"CA_t", 
+		"ME_t", 
+		"CH_t", 
+		"DA_t", 
+		"Insect_t", 
+		"NatInsect_t",
+		"CAyr_t",
+		"MEyr_t",
+		"CHyr_t",
+		"DAyr_t",
+		"Insectyr_t",
+		"NatInsectyr_t"
+	)
 	x %>% 
 		arrange(Date) %>%
 		group_by(PlantID, Date) %>%
 		mutate(
 			# new insect variables
-			Insect_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
-			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)
+			Insect_t 	= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
+			NatInsect_t = ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)
 		) %>%
 		group_by(PlantID) %>%
-		mutate(
-			# lagged insects
-			CA_t_1 		= c(NA, head(CA_t, -1)),
-			ME_t_1 		= c(NA, head(ME_t, -1)),
-			CH_t_1 		= c(NA, head(CH_t, -1)),
-			DA_t_1 		= c(NA, head(DA_t, -1)),
-			Insect_t_1 		= c(NA, head(Insect_t, -1)),
-			NatInsect_t_1 	= c(NA, head(NatInsect_t, -1))
-		) %>%
-		as.data.frame
+		calculateLagGroupedDF(
+			vars=vars, 
+			arrange.variable=arrange.variable, 
+			grouping.variable=grouping.variable
+		)
 }
 
-
-#' Calculate insect presence during the previous year
-#' 
-#' @param x Dataset
-#' @description calculate lag insects during the previous year.
-#' 
-#' @export
-
-lag_insects_yr_function <- function(x=x){
-	x %>% 
-		arrange(Date) %>%
-		group_by(PlantID) %>%
-		mutate(
-			# new insect variables
-			Insectyr_t 		= ifelse(sum(DAyr_t, CAyr_t, CHyr_t, MEyr_t, na.rm=T)>0, 1, 0),
-			NatInsectyr_t 	= ifelse(sum(DAyr_t, CHyr_t, MEyr_t, na.rm=T)>0, 1, 0),
-			# lagged insects
-			CAyr_t_1 		= c(NA, head(CAyr_t, -1)),
-			MEyr_t_1 		= c(NA, head(MEyr_t, -1)),
-			CHyr_t_1 		= c(NA, head(CHyr_t, -1)),
-			DAyr_t_1 		= c(NA, head(DAyr_t, -1)),
-			Insectyr_t_1 		= c(NA, head(Insectyr_t, -1)),
-			NatInsectyr_t_1 	= c(NA, head(NatInsectyr_t, -1))
-		) %>%
-		as.data.frame
-}
 
 
 #' Calculate size variables at the previous time step
@@ -97,39 +89,81 @@ lag_insects_yr_function <- function(x=x){
 #' @export
 
 lag_size_function <- function(x=x){
+	
+	
+	vars <- c(
+		"Size_t", 
+		"Height_t", 
+		"Cone_t", 
+		"Cylinder_Tall_t", 
+		"Cylinder_t", 
+		"Elliptic_Cylinder_t"
+	)
+	
+	
 	x <- Plant_Surveys
-	x %<>% 
-		arrange(Date) %>%
-		group_by(PlantID)
-		sizes <- c(
-			"Size_t", 
-			"Height_t", 
-			"Cone_t", 
-			"Cylinder_Tall_t_1", 
-			"Elliptic_Cylinder_t_1"
-		)
-		for (i in 1:length(sizes)) {
-			if (sizes[i] %in% names(x)) {
-			  #  varname <- 
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)
-			    x %<>% 
-					group_by(PlantID) %>%
-					mutate(
-						.dots = setNames(
-							list(varval),
-							sizes[i]
-						)
-					)	
-				}			
-			names(x)[dim(x)[2]] <- paste(sizes[i], "_1", sep="")
-		#		temp <- eval(parse(text=paste("x$", sizes[i], sep="")))
-			}
-		}	
-		
-		
 
-"Fruit_t_1", 
-"FruitPres_t_1", 
+	#' @param x the dataset
+	#' @param vars the vector of variables
+	#' @param arrange.variable is variable that arranges the data. Defaults to "Date".
+	#' @param grouping.variable is the variable that groups the data. Defaults to "PlantID".
+	#' @description the function first arranges by Date
+	
+	calculateLagGroupedDF <- function(
+		x, 
+		vars = vars, 
+		arrange.variable = "Date", 
+		grouping.variable = "PlantID"
+	) {
+		x %<>% 
+			arrange_(.dots = arrange.variable) %>%
+			group_by_(.dots = grouping.variable)
+			# make a copy to use in the iterations
+		y <- x
+		# calculate lag for each variable in vars
+		for (i in 1:length(vars)) {
+			if (vars[i] %in% names(x)) {
+				# select columns
+				mycols <- c("Date", vars[i])
+				z <- x %>% dplyr::select(match(mycols, names(.)))
+				# set new variable name
+				var.names <- setNames(vars[i], paste0(vars[i], "_1"))
+				# calculate new lag variable
+				z %<>% mutate_each_(funs(lag), var.names)
+				y <- merge(y, z, by=c("PlantID", "Date", vars[i]))
+			}
+		}
+		return(y)
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	vars <- c(
+		"Size_t", 
+		"Height_t", 
+		"Cone_t", 
+		"Cylinder_Tall_t", 
+		"Cylinder_t", 
+		"Elliptic_Cylinder_t"
+		"Size_max_t_1",
+		"Size_min_t_1",
+		"Cone_max_t_1",
+		"Cylinder_Tall_max_t_1"
+	)
+	
+	
+		
 
 
 #' Calculate size and fruit production variables at the previous time step
@@ -138,48 +172,27 @@ lag_size_function <- function(x=x){
 #' @description calculate lag size and fruit.
 #' 
 #' @export
+lag_size_fruit_function
 
-lag_size_fruit_function <- function(x=x){
+calculateFruitLags <- function(
+	x=x,
+	arrange.variable, 
+	grouping.variable
+){
+	vars = c(
+		"Fruit_t",
+		"FruitPres_t"
+	)
 	x %>% 
-		arrange(ObsYear) %>%
-		group_by(PlantID) %>%
-		mutate(
-			# size
-			Size_max_t_1 			= c(NA, Size_t_max[-length(Size_t_max)]),
-			Size_min_t_1 			= c(NA, Size_t_min[-length(Size_t_min)]),
-			Cone_max_t_1 			= c(NA, Cone_t_max[-length(Cone_t_max)]),
-			Cylinder_Tall_max_t_1 	= c(NA, Cylinder_Tall_t_max[-length(Cylinder_Tall_t_max)]),
-			# fruit
-			Fruit_t_1 			= c(NA, Fruit_t[-length(Fruit_t)]),
-			FruitPres_t_1 		= c(NA, FruitPres_t[-length(FruitPres_t)])
+		arrange_(.dots=arrange.variable) %>%
+		group_by_(.dots=grouping.variable) %>%
+		calculateLagGroupedDF(
+			vars=vars, 
+			arrange.variable=arrange.variable, 
+			grouping.variable=grouping.variable
 		)
 }
 
-#' Calculate insect presence at previous time step for fecundity data
-#' 
-#' @param x Dataset
-#' @description calculate lag insects.
-#' 
-#' @export
-
-lag_insects_fecundity_function <- function(x=x){
-	x %>% 
-		arrange(ObsYear) %>%
-		group_by(PlantID) %>%
-		mutate(
-			# new insect variables
-			Insect_t 		= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
-			NatInsect_t 	= ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
-			# lagged insects
-			CA_t_1 		= c(NA, head(CA_t, -1)),
-			ME_t_1 		= c(NA, head(ME_t, -1)),
-			CH_t_1 		= c(NA, head(CH_t, -1)),
-			DA_t_1 		= c(NA, head(DA_t, -1)),
-			Insect_t_1 		= c(NA, head(Insect_t, -1)),
-			NatInsect_t_1 	= c(NA, head(NatInsect_t, -1))
-		) %>%
-		as.data.frame
-}
 
 #' Calculate size and fruit production variables at the previous time step
 #' 

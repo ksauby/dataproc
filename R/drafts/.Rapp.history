@@ -125,13 +125,6 @@ library(devtools)
 devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
 devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
 install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-library(ProjectTemplate)#
-setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
-# load project#
-load.project()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/Manuscript/Appendix')
-rmarkdown::render('weather.Rmd')
 setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling')
 library(ProjectTemplate)#
 #
@@ -140,330 +133,205 @@ library(ProjectTemplate)#
 #
 # load project#
 load.project()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# timeseries <- timeseries.25Jan2015JK.mod#
-#
-timeseries <- processData(timeseries.25Jan2015JK.mod)#
-timeseries_obs_after_USDA <- keepUSDAData(timeseries)#
-timeseries <- removeData(timeseries)#
-#
-# climate_data <- processWeather()#
-#
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival <- createSurvivalDataset(timeseries)#
-#
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
-#
-timeseries_survival_humifusa = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-timeseries_obs_after_USDA <- createAllSurveysDataset(timeseries_obs_after_USDA)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_obs_after_USDA")#
-write.csv(timeseries_all_surveys, "./data/timeseries_obs_after_USDA.csv")#
-#
-################################################################################
-# Fecundity#
-################################################################################
-timeseries_fecundity <- createFruitYearDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_fecundity")#
-write.csv(timeseries_fecundity, "./data/timeseries_fecundity.csv")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# timeseries <- timeseries.25Jan2015JK.mod#
-#
-timeseries <- processData(timeseries.25Jan2015JK.mod)#
-timeseries_obs_after_USDA <- keepUSDAData(timeseries)#
-timeseries <- removeData(timeseries)#
-#
-# climate_data <- processWeather()#
-#
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival <- createSurvivalDataset(timeseries)#
-#
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
-#
-timeseries_survival_humifusa = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-timeseries_obs_after_USDA <- createAllSurveysDataset(timeseries_obs_after_USDA)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_obs_after_USDA")#
-write.csv(timeseries_all_surveys, "./data/timeseries_obs_after_USDA.csv")#
-#
-################################################################################
-# Fecundity#
-################################################################################
-timeseries_fecundity <- createFruitYearDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_fecundity")#
-write.csv(timeseries_fecundity, "./data/timeseries_fecundity.csv")
 setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
 x <- Plant_Surveys
 setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
 x %<>% #
 		arrange(Date) %>%#
-		group_by(PlantID)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-sizes <- c(#
-			"Size_t", #
-			"Height_t", #
-			"Cone_t", #
-			"Cylinder_Tall_t_1", #
-			"Elliptic_Cylinder_t_1"#
-		)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-			#    varval <- dplyr::lag(temp)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-					#setNames(#
-						dplyr::lag(Size_t)#
-				}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-			#    varval <- dplyr::lag(temp)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-					#setNames(#
-						dplyr::lag(Size_t)#
-						)#
-				}
-i=1
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-			#    varval <- dplyr::lag(temp)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-					#setNames(#
-						dplyr::lag(Size_t)#
-						)#
-				}
+		group_by(PlantID) %>%#
+		dplyr::select("Size_t")
 head(x)
-head(x)%>%as.data.frame
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+# Plant_Surveys$Date %<>%#
+#	strptime("%Y-%m-%d") %>%#
+#	as.POSIXct(format="%Y-%m-%d")#
+# Plant_Surveys %<>% as.data.frame %>% assignSeason#
+# Plant_Surveys$Date %<>% as.Date#
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+Plant_Surveys %>%#
+group_by(PlantID, Date) %>%#
+summarise(n.surveys = length(Species)) %>%#
+filter(n.surveys > 1) %>%#
+as.data.frame#
+#
+################################################################################
+# Save modified timeseries dataset - just STRICTA#
+###############################################################################	#
+Plant_Surveys_by_Visit <- Plant_Surveys %>% #
+	group_by(Visit, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	# lag variables#
+	lag_size_fruit_function_GTMNERR %>%#
+	lag_dates_function %>%#
+	lag_insects_function %>%#
+	as.data.frame %>%#
+	# RGR#
+	mutate(#
+		RGR_Size = (Size_t - Size_t_1) / (DaysSincePrevSurvey*Size_t_1),#
+		RGR_Height = (Height_t - Height_t_1) / (DaysSincePrevSurvey*Height_t_1)#
+	)#
+Plant_Surveys_stricta_analysis <- Plant_Surveys_by_Visit %>% 	#
+	as.data.frame %>%#
+	droplevels %>% #
+	mutate(Ln_Size_t_1_st = arm::rescale(log(Size_t_1))) %>%#
+	dplyr::select(#
+		PlantID,#
+		Date,#
+		Network,#
+		Island,#
+		Size_t_1,#
+		Height_t_1,#
+		CA_t_1,#
+		ME_t_1,#
+		Old_Moth_t_1,#
+		RGR_Size,#
+		RGR_Height,#
+		Ln_Size_t_1_st,#
+		FruitPres_t,#
+		Fruit_t#
+	) %>%#
+	.[complete.cases(.),]#
+setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling/data')#
+write.csv(Plant_Surveys_stricta_analysis, "Plant_Surveys_stricta.csv")#
+setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling')#
+cache("Plant_Surveys_stricta")#
+################################################################################
+# Save modified timeseries dataset - just pusilla#
+################################################################################
+Plant_Surveys_pusilla =	Plant_Surveys_by_Visit %>% #
+	filter(Species=="Opuntia pusilla")#
+Plant_Surveys_pusilla$Species %<>% droplevels#
+#
+setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling')#
+cache("Plant_Surveys_pusilla")
 setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-names(x)[dim(x)[2]] <- paste(sizes[i], "_1", sep="")
-head(x)%>%as.data.frame
-x$Size_t_1
+x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID) %>%#
+		dplyr::select("Size_t")
 setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-			#    varval <- dplyr::lag(temp)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-					#setNames(#
-						dplyr::lag(eval(parse(text=sizes[i])))#
-						)#
-				}
-multipetal <- function(df, n) {#
-    varname <- paste("petal", n , sep=".")#
-    varval <- lazyeval::interp(~Petal.Width * n, n=n)#
-    mutate_(df, .dots= setNames(list(varval), varname))#
-}
-require(dplyr)#
-data(iris)#
-iris <- tbl_df(iris)
-for(i in 2:5) {#
-    iris <- multipetal(df=iris, n=i)#
-}
+x <- Plant_Surveys#
+	x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID) %>%#
+		dplyr::select("Size_t")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID) %>%#
+		dplyr::select(Size_t)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars <- setNames(vars, paste("Size_t", "_1", sep=""))#
+	x %<>% mutate_each(funs(dplyr::lag), vars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars <- "Size_t"#
+	vars <- setNames(vars, paste(vars, "_1", sep=""))#
+	x %<>% mutate_each(funs(dplyr::lag), vars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars <- "Size_t"#
+	vars <- setNames(vars, paste0(vars, "_1", sep=""))#
+	x %<>% mutate_each(funs(dplyr::lag), vars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars <- "Size_t"#
+	vars <- setNames(vars, paste0(vars, "_1"))#
+	x %<>% mutate_each(funs(dplyr::lag), vars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars <- "Size_t"#
+	vars <- setNames(vars, paste0(vars, "_1"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %<>% mutate_each_(funs(dplyr::lag), vars)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %>% mutate_each_(funs(dplyr::lag), vars) %>% head
+str(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %>% mutate_(funs(dplyr::lag), vars) %>% head
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %>% mutate_each_(funs(dplyr::lag), vars) %>% head
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+y <- x %>% mutate_each(funs(dplyr::lag))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+y <- x %>% mutate_each(funs(lag))
+head(y)
+merge(x, y, by="PlantID") %>% head
+merge(x, y, by="PlantID") %>% filter(PlantID=="9001")
+merge(x, y, by="PlantID") %>% filter(PlantID=="9002")
+merge(x, y, by="PlantID") %>% filter(PlantID=="9020")
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x <- Plant_Surveys
+head(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+x %<>% #
+		arrange(Date) %>%#
+		group_by(PlantID) %>%#
+		dplyr::select(Date, Island, Size_t)
+head(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+y <- x %>% mutate_each(funs(lag), -c(Date, Island))
+head(y)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars <- "Size_t"#
+	vars <- setNames(vars, paste0(vars, "_1"))#
+	y <- x %>% mutate_each_(funs(lag), vars, -c(Date, Island))
+?mutate_each_
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+y <- x %>% mutate_each_(funs(lag), vars, list(quote(-c(Date, Island))))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+y <- x %>% mutate_each_(funs(lag), vars, list(quote(-(Date, Island))))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
+vars <- "Size_t"#
+	vars <- setNames(vars, paste0(vars, "_1"))#
+	y <- x %>% mutate_each_(funs(lag), vars, list(quote(-c(Date, Island))))
+summarise_each_(iris, funs(max), list(quote(-Species)))
 head(iris)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-				}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-						)#
-				}
-head(x)
-i=2
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-						)#
-				}
-i=2
-head(x)
-?lazyeval::interp
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							varval,#
-							sizes[i]#
-						)#
-						)#
-				}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-list(varval)
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-sizes[i]
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-				}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-					)	#
-				}
-head(x)
-head(x) %>% as.data.aframe
-head(x) %>% as.data.frame
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-parse(text=sizes[i])
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-eval(parse(text=sizes[i]))
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))))#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-					)	#
-				}
-head(x) %>% as.data.frame
-i=3
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))))#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-					)	#
-				}
-head(x) %>% as.data.frame
-setwd('/Users/KSauby/Documents/Projects/dataproc/R/drafts')
-if (sizes[i] %in% names(x)) {#
-			  #  varname <- #
-				varval <- lazyeval::interp(~dplyr::lag(eval(parse(text=sizes[i]))), i=i)#
-			    x %<>% #
-					group_by(PlantID) %>%#
-					mutate(#
-						.dots = setNames(#
-							list(varval),#
-							sizes[i]#
-						)#
-					)	#
-				}
-head(x) %>% as.data.frame
