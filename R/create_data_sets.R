@@ -14,18 +14,78 @@
 createAllSurveysDataset <- function(timeseries) {
 	timeseries_all_surveys <- timeseries
 	timeseries_all_surveys %<>% 
-								# lag variables
-								calculateSizeLags(
-									arrange.variable="Date", 
-									grouping.variable="PlantID"
-								) %>%
-								calculateDateLags %>%
-								calculateInsectLags(
-									arrange.variable="Date", 
-									grouping.variable="PlantID"
-								) %>%
-								# RGR
-								calculateRGR
+		# lag variables
+		calculateSizeLags(
+			arrange.variable="Date", 
+			grouping.variable="PlantID"
+		) %>%
+		calculateDateLags %>%
+		calculateInsectLags(
+			arrange.variable="Date", 
+			grouping.variable="PlantID"
+		) %>%
+		# RGR
+		calculateRGR
+		# convert to factor
+		timeseries_all_surveys[,c(
+			"Location",
+			"Species",
+			"Coastal",
+			"Season",
+			"PlantID",
+			"PlantID2")] %<>%
+			apply(., 2, as.factor
+		)
+		timeseries_all_surveys[,c(
+			"Cylinder_Tall_t",
+			"Cone_t",
+			"Height_t",            
+			"Width_t",               
+			"Height_t_1",
+			"Cone_t_1",               
+			"Cylinder_Tall_t_1",
+			"RGR_Height",
+			"RGR_Height365",
+			"RGR_Size",
+			"RGR_Size365",
+			"RGR_Cone",
+			"RGR_Cone365",
+			"RGR_Cylinder_Tall",
+			"RGR_CylinderTall365")] %<>%
+			apply(., 2, as.numeric
+		)
+		timeseries_all_surveys[,c(
+			"DA_t",
+			"CH_t",
+			"ME_t",
+			"CA_t",
+			"Size_t",
+			"Fruit_t",  
+			"FruitPres_t",
+			"CACAPresent",
+			"MEPRPresent",
+			"DACTPresent",          
+			"CHVIPresent",
+			"NumInsectSpecies_t",
+			"Size_t_1",
+			"CA_t_1",
+			"ME_t_1",
+			"CH_t_1",                 
+			"DA_t_1")] %<>%
+			apply(., 2, as.integer
+		)
+
+                 
+
+	   
+	   
+	   
+	   
+	   
+	   
+	   		# convert to Date
+		timeseries_all_surveys$Date %<>% as.Date(format = "%Y-%m-%d")	
+		timeseries_all_surveys$Previous_Survey_Date %<>% as.Date(format = "%Y-%m-%d")	
 	# Save
 	setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")
 	cache("timeseries_all_surveys")
