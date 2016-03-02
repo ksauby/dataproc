@@ -20,6 +20,7 @@ renameLocations <- function(dat) {
 #' @description Create Year and Day of Year variables.
 #'
 #' @export
+#' @importFrom lubridate year
 
 formatClimateDataYearDayofYear <- function(climate_data) {
 	climate_data %>% 

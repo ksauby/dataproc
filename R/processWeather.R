@@ -284,7 +284,7 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 	# modify distance matrix
 	# 		keep columns 1:6 (correspond to the 6 sampling locations)
 	# 		keep rows 7:170 (correspond to the weather stations)
-	distance_matrix <- distance_matrix[7:134, 1:6]
+	distance_matrix <- distance_matrix[7:206, 1:6]
 	names(distance_matrix) <- Location_list
 	# merge distance matrix with weather station info
 	B <- dplyr::select(
