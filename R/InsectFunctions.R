@@ -3,6 +3,7 @@
 #' @param arrange.variable is variable that arranges the data. Defaults to "Date".
 #' @param grouping.variable is the variable that groups the data. Defaults to "PlantID".
 #' @description Calculate insects at time t ("Insect_t") and native insects at time t ("NatInsect_t").
+#' @export
 
 createNewInsectVariables <- function(
 	x, 

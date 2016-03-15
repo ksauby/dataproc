@@ -255,12 +255,14 @@ formatconvertClimateData <- function(climate_data) {
 #' @param Distance Radius (km) within which to look for climate stations for a particular location. Defaults to 85 kilometers.
 #'
 #' @export
+#' @importFrom sp coordinates spTransform CRS
+#' @importFrom reshape2 melt
 
 findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 	# merge sampling locations and weather station locations to calculate distance matrix (all pairwise distances among points)
 	A <- sites %>%
-		dplyr::select(Location.name, Latitude, Longitude) %>%
-		rbind.fill(dplyr::select(wstations, Name, Latitude, Longitude))
+		select(Location.name, Latitude, Longitude) %>%
+		rbind.fill(select(wstations, Name, Latitude, Longitude))
 	# first convert sampling locations and weather station coordinates to UTM
 	coordinates(A) <- c("Longitude", "Latitude")
 	proj4string(A) <- CRS("+proj=longlat +datum=WGS84")  ## for example
@@ -287,7 +289,7 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 	distance_matrix <- distance_matrix[7:206, 1:6]
 	names(distance_matrix) <- Location_list
 	# merge distance matrix with weather station info
-	B <- dplyr::select(
+	B <- select(
 		wstations, 
 		Name, 
 		Station.ID, 
@@ -302,7 +304,7 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 	)
 	distance_matrix %<>% cbind(B)
 	# change distance matrix columns to one column
-	weather_station_info <- reshape2::melt(
+	weather_station_info <- melt(
 		distance_matrix, 
 		id.vars=c(
 			"Name", 
@@ -328,7 +330,7 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 	# SELECT CLOSEST WEATHER STATIONS FOR EACH SAMPLING LOCATION
 	# merge distance data with climate_data
 	climate_data_temp <- weather_station_info %>% 
-		dplyr::select(Station.ID, Sampling_Location, Distance) %>%
+		select(Station.ID, Sampling_Location, Distance) %>%
 		merge(climate_data, by.x="Station.ID", by.y="STATION")
 	BLSP_stations <- climate_data_temp %>% 
 		filter(Sampling_Location=="BLSP" & Distance <= Distance)
@@ -482,7 +484,7 @@ calculateDegreeDays <- function(climate_data, DegreeDay_list) {
 		X[[i]] <- eval(parse(text=DegreeDay_list[i]))
 	}
 	DegreeDays <- do.call(rbind.fill, X)
-	DegreeDays$Date %<>% as.Date("%m/%d/%y")
+	DegreeDays$Date %<>% as.Date("%Y-%m-%d")
 	DegreeDays.unique = unique(DegreeDays[, 1:4])
 	# DegreeDays %>% filter(Date=="2014-01-17")
 	DegreeDays.merged = merge(

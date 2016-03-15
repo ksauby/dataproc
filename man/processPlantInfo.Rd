@@ -8,6 +8,8 @@ processPlantInfo(Plant_Info, Plot_Info)
 }
 \arguments{
 \item{Plant_Info}{Dataset with Plant Information}
+
+\item{Plot_Info}{Dataset with Plot Information}
 }
 \description{
 Process Plant Info

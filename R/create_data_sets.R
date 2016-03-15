@@ -20,6 +20,10 @@ createAllSurveysDataset <- function(timeseries) {
 			grouping.variable="PlantID"
 		) %>%
 		calculateDateLags %>%
+		createNewInsectVariables(
+			arrange.variable="Date", 
+			grouping.variable="PlantID"
+		) %>%
 		calculateInsectLags(
 			arrange.variable="Date", 
 			grouping.variable="PlantID"
@@ -36,6 +40,7 @@ createAllSurveysDataset <- function(timeseries) {
 			"PlantID2")] %<>%
 			apply(., 2, as.factor
 		)
+		# convert to numeric
 		timeseries_all_surveys[,c(
 			"Cylinder_Tall_t",
 			"Cone_t",
@@ -54,6 +59,7 @@ createAllSurveysDataset <- function(timeseries) {
 			"RGR_CylinderTall365")] %<>%
 			apply(., 2, as.numeric
 		)
+		# convert to integer
 		timeseries_all_surveys[,c(
 			"DA_t",
 			"CH_t",
@@ -71,21 +77,15 @@ createAllSurveysDataset <- function(timeseries) {
 			"CA_t_1",
 			"ME_t_1",
 			"CH_t_1",                 
-			"DA_t_1")] %<>%
+			"DA_t_1",
+			"Dead",
+			"DaysSincePrevSurvey")] %<>%
 			apply(., 2, as.integer
 		)
-
-                 
-
-	   
-	   
-	   
-	   
-	   
-	   
-	   		# convert to Date
+   		# convert to Date
 		timeseries_all_surveys$Date %<>% as.Date(format = "%Y-%m-%d")	
-		timeseries_all_surveys$Previous_Survey_Date %<>% as.Date(format = "%Y-%m-%d")	
+		timeseries_all_surveys$Previous_Survey_Date %<>% 
+			as.Date(format = "%Y-%m-%d")	
 	# Save
 	setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")
 	cache("timeseries_all_surveys")
@@ -242,14 +242,18 @@ createFruitYearDataset <- function(timeseries) {
 			CA_t 					= max(CA_t),
 			CH_t 					= max(CH_t),
 			DA_t 					= max(DA_t),
-			Size_t_max 				= max(Size_t),
-			Cone_t_max 				= max(Cone_t), 
-			Cylinder_Tall_t_max 	= max(Cylinder_Tall_t),
-			Size_t_min 				= min(Size_t),
-			Cone_t_min 				= min(Cone_t), 
-			Cylinder_Tall_t_min 	= min(Cylinder_Tall_t),
+			Size_max_t 				= max(Size_t),
+			Cone_max_t 				= max(Cone_t), 
+			Cylinder_Tall_max_t 	= max(Cylinder_Tall_t),
+			Size_min_t 				= min(Size_t),
+			Cone_min_t 				= min(Cone_t), 
+			Cylinder_Tall_min_t 	= min(Cylinder_Tall_t),
 			complete_insect_surveys = min(complete_insect_surveys), 
 			complete_surveys		= min(complete_surveys)
+		) %>%
+		createNewInsectVariables(
+			arrange.variable="ObsYear", 
+			grouping.variable="PlantID"
 		) %>%
 		# lag variables
 		calculateSizeLags(

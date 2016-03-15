@@ -190,7 +190,9 @@ calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", D
 
 fixErroneousTemps <- function(climate_data) {
 	X = as.vector(which(climate_data$MinTemp >= climate_data$MaxTemp))
-	climate_data[X, ]$MinTemp <- NA
-	climate_data[X, ]$MaxTemp <- NA
+	if (!is.null(dim(X))) {
+		climate_data[X, ]$MinTemp <- NA
+		climate_data[X, ]$MaxTemp <- NA
+	}
 	return(climate_data)
 }

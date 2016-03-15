@@ -122,12 +122,12 @@ calculateSizeLags <- function(
 		"Cylinder_Tall_t", 
 		"Cylinder_t", 
 		"Elliptic_Cylinder_t",
-		"Size_t_max",
-		"Size_t_min",
-		"Cone_t_max",
-		"Cone_t_min",
-		"Cylinder_Tall_t_max",
-		"Cylinder_Tall_t_min"
+		"Size_max_t",
+		"Size_min_t",
+		"Cone_max_t",
+		"Cone_min_t",
+		"Cylinder_Tall_max_t",
+		"Cylinder_Tall_min_t"
 	)
 	x %>% calculateLagGroupedDF(
 		vars, 
