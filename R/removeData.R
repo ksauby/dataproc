@@ -47,7 +47,7 @@ removeData <- function(timeseries) {
 		filter(!(PlantID == "BLSPOH1")) %>%
 		filter(!(PlantID == "BLSPOH3")) %>%
 		# not sure if this was from parent OH1 or not
-		filter(!(PlantID == "NOH1A"))
+		filter(!(PlantID == "NPOH1A"))
 	#----------------------------------------------------------------------#
 	# Keep only first observation that a plant is dead
 	timeseries_not_dead <- timeseries %>%

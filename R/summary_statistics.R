@@ -36,7 +36,16 @@ Maximum <- function(x) {
 #'
 #' @export
 
-Mean <- function(x) base::mean(x, na.rm=TRUE) %>% round(2)
+Mean <- function(x) base::mean(x, na.rm=TRUE) %>% round(3)
+
+#' Return the percentage of a vector with up to one decimal places, after removing NAs.
+#' 
+#' @param x Vectors of data.
+#' @description Written for use in the tables::tabular function to create publication-ready tables.
+#'
+#' @export
+
+Percentage <- function(x) base::mean(x, na.rm=TRUE) %>% round(3)*100
 
 #' Return the minimum value of a vector, after removing NAs.
 #' 

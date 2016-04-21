@@ -4,7 +4,7 @@
 \alias{Variance}
 \title{Return the variance of a vector with up to two decimal places, after removing NAs.}
 \usage{
-Variance(x)
+Variance(x, round_n = 3)
 }
 \arguments{
 \item{x}{Vectors of data.}
