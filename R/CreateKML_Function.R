@@ -10,7 +10,7 @@
 #' @examples
 #' Plot_Info_Islands = read.csv(file = "../../../Written-Documents/Data-forms/island-data-collection-form/IslandRoadway1_MasterPlotList_OrderedbyGeography_Unsurveyed.csv", header = TRUE, stringsAsFactors = FALSE)
 #' # Roadway 1
-#' CreateKML_Function(dataset=Unsurveyed.Plots, proj4stringdata="+proj=utm +zone=17 +datum=WGS84", CRSdata="+proj=longlat +datum=WGS84", NameField="Tag_Number", filename="Unsurveyed.Plots")
+#' CreateKML_Function(dataset=Florida.ghcnd.stations, proj4stringdata="+proj=utm +zone=17 +datum=WGS84", CRSdata="+proj=longlat +datum=WGS84", NameField="Tag_Number", filename="Florida.ghcnd.stations")
 #' # EXAMPLE
 #' # create KML of unsurveyed plots - dataset "Unsurveyed"
 #' # The points should be named based on the column "Tag_Number"

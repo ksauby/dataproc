@@ -93,7 +93,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			Z[[i]][j, "Fruit_t"] 					<- sum(M$Fruit_t)
 			Z[[i]][j, "Fruit_Flowers_t"] 			<- sum(M$Fruit_Flowers_t)
 			Z[[i]][j, "DemographicSurvey"] 			<- M$DemographicSurvey[1]
-			Z[[i]][j, "Visit"] 						<- M$Visit[1]
+			Z[[i]][j, "SamplingYear"] 				<- M$SamplingYear[1]
 			# Paste PlotPlantIDs together to know which plants were surveyed on this date
 			Z[[i]][j, "PlantsSurveyed"] <- paste(M$PlotPlantID, collapse=",")
 		}
@@ -152,7 +152,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		Dead, 
 		Missing, 
 		DemographicSurvey,
-		Visit
+		SamplingYear
 	)
 	temp_C$AllSurveyed <- "TRUE"
 	temp_C$PlantsSurveyed <- "NA"

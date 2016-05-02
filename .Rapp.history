@@ -1,232 +1,3835 @@
-21.4*.813
-21.4 -21.4*.813
-library(lubridaste)
-library(lubrida=te)
-library(lubridate)
--v
-install.packages("rgeos", repos="http://R-Forge.R-project.org")#
-require(rgeos)
-library(rgeos)
-require(rgeos)
-library(rgeos)
-install.packages("rgdal", repos="http://R-Forge.R-project.org")#
-require(rgdal)
-R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config#
- --with-proj-include=/Library/Frameworks/PROJ.framework/Headers#
- --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
-R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config--with-proj-include=/Library/Frameworks/PROJ.framework/Headers--with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
-library(lme3)
-library(lme4)
-300/241
-.244*30
-1.25*300
-1.25*240
-7*12
-7849-7527
-322/1353
-8028-7527
-501/1353
-8028-7957
-1353-501
-852/71
-7956-7878
-8176-8029
-8176-8092
-250*.75
-250*.25
-42*2 + 17*2
-118/19
-21/6.2
-59.5*.75
-59.5*.5 + 59.5
-71/12
-597/80
-597/8
-432/8
-15*8 + 9*3
-?seq_len
-7.25/3
-7.25/4
-for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
-install.packages("ProjectTemplate")
-install.packages("dplyr")
-install.packages("ggplot2")
-install.packages("data.table")
-install.packages("corrgram")
-install.packages("survival")
-install.packages("shapefiles")
-install.packages("rgdal")
-install.packages("PBSmapping")
-install.packages("sp")
-install.packages("gdistance")
-install.packages("chron")
-install.packages("unmarked")
-install.packages("lme4")
-install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
-require(rgeos)
-install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
-library(rgdal)
-install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
-18/1.618
-189+114
-library(lubridate)
-library(magrittr)
-seasons <- data.frame(#
-	   SE = as.POSIXct(c("2009-3-20", "2010-3-20", "2011-3-20", "2012-3-20", #
-            "2013-3-20", "2014-3-20"), format="%Y-%m-%d"),#
-	   SS = as.POSIXct(c("2009-6-21", "2010-6-21", "2011-6-21", "2012-6-20",#
-            "2013-6-20", "2014-6-20"), format="%Y-%m-%d"),#
-	   FE = as.POSIXct(c("2009-9-22", "2010-9-23", "2011-9-23", "2012-9-22",#
-            "2013-9-22", "2014-9-22"), format="%Y-%m-%d"),#
-	   WS = as.POSIXct(c("2009-12-21", "2010-12-21", "2011-12-22", "2012-12-21", #
-            "2013-12-21", "2014-12-21"), format="%Y-%m-%d")#
-    )#
+# make sure there aren't duplicate records for students#
+BSC2011_Exam3 %<>% #
+	group_by(UFID) %>% #
+	mutate(N.records = length(Score)) %>%#
+	as.data.frame#
 #
-    assignSeason <- function(dat, SeasonStarts=seasons) {#
-	    dat %<>% mutate(#
-		    Season = lapply(Date,#
-				function(x) {#
-					findInterval(#
-						x, #
-						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
-					)#
-				}#
-			) %>% unlist	#
+BSC2011_Exam3 %>% filter(N.records > 1)#
+BSC2011_Exam3 %>% filter(N.records < 1)#
+#
+BSC2011_Exam3 %<>% dplyr::select(-N.records)#
+#
+BSC2011_Exam3[which(is.na(BSC2011_Exam3$Score)), ] %>% write.csv("Exam3_missing_grades.csv")#
+#
+BSC2011_Exam3[which(is.na(BSC2011_Exam3$Score)), ]$Score <- 0#
+BSC2011_Exam3[which(BSC2011_Exam3$Score < 0), ]#
+BSC2011_Exam3[which(BSC2011_Exam3$Score < 40), ]#
+#
+# export data#
+#
+BSC2011_Exam3 %<>%#
+	setnames("Score", "Exam 3 (3010020)") %>%#
+	as.data.frame %>%#
+	dplyr::select(#
+		 SIS.Login.ID,#
+		 `Exam 3 (3010020)`#
+	)
+setwd('/Users/KSauby/Documents/Dropbox/BSC_2011_Spring_2016/grades/analysis')
+###############################################################################
+# 0543#
+###############################################################################
+X0543 <- X0543BSC2011Spring2016.questions %>%#
+	dplyr::select(Email.Address, contains("DOUGLAS")) %>%#
+	dplyr::select(-DOUGLAS..L1Q1) %>%#
+	as.data.table#
+X0543$Email.Address <- tolower(X0543$Email.Address)#
+setDT(X0543)#
+X0543 %<>%#
+	.[, .(Mean = rowMeans(.SD)), by = Email.Address] %>%#
+	as.data.frame %>%#
+	arrange(Email.Address)#
+X0543$Unit1 <- X0543$Mean#
+X0543 %<>%#
+	mutate(#
+		Unit1 = replace(#
+			Unit1,#
+			Unit1 >= 0.75,#
+			1#
+		),#
+		Unit1 = Unit1*6,#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "reneefontana13@gmail.com",#
+			"reneelynn13@ufl.edu"#
+		),		#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jessicaleefels@gmail.com",#
+			"jfels@ufl.edu"#
 		)#
-	    dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"#
-	    dat[which(dat$Season==1), ]$Season 					<- "Spring"#
-	    dat[which(dat$Season==2), ]$Season 					<- "Summer"#
-	    dat[which(dat$Season==3), ]$Season 					<- "Fall"#
-	    return(dat)#
-    }
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(dplyr)
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(devtoolks)
-library(devtools)
-?install_github
-devtools::install_github("ksauby/ACSampling", auth_token="2ab30a602e52fae481f4249cc25e892c0a9ccfc7", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install_github("ksauby/ACSampling", auth_token="2794c3f10db92f525181a0b1f6c19064fe3a2ef3", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-library(devtools)
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-library(ProjectTemplate)#
-setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
-# load project#
-load.project()
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# timeseries <- timeseries.25Jan2015JK.mod#
+	)#
+###############################################################################
+# 0544#
+###############################################################################
+# Zive - 1/27/16 - 2/1/16#
+# she missed three#
+Zive <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "rzive@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS")) %>%#
+	rowSums(na.rm=T)/(19-3) * 6 %>%#
+	round(2)#
 #
-timeseries <- processData(timeseries.25Jan2015JK.mod)#
-timeseries_obs_after_USDA <- keepUSDAData(timeseries)#
-timeseries <- removeData(timeseries)#
+# Hoctor - missed#
+#		DOUGLAS..L2Q2,#
+#		DOUGLAS..L3Q1,#
+#		DOUGLAS..L3Q2,#
+#		DOUGLAS..L4Q1,#
+#		DOUGLAS..L4Q2,#
+# remove L1Q1 too#
+Hoctor <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "sianhoctor@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS")) %>%#
+	rowSums(na.rm=T)/(19-6) * 6 %>%#
+	round(2)#
 #
-# climate_data <- processWeather()#
+# gengirald@ufl.edu#
+# missed two questions from L6#
+# she got an L7 wrong so I fixed that too, since she was so close to 75%#
+gengirald <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "gengirald@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS")) %>%#
+	rowSums(., na.rm=T)#
+gengirald <- (gengirald - 0.25)/(19-3) * 6 %>%#
+	round(2)#
 #
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival <- createSurvivalDataset(timeseries)#
+# zgilbert.27@ufl.edu#
+# since Jan. 25#
+# received no credit for the two L7 Qs#
+zgilbert <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "zgilbert.27@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS")) %>%#
+	rowSums(na.rm=T)/(19-2) * 6 %>%#
+	round(2)#
 #
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
+# gharrington@ufl.edu#
+# missed 12 questions#
+gharrington <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "gharrington@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS")) %>%#
+	rowSums(na.rm=T)/(19-13) * 6 %>%#
+	round(2)#
+#
+# mshinego@ufl.edu#
+# missed 12 questions#
+mshinego <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "mshinego@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS")) %>%#
+	rowSums(na.rm=T)/(19-2) * 6 %>%#
+	round(2)#
+# Rebecca Campbell missed 6 classes#
+rebshc <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "rebshc@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS")) %>%#
+	rowSums(na.rm=T)/(19-6) * 6 %>%#
+	round(2)#
+X0544 <- X0544BSC2011Spring2016.questions %>%#
+	dplyr::select(Email.Address, contains("DOUGLAS")) %>%#
+	dplyr::select(-DOUGLAS..L1Q1) %>%#
+	as.data.table#
+X0544$Email.Address <- tolower(X0544$Email.Address)#
+setDT(X0544)	#
+X0544 %<>%#
+	.[, .(Mean = rowMeans(.SD)), by = Email.Address] %>%#
 	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
+	arrange(Email.Address)#
+X0544$Unit1 <- X0544$Mean#
+X0544 %<>%#
+	mutate(#
+		Unit1 = replace(#
+			Unit1,#
+			Email.Address == "sianhoctor@ufl.edu",#
+			Hoctor#
+		),#
+		Unit1 = replace(#
+			Unit1,#
+			Email.Address == "gengirald@ufl.edu",#
+			gengirald#
+		),#
+		Unit1 = replace(#
+			Unit1,#
+			Email.Address == "zgilbert.27@ufl.edu",#
+			zgilbert#
+		),#
+		Unit1 = replace(#
+			Unit1,#
+			Email.Address == "gharrington@ufl.edu",#
+			gharrington#
+		),#
+		Unit1 = replace(#
+			Unit1,#
+			Email.Address == "mshinego@ufl.edu",#
+			mshinego#
+		),#
+		Unit1 = replace(#
+			Unit1,#
+			Email.Address == "rebshc@ufl.edu",#
+			rebshc#
+		),#
+		Unit1 = replace(#
+			Unit1,#
+			Email.Address == "rzive@ufl.edu",#
+			Zive#
+		),#
+		Unit1 = replace(#
+			Unit1,#
+			Unit1 >= 0.75,#
+			1#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jamiezeld@gmail.com",#
+			"jzeldman@ufl.edu"#
+		),#
+		Unit1 = Unit1*6#
+	) %>%#
+	rbind(c("v.nguyen@ufl.edu", 0, 0)) %>%#
+	rbind(c("tianatru@ufl.edu", 0, 0))#
+###############################################################################
+# Smithey#
+###############################################################################
 #
-timeseries_survival_humifusa = timeseries_survival %>% #
+Smithey0543 <- X0543BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "dsmithey2008@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS"))#
+#
+Smithey0544 <- X0544BSC2011Spring2016.questions %>% #
+	filter(Email.Address == "dsmithey2008@ufl.edu") %>%#
+	dplyr::select(contains("DOUGLAS"))#
+#
+Smithey <- cbind(Smithey0543, Smithey0544)#
+Smithey <- rowSums(Smithey, na.rm=T)/19*6#
+###############################################################################
+# 4926#
+###############################################################################
+X4926 <- X4926BSC2011Spring2016.questions %>%#
+	dplyr::select(Email.Address, contains("DOUGLAS")) %>%#
+	as.data.table#
+X4926$Email.Address <- tolower(X4926$Email.Address)#
+setDT(X4926)#
+X4926 %<>%#
+	.[, .(Mean = rowMeans(.SD)), by = Email.Address] %>%#
 	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_all_surveys")#
-write.csv(timeseries_all_surveys, "./data/timeseries_all_surveys.csv")#
-timeseries_obs_after_USDA <- createAllSurveysDataset(timeseries_obs_after_USDA)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_obs_after_USDA")#
-write.csv(timeseries_all_surveys, "./data/timeseries_obs_after_USDA.csv")#
-#
-################################################################################
-# Fecundity#
-################################################################################
-timeseries_fecundity <- createFruitYearDataset(timeseries)#
-#
-setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")#
-cache("timeseries_fecundity")#
-write.csv(timeseries_fecundity, "./data/timeseries_fecundity.csv")
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-# list of climate files to fix#
-climate_file_names <- c("NOAA.ApalachicolaAirport", "NOAA.ApalachicolaAirport1", "NOAA.Bloxham", "NOAA.Bristol2", "NOAA.Callaway03", "NOAA.Callaway06S", "NOAA.Chipley", "NOAA.Clarksville2N", "NOAA.CrestviewBobSikesAirport", "NOAA.DeFuniakSprings", "NOAA.Destin1", "NOAA.DestinFortWaltonBeach", "NOAA.Freeport34", "NOAA.Freeport40SSW", "NOAA.Freeport44", "NOAA.Hosford27", "NOAA.Marianna7NE", "NOAA.NavalLiveOaks", "NOAA.NWFLBeaches", "NOAA.PanamaCity", "NOAA.PanamaCityBayCoAirport", "NOAA.PanamaCityBeach03", "NOAA.PanamaCityBeach12ESE", "NOAA.PensacolaForest", "NOAA.PensacolaRegionalAirport", "NOAA.PortStJoe06", "NOAA.PortStJoe81", "NOAA.Quincy3SSW", "NOAA.Sumatra", "NOAA.Telogia", "NOAA.ValparaisoEglinAFB", "NOAA.Vernon106", "NOAA.WestPensacola109", "NOAA.Wewahitchka", "NOAA.Wewahitchka16", "NOAA.Wilma", "NOAA.WoodruffDam", "NOAA.Bellview17", "NOAA.Pensacola92", "NOAA.MiramarBeach95", "NOAA.InletBeach07", "NOAA.PanamaCityBeach59", "NOAA.Apalachicola08WNW", "NOAA.NewHope", "NOAA.Destin15")#
-#
-wstations <- ghcnd.stations.NW.FL.current#
-Location_list <- c("BLSP", "HBSP", "MB", "N", "SASP", "TSP")#
-#
-DegreeDay_list <- c(#
-	"UCD.IPM.BLSP.DegreeDays",#
-	"UCD.IPM.HBSP.DegreeDays",#
-	"UCD.IPM.MB.DegreeDays",#
-	"UCD.IPM.N.DegreeDays",#
-	"UCD.IPM.SASP.DegreeDays",#
-	"UCD.IPM.TSP.DegreeDays"#
+	arrange(Email.Address)#
+X4926$Unit1 <- X4926$Mean#
+X4926 %<>%#
+	mutate(#
+		Unit1 = replace(#
+			Unit1,#
+			Unit1 >= 0.75,#
+			1#
+		),#
+		Unit1 = Unit1*6,#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "suzieqbrinson3@gmail.com",#
+			"sbrinson@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "ditzfrank@gmail.com",#
+			"ditzfrank@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "nghan005@fiu.edu",#
+			"najwaghanem@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "lucyhernandez112@yahoo.com",#
+			"lucyhernandez@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "omarh2011@ufl.edu",#
+			"omarhan2011@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "catvu1565@gmail.com",#
+			"catvu1565@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "victoriano_carlos@yahoo.com",#
+			"cvictoriano24@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jbauson3@ufl.edu ",#
+			"jbauson3@ufl.edu"#
+		)#
+	) %>%#
+	rbind(c("alexandrammiller@ufl.edu", 0, 0))#
+# merge sections together#
+TopHat_Unit1 <- rbind.fill(#
+		X0543,#
+		X0544,#
+		X4926#
+	) %>% #
+	group_by(Email.Address) %>%#
+	summarise(#
+		Mean = max(Mean, na.rm=T),#
+		Unit1 = max(Unit1, na.rm=T)#
+	)#
+TopHat_Unit1 %>% #
+	group_by(Email.Address) %>% #
+	summarise(length=length(Mean)) %>% #
+	filter(length > 1)#
+TopHat_Unit1_merged <- merge(X07.Apr.14.01.Grades.BSC2011, TopHat_Unit1,#
+	by.x = "SIS.Login.ID",#
+	by.y = "Email.Address",#
+	all.x=T) %>%#
+	filter(!is.na(SIS.User.ID))%>%#
+	dplyr::select(#
+		# Student,#
+		# ID,#
+		# SIS.User.ID,#
+		SIS.Login.ID,#
+		# Section,#
+		# Exam.1..2983040.#
+		Unit1#
+	) #
+TopHat_Unit1_merged$Unit1 %<>% as.numeric %>% round(2)#
+TopHat_Unit1_merged[which(TopHat_Unit1_merged$SIS.Login.ID == "dsmithey2008@ufl.edu"), ]$Unit1 <- round(Smithey, 2)#
+names(TopHat_Unit1_merged) <- c(#
+	"SIS Login ID",#
+	"Top Hat (Douglas - Unit 1) (2983135)"#
 )#
-sites <- Marsico.Florida.data.collection.site.location.summary#
-wstations %<>% formatWeatherStationInfo#
+# TopHat_Unit1_merged %>%	write.csv("TopHat_Unit1_grades.csv")
+setwd('/Users/KSauby/Documents/Dropbox/BSC_2011_Spring_2016/grades/analysis')
+###############################################################################
+# 0543 - 4 x 0.25#
+###############################################################################
+#
+# calculate custom grades for students with excused absences#
+Mann <- TopHatUnit2.0543BSC2011Spring2016 %>% #
+	filter(Email.Address == "lillianmmann@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - (2.25 + 6 + 4.25)#
+	) %>%#
+	summarise(sum/length)		#
+#
+Vesely <- TopHatUnit2.0543BSC2011Spring2016 %>% #
+	filter(Email.Address == "jvesely@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 9#
+	) %>%#
+	summarise(sum/length)		#
+#
+# calculate grades for entire class#
+# 4 questions were worth 0.25 points#
+customMean <- function(x) {sum(x)/(length(x) - 4*.75)}	#
+#
+X0543 <- TopHatUnit2.0543BSC2011Spring2016 %>%#
+	dplyr::select(Email.Address, contains("CHOE")) %>%#
+	as.data.table#
+X0543$Email.Address <- tolower(X0543$Email.Address)#
+setDT(X0543)#
+X0543 %<>%#
+	.[, .(Mean = customMean(.SD)), by = Email.Address] %>%#
+	as.data.frame %>%#
+	arrange(Email.Address)#
+X0543$Unit2 <- X0543$Mean#
+X0543 %<>% #
+	# replace grades#
+	mutate(#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "lillianmmann@ufl.edu",#
+			Mann#
+		),#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "jvesely@ufl.edu",#
+			Vesely#
+		)#
+	) %>% #
+	# replace email addresses#
+	mutate(#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "reneefontana13@gmail.com",#
+			"reneelynn13@ufl.edu"#
+		),		#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jessicaleefels@gmail.com",#
+			"jfels@ufl.edu"#
+		)#
+	) %>%#
+	# change grades 0.75 and above to 1#
+	mutate(#
+		Unit2 = replace(#
+			Unit2,#
+			Unit2 >= 0.75,#
+			1#
+		)#
+	)#
+X0543$Unit2 %<>% unlist	#
+X0543 %<>% mutate(Unit2 = round((Unit2 * 6), 2))#
+###############################################################################
+# 0544 - 6 x 0.25#
+###############################################################################
+#
+# calculate custom grades for students with excused absences#
+Mackie <- TopHatUnit2.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "philmackie1095@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 7.25#
+	) %>%#
+	summarise(sum/length)		#
+#
+Stephens <- TopHatUnit2.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "garrettstephens@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 4#
+	) %>%#
+	summarise(sum/length)	#
+Arciola <- TopHatUnit2.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "barciola@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 2.75#
+	) %>%#
+	summarise(sum/length)	#
+Zive <- TopHatUnit2.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "rzive@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 4#
+	) %>%#
+	summarise(sum/length)	#
+Cahill <- TopHatUnit2.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "kmcahill@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 4#
+	) %>%#
+	summarise(sum/length)			#
+#
+# calculate grades for entire class#
+# 6 questions were worth 0.25 points#
+customMean <- function(x) {sum(x)/(length(x) - 6*.75)}	#
+#
+X0544 <- TopHatUnit2.0544BSC2011Spring2016 %>%#
+	dplyr::select(Email.Address, contains("CHOE")) %>%#
+	as.data.table#
+X0544$Email.Address <- tolower(X0544$Email.Address)#
+setDT(X0544)#
+X0544 %<>%#
+	.[, .(Mean = customMean(.SD)), by = Email.Address] %>%#
+	as.data.frame %>%#
+	arrange(Email.Address)#
+X0544$Unit2 <- X0544$Mean#
+X0544 %<>% #
+	# replace grades#
+	mutate(#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "philmackie1095@ufl.edu",#
+			Mackie#
+		),#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "garrettstephens@ufl.edu",#
+			Stephens#
+		),#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "barciola@ufl.edu",#
+			Arciola#
+		),#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "rzive@ufl.edu",#
+			Zive#
+		),#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "kmcahill@ufl.edu",#
+			Cahill#
+		)#
+	) %>% #
+	# replace email addresses#
+	mutate(#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jamiezeld@gmail.com",#
+			"jzeldman@ufl.edu"#
+		)#
+	) %>%#
+	# change grades 0.75 and above to 1#
+	mutate(#
+		Unit2 = replace(#
+			Unit2,#
+			Unit2 >= 0.75,#
+			1#
+		)#
+	)#
+X0544$Unit2 %<>% unlist	#
+X0544 %<>% mutate(Unit2 = round((Unit2 * 6), 2)) %>%#
+	rbind(c("tianatru@ufl.edu", 0, 0))#
+#
+###############################################################################
+# Smithey#
+###############################################################################
+#
+Smithey0543 <- TopHatUnit2.0543BSC2011Spring2016 %>% #
+	filter(Email.Address == "dsmithey2008@ufl.edu") %>%#
+	dplyr::select(contains("CHOE"))#
+Smithey0544 <- TopHatUnit2.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "dsmithey2008@ufl.edu") %>%#
+	dplyr::select(contains("CHOE"))#
+#
+Smithey <- cbind(Smithey0543, Smithey0544)#
+Smithey <- rowSums(Smithey, na.rm=T)/28*6#
+#
+###############################################################################
+# 4926 - 5 x 0.25#
+###############################################################################
+#
+# calculate custom grades for students with excused absences#
+Nayfeh <- TopHatUnit2.4926BSC2011Spring2016 %>% #
+	filter(Email.Address == "adamjnayfeh@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = 22.25#
+	) %>%#
+	summarise(sum/length)#
+#
+Kearney <- TopHatUnit2.4926BSC2011Spring2016 %>% #
+	filter(Email.Address == "lizmkearney@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 10.25#
+	) %>%#
+	summarise(sum/length)#
+#
+Gonzalez <- TopHatUnit2.4926BSC2011Spring2016 %>% #
+	filter(Email.Address == "camila22896@ufl.edu") %>%#
+	dplyr::select(contains("CHOE")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 5*.75 - 7.25#
+	) %>%#
+	summarise(sum/length)#
+#
+# calculate grades for entire class#
+# 5 questions were worth 0.25 points#
+customMean <- function(x) {sum(x)/(length(x) - 5*.75)}	#
+#
+X4926 <- TopHatUnit2.4926BSC2011Spring2016 %>%#
+	dplyr::select(Email.Address, contains("CHOE")) %>%#
+	as.data.table#
+X4926$Email.Address <- tolower(X4926$Email.Address)#
+setDT(X4926)#
+X4926 %<>%#
+	.[, .(Mean = customMean(.SD)), by = Email.Address] %>%#
+	as.data.frame %>%#
+	arrange(Email.Address)#
+X4926$Unit2 <- X4926$Mean#
+X4926 %<>% #
+	# replace grades#
+	mutate(#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "lizmkearney@ufl.edu",#
+			Kearney#
+		),#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "camila22896@ufl.edu",#
+			Gonzalez#
+		),#
+		Unit2 = replace(#
+			Unit2,#
+			Email.Address == "adamjnayfeh@ufl.edu",#
+			Nayfeh#
+		)#
+	) %>% #
+	# replace email addresses#
+	mutate(#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "suzieqbrinson3@gmail.com",#
+			"sbrinson@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "ditzfrank@gmail.com",#
+			"ditzfrank@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "nghan005@fiu.edu",#
+			"najwaghanem@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "lucyhernandez112@yahoo.com",#
+			"lucyhernandez@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "omarh2011@ufl.edu",#
+			"omarhan2011@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "catvu1565@gmail.com",#
+			"catvu1565@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "victoriano_carlos@yahoo.com",#
+			"cvictoriano24@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jbauson3@ufl.edu ",#
+			"jbauson3@ufl.edu"#
+		)#
+	) %>%#
+	# change grades 0.75 and above to 1#
+	mutate(#
+		Unit2 = replace(#
+			Unit2,#
+			Unit2 >= 0.75,#
+			1#
+		)#
+	)#
+X4926$Unit2 %<>% unlist	#
+X4926 %<>% mutate(Unit2 = round((Unit2 * 6), 2))#
+#
+###############################################################################
+# merge sections together#
+###############################################################################
+TopHat_Unit2 <- rbind.fill(#
+		X0543,#
+		X0544,#
+		X4926#
+	) %>% #
+	group_by(Email.Address) %>%#
+	summarise(#
+		#Mean = max(Mean, na.rm=T),#
+		`Top Hat (Choe - Unit 2) (2995596)` = max(Unit2, na.rm=T)#
+	)#
+#
+TopHat_Unit2[which(TopHat_Unit2$Email.Address=="dsmithey2008@ufl.edu"), ]$`Top Hat (Choe - Unit 2) (2995596)` <- round(Smithey, 2)#
+TopHat_Unit2[which(TopHat_Unit2$Email.Address=="tianatru@ufl.edu"), ]$`Top Hat (Choe - Unit 2) (2995596)` <- 0#
+#
+TopHat_Unit12_merged <- merge(TopHat_Unit1_merged, TopHat_Unit2,#
+	by.x = "SIS Login ID",#
+	by.y = "Email.Address",#
+	all.x=T) %>%#
+	filter(!is.na(`SIS Login ID`))
+setwd('/Users/KSauby/Documents/Dropbox/BSC_2011_Spring_2016/grades/analysis')
+customMean <- function(x) {sum(x)/(length(x) - 2*.75)}	#
+#
+###############################################################################
+# 0543 - 2 x 0.25#
+###############################################################################
+#
+# number of points: 37 - 2*.75 = 35.5#
+TopHat.Unit3.0543BSC2011Spring2016 %>% #
+	dplyr::select(contains("DEMARCO")) %>%#
+	dim#
+#
+# calculate custom grades for students with excused absences#
+#
+# missed 7#
+Mann <- TopHat.Unit3.0543BSC2011Spring2016 %>% #
+	filter(Email.Address == "lillianmmann@ufl.edu") %>%#
+	dplyr::select(contains("DEMARCO")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T) + 0.75,#
+		length = length(.) - 2*.75 - 7#
+	) %>%#
+	summarise(sum/length)	#
+# missed 7#
+Shelton <- TopHat.Unit3.0543BSC2011Spring2016 %>% #
+	filter(Email.Address == "jessi08@ufl.edu") %>%#
+	dplyr::select(contains("DEMARCO")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T) + 0.75,#
+		length = length(.) - 2*.75 - 2#
+	) %>%#
+	summarise(sum/length)	#
+#
+# calculate grades for entire class#
+X0543 <- TopHat.Unit3.0543BSC2011Spring2016 %>%#
+	dplyr::select(Email.Address, contains("DEMARCO")) %>%#
+	as.data.table#
+X0543$Email.Address <- tolower(X0543$Email.Address)#
+setDT(X0543)#
+X0543 %<>%#
+	.[, .(Mean = customMean(.SD)), by = Email.Address] %>%#
+	as.data.frame %>%#
+	arrange(Email.Address)#
+X0543$Unit3 <- X0543$Mean#
+X0543 %<>% #
+	# replace grades#
+	mutate(#
+		Unit3 = replace(#
+			Unit3,#
+			Email.Address == "lillianmmann@ufl.edu",#
+			Mann#
+		),#
+		Unit3 = replace(#
+			Unit3,#
+			Email.Address == "jessi08@ufl.edu",#
+			Shelton#
+		)#
+	) %>% #
+	# replace email addresses#
+	mutate(#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "reneefontana13@gmail.com",#
+			"reneelynn13@ufl.edu"#
+		),		#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jessicaleefels@gmail.com",#
+			"jfels@ufl.edu"#
+		)#
+	) #
+X0543$Unit3 %<>% unlist	%>% round(2)#
+X0543 %<>%#
+	# change grades 0.75 and above to 1#
+	mutate(#
+		Unit3 = replace(#
+			Unit3,#
+			Unit3 >= 0.75,#
+			1#
+		)#
+	)#
+X0543 %<>% mutate(Unit3 = round((Unit3 * 6), 2))#
+###############################################################################
+# 0544 - 2 x 0.25#
+###############################################################################
+#
+# number of points: 37 - 2*.75 = 35.5#
+TopHat.Unit3.0544BSC2011Spring2016 %>% #
+	dplyr::select(contains("DEMARCO")) %>%#
+	dim#
+#
+# calculate custom grades for students with excused absences#
+Patterson <- TopHat.Unit3.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "rlpatt@ufl.edu") %>%#
+	dplyr::select(contains("DEMARCO")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 2*.75 - 1.5#
+	) %>%#
+	summarise(sum/length)			#
+#
+# calculate grades for entire class#
+X0544 <- TopHat.Unit3.0544BSC2011Spring2016 %>%#
+	dplyr::select(Email.Address, contains("DEMARCO")) %>%#
+	as.data.table#
+X0544$Email.Address <- tolower(X0544$Email.Address)#
+setDT(X0544)#
+X0544 %<>%#
+	.[, .(Mean = customMean(.SD)), by = Email.Address] %>%#
+	as.data.frame %>%#
+	arrange(Email.Address)#
+X0544$Unit3 <- X0544$Mean#
+X0544 %<>% #
+	# replace grades#
+	mutate(#
+		Unit3 = replace(#
+			Unit3,#
+			Email.Address == "rlpatt@ufl.edu",#
+			Patterson#
+		)#
+	) %>% #
+	# replace email addresses#
+	mutate(#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jamiezeld@gmail.com",#
+			"jzeldman@ufl.edu"#
+		)#
+	) #
+X0544$Unit3 %<>% unlist	%>% round(2)#
+X0544 %<>%#
+	# change grades 0.75 and above to 1#
+	mutate(#
+		Unit3 = replace(#
+			Unit3,#
+			Unit3 >= 0.75,#
+			1#
+		)#
+	)#
+X0544$Unit3 <- unlist(X0544$Unit3)#
+X0544 %<>% mutate(Unit3 = round((Unit3 * 6), 2)) %>%#
+rbind(c("tianatru@ufl.edu", 0, 0))#
+###############################################################################
+# Smithey#
+###############################################################################
+#
+Smithey0543 <- TopHat.Unit3.0543BSC2011Spring2016 %>% #
+	filter(Email.Address == "dsmithey2008@ufl.edu") %>%#
+	dplyr::select(contains("DEMARCO"))#
+Smithey0544 <- TopHat.Unit3.0544BSC2011Spring2016 %>% #
+	filter(Email.Address == "dsmithey2008@ufl.edu") %>%#
+	dplyr::select(contains("DEMARCO"))#
+#
+Smithey <- Smithey0543 + Smithey0544#
+Smithey <- rowSums(Smithey, na.rm=T)/35.5*6#
+#
+###############################################################################
+# 4926 - 2 x 0.25#
+###############################################################################
+#
+# number of points: 36 - 2*.75 = 34.5#
+TopHat.Unit3.4926BSC2011Spring2016 %>% #
+	dplyr::select(contains("DEMARCO")) %>%#
+	dim#
+#
+# calculate custom grades for students with excused absences#
+# don't need to fix#
+Collins <- TopHat.Unit3.4926BSC2011Spring2016 %>% #
+	filter(Email.Address == "emilie.collins@ufl.edu") %>%#
+	dplyr::select(contains("DEMARCO")) %>%#
+	summarise(#
+		sum = rowSums(., na.rm=T),#
+		length = length(.) - 2*.75#
+	) %>%#
+	summarise(sum/length)#
+#
+# calculate grades for entire class#
+X4926 <- TopHat.Unit3.4926BSC2011Spring2016 %>%#
+	dplyr::select(Email.Address, contains("DEMARCO")) %>%#
+	as.data.table#
+X4926$Email.Address <- tolower(X4926$Email.Address)#
+setDT(X4926)#
+X4926 %<>%#
+	.[, .(Mean = customMean(.SD)), by = Email.Address] %>%#
+	as.data.frame %>%#
+	arrange(Email.Address)#
+X4926$Unit3 <- X4926$Mean#
+X4926 %<>% #
+	# replace grades#
+	mutate(#
+		Unit3 = replace(#
+			Unit3,#
+			Email.Address == "emilie.collins@ufl.edu",#
+			Collins#
+		)#
+	) %>% #
+	# replace email addresses#
+	mutate(#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "suzieqbrinson3@gmail.com",#
+			"sbrinson@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "ditzfrank@gmail.com",#
+			"ditzfrank@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "nghan005@fiu.edu",#
+			"najwaghanem@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "lucyhernandez112@yahoo.com",#
+			"lucyhernandez@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "omarh2011@ufl.edu",#
+			"omarhan2011@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "catvu1565@gmail.com",#
+			"catvu1565@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "victoriano_carlos@yahoo.com",#
+			"cvictoriano24@ufl.edu"#
+		),#
+		Email.Address = replace(#
+			Email.Address,#
+			Email.Address == "jbauson3@ufl.edu ",#
+			"jbauson3@ufl.edu"#
+		)#
+	) #
+X4926$Unit3 %<>% unlist	%>% round(2)#
+X4926 %<>%#
+	# change grades 0.75 and above to 1#
+	mutate(#
+		Unit3 = replace(#
+			Unit3,#
+			Unit3 >= 0.75,#
+			1#
+		)#
+	)#
+X4926$Unit3 %<>% unlist	#
+X4926 %<>% mutate(Unit3 = round((Unit3 * 6), 2))#
+#
+X4926[which(X4926$Email.Address=="adamjnayfeh@ufl.edu"), ]$Unit3 <- 6#
+#
+###############################################################################
+# merge sections together#
+###############################################################################
+TopHat_Unit3 <- rbind.fill(#
+		X0543,#
+		X0544,#
+		X4926#
+	) %>% #
+	group_by(Email.Address) %>%#
+	summarise(#
+		#Mean = max(Mean, na.rm=T),#
+		`Top Hat (DeMarco - Unit 3) (3012674)` = max(Unit3, na.rm=T)#
+	)#
+TopHat_Unit3[which(TopHat_Unit3$Email.Address=="dsmithey2008@ufl.edu"), ]$`Top Hat (DeMarco - Unit 3) (3012674)` <- round(Smithey, 2)
+setwd('/Users/KSauby/Documents/Dropbox/BSC_2011_Spring_2016/grades/analysis')
+# get enrollment dates#
+roster2011spring2016$Date_Added %<>% as.Date(format = "%m/%d/%y")#
+roster2011spring2016 %<>% dplyr::select(E.mailAddress, Date_Added)#
+# merge with Pre/Post Test grades#
+LaunchPad.PrePostTest$Email <- tolower(LaunchPad.PrePostTest$Email)#
+PrePostTest <- LaunchPad.PrePostTest %>% #
+	mutate(#
+		Email = replace(#
+			Email,#
+			Email == "jb19957@gmail.com",#
+			"jb19957@ufl.edu"#
+		)#
+	) %>%#
+	merge(#
+		roster2011spring2016, #
+		by.x="Email", #
+		by.y="E.mailAddress"#
+	)#
+#
+late_enrolls 	<- PrePostTest %>% filter(Date_Added > "2016-01-07")#
+late_enrolls_no_pretest <- late_enrolls %>% filter(Pre.test==0 & Post.test!=0)#
+late_enrolls_no_posttest <- late_enrolls %>% filter(Pre.test!=0 & Post.test==0)#
+late_enrolls_both <- late_enrolls %>% filter(Pre.test!=0 & Post.test!=0)#
+late_enrolls_0 <- late_enrolls %>% filter(Pre.test==0 & Post.test==0)#
+early_enrolls 	<- PrePostTest %>% filter(Date_Added <= "2016-01-07")	#
+#
+# students to penalize#
+LP3Grades0 <- early_enrolls %>% filter(Pre.test==0 | Post.test==0)#
+LP3Grades0$newPostTest <- LP3Grades0[ , c("Pre.test","Post.test")] %>% #
+	apply(#
+		.,#
+		1, #
+		function(dat) {#
+			new.Post.test = max(dat["Pre.test"], dat["Post.test"]) - 2#
+		}#
+	)#
+LP3Grades0[LP3Grades0$newPostTest < 0, ]$newPostTest <- 0#
+# students who took both#
+LP3Grades1 <- early_enrolls %>% filter(Pre.test!=0 & Post.test!=0)#
+LP3Grades1$newPostTest <- LP3Grades1[ , c("Pre.test","Post.test")] %>% #
+	apply(#
+		.,#
+		1, #
+		function(dat) {#
+			new.Post.test = max(dat["Pre.test"], dat["Post.test"])#
+		}#
+	)#
+# any below zero?#
+LP3Grades1[which(LP3Grades1$newPostTest < 0), ]$newPostTest#
+#
+# students that registered late#
+late_enrolls_no_pretest$newPostTest <- late_enrolls_no_pretest$Post.test#
+late_enrolls_no_posttest$newPostTest <- late_enrolls_no_posttest$Pre.test - 2#
+late_enrolls_0$newPostTest <- 0#
+late_enrolls_both$newPostTest <- late_enrolls_both[, c("Pre.test","Post.test")] %>% #
+	apply(#
+		.,#
+		1, #
+		function(dat) {#
+			new.Post.test = max(dat["Pre.test"], dat["Post.test"])#
+		}#
+	)#
+#
+LaunchPad3PostTest <- rbind.fill(LP3Grades0, LP3Grades1) %>%#
+	rbind.fill(late_enrolls_no_pretest) %>% #
+	rbind.fill(late_enrolls_no_posttest) %>% #
+	rbind.fill(late_enrolls_both) %>%#
+	rbind.fill(late_enrolls_0) %>%#
+	dplyr::select(Email, newPostTest) %>%#
+	setnames("newPostTest", "Pre/Post Test (2983296)")#
+LaunchPad3PostTest[which(LaunchPad3PostTest$`Pre/Post Test (2983296)` < 0), ] <- 0#
+#
+LaunchPad3PostTest[which(LaunchPad3PostTest$Email=="marioeagerone@ufl.edu"), ]$`Pre/Post Test (2983296)` <- 3.25
+setwd('/Users/KSauby/Documents/Dropbox/BSC_2011_Spring_2016/grades/analysis')
+BSC2011_LaunchPad <- LaunchPad.Unit3Grades %>%#
+	dplyr::filter(Email!="elad2019@ufl.edu") %>%#
+	dplyr::select(#
+		Email,#
+		Total#
+	) %>%#
+	mutate(#
+		Email = replace(#
+			Email,#
+			Email == "emmaaustindatta@gmail.com",#
+			"elad2019@ufl.edu"#
+		)#
+	)#
+BSC2011_LaunchPad$Email <- tolower(BSC2011_LaunchPad$Email)#
+#
+BSC2011_LaunchPad %<>% mutate(#
+	Email = replace(#
+		Email,#
+		Email == "jb19957@gmail.com",#
+		"jb19957@ufl.edu"#
+	)#
+) %>%#
+setnames("Total", "LauchPad (DeMarco - Unit 3) (3012673)")
+setwd('/Users/KSauby/Documents/Dropbox/BSC_2011_Spring_2016/grades/analysis')
+BSC_2011_grades_merged <- X25.Apr.19.43.Grades.BSC2011 %>%#
+	merge(BSC2011_LaunchPad, by.x="SIS.Login.ID", by.y="Email") %>%#
+	merge(TopHat_Unit1_merged, by.x="SIS.Login.ID", by.y="SIS Login ID") %>%#
+	merge(TopHat_Unit2, by.x="SIS.Login.ID", by.y="Email.Address") %>%#
+	merge(TopHat_Unit3, by.x="SIS.Login.ID", by.y="Email.Address") %>%#
+	merge(LaunchPad3PostTest, by.x="SIS.Login.ID", by.y="Email") %>%#
+	merge(BSC2011_Exam3, by="SIS.Login.ID") %>%#
+	dplyr::select(#
+		Student,#
+		ID,#
+		SIS.User.ID,#
+		SIS.Login.ID,#
+		Section,#
+		`Pre/Post Test (2983296)`,#
+		Exam.1..2983040.,#
+		`Top Hat (Douglas - Unit 1) (2983135)`,#
+		LaunchPad..Douglas...Unit.1...2983297.,#
+		Choe.Extra.Credit..2994893.,#
+		Exam.2..2995594.,#
+		LaunchPad..Choe...Unit.2...2995595.,#
+		`Top Hat (Choe - Unit 2) (2995596)`,#
+		`Exam 3 (3010020)`,#
+		`LauchPad (DeMarco - Unit 3) (3012673)`,#
+		`Top Hat (DeMarco - Unit 3) (3012674)`#
+	) %>%#
+	setnames(#
+		"SIS.User.ID", #
+		"SIS User ID"#
+	) %>%#
+	setnames(#
+		"SIS.Login.ID",#
+		"SIS Login ID"#
+	) %>%#
+	setnames(#
+		"Exam.1..2983040.",#
+		"Exam 1 (2983040)"#
+	) %>%#
+	setnames(#
+		'LaunchPad..Douglas...Unit.1...2983297.',#
+		"LaunchPad (Douglas - Unit 1) (2983297)"#
+	) %>%#
+	setnames(#
+		"Choe.Extra.Credit..2994893.",#
+		"Choe Extra Credit (2994893)"#
+	) %>%#
+	setnames(#
+		"Exam.2..2995594.",#
+		"Exam 2 (2995594)"#
+	) %>%#
+	setnames(#
+		"LaunchPad..Choe...Unit.2...2995595.",#
+		"LaunchPad (Choe - Unit 2) (2995595)"#
+	) %>%#
+	arrange(Student)#
+BSC_2011_grades_merged %>% write.csv("BSC2011_unit3.csv")#
+X25.Apr.19.43.Grades.BSC2011[which(!(BSC_2011_grades_merged$`SIS Login ID` %in% X25.Apr.19.43.Grades.BSC2011$SIS.Login.ID)), ]
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
+FHP_FW
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+XP_SS
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+XP_FW %<>% #
+	mutate(ObsYear = year(Date))#
+XP_FW$Date %<>% as.Date#
+XP_FW$Location %<>% factor
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+XP_FW
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+XP
+head(Plant_Surveys_by_Year)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear
+head(Plant_Surveys)
+head(Plant_Surveys) %>% as.data.frame
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+#' Determine Fruit and Flower Presence#
+#'#
+#' @description Create separate variables indicating whether fruit and fruit and flowers were present.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+calculateFruitPresence <- function(Plant_Surveys) {#
+	Plant_Surveys %>% #
+		mutate(#
+			FruitPres_t 		= ifelse(Fruit_t > 0, 1, 0),#
+			FruitFlowerPres_t 	= ifelse(Fruit_Flowers_t > 0, 1, 0)#
+		) %>%#
+		as.data.table %>%#
+		# add NAs#
+		.[is.na(Fruit_t), FruitPres_t := NA] %>%#
+		.[is.na(Fruit_Flowers_t), FruitPres_t := NA] %>%#
+		as.data.frame#
+}#
+#
+#' Calculate Plant Volume#
+#'#
+#' @description Calculate plant volume as a cone, cylinder, and elliptic cylinder.#
+#' @param Plant_Surveys Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+calculatePlantVolume <- function(Plant_Surveys) {#
+	Plant_Surveys %>% #
+		mutate(#
+			Cone_t 				= pi * (((Width_t + Perpen_Width)/4)^2) * #
+									Height_t / 3,#
+			Cylinder_t 			= pi * ((Perpen_Width/2)^2) * Width_t,#
+			Elliptic_Cylinder_t = pi * Height_t/2 * Perpen_Width/2 * Width_t#
+		)#
+}#
+#
+#' Determine if a survey was complete#
+#'#
+#' @param x Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+Complete_Surveys_function <- function(x){#
+	ifelse(rowSums(is.na(x))==0, 1, 0)#
+	return(x)#
+}#
+#
+#' Determine whether a survey was complete#
+#'#
+#' @description Determine whether all data was collected during a survey.#
+#' Determine complete surveys for:#
+#' \itemize{#
+#'  \item insect surveys#
+#'  \item plant size#
+#'  \item size measurements (cm)#
+#'  \item fruit, flowers, and flower buds#
+#'  \item all data#
+#' 	}#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+determineCompleteSurveys <- function(Plant_Surveys) {#
+	Plant_Surveys$complete_insect_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"CA_t",#
+			"ME_t",#
+			"Unknown_Moth_t",#
+			"Old_Moth_Evidence_t"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_segments_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"Plant_Segments_w_leaves",#
+			"Plant_Segments_wo_leaves",#
+			"Plant_Segments_woody"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_size_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"Height_t",#
+			"Width_t",#
+			"Perpen_Width"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_fruit_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"Num_FlowerBuds",#
+			"Num_Fruit_red",#
+			"Num_Fruit_green",#
+			"Num_Flowers"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+		# insects#
+		"CA_t",#
+		"ME_t",#
+		"Unknown_Moth_t",#
+		"Old_Moth_Evidence_t",#
+		# number of segments#
+		"Size_t",#
+		"Plant_Segments_w_leaves",#
+		"Plant_Segments_wo_leaves",#
+		"Plant_Segments_woody",#
+		# size in cm#
+		"Height_t",#
+		"Width_t",#
+		"Perpen_Width",#
+		# flowers and fruit#
+		"Fruit_t" #
+		)]))==0, 1, 0#
+	)#
+	return(Plant_Surveys)#
+}#
+#
+#' Determine if an insect species was ever detected during the study period#
+#'#
+#' @description Determine if an insect species was ever detected during the study period.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+determineInsectPresenceDuringStudy <- function(Plant_Surveys) {#
+	Plant_Surveys.present <- Plant_Surveys %>%#
+		group_by(PlantID) %>%#
+		summarise(#
+			CAPresent = ifelse(sum(CA_t, na.rm=T) > 0, 1, 0),#
+			MEPresent = ifelse(sum(ME_t, na.rm=T) > 0, 1, 0)#
+			) %>%#
+		as.data.frame()#
+	Plant_Surveys %>% merge(Plant_Surveys.present, by="PlantID")#
+}#
+#
+#' Rename Species levels#
+#'#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+renameSpecies <- function(Plant_Surveys) {#
+	Plant_Surveys %>% #
+		mutate(#
+			Species = replace(#
+				Species, #
+				which(Species =="pusilla"), #
+				"Opuntia pusilla"#
+			),#
+			Species = replace(#
+				Species, #
+				which(Species =="stricta"), #
+				"Opuntia stricta"#
+			)#
+		)#
+}#
+#
+#' Rename Convert 1/0 to Yes/No#
+#'#
+#' @param x Vector of 0/1 data#
+#'#
+#' @export#
+#
+Yes_No_from_1_0_Function <- function(x){#
+	x[x > 0] <- "Yes"#
+	x[x == 0] <- "No"#
+	return(x)#
+}#
+#
+#' Make Insect Factor Variables#
+#'#
+#' @description Make new insect variables with "yes"/"no" values instead of 0/1.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+createInsectFactorVariables <- function(Plant_Surveys) {#
+	Plant_Surveys$C_cactorum 	<- Plant_Surveys$CA_t#
+	Plant_Surveys$M_prodenialis <- Plant_Surveys$ME_t#
+	Plant_Surveys[,c(#
+		"C_cactorum",#
+		"M_prodenialis")] %<>%#
+		apply(., 2, Yes_No_from_1_0_Function) %>%#
+		apply(., 2, as.factor#
+	)#
+	return(Plant_Surveys)#
+}#
+#
+#' Format as Factors#
+#'#
+#' @description Format variables as factors.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+formatasFactors <- function(x) {#
+	factors <- c("ClusterID", "Network", "Island", "Species", #
+		"DemographicSurvey", "Visit", "Year", "Season", "C_cactorum", #
+		"M_prodenialis")#
+	for (i in 1:length(factors)) {#
+		if (factors[i] %in% names(x)) {#
+			x[, factors[i]] %<>% as.factor#
+		}#
+	}#
+	return(x)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence
+head(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+#' Determine Fruit and Flower Presence#
+#'#
+#' @description Create separate variables indicating whether fruit and fruit and flowers were present.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+calculateFruitPresence <- function(Plant_Surveys) {#
+	Plant_Surveys %>% #
+		mutate(#
+			FruitPres_t 		= ifelse(Fruit_t > 0, 1, 0),#
+			FruitFlowerPres_t 	= ifelse(Fruit_Flowers_t > 0, 1, 0)#
+		) %>%#
+		as.data.table %>%#
+		# add NAs#
+		.[is.na(Fruit_t), FruitPres_t := NA] %>%#
+		.[is.na(Fruit_Flowers_t), FruitPres_t := NA] %>%#
+		as.data.frame#
+}#
+#
+#' Calculate Plant Volume#
+#'#
+#' @description Calculate plant volume as a cone, cylinder, and elliptic cylinder.#
+#' @param Plant_Surveys Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+calculatePlantVolume <- function(Plant_Surveys) {#
+	Plant_Surveys %>% #
+		mutate(#
+			Cone_t 				= pi * (((Width_t + Perpen_Width)/4)^2) * #
+									Height_t / 3,#
+			Cylinder_t 			= pi * ((Perpen_Width/2)^2) * Width_t,#
+			Elliptic_Cylinder_t = pi * Height_t/2 * Perpen_Width/2 * Width_t#
+		)#
+}#
+#
+#' Determine if a survey was complete#
+#'#
+#' @param x Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+Complete_Surveys_function <- function(x){#
+	ifelse(rowSums(is.na(x))==0, 1, 0)#
+	return(x)#
+}#
+#
+#' Determine whether a survey was complete#
+#'#
+#' @description Determine whether all data was collected during a survey.#
+#' Determine complete surveys for:#
+#' \itemize{#
+#'  \item insect surveys#
+#'  \item plant size#
+#'  \item size measurements (cm)#
+#'  \item fruit, flowers, and flower buds#
+#'  \item all data#
+#' 	}#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+determineCompleteSurveys <- function(Plant_Surveys) {#
+	Plant_Surveys$complete_insect_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"CA_t",#
+			"ME_t",#
+			"Unknown_Moth_t",#
+			"Old_Moth_Evidence_t"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_segments_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"Plant_Segments_w_leaves",#
+			"Plant_Segments_wo_leaves",#
+			"Plant_Segments_woody"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_size_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"Height_t",#
+			"Width_t",#
+			"Perpen_Width"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_fruit_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+			"Num_FlowerBuds",#
+			"Num_Fruit_red",#
+			"Num_Fruit_green",#
+			"Num_Flowers"#
+		)]))==0, 1, 0#
+	)#
+	Plant_Surveys$complete_surveys <- ifelse(rowSums(is.na(#
+		Plant_Surveys[, #
+		c(#
+		# insects#
+		"CA_t",#
+		"ME_t",#
+		"Unknown_Moth_t",#
+		"Old_Moth_Evidence_t",#
+		# number of segments#
+		"Size_t",#
+		"Plant_Segments_w_leaves",#
+		"Plant_Segments_wo_leaves",#
+		"Plant_Segments_woody",#
+		# size in cm#
+		"Height_t",#
+		"Width_t",#
+		"Perpen_Width",#
+		# flowers and fruit#
+		"Fruit_t" #
+		)]))==0, 1, 0#
+	)#
+	return(Plant_Surveys)#
+}#
+#
+#' Determine if an insect species was ever detected during the study period#
+#'#
+#' @description Determine if an insect species was ever detected during the study period.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+determineInsectPresenceDuringStudy <- function(Plant_Surveys) {#
+	Plant_Surveys.present <- Plant_Surveys %>%#
+		group_by(PlantID) %>%#
+		summarise(#
+			CAPresent = ifelse(sum(CA_t, na.rm=T) > 0, 1, 0),#
+			MEPresent = ifelse(sum(ME_t, na.rm=T) > 0, 1, 0)#
+			) %>%#
+		as.data.frame()#
+	Plant_Surveys %>% merge(Plant_Surveys.present, by="PlantID")#
+}#
+#
+#' Rename Species levels#
+#'#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+renameSpecies <- function(Plant_Surveys) {#
+	Plant_Surveys %>% #
+		as.data.table %>%#
+		.[Species == "pusilla", Species := "Opuntia pusilla"] %>%#
+		.[Species == "stricta", Species := "Opuntia stricta"] %>%#
+		as.data.frame#
+}#
+#
+#' Rename Convert 1/0 to Yes/No#
+#'#
+#' @param x Vector of 0/1 data#
+#'#
+#' @export#
+#
+Yes_No_from_1_0_Function <- function(x){#
+	x[x > 0] <- "Yes"#
+	x[x == 0] <- "No"#
+	return(x)#
+}#
+#
+#' Make Insect Factor Variables#
+#'#
+#' @description Make new insect variables with "yes"/"no" values instead of 0/1.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+createInsectFactorVariables <- function(Plant_Surveys) {#
+	Plant_Surveys$C_cactorum 	<- Plant_Surveys$CA_t#
+	Plant_Surveys$M_prodenialis <- Plant_Surveys$ME_t#
+	Plant_Surveys[,c(#
+		"C_cactorum",#
+		"M_prodenialis")] %<>%#
+		apply(., 2, Yes_No_from_1_0_Function) %>%#
+		apply(., 2, as.factor#
+	)#
+	return(Plant_Surveys)#
+}#
+#
+#' Format as Factors#
+#'#
+#' @description Format variables as factors.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+formatasFactors <- function(x) {#
+	factors <- c("ClusterID", "Network", "Island", "Species", #
+		"DemographicSurvey", "Visit", "Year", "Season", "C_cactorum", #
+		"M_prodenialis")#
+	for (i in 1:length(factors)) {#
+		if (factors[i] %in% names(x)) {#
+			x[, factors[i]] %<>% as.factor#
+		}#
+	}#
+	return(x)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies
+head(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+#' Merge Plant Info and Plant Surveys data files#
+#'#
+#' @description Add Island, Cluster, and Host Species information to the Plant_Surveys dataset.#
+#' @param Plant_Surveys Plant Survey Dataset#
+#' @param Plant_Info  Plant Information Dataset#
+#'#
+#' @export#
+#
+mergePlantSurveysPlantInfo <- function(Plant_Surveys, Plant_Info) {#
+	Plant_Surveys <- Plant_Info %>%#
+		dplyr::select(#
+			ClusterID, #
+			InDemographicStudy, #
+			PlotPlantID, #
+			Tag_Number, #
+			Island, #
+			Cluster2, #
+			Network, #
+			Species, #
+			InBigPlantStudy, #
+			N.PlotPlantIDs, #
+			Easting, #
+			Northing,#
+			ReproductiveMode#
+		) %>%#
+		merge(Plant_Surveys, by = "PlotPlantID")#
+	return(Plant_Surveys)#
+}#
+#
+#' Add Sampling Period Variable#
+#'#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+addSamplingPeriods <- function(Plant_Surveys) {#
+	Plant_Surveys$DemographicSurvey <- "NA"#
+	Plant_Surveys %<>% #
+		group_by(Date) %>% #
+		mutate(#
+			# SURVEY 1 - SPRING/SUMMER 2013#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2013-05-14" & Date < "2013-08-06"), "1"),#
+			# SURVEY 2 - FALL/WINTER 2013/2014#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2013-12-13" & Date < "2014-01-28"), "2"),#
+			# SURVEY 3 - SPRING/SUMMER 2014#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2014-05-06" & Date < "2014-09-24"), "3"),#
+			# SURVEY 4 - WINTER 2015#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2015-01-08" & Date < "2015-02-21"), "4"),#
+			# SURVEY 5 - SPRING/SUMMER 2015#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2015-05-01"), "5"))#
+	return(Plant_Surveys)#
+}#
+#
+#' Add Sampling Year Variable#
+#'#
+#' @param Plant_Surveys Plant Survey Dataset#
+#'#
+#' @export#
+#
+addSamplingYear <- function(Plant_Surveys) {#
+	Plant_Surveys$SamplingYear <- NA#
+	Plant_Surveys %<>% #
+		group_by(Date) %>% #
+		mutate(#
+			SamplingYear = replace(#
+				SamplingYear, #
+				which(Date >= "2012-12-02" & Date < "2013-05-01"), #
+				2012#
+			),#
+			SamplingYear = replace(#
+				SamplingYear, #
+				which(Date >= "2013-05-01" & Date < "2014-05-01"), #
+				2013#
+			),#
+			SamplingYear = replace(#
+				SamplingYear, #
+				which(Date >= "2014-05-01" & Date < "2015-05-01"), #
+				2014#
+			),#
+			SamplingYear = replace(#
+				SamplingYear, #
+				which(Date >= "2015-05-01"), #
+				2015#
+			)#
+		)#
+	return(Plant_Surveys)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- timeseries %>% #
+	group_by(Location, ID, Date) %>%#
+	summarise(n.obs = length(Species)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots
+names(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, Date) %>%#
+	summarise(n.obs = length(Species)) %>%#
+	filter(n.obs > 1)
+dim(dups)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, Date) %>%#
+	summarise(n.obs = length(Species)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots
+names(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, Date) %>%#
+	summarise(n.obs = length(Species)) %>%#
+	filter(n.obs > 1)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+str(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Species)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+# ------------------------------------
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID) %>%#
+	summarise(n.obs = length(Species)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+# --------------------
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}
+dim(dups)
+head(dups)
+Plant_Surveys[which(Plant_Surveys$PlantID=="1569"), ]
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+# ---------------------------------------------------------------------------
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys
+head(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame %>%#
+	calculateRGR
+head(Plant_Surveys_by_Year)
+tai;(Plant_Surveys_by_Year)
+tail(Plant_Surveys_by_Year)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year$Size_t_1 %<>% as.numeric#
+#
+Plant_Surveys_by_Year[,c(#
+	"Old_Moth_Evidence_t",#
+	"NatInsect_t",#
+	"Insect_t",#
+	"DA_t",#
+	"CH_t",#
+	"ME_t",#
+	"CA_t",                #
+	"Size_t",#
+	"FruitPres_t",#
+	"FruitFlowerPres_t",#
+	"Fruit_t",#
+	"Size_t_1",#
+	"DaysSincePrevSurvey",#
+	"DaysSinceStart",#
+	"CA_t_1",#
+	"ME_t_1",#
+	"CH_t_1",#
+	"DA_t_1",#
+	"Insect_t_1",#
+	"NatInsect_t_1",#
+	"Old_Moth_Evidence_t_1"#
+)] %<>% apply(., 2, as.integer)#
+#
+Plant_Surveys_by_Year[,c(#
+	"Height_t",#
+	"Height_t_1",#
+	"RGR_Height",#
+	"RGR_Height365",#
+	"RGR_Size",#
+	"RGR_Size365"#
+)] %<>% apply(., 2, as.numeric)#
+#
+Plant_Surveys_by_Year$PlantID %<>% as.factor	#
+Plant_Surveys_by_Year$SamplingYear %<>% as.factor#
+Plant_Surveys_by_Year$Species %<>% as.factor#
+Plant_Surveys_by_Year$Network %<>% as.factor#
+Plant_Surveys_by_Year$Island %<>% as.factor#
+Plant_Surveys_by_Year$ReproductiveMode %<>% as.factor
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# convert to Date#
+Plant_Surveys_by_Year$Date %<>% as.Date(format = "%Y-%m-%d")	#
+Plant_Surveys_by_Year$Previous_Survey_Date %<>% #
+	as.Date(format = "%Y-%m-%d")
+head(Plant_Surveys_by_Year)
+tail(Plant_Surveys_by_Year)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %>% #
+	filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %>% #
+	filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %>% #
+	filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame %>%#
+	calculateRGR
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame %>%#
+	calculateRGR
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+# create Fecundity and RGR dataset - only measured size during the spring and summer#
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame
+head(Plant_Surveys_by_Year)
+Plant_Surveys_by_Year %>% filter(PlantID=="1549")
+Plant_Surveys_by_Year %>% filter(PlantID=="1548")
+Plant_Surveys_by_Year %>% filter(PlantID=="1748")
+Plant_Surveys_by_Year %>% filter(PlantID=="1948")
+Plant_Surveys_by_Year %>% filter(PlantID=="1848")
+Plant_Surveys_by_Year %>% filter(PlantID=="1847")
+str(Plant_Surveys_by_Year)
+tail(Plant_Surveys_by_Year)
+Plant_Surveys_by_Year %>% filter(PlantID=="9999")
+Plant_Surveys_by_Year %>% filter(PlantID=="9999") %>% calculateRGR
+7.5-6/(44*6)
+(7.5-6)/(44*6)
+(7.5-6)/(44*6)*365
+(6-7.5)/(44*7.5)*365
+(6-7.5)/(44*7.5)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+#' Calculate Relative Growth Rate#
+#'#
+#' @param x Dataset to which RGR variables should be added.#
+#' @description formula for relative growth rate is from Paine, C. E. T., Marthews, T. R., Vogt, D. R., Purves, D., Rees, M., Hector, A., & Turnbull, L. A. (2011). How to fit nonlinear plant growth models and calculate growth rates: an update for ecologists. Methods in Ecology and Evolution, no–no. doi:10.1111/j.2041-210X.2011.00155.x#
+#
+#' absolute growth rate (AGR) is the derivative with respect to time of the function used to predict biomass, and RGR is simply AGR divided by the current biomass#
+#
+#' RGR is (dM/dt)/M#
+#
+#' CURRENT FORMULA FOR RGR#
+#' after meeting with Mary and Bob (1 Dec 2014) Bob suggested that I divide by plant size at time t-1#
+#
+#' scale by DaysSincePrevTime#
+#'#
+#' @export#
+#' @importFrom dplyr mutate#
+#' @import magrittr#
+#' @import data.table#
+#
+calculateRGR <- function(x=x){#
+	vars <- c(#
+		"Height_t",#
+		"Size_t",#
+		"Cone_t",#
+		"Cylinder_Tall_t"#
+	)#
+	if ("Height_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Height		= (Height_t - Height_t_1) /#
+								(DaysSincePrevSurvey*Height_t_1),#
+			RGR_Height365 	= RGR_Height*365		#
+		)#
+	}#
+	if ("Size_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Size		= (Size_t - Size_t_1) /#
+								(DaysSincePrevSurvey*Size_t_1),#
+			RGR_Size365 	= RGR_Size*365				#
+		)#
+	}#
+	if ("Cone_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Cone		= (Cone_t - Cone_t_1) / #
+								(DaysSincePrevSurvey*Cone_t_1),#
+			RGR_Cone365 	= RGR_Cone*365				#
+		)#
+	}#
+	if ("Cylinder_Tall_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Cylinder_Tall = (Cylinder_Tall_t - Cylinder_Tall_t_1) / #
+									(DaysSincePrevSurvey*Cylinder_Tall_t_1),#
+			RGR_CylinderTall365 = RGR_Cylinder_Tall*365#
+		)#
+	}#
+	# remove Inf values#
+	# x[, names(x)] %<>%#
+	#	apply(., 2, NA_Function#
+	#)#
+	return(x)#
+}
+Plant_Surveys_by_Year %>% filter(PlantID=="9999") %>% calculateRGR
+(6-7.5)/(358*7.5)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+#' Calculate Relative Growth Rate#
+#'#
+#' @param x Dataset to which RGR variables should be added.#
+#' @description formula for relative growth rate is from Paine, C. E. T., Marthews, T. R., Vogt, D. R., Purves, D., Rees, M., Hector, A., & Turnbull, L. A. (2011). How to fit nonlinear plant growth models and calculate growth rates: an update for ecologists. Methods in Ecology and Evolution, no–no. doi:10.1111/j.2041-210X.2011.00155.x#
+#
+#' absolute growth rate (AGR) is the derivative with respect to time of the function used to predict biomass, and RGR is simply AGR divided by the current biomass#
+#
+#' RGR is (dM/dt)/M#
+#
+#' CURRENT FORMULA FOR RGR#
+#' after meeting with Mary and Bob (1 Dec 2014) Bob suggested that I divide by plant size at time t-1#
+#
+#' scale by DaysSincePrevTime#
+#'#
+#' @export#
+#' @importFrom dplyr mutate#
+#' @import magrittr#
+#' @import data.table#
+#
+calculateRGR <- function(x=x){#
+	vars <- c(#
+		"Height_t",#
+		"Size_t",#
+		"Cone_t",#
+		"Cylinder_Tall_t"#
+	)#
+	if ("Height_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Height		= (Height_t - Height_t_1) /#
+								(DaysSincePrevSurvey*Height_t_1),#
+			RGR_Height365 	= RGR_Height*365		#
+		)#
+	}#
+	if ("Size_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Size		= (Size_t - Size_t_1) /#
+								(DaysSincePrevSurvey*Size_t_1),#
+			RGR_Size365 	= RGR_Size*365				#
+		)#
+	}#
+	if ("Cone_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Cone		= (Cone_t - Cone_t_1) / #
+								(DaysSincePrevSurvey*Cone_t_1),#
+			RGR_Cone365 	= RGR_Cone*365				#
+		)#
+	}#
+	if ("Cylinder_Tall_t" %in% names(x)) {#
+		x %<>% mutate(#
+			RGR_Cylinder_Tall = (Cylinder_Tall_t - Cylinder_Tall_t_1) / #
+									(DaysSincePrevSurvey*Cylinder_Tall_t_1),#
+			RGR_CylinderTall365 = RGR_Cylinder_Tall*365#
+		)#
+	}#
+	# remove Inf values#
+	# x[, names(x)] %<>%#
+	#	apply(., 2, NA_Function#
+	#)#
+	return(x)#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+# create Fecundity and RGR dataset - only measured size during the spring and summer#
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame %>%#
+	calculateRGR ## this leads to a few values with PlantID = NA
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups <- Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))#
+#
+	if (dim(dups)[1] > 0) {#
+			stop("NA values for PlantID.")#
+	}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))
+Plant_Surveys_by_Year %>% filter(PlantID=="9998") %>% calculateRGR
+(7-5)/(358*5)
+(7-5)/(390*5)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year %>% #
+		filter(SamplingYear==2012) %>%#
+		filter(!is.na(RGR_Height))
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# check for PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+# create Fecundity and RGR dataset - only measured size during the spring and summer#
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame %>%#
+	calculateRGR ## this leads to a few values with PlantID = NA#
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+	# check for PlantID = NA#
+	dups <- Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))#
+#
+	if (dim(dups)[1] > 0) {#
+			stop("NA values for PlantID.")#
+	}#
+	# should not be any non-NA values for RGR for SamplingYear 2012#
+	dups <- Plant_Surveys_by_Year %>% #
+		filter(SamplingYear==2012) %>%#
+		filter(!is.na(RGR_Height))#
+#
+	if (dim(dups)[1] > 0) {#
+			stop("Non-NA values for RGR for first Sampling Year.")#
+	}#
+# --------------------------------------------------------------------------- ##
+Plant_Surveys_by_Year$Size_t_1 %<>% as.numeric#
+#
+Plant_Surveys_by_Year[,c(#
+	"Old_Moth_Evidence_t",#
+	"NatInsect_t",#
+	"Insect_t",#
+	"DA_t",#
+	"CH_t",#
+	"ME_t",#
+	"CA_t",                #
+	"Size_t",#
+	"FruitPres_t",#
+	"FruitFlowerPres_t",#
+	"Fruit_t",#
+	"Size_t_1",#
+	"DaysSincePrevSurvey",#
+	"DaysSinceStart",#
+	"CA_t_1",#
+	"ME_t_1",#
+	"CH_t_1",#
+	"DA_t_1",#
+	"Insect_t_1",#
+	"NatInsect_t_1",#
+	"Old_Moth_Evidence_t_1"#
+)] %<>% apply(., 2, as.integer)#
+#
+Plant_Surveys_by_Year[,c(#
+	"Height_t",#
+	"Height_t_1",#
+	"RGR_Height",#
+	"RGR_Height365",#
+	"RGR_Size",#
+	"RGR_Size365"#
+)] %<>% apply(., 2, as.numeric)#
+#
+Plant_Surveys_by_Year$PlantID %<>% as.factor	#
+Plant_Surveys_by_Year$SamplingYear %<>% as.factor#
+Plant_Surveys_by_Year$Species %<>% as.factor#
+Plant_Surveys_by_Year$Network %<>% as.factor#
+Plant_Surveys_by_Year$Island %<>% as.factor#
+Plant_Surveys_by_Year$ReproductiveMode %<>% as.factor
+head(Plant_Surveys_by_Year)
+tail(Plant_Surveys_by_Year)
+str(Plant_Surveys_by_Year)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %>% #
+	filter(Size_t==0)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups <- Plant_Surveys %>% #
+	filter(Size_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Values for Size_t equal 0.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups <- Plant_Surveys %>% #
+	filter(Size_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Values for Size_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Height_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Height_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Width_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Width_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Perpen_Width==0)#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Perpen_Width equal 0.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %>% #
+	filter(Perpen_Width==0)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %>% #
+	filter(Height_t==0)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups %>% write.csv("Height_0.csv")
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups <- Plant_Surveys %>% #
+	filter(Perpen_Width==0)#
+#
+dups %>% write.csv("Perpen_Width_0.csv")
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+dups <- Plant_Surveys %>% #
+	filter(Height_t==0)#
+#
+dups %>% write.csv("Height_0.csv")
+head(Plant_Surveys_by_Year)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# check for PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+#
+# There should never be observations of 0 pads, 0 height, or 0 width#
+# replace 0 with NA#
+#
+dups <- Plant_Surveys %>% #
+	filter(Size_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Values for Size_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Height_t==0)#
+#
+dups %>% write.csv("Height_0.csv")#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Height_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Width_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Width_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Perpen_Width==0)#
+#
+dups %>% write.csv("Perpen_Width_0.csv")#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Perpen_Width equal 0.")#
+}#
+#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+# create Fecundity and RGR dataset - only measured size during the spring and summer#
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame %>%#
+	calculateRGR ## this leads to a few values with PlantID = NA#
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+	# check for PlantID = NA#
+	dups <- Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))#
+#
+	if (dim(dups)[1] > 0) {#
+			stop("NA values for PlantID.")#
+	}#
+	# should not be any non-NA values for RGR for SamplingYear 2012#
+	dups <- Plant_Surveys_by_Year %>% #
+		filter(SamplingYear==2012) %>%#
+		filter(!is.na(RGR_Height))#
+#
+	if (dim(dups)[1] > 0) {#
+			stop("Non-NA values for RGR for first Sampling Year.")#
+	}#
+# --------------------------------------------------------------------------- ##
+Plant_Surveys_by_Year$Size_t_1 %<>% as.numeric#
+#
+Plant_Surveys_by_Year[,c(#
+	"Old_Moth_Evidence_t",#
+	"NatInsect_t",#
+	"Insect_t",#
+	"DA_t",#
+	"CH_t",#
+	"ME_t",#
+	"CA_t",                #
+	"Size_t",#
+	"FruitPres_t",#
+	"FruitFlowerPres_t",#
+	"Fruit_t",#
+	"Size_t_1",#
+	"DaysSincePrevSurvey",#
+	"DaysSinceStart",#
+	"CA_t_1",#
+	"ME_t_1",#
+	"CH_t_1",#
+	"DA_t_1",#
+	"Insect_t_1",#
+	"NatInsect_t_1",#
+	"Old_Moth_Evidence_t_1"#
+)] %<>% apply(., 2, as.integer)#
+#
+Plant_Surveys_by_Year[,c(#
+	"Height_t",#
+	"Height_t_1",#
+	"RGR_Height",#
+	"RGR_Height365",#
+	"RGR_Size",#
+	"RGR_Size365"#
+)] %<>% apply(., 2, as.numeric)#
+#
+Plant_Surveys_by_Year$PlantID %<>% as.factor	#
+Plant_Surveys_by_Year$SamplingYear %<>% as.factor#
+Plant_Surveys_by_Year$Species %<>% as.factor#
+Plant_Surveys_by_Year$Network %<>% as.factor#
+Plant_Surveys_by_Year$Island %<>% as.factor#
+Plant_Surveys_by_Year$ReproductiveMode %<>% as.factor
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# check for PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}
+names(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# check for PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+#
+# There should never be observations of 0 pads, 0 height, or 0 width#
+# replace 0 with NA#
+#
+dups <- Plant_Surveys %>% #
+	filter(Size_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Values for Size_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Max_Height==0)#
+#
+dups %>% write.csv("Height_0.csv")#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Max_Height equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Max_Width==0)#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Max_Width equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Perpen_Width==0)#
+#
+dups %>% write.csv("Perpen_Width_0.csv")#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Perpen_Width equal 0.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys %<>% processPlantSurveys
+names(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# check for PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+#
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# There should never be observations of 0 pads, 0 height, or 0 width#
+# replace 0 with NA#
+#
+dups <- Plant_Surveys %>% #
+	filter(Size_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Values for Size_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Max_Height==0)#
+#
+dups %>% write.csv("Height_0.csv")#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Max_Height equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Width_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Width_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Perpen_Width==0)#
+#
+dups %>% write.csv("Perpen_Width_0.csv")#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Perpen_Width equal 0.")#
+}#
+# ---------------------------------------------------------------------------
+names(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# check for PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
+#
+Plant_Surveys %<>% processPlantSurveys#
+#
+# --------------------------------------------------------------------------- ##
+########################## ERROR MESSAGE#
+# There should never be observations of 0 pads, 0 height, or 0 width#
+# replace 0 with NA#
+#
+dups <- Plant_Surveys %>% #
+	filter(Size_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Values for Size_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Height_t==0)#
+#
+dups %>% write.csv("Height_0.csv")#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Height_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Width_t==0)#
+#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Width_t equal 0.")#
+}#
+#
+dups <- Plant_Surveys %>% #
+	filter(Perpen_Width==0)#
+#
+dups %>% write.csv("Perpen_Width_0.csv")#
+if (dim(dups)[1] > 0) {#
+	stop("Values for Perpen_Width equal 0.")#
+}
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Info %<>% processPlantInfo(Plot_Info)#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) %>%#
+	addSamplingPeriods %>%#
+	addSamplingYear %>%#
+	as.data.frame %>%#
+	mergePlantRecordsfromMultiplePlots %>%#
+	calculateFruitPresence %>%#
+	calculatePlantVolume %>%#
+	determineCompleteSurveys #
+Plant_Surveys %<>% #
+	determineInsectPresenceDuringStudy %>%#
+# 	assignSeason %>%#
+	renameSpecies %>%#
+	createInsectFactorVariables %>%#
+	formatasFactors#
+#
+# create Fecundity and RGR dataset - only measured size during the spring and summer#
+Plant_Surveys_by_Year <- Plant_Surveys %>% #
+	group_by(SamplingYear, PlantID) %>%#
+	summarise(#
+		Species = Species[1],#
+		Network = Network[1],#
+		Island = Island[1],#
+		ReproductiveMode = ReproductiveMode[1],#
+		Date = min(Date),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
+		Size_t = max(Size_t, na.rm=T),#
+		Height_t = max(Height_t, na.rm=T),#
+		Fruit_t = max(Fruit_t, na.rm=T),#
+		FruitPres_t = max(FruitPres_t, na.rm=T),#
+		CA_t = max(CA_t, na.rm=T),#
+		ME_t = max(ME_t, na.rm=T),#
+		DA_t = max(DA_t, na.rm=T),#
+		CH_t = max(CH_t, na.rm=T),#
+		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T)#
+	) %>% #
+	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
+	# lag variables#
+	calculateSizeLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateDateLags %>%#
+	createNewInsectVariables(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	calculateInsectLags(#
+		arrange.variable="Date", #
+		grouping.variable="PlantID"#
+	) %>%#
+	as.data.frame %>%#
+	calculateRGR ## this leads to a few values with PlantID = NA
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+########################## ERROR MESSAGE#
+	# check for PlantID = NA#
+	dups <- Plant_Surveys_by_Year %>% #
+		filter(is.na(PlantID))#
+#
+	if (dim(dups)[1] > 0) {#
+			stop("NA values for PlantID.")#
+	}#
+	# should not be any non-NA values for RGR for SamplingYear 2012#
+	dups <- Plant_Surveys_by_Year %>% #
+		filter(SamplingYear==2012) %>%#
+		filter(!is.na(RGR_Height))#
+#
+	if (dim(dups)[1] > 0) {#
+			stop("Non-NA values for RGR for first Sampling Year.")#
+	}#
+# ------------------------------------------------------------
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_by_Year$Size_t_1 %<>% as.numeric#
+Plant_Surveys_by_Year[,c(#
+	"Old_Moth_Evidence_t",#
+	"NatInsect_t",#
+	"Insect_t",#
+	"DA_t",#
+	"CH_t",#
+	"ME_t",#
+	"CA_t",                #
+	"Size_t",#
+	"FruitPres_t",#
+	"FruitFlowerPres_t",#
+	"Fruit_t",#
+	"Size_t_1",#
+	"DaysSincePrevSurvey",#
+	"DaysSinceStart",#
+	"CA_t_1",#
+	"ME_t_1",#
+	"CH_t_1",#
+	"DA_t_1",#
+	"Insect_t_1",#
+	"NatInsect_t_1",#
+	"Old_Moth_Evidence_t_1"#
+)] %<>% apply(., 2, as.integer)#
+Plant_Surveys_by_Year[,c(#
+	"Height_t",#
+	"Height_t_1",#
+	"RGR_Height",#
+	"RGR_Height365",#
+	"RGR_Size",#
+	"RGR_Size365"#
+)] %<>% apply(., 2, as.numeric)#
+Plant_Surveys_by_Year$PlantID %<>% as.factor	#
+Plant_Surveys_by_Year$SamplingYear %<>% as.factor#
+Plant_Surveys_by_Year$Species %<>% as.factor#
+Plant_Surveys_by_Year$Network %<>% as.factor#
+Plant_Surveys_by_Year$Island %<>% as.factor#
+Plant_Surveys_by_Year$ReproductiveMode %<>% as.factor
+head(Plant_Surveys_by_Year)
+tail(Plant_Surveys_by_Year)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+Plant_Surveys_analysis <- Plant_Surveys_by_Year %>% 	#
+	as.data.frame %>%#
+ 	droplevels %>% #
+ 	mutate(Ln_Size_t_1_st = arm::rescale(log(Size_t_1))) %>%#
+ 	dplyr::select(#
+ 		PlantID,#
+ 		Date,#
+ 		Network,#
+ 		Island,#
+ 		Size_t_1,#
+ 		Height_t_1,#
+ 		CA_t_1,#
+ 		ME_t_1,#
+ 		Old_Moth_Evidence_t_1,#
+ 		RGR_Size,#
+ 		RGR_Height,#
+ 		Ln_Size_t_1_st,#
+ 		FruitPres_t,#
+ 		Fruit_t#
+ 	) %>%#
+ 	.[complete.cases(.),]
+head(Plant_Surveys_analysis)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+# list of climate files to fix#
+climate_file_names <- c("NOAA.Palm.Coast.6.NE")#
 climate_data <- mergeClimateFiles(climate_file_names) %>%#
 	filterClimateDataByQuality %>%#
 	formatconvertClimateData#
-climate_data %<>% filter(Date <= "2014-01-17", Date >= "2008-01-20")#
-climate_data %<>% filter(MaxTemp != MinTemp)#
-Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) #
-climate_data <- getClimateDataByLocationDate(Datalist)
-library(dataproc)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) #
-climate_data <- getClimateDataByLocationDate(Datalist)
-library(rgdal)
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series/munge')
-Datalist <- findClosestWeatherStations(sites, climate_data, Distance=85) #
-climate_data <- getClimateDataByLocationDate(Datalist)
+#
+# check data#
+climate_data %>%#
+filter(MaxTemp < MinTemp)#
+#
+climate_data %>%#
+filter(MaxTemp == MinTemp)#
+#
+# split files to calculate degree days#
+climate_data %>% #
+	dplyr::select(Date, MinTemp, MaxTemp) %>%#
+	.[complete.cases(.),] %>%#
+	write.csv("GTMNERR_data.csv", row.names=F)#
+climate_data %>% filter(is.na(MinTemp) | is.na(MaxTemp) | is.na(Precip)) %>%#
+	dplyr::select(Date, MinTemp, MaxTemp, Precip) %>%#
+	write.csv("climate_data_NAs.csv", row.names=F)
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+temp_variables = c("Max Temp, Mean",#
+"Max Temp, SD",#
+"Mean Degree Day",#
+"Perc. Freezing Days",#
+"Consec. Freezing Days, Mean",#
+"Consec. Freezing Days, Max",#
+"Consec. Freezing Days, SD"#
+)#
+#
+#precip_variables = c("D.Precip.mean", "D.Precip.SD", "% D w/Rain", "D w/Rain, Mean", "D w/Rain, Max", "D w/Rain, SD", "D w/o Rain, Mean", "D w/o Rain, Max", "D w/o Rain, SD")#
+#
+precip_variables = c("Daily Precip, mean",#
+"Daily Precip, SD",#
+"Perc. Days w/Rain",#
+"Consec. Days w/Rain, Mean",#
+"Consec. Days w/Rain, Max",#
+"Consec. Days w/Rain, SD",#
+"Consec. Days w/o Rain, Mean",#
+"Consec. Days w/o Rain, Max",#
+"Consec. Days w/o Rain, SD"#
+)#
+temp_variables = c("E1","E2", "F")#
+precip_variables = c("A1", "A2", "B","C1","C2","C3","D1","D2","D3")#
+ID_variables = c("Date") #, "Location", "Species")#
+Location_list <- "GTMNERR"#
+DegreeDay_list <- c("GTMNERR.Degree.Days")#
+#
+climate_data %<>% calculateDegreeDays(DegreeDay_list) %>%#
+	formatClimateDataYearDayofYear %>%#
+	fixErroneousTemps#
+Plant_Surveys_by_Year %<>% mutate(Location="GTMNERR")#
+climate_data %<>% #
+	dplyr::select(Date, MinTemp, MaxTemp, Precip, Daily.DD, Year, Day_of_year) %>%#
+	mutate(Location="GTMNERR") %>%#
+	.[complete.cases(.), ]#
+Plant_Surveys_by_Year_climate <- calculateClimateVariables(#
+	x = Plant_Surveys_by_Year, #
+	climate_data, #
+	calculate_dates="TRUE", #
+	Dates_dataframe=NULL,#
+	first.year=2011#
+)#
+#
+# only 8 days with temperatures below freezing: climate_data[which(climate_data$MinTemp<0),], between 2011-01-01 and 2015-08, and all were either in 2011 and 2012#
+# removing freezing variables#
+Plant_Surveys_by_Year_climate %<>%#
+	dplyr::select(-c(#
+		Mean_Consecutive_Freezing_Days, #
+		Max_Consecutive_Freezing_Days, #
+		sd_Consecutive_Freezing_Days,#
+		Perc_Days_w_Freeze#
+	))#
+#
+# (1) First restrict to complete cases#
+#
+# dates for the starts of Spring and Fall#
+df <- data.frame(Date = as.Date(c(seasons$SE, seasons$FE))) %>% #
+	arrange(Date) %>%#
+	filter(Date > "2012-03-01" & Date <= "2015-09-20") %>%#
+	mutate(PrevSurvD = as.Date(c(NA, Date[-length(Date)]), origin="1970-01-01"))#
+six_month_dates = df[rep(1:nrow(df), times=length(Location_list)), ]#
+six_month_dates$Location = rep(Location_list, times=dim(df)[1])#
+#
+Dates_dataframe <- six_month_dates %>% .[complete.cases(.), ]#
+fecundityRGR <- calculateClimateVariables(#
+	Plant_Surveys_by_Year, #
+	climate_data, #
+	calculate_dates="FALSE", #
+	Dates_dataframe=Dates_dataframe,#
+	first.year=2012#
+) #
+#
+fecundityRGR$Dataset <- NA#
+fecundityRGR[which(month(fecundityRGR$Date)==9), ]$Dataset <- "SS"#
+fecundityRGR[which(month(fecundityRGR$Date)==3), ]$Dataset <- "FW"#
+#
+# HUMIFUSA#
+X <- fecundityRGR %>%#
+	as.data.table %>% #
+	change_weather_names_function2 %>%#
+	as.data.frame %>%#
+	.[complete.cases(.), ]#
+# Temp#
+XT <- X %>% .[, c(ID_variables, "Dataset", temp_variables)]#
+XT_SS <-XT %>% filter(Dataset=="SS")#
+XT_FW <- XT %>% filter(Dataset=="FW")#
+# Precip#
+XP <- X %>% #
+	.[, c(ID_variables, "Dataset", precip_variables)] %>%#
+	mutate(ObsYear = year(Date))#
+XP_SS <- XP %>% filter(Dataset=="SS")#
+XP_FW <- XP %>% filter(Dataset=="FW")
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+XP_SS
+setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling/munge')
+XP <- X %>% #
+	.[, c(ID_variables, "Dataset", precip_variables)] %>%#
+	mutate(ObsYear = year(Date)) %>%#
+	dplyr::select(Date, Dataset, ObsYear, A1, B)#
+XP_SS <- XP %>% filter(Dataset=="SS")#
+XP_FW <- XP %>% filter(Dataset=="FW")
+XP_FW
+head(X)
+seasons
+?seasons
+seasons <- data.frame(#
+   SE = as.POSIXct(c("2008-03-20", "2009-3-20", "2010-3-20", "2011-3-20", "2012-3-20", "2013-3-20", "2014-3-20", "2015-3-21"), format="%Y-%m-%d"),#
+   SS = as.POSIXct(c("2008-06-20", "2009-6-21", "2010-6-21", "2011-6-21", "2012-6-20", "2013-6-21", "2014-6-21", "2015-6-21"), format="%Y-%m-%d"),#
+   FE = as.POSIXct(c("2008-09-22", "2009-9-22", "2010-9-23", "2011-9-23", "2012-9-22", "2013-9-22", "2014-9-23", "2015-9-21"), format="%Y-%m-%d"),#
+   WS = as.POSIXct(c("2008-12-21", "2009-12-21", "2010-12-21", "2011-12-22", "2012-12-21", "2013-12-21", "2014-12-21", "2015-12-21"), format="%Y-%m-%d")#
+)
+seasons
+save(seasons, file="seasons.rda")
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./dataproc")#
 #setwd("./modresproc")#
-devtools::test()#
+#devtools::test()#
 devtools::document()#
 devtools::install()
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./dataproc")#
-#setwd("./modresproc")#
-devtools::test()#
-devtools::document()#
-devtools::install()
+seasons

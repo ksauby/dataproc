@@ -125,13 +125,32 @@ library(devtools)
 devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
 devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
 install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-library(dataproc)
-?processPlantInfo
-setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series')
-library(ProjectTemplate)#
-setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
-# load project#
-load.project()
+??limit
+37-13
+24/37
+37-13
+26/37
+25/37
+23/37
+29/37
+30/37
+22/37
+30/37
+29/37
+28/37
+27/37
+35/37
+30/37
+29/37
+26/37
+26/37 - .6757
+28/37
+30/37
+29/37
+37-12
+25/37
+219*.8
+219*.8 - 17
 setwd('/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/sampling')
 library(ProjectTemplate)#
 #
@@ -150,44 +169,170 @@ D_Plot_Surveys <- Demographic.Plot.Surveys#
 Original_Plant_Data <- Original.Demographic.Plant.Data#
 Seed_Abundance <- Seed.Abundance#
 Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
-GIS_data_updated <- GIS.data.updated
-?select
-head(Plot_Info)
-head(Plot_Info)
-Plot_Info %>%#
-		dplyr::head%>% head
-head(Plant_Info)
-tail(Plant_Info)
+GIS_data_updated <- GIS.data.updated#
+#
+# --------------------------------------------------------------------------- ##
+# --------------- Demographic Plot Surveys --------------------------------- ##
+# --------------------------------------------------------------------------- ##
+#
+########################## ERROR MESSAGE#
+# check first duplicate data entries#
+dups <- Plant_Surveys %>% #
+	group_by(PlantID, DateSurveyed) %>%#
+	summarise(n.obs = length(Plant_collected)) %>%#
+	filter(n.obs > 1)#
+#
+if (dim(dups)[1] > 0) {#
+		stop("Duplicates observations for a PlantID, Date combination are #
+			present in the dataset.")#
+}#
+#
+# check for PlantID = NA#
+dups <- Plant_Surveys %>% #
+	filter(is.na(PlantID))#
+#
+if (dim(dups)[1] > 0) {#
+		stop("NA values for PlantID.")#
+}#
+# --------------------------------------------------------------------------- ##
+#
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-Plant_Info %<>% Format_PlantIDs_Function
-head(Plant_Info)
-tail(Plant_Info)
-head(Plant_Info[which(Plant_Info$Island=="Roadway1"),])
-Plant_Info[40,]
-Plant_Info[40:60,]
-Plant_Info[400:600,]
-?createAllSurveysDataset
-library(ACSampling)
-?t_HT
-?createACS
-library(ggplot2)#
-data(Thompson1990Figure1Population)#
-data(Thompson1990Figure1Sample)
-Z = createACS(Thompson1990Figure1Population, seed=2, n1=10, "y_value", condition=0)#
+# ------------------------------------------------------------- CHANGE NAMES#
+	# remame size and height#
+	Plant_Surveys %<>%	as.data.table %>%#
+		setnames("Max_Height", 				"Height_t") %>%#
+		setnames("Max_Width", 				"Width_t") %>%#
+		setnames("CACA_Larvae", 			"CA_t") %>%#
+		setnames("MEPR_Larvae", 			"ME_t") %>%#
+		setnames("CHVI_Evidence", 			"CH_t") %>%#
+		setnames("DACT_Evidence", 			"DA_t") %>%#
+		setnames("UnknownMoth_Evidence", 	"Unknown_Moth_t") %>%#
+		setnames("Old_Moth_Evidence", 		"Old_Moth_Evidence_t") %>%#
+		setnames("DateSurveyed", 			"Date") %>%#
+		as.data.frame#
+	# formatting/preparation necessary for prepping Demographic Plant Info#
+	Plant_Surveys$Date %<>% Format_Date_Function#
+	Plant_Surveys %<>% arrange(Date)#
+	Plant_Surveys %<>% Format_PlantIDs_Function#
+	# ------------------------------------------------ CONVERT ALL "999s" to NAs#
+	Plant_Surveys[,c(#
+		"Plant_Segments_total", #
+		"Plant_Segments_w_leaves",#
+		"Plant_Segments_wo_leaves",#
+		"Plant_Segments_woody",#
+		"Perpen_Width",#
+		"Width_t",#
+		"Height_t",#
+		"Num_FlowerBuds",#
+		"Num_Fruit_red",#
+		"Num_Fruit_green",#
+		"Num_Flowers",#
+		"Num_Fruit")] %<>% #
+		apply(2, NA_Function#
+	)#
+	# ------------------- INSECT SURVEYS, MISSING, DEAD - CHANGE YES, NO to 0, 1#
+	Plant_Surveys[,c(#
+		"CA_t",#
+		"ME_t",#
+		"CH_t",#
+		"DA_t",#
+		"Unknown_Moth_t",#
+		"Old_Moth_Evidence_t",#
+		"Dead",#
+		"Missing")] %<>% #
+		apply(2, Yes_Function#
+	)#
+	Plant_Surveys[,c(#
+		"CA_t",#
+		"ME_t",#
+		"CH_t",#
+		"DA_t",#
+		"Unknown_Moth_t",#
+		"Old_Moth_Evidence_t",#
+		"Dead",#
+		"Missing")] %<>%#
+		apply(2, No_Function#
+	)#
+	Plant_Surveys[,c(#
+		"CA_t",#
+		"ME_t",#
+		"CH_t",#
+		"DA_t",#
+		"Unknown_Moth_t",#
+		"Old_Moth_Evidence_t",#
+		"Dead",#
+		"Missing")] %<>% #
+		apply(2, NA_Function#
+	)#
+	# ------------------------------------------------------------- MAKE NUMERIC#
+	Plant_Surveys[,c(#
+		"CA_t",#
+		"ME_t",#
+		"CH_t",#
+		"DA_t",#
+		"Unknown_Moth_t",#
+		"Old_Moth_Evidence_t",#
+		"Plant_Segments_total",#
+		"Plant_Segments_w_leaves",#
+		"Plant_Segments_wo_leaves",#
+		"Plant_Segments_woody",#
+		"Height_t",#
+		"Width_t",#
+		"Perpen_Width",#
+		"Num_FlowerBuds",#
+		"Num_Fruit_red",#
+		"Num_Fruit_green",#
+		"Num_Flowers",#
+		"Num_Fruit",#
+		"Dead",#
+		"Missing")] %<>% #
+		apply(2, as.numeric#
+	)#
+	# ------------------------------------------------- ADD TOTAL SEGMENT COLUMN#
+	# do this so that plants that have no segments recorded (all NAs) have a total segment count = NA#
+	# for those plants that have fewer than four NAs (at least one segment column has a number), sum the segments#
+	Plant_Surveys$Size_t <- Plant_Surveys %>%#
+							dplyr::select(#
+								Plant_Segments_total,#
+								Plant_Segments_w_leaves,#
+								Plant_Segments_wo_leaves,#
+								Plant_Segments_woody#
+							) %>%#
+							apply(1, mysum)#
+	Plant_Surveys$Size_t %<>% Zero_is_NA_Function#
+	# --------------------------------------------------------- ADD FRUIT COLUMN#
+	Plant_Surveys$Fruit_t <- Plant_Surveys %>%#
+							dplyr::select(#
+								Num_Fruit_red,#
+								Num_Fruit_green,#
+								Num_Fruit#
+							) %>%#
+							apply(1, mysum)#
+	Plant_Surveys$Fruit_Flowers_t <- Plant_Surveys %>%#
+							dplyr::select(#
+								Num_FlowerBuds,#
+								Num_Flowers,#
+								Num_Fruit_red,#
+								Num_Fruit_green,#
+								Num_Fruit#
+							) %>%#
+							apply(1, mysum)#
+	# ----------------------------------------------------------- ERROR MESSAGES#
+	# There should never be observations of 0 pads, 0 height, or 0 width#
+	# replace 0 with NA#
+	dups <- Plant_Surveys %>% filter(Size_t==0)#
+	if (dim(dups)[1] > 0) {stop("Values for Size_t equal 0.")}#
 #
-# plot ACS sample overlaid onto population#
-ggplot() +#
-	geom_point(data=Thompson1990Figure1Population, aes(x,y, size=factor(y_value),#
-		shape=factor(y_value))) +#
-	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=Z, aes(x,y), shape=0, size=7)#
-# Initiate ACS, different seed#
-Z = createACS(Thompson1990Figure1Population, seed=26, n1=10, "y_value", condition=0)
-Z = createACS(Thompson1990Figure1Population, seed=26, n1=10, "y_value", condition=0)#
+	dups <- Plant_Surveys %>% filter(Height_t==0)#
+	if (dim(dups)[1] > 0) {stop("Values for Height_t equal 0.")}#
 #
-# plot ACS sample overlaid onto population#
-ggplot() +#
-	geom_point(data=Thompson1990Figure1Population, aes(x,y, size=factor(y_value),#
-		shape=factor(y_value))) +#
-	scale_shape_manual(values=c(1, rep(16, length(2:13)))) +#
-	geom_point(data=Z, aes(x,y), shape=0, size=7)
+	dups <- Plant_Surveys %>% filter(Width_t==0)#
+	if (dim(dups)[1] > 0) {stop("Values for Width_t equal 0.")}#
+#
+	dups <- Plant_Surveys %>% filter(Perpen_Width==0)#
+	if (dim(dups)[1] > 0) {stop("Values for Perpen_Width equal 0.")}
+head(Plant_Surveys)
+Plant_Surveys %>% arrange(PlantID) %$% PlantID
+Plant_Surveys %>% arrange(PlantID) %$% PlantID %>% unique
+head(Plant_Surveys)

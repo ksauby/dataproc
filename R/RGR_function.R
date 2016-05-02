@@ -54,8 +54,8 @@ calculateRGR <- function(x=x){
 	}
 	
 	# remove Inf values
-	x[, names(x)] %<>%
-		apply(., 2, NA_Function
-	)
+	# x[, names(x)] %<>%
+	#	apply(., 2, NA_Function
+	#)
 	return(x)
 }
