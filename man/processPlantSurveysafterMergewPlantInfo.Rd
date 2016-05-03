@@ -4,7 +4,7 @@
 \alias{processPlantSurveysafterMergewPlantInfo}
 \title{Process Plant Survey Data}
 \usage{
-processPlantSurveysafterMergewPlantInfo(x)
+processPlantSurveysafterMergewPlantInfo(Plant_Surveys)
 }
 \description{
 Steps:

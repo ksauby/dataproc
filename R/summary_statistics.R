@@ -22,7 +22,7 @@ safe.ifelse <- function(cond, yes, no) {
 #' @export
 
 Maximum <- function(x) {
-	safe.ifelse(
+	ifelse(
 		!all(is.na(x)),
 		max(x, na.rm=TRUE),
 		NA
