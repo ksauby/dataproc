@@ -87,7 +87,7 @@ createAllSurveysDataset <- function(timeseries) {
 		timeseries_all_surveys$Previous_Survey_Date %<>% 
 			as.Date(format = "%Y-%m-%d")	
 	# Save
-	setwd("/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/marsico-time-series/")
+	setwd("/Users/KSauby/Documents/Projects/marsico-time-series/")
 	cache("timeseries_all_surveys")
 	return(timeseries_all_surveys)
 }	
@@ -97,11 +97,11 @@ createAllSurveysDataset <- function(timeseries) {
 #' @description Each starts on the first day of spring of that calendar year, then ends on the last day of winter in the next calendar year (e.g., Spring 2009 - Winter 2010).
 #' The years are defined as follows:
 #' \itemize{
-#'  \item Year 1 - Spring, Summer, Fall, Winter 2009, Winter 2010
-#'  \item Year 2 - Spring, Summer, Fall, Winter 2010, Winter 2011
-#'  \item Year 3 - Spring, Summer, Fall, Winter 2011, Winter 2012
-#'  \item Year 4 - Spring, Summer, Fall, Winter 2012, Winter 2013
-#'	\item Year 5 - Spring, Summer, Fall, Winter 2013, Winter 2014
+#'  \item Year 2009 - Spring, Summer, Fall, Winter 2009 - 2010
+#'  \item Year 2010 - Spring, Summer, Fall, Winter 2010 - 2011
+#'  \item Year 2011 - Spring, Summer, Fall, Winter 2011 - 2012
+#'  \item Year 2012 - Spring, Summer, Fall, Winter 2012 - 2013
+#'	\item Year 2013 - Spring, Summer, Fall, Winter 2013 - 2014
 #' }
 #' @param timeseries Dataset
 #' 
@@ -136,7 +136,7 @@ createObsYear <- function(timeseries) {
 			ObsYear = replace(
 				ObsYear, 
 				which(
-					(Season 	== "Spring" | 
+					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
 					Year 	== 2011
@@ -146,7 +146,7 @@ createObsYear <- function(timeseries) {
 			ObsYear = replace(
 				ObsYear, 
 				which(
-					(Season 	== "Spring" | 
+					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
 					Year 	== 2012
@@ -156,7 +156,7 @@ createObsYear <- function(timeseries) {
 			ObsYear = replace(
 				ObsYear, 
 				which(
-					(Season 	== "Spring" | 
+					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
 					Year 	== 2013

@@ -339,8 +339,8 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 		arrange(Date)
 	MB_stations <- climate_data_temp %>% 
 		filter(Sampling_Location=="MB" & Distance <= Distance)
-	N_stations <- climate_data_temp %>% 
-		filter(Sampling_Location=="N" & Distance <= Distance)
+	NP_stations <- climate_data_temp %>% 
+		filter(Sampling_Location=="NP" & Distance <= Distance)
 	SASP_stations <- climate_data_temp %>% 
 		filter(Sampling_Location=="SASP" & Distance <= Distance)
 	TSP_stations <- climate_data_temp %>% 
@@ -351,7 +351,7 @@ findClosestWeatherStations <- function(sites, climate_data, Distance=85) {
 		`BLSP_stations` = BLSP_stations,
 		`HBSP_stations` = HBSP_stations,
 		`MB_stations` 	= MB_stations,
-		`N_stations` 	= N_stations,
+		`NP_stations` 	= NP_stations,
 		`SASP_stations` = SASP_stations,
 		`TSP_stations` 	= TSP_stations
 	)
