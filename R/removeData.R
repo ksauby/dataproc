@@ -31,7 +31,7 @@ removeData <- function(timeseries) {
 	timeseries %<>% as.data.frame %>%
 		# not enough engelmannii observations for analysis
 		filter(Species!="engelmannii") %>% 
-		# remove surveys of these plants that occurred after 2011-05-16 because they were hacked by the USDA
+		# remove surveys of these plants that occurred after 2011-05-16 because they were hacked by the USDA (this was discovered at HBSP on 5/17/11)
 		filter(!(PlantID == "HBSPOS10" & Date > "2011-05-16")) %>%
 		filter(!(PlantID == "HBSPOS11" & Date > "2011-05-16")) %>%
 		filter(!(PlantID == "HBSPOS12" & Date > "2011-05-16")) %>%
@@ -97,6 +97,7 @@ keepUSDAData <- function(timeseries) {
 	timeseries %<>% as.data.frame %>%
 		# not enough engelmannii observations for analysis
 		# remove surveys of these plants that occurred after 2011-05-16 because they were hacked by the USDA
+		# keep dates before USDA hacking so RGR can be calculated
 		filter( 
 			(PlantID == "HBSPOS10" & Date > "2010-10-01") |
 			(PlantID == "HBSPOS11" & Date > "2010-10-01") |
