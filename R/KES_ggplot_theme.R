@@ -29,15 +29,16 @@ KEStheme <- function(base_size = 10, base_family = "") {
         legend.title =      element_text(size = base_size * 2, face = "bold", 
 							hjust = 0),
         legend.position =   "right",
+		legend.margin = unit(0.1, "lines"),
         panel.background =  element_rect(fill = "white", colour = NA),
         panel.border =      element_rect(fill=NA, colour="black", size=1.2),
         panel.grid.major =  element_blank(),
         panel.grid.minor =  element_blank(),
-        panel.margin =      unit(0.25, "lines"),
+        #panel.margin =      unit(0.25, "lines"),
         strip.background =  element_rect(fill = "white", colour = NA),
-        strip.text.y =      element_text(size = base_size * 2, angle = -90),
+        #strip.text.y =      element_text(size = base_size * 2, angle = -90),
         plot.background =   element_rect(fill = NA, colour = NA),
-        plot.title =        element_text(size = base_size * 3),
-        plot.margin =       unit(c(1, 1, 0.5, 0.5), "lines")
+        plot.title =        element_text(size = base_size * 3)#,
+        #plot.margin =       unit(c(1, 1, 0.5, 0.5), "lines")
 	)
 }
