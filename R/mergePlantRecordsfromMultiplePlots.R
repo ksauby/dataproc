@@ -45,12 +45,12 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			# if all PlotPlantIDs were surveyed for a given date:
 			if (identical(M$PlotPlantID[order(M$PlotPlantID)], 
 				N$PlotPlantID[order(N$PlotPlantID)])==T) {
-				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)
-				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)
-				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)
-				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)
-				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)
-				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)
+				Z[[i]][j, "CA_t"] 					<- mysum(M$CA_t)
+				Z[[i]][j, "ME_t"] 					<- mysum(M$ME_t)
+				Z[[i]][j, "CH_t"] 					<- mysum(M$CH_t)
+				Z[[i]][j, "DA_t"] 					<- mysum(M$DA_t)
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum(M$Unknown_Moth_t)
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum(M$Old_Moth_Evidence_t)
 				# Dead or missing - has to be dead or missing in all plots
 				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
 				if (sum(M$Dead, na.rm=T)==dim(N)[1]) 
@@ -86,12 +86,12 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			Z[[i]][j, "Width_t"] 					<- max(M$Width_t)
 			Z[[i]][j, "Perpen_Width"] 				<- max(M$Perpen_Width)
 			# Fruit	and Flowers
-			Z[[i]][j, "Num_FlowerBuds"] 			<- sum(M$Num_FlowerBuds)
-			Z[[i]][j, "Num_Fruit_red"] 				<- sum(M$Num_Fruit_red)
-			Z[[i]][j, "Num_Fruit_green"] 			<- sum(M$Num_Fruit_green)
-			Z[[i]][j, "Num_Flowers"] 				<- sum(M$Num_Flowers)
-			Z[[i]][j, "Fruit_t"] 					<- sum(M$Fruit_t)
-			Z[[i]][j, "Fruit_Flowers_t"] 			<- sum(M$Fruit_Flowers_t)
+			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)
+			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)
+			Z[[i]][j, "Num_Fruit_green"] 			<- mysum(M$Num_Fruit_green)
+			Z[[i]][j, "Num_Flowers"] 				<- mysum(M$Num_Flowers)
+			Z[[i]][j, "Fruit_t"] 					<- mysum(M$Fruit_t)
+			Z[[i]][j, "Fruit_Flowers_t"] 			<- mysum(M$Fruit_Flowers_t)
 			Z[[i]][j, "DemographicSurvey"] 			<- M$DemographicSurvey[1]
 			Z[[i]][j, "SamplingYear"] 				<- M$SamplingYear[1]
 			# Paste PlotPlantIDs together to know which plants were surveyed on this date
@@ -117,7 +117,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 	# - Merge plant survey data into one file -------------------------------- #
 	# create new file with those plants in only one plot
 	temp_C <- filter(Plant_Surveys, N.PlotPlantIDs == 1)
-	temp_C %<>% dplyr::select( 
+	temp_C %<>% select( 
 		PlantID, 
 		Date, 
 		ClusterID, 
