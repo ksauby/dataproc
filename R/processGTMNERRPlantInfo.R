@@ -5,6 +5,7 @@
 #' @param Plot_Info Dataset with Plot Information
 #'
 #' @importFrom dplyr select summarise group_by arrange
+
 #' @export
 
 processPlantInfo <- function(Plant_Info, Plot_Info) {
@@ -32,12 +33,14 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 			N.PlotPlantIDs = length(unique(PlotPlantID))
 		) %>%
 		merge(Plant_Info, by="PlantID")
-	#----------------------------------- ADD FIRST DATE PlotPlantID WAS SURVEYED
+	#-------------------------- ADD FIRST and LAST DATE PlotPlantID WAS SURVEYED
 	# particularly relevant for plants that grew into plots over the course of the study (and thus the number of PlotPlantIDs for a given PlantID changed over time)
+	# also helps calculate the number of days a plant was known to have survived
 	Plant_Info <- Plant_Surveys %>%
 		group_by(PlotPlantID) %>%
 		summarise(
-			First.Survey.Date = min(Date)
+			First.Survey.Date = min(Date),
+			Last.Survey.Date = max(Date)
 		) %>%
 		merge(Plant_Info, ., by="PlotPlantID", all.y=TRUE)
 	# ----------------------------------------------------------- PLANT SURVIVAL
@@ -54,6 +57,24 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		ConfirmedDeadMissing = Confirmed_Dead_Missing_Function(c(Dead,Missing))	
 	) %>%
 	merge(Plant_Info, ., by="PlotPlantID")
+	# for those first marked dead/missing during the last survey, assume they are confirmed dead/missing
+	Plant_Info %<>% 
+		group_by(PlotPlantID) %>%
+		mutate(
+			ConfirmedDeadMissing = replace(
+				ConfirmedDeadMissing,
+				which(Last.Survey.Date >= "2015-05-01"),
+				max(
+					DeadObservation,
+					MissingObservation,
+					ConfirmedDead,
+					ConfirmedMissing,
+					ConfirmedDeadMissing,
+					na.rm=T
+				)
+			)
+		)
+		# FIX LAST SURVEY DATE FOR THOSE THAT AREN:T DEAD
 	#---------------- ADD FIRST DATE PlotPlantID WAS RECORDED AS DEAD OR MISSING
 	# oldest date PlotPlantID was recorded as dead
 	temp_dead_obs <- filter(Plant_Surveys, Dead=="1") %>%
@@ -71,14 +92,45 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		all=T
 	) 
 	temp_dead_missing$FirstDeadMissingObservation = 
-		dplyr::select(
+		select(
 			temp_dead_missing, 
 			FirstDeadObservation,
 			FirstMissingObservation
 		) %>% 
-		apply(., 1, min, na.rm=T) 
+		apply(., 1, min, na.rm=T) %>%
+		as.Date
 	# merge with Plant_Info
 	Plant_Info <- merge(Plant_Info, temp_dead_missing, by="PlotPlantID", all=T)
+	# fix last survey date
+	#	for each PlotPlantID, keep FirstDeadMissingObservation
+	Plant_Info %<>% 
+		group_by(PlotPlantID) %>%
+		mutate(
+			Last.Survey.Date = replace(
+				Last.Survey.Date,
+				which(ConfirmedDeadMissing==1),
+				FirstDeadMissingObservation
+			)
+		)
+		# then find latest date at which a plant was a surveyed (regardless of whether it had died or not)
+		Plant_Info %<>% group_by(PlantID) %>%
+		mutate(
+			Last.Survey.Date = max(Last.Survey.Date, na.rm=T)
+		)
+		# find the earliest date that the plant was surveyed
+		Plant_Info %<>% group_by(PlantID) %>%
+		mutate(
+			First.Survey.Date = min(First.Survey.Date, na.rm=T)
+		)
+		# STANDARDIZE PARENT, REPRODUCTIVEMODE for PLANTIDs
+
+	# ---------------------- CALCULATE HOW MANY DAYS PLANT WAS KNOWN TO BE ALIVE
+	Plant_Info %<>% 
+		group_by(PlantID) %>%
+		mutate(DaysAlive = Last.Survey.Date - First.Survey.Date)
+	
+	
+	
 	# -------------------------------------------------- CLEANUP FOR CONSISTENCY
 	Plant_Info[,c(
 		"Quadrant",
@@ -111,7 +163,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	# ------------------------------------------------------------ ADD ClusterID
 	#	do this because some clusters share plots
 	Plot_Info_Cluster <- Plot_Info %>%
-		dplyr::select(Tag_Number, Cluster, Cluster2) %>%
+		select(Tag_Number, Cluster, Cluster2) %>%
 		reshape2:::melt.data.frame(., id.vars=c("Tag_Number"), 
 			value.name="ClusterID") %>%
 		filter(ClusterID!=0) %>%
@@ -122,13 +174,13 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 		summarise(ClusterID = paste(ClusterID, collapse=", "))
 	# CLUSTER ID FOR PLOTS *NOT* IN CLUSTERS
 	temp_A = Plot_Info %>%
-		dplyr::select(Tag_Number, Cluster) %>%
+		select(Tag_Number, Cluster) %>%
 		filter(Cluster==0)
 	temp_A$ClusterID <- temp_A$Tag_Number
 	temp_A %<>% .[, -2]
 	Plot_Info_Cluster %<>% rbind.fill(temp_A) %>% 
 		merge(Plot_Info, by="Tag_Number") %>%
-		dplyr::select(ClusterID, Tag_Number)
+		select(ClusterID, Tag_Number)
 	Plant_Info %<>% merge(Plot_Info_Cluster, by="Tag_Number", all.x=T)
 	# --------------------------------------------------- remove InBigPlantStudy
 	Plant_Info[which(is.na(Plant_Info$InBigPlantStudy)), ]$InBigPlantStudy <- "No"
