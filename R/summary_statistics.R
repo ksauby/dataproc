@@ -81,7 +81,11 @@ mysum1 <- function(x) {if (sum(x,na.rm=T) > 0) 1 else NA}
 #'
 #' @export
 
-mysum2 <- function(x) {if (all(is.na(x))) NA else if (sum(x,na.rm=T) > 0) 1 else 0}
+mysum2 <- function(x) {
+	if (all(is.na(x))) NA else 
+		if (sum(x,na.rm=T) > 0) 1 else 
+			0
+}
 
 #' Return the sum of a vector, after removing NAs.
 #' 

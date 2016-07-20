@@ -45,12 +45,12 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 			# if all PlotPlantIDs were surveyed for a given date:
 			if (identical(M$PlotPlantID[order(M$PlotPlantID)], 
 				N$PlotPlantID[order(N$PlotPlantID)])==T) {
-				Z[[i]][j, "CA_t"] 					<- mysum(M$CA_t)
-				Z[[i]][j, "ME_t"] 					<- mysum(M$ME_t)
-				Z[[i]][j, "CH_t"] 					<- mysum(M$CH_t)
-				Z[[i]][j, "DA_t"] 					<- mysum(M$DA_t)
-				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum(M$Unknown_Moth_t)
-				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum(M$Old_Moth_Evidence_t)
+				Z[[i]][j, "CA_t"] 					<- mysum2(M$CA_t)
+				Z[[i]][j, "ME_t"] 					<- mysum2(M$ME_t)
+				Z[[i]][j, "CH_t"] 					<- mysum2(M$CH_t)
+				Z[[i]][j, "DA_t"] 					<- mysum2(M$DA_t)
+				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)
+				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)
 				# Dead or missing - has to be dead or missing in all plots
 				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
 				if (sum(M$Dead, na.rm=T)==dim(N)[1]) 
@@ -71,6 +71,13 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)
 				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)
 				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)
+				# Dead or missing - cannot be dead; can be alive if at least one observation of alive
+				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
+				if (sum(M$Dead, na.rm=T) <= (dim(N)[1]-1)) 
+					{Z[[i]][j, "Dead"] <- 0} 
+					else {Z[[i]][j, "Dead"] <- NA}
+				# Missing
+				Z[[i]][j, "Missing"] <- NA
 				# all surveyed = FALSE
 				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"
 			}

@@ -620,7 +620,7 @@ createInsectFactorVariables <- function(Plant_Surveys) {
 
 formatasFactors <- function(x) {
 	factors <- c("ClusterID", "Network", "Island", "Species", 
-		"DemographicSurvey", "SamplingYear", "Year", "Season", "C_cactorum", 
+		"DemographicSurvey", "Year", "Season", "C_cactorum", 
 		"M_prodenialis")
 	for (i in 1:length(factors)) {
 		if (factors[i] %in% names(x)) {
