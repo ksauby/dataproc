@@ -39,7 +39,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				# only include plants that are listed as having been added to Plant_Info on or after Date
 				First.Survey.Date <= unique(L$Date)[j],
 				# exclude dead plants (including date plant was first recorded as dead)
-				FirstDeadMissingObservation > unique(L$Date)[j] | 
+				FirstDeadMissingObservation >= unique(L$Date)[j] | 
 					is.na(FirstDeadMissingObservation)==T
 			)
 			# if all PlotPlantIDs were surveyed for a given date:
@@ -54,12 +54,10 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				# Dead or missing - has to be dead or missing in all plots
 				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
 				if (sum(M$Dead, na.rm=T)==dim(N)[1]) 
-					{Z[[i]][j, "Dead"] <- 1} 
-					else {Z[[i]][j, "Dead"] <- 0}
+					{Z[[i]][j, "Dead"] <- 1} else {Z[[i]][j, "Dead"] <- 0}
 				# Missing
 				if (sum(M$Missing, na.rm=T)==dim(N)[1]) 
-					{Z[[i]][j, "Missing"] <- 1} 
-					else {Z[[i]][j, "Missing"] <- 0}
+					{Z[[i]][j, "Missing"] <- 1} else {Z[[i]][j, "Missing"] <- 0}
 				# all surveyed = TRUE
 				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"
 			}

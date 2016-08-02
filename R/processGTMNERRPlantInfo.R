@@ -74,7 +74,7 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 				)
 			)
 		)
-		# FIX LAST SURVEY DATE FOR THOSE THAT AREN:T DEAD
+		# FIX LAST SURVEY DATE FOR THOSE THAT AREN'T DEAD
 	#---------------- ADD FIRST DATE PlotPlantID WAS RECORDED AS DEAD OR MISSING
 	# oldest date PlotPlantID was recorded as dead
 	temp_dead_obs <- filter(Plant_Surveys, Dead=="1") %>%
@@ -106,28 +106,28 @@ processPlantInfo <- function(Plant_Info, Plot_Info) {
 	Plant_Info %<>% 
 		group_by(PlotPlantID) %>%
 		mutate(
-			Last.Survey.Date = replace(
+			PlantID.Last.Alive = replace(
 				Last.Survey.Date,
 				which(ConfirmedDeadMissing==1),
 				FirstDeadMissingObservation
 			)
 		)
-		# then find latest date at which a plant was a surveyed (regardless of whether it had died or not)
+		# then find latest date at which a plant was surveyed (regardless of whether it had died or not)
 		Plant_Info %<>% group_by(PlantID) %>%
 		mutate(
-			Last.Survey.Date = max(Last.Survey.Date, na.rm=T)
+			PlantID.Last.Alive = max(Last.Survey.Date, na.rm=T)
 		)
 		# find the earliest date that the plant was surveyed
 		Plant_Info %<>% group_by(PlantID) %>%
 		mutate(
-			First.Survey.Date = min(First.Survey.Date, na.rm=T)
+			PlantID.First.Alive = min(First.Survey.Date, na.rm=T)
 		)
 		# STANDARDIZE PARENT, REPRODUCTIVEMODE for PLANTIDs
 
 	# ---------------------- CALCULATE HOW MANY DAYS PLANT WAS KNOWN TO BE ALIVE
 	Plant_Info %<>% 
 		group_by(PlantID) %>%
-		mutate(DaysAlive = Last.Survey.Date - First.Survey.Date)
+		mutate(DaysAlive = PlantID.Last.Alive - PlantID.First.Alive)
 	
 	
 	
