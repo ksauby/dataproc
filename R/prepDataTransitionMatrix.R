@@ -77,7 +77,7 @@ prepDataTransitionMatrix <- function(
 	))
 	# trans01 %<>% filter(stage != "Dead")
 	# number of seedlings estimated to have been produced by each stage class
-	trans01$Seedling <- trans01$Repro/sum(trans01$Repro) * seedlings
+	trans01$Seedling <- trans01$Repro/sum(trans01$Repro, na.rm=T) * seedlings
 	# estimate seed to seedling transition
 	Seedlings <- nrow(subset(trans, Year == TransitionYear & stage =="Seedling"))
 	seeds.from.plants <- sum(trans01$Repro) * SeedsPerFruit
