@@ -39,6 +39,7 @@ processData <- function(dataset) {
 		setnames("Width", "Width_t") %>%
 		setnames("Fruit", "Fruit_t")
 	# Rename Species factor labels
+	timeseries %<>% as.data.table
 	timeseries[Species == "humifusa", Species := "Opuntia humifusa"]
 	timeseries[Species == "stricta", Species := "Opuntia stricta"]
 	# format as factor
@@ -80,6 +81,7 @@ processData <- function(dataset) {
 	#--------------------------------------------------------------------------#
 	# create "Visit Number" field
 	#--------------------------------------------------------------------------#
+	timeseries %<>% as.data.table
 	timeseries[Date >= "2009-01-21" & Date <= "2009-01-26", VisitNum := 1]
 	timeseries[Date >= "2009-04-25" & Date <= "2009-04-30", VisitNum := 2]
 	timeseries[Date >= "2009-07-23" & Date <= "2009-07-28", VisitNum := 3]
@@ -105,6 +107,7 @@ processData <- function(dataset) {
 	# make FruitPres variable
 	timeseries %<>% 
 		mutate(FruitPres_t = ifelse(Fruit_t>0, 1, 0)) %>%
+		as.data.table %>%
 		# add NAs
 		.[is.na(Fruit_t), FruitPres_t := NA]
 	############################################################################
@@ -112,6 +115,7 @@ processData <- function(dataset) {
 	############################################################################
 	timeseries %<>%
 		mutate(Coastal = as.integer(NA)) %>%
+		as.data.table %>%
 		# Nokuse and TSP are given 0 because they are not coastal
 		.[Location=="N" | Location=="TSP", Coastal := 0] %>%
 		.[Location!="N" & Location!="TSP", Coastal := 1]
@@ -134,6 +138,7 @@ processData <- function(dataset) {
 	############################################################################
 	# Insect presence during current survey
 	############################################################################
+	timeseries %<>% as.data.frame
 	timeseries$NumInsectSpecies_t <- timeseries %>%
 		dplyr::select(ME_t, CA_t, CH_t, DA_t) %>%
 		apply(., 1, mysum

@@ -236,6 +236,7 @@ createFruitYearDataset <- function(timeseries) {
 			PrevObsYear				= PrevObsYear[1],
 			Location 				= Location[1],
 			Species					= Species[1],
+			ID						= ID[1],
 			Fruit_t 				= max(Fruit_t),
 			FruitPres_t 			= max(FruitPres_t),
 			ME_t 					= max(ME_t),

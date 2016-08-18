@@ -36,7 +36,7 @@ KEStheme <- function(base_size = 10, base_family = "") {
         panel.grid.minor =  element_blank(),
         #panel.margin =      unit(0.25, "lines"),
         strip.background =  element_rect(fill = "white", colour = NA),
-        #strip.text.y =      element_text(size = base_size * 2, angle = -90),
+        strip.text =      element_text(size = base_size * 2),
         plot.background =   element_rect(fill = NA, colour = NA),
         plot.title =        element_text(size = base_size * 3)#,
         #plot.margin =       unit(c(1, 1, 0.5, 0.5), "lines")
