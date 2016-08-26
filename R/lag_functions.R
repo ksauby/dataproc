@@ -4,7 +4,8 @@
 #' @param arrange.variable is variable that arranges the data. Defaults to "Date".
 #' @param grouping.variable is the variable that groups the data. Defaults to "PlantID".
 #' @description the function first arranges by Date
-	
+#' @export
+
 calculateLagGroupedDF <- function(
 	x, 
 	vars, 
