@@ -15,7 +15,17 @@ createNewInsectVariables <- function(
 		group_by_(.dots=c(arrange.variable, grouping.variable)) %>%
 		mutate(
 			# new insect variables
-			Insect_t 	= ifelse(sum(DA_t, CA_t, CH_t, ME_t, na.rm=T)>0, 1, 0),
+			Insect_t 	= ifelse(
+				sum(
+					DA_t, 
+					CA_t, 
+					CH_t, 
+					ME_t, 
+					Unknown_Moth_t,
+					Gerstaeckeria_t,
+					na.rm=T
+				)>0, 1, 0
+			),
 			NatInsect_t = ifelse(sum(DA_t, CH_t, ME_t, na.rm=T)>0, 1, 0)
 		)
 }

@@ -50,6 +50,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Z[[i]][j, "CH_t"] 					<- mysum2(M$CH_t)
 				Z[[i]][j, "DA_t"] 					<- mysum2(M$DA_t)
 				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum2(M$Unknown_Moth_t)
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum2(M$Gerstaeckeria_t)
 				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum2(M$Old_Moth_Evidence_t)
 				# Dead or missing - has to be dead or missing in all plots
 				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
@@ -68,6 +69,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)
 				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)
 				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)
+				Z[[i]][j, "Gerstaeckeria_t"] 		<- mysum1(M$Gerstaeckeria_t)
 				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)
 				# Dead or missing - cannot be dead; can be alive if at least one observation of alive
 				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots
@@ -138,6 +140,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		CH_t,
 		DA_t,
 		Unknown_Moth_t, 
+		Gerstaeckeria_t,
 		Old_Moth_Evidence_t, 
 		# size
 		Size_t, 

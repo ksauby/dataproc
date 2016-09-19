@@ -94,6 +94,7 @@ processPlantSurveys <- function(Plant_Surveys) {
 		setnames("UnknownMoth_Evidence", 	"Unknown_Moth_t") %>%
 		setnames("Old_Moth_Evidence", 		"Old_Moth_Evidence_t") %>%
 		setnames("DateSurveyed", 			"Date") %>%
+		setnames("Gerstaeckeria", 			"Gerstaeckeria_t") %>%
 		as.data.frame
 	# formatting/preparation necessary for prepping Demographic Plant Info
 	Plant_Surveys$Date %<>% Format_Date_Function
@@ -122,6 +123,7 @@ processPlantSurveys <- function(Plant_Surveys) {
 		"CH_t",
 		"DA_t",
 		"Unknown_Moth_t",
+		"Gerstaeckeria_t",
 		"Old_Moth_Evidence_t",
 		"Dead",
 		"Missing")] %<>% 
@@ -133,6 +135,7 @@ processPlantSurveys <- function(Plant_Surveys) {
 		"CH_t",
 		"DA_t",
 		"Unknown_Moth_t",
+		"Gerstaeckeria_t",
 		"Old_Moth_Evidence_t",
 		"Dead",
 		"Missing")] %<>%
@@ -144,6 +147,7 @@ processPlantSurveys <- function(Plant_Surveys) {
 		"CH_t",
 		"DA_t",
 		"Unknown_Moth_t",
+		"Gerstaeckeria_t",
 		"Old_Moth_Evidence_t",
 		"Dead",
 		"Missing")] %<>% 
@@ -156,6 +160,7 @@ processPlantSurveys <- function(Plant_Surveys) {
 		"CH_t",
 		"DA_t",
 		"Unknown_Moth_t",
+		"Gerstaeckeria_t",
 		"Old_Moth_Evidence_t",
 		"Plant_Segments_total",
 		"Plant_Segments_w_leaves",

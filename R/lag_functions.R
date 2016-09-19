@@ -93,7 +93,11 @@ calculateInsectLags <- function(
 		"DAyr_t",
 		"Insectyr_t",
 		"NatInsectyr_t",
-		"Old_Moth_Evidence_t"
+		"Old_Moth_Evidence_t",
+		"Unknown_Moth_t",
+		"Gerstaeckeria_t",
+		"Moth_Evidence_t",
+		"Insect_Evidence_t"
 	)
 	x %>% calculateLagGroupedDF(
 		vars=vars, 
