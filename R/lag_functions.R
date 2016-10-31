@@ -106,6 +106,60 @@ calculateInsectLags <- function(
 	)
 }
 
+#' Calculate insect presence at time lag 2
+#' 
+#' @param x Dataset
+#' @param arrange.variable is variable that arranges the data
+#' @param grouping.variable is the variable that groups the data
+#' @description calculate lag insects.
+#' 
+#' @export
+
+calculateInsectLags2 <- function(
+	x=x,
+	arrange.variable, 
+	grouping.variable
+	){
+	vars = c(
+		"CA_t_1", 
+		"ME_t_1", 
+		"Old_Moth_Evidence_t_1",
+		"Insect_t_1"
+	)
+	x %>% calculateLagGroupedDF(
+		vars=vars, 
+		arrange.variable=arrange.variable, 
+		grouping.variable=grouping.variable
+	)
+}
+
+#' Calculate insect presence at time lag 3
+#' 
+#' @param x Dataset
+#' @param arrange.variable is variable that arranges the data
+#' @param grouping.variable is the variable that groups the data
+#' @description calculate lag insects.
+#' 
+#' @export
+
+calculateInsectLags3 <- function(
+	x=x,
+	arrange.variable, 
+	grouping.variable
+	){
+	vars = c(
+		"CA_t_1_1", 
+		"ME_t_1_1", 
+		"Old_Moth_Evidence_t_1_1",
+		"Insect_t_1_1"
+	)
+	x %>% calculateLagGroupedDF(
+		vars=vars, 
+		arrange.variable=arrange.variable, 
+		grouping.variable=grouping.variable
+	)
+}
+
 #' Calculate size variables at the previous time step
 #' 
 #' @param x Dataset

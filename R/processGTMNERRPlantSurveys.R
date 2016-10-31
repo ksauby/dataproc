@@ -358,7 +358,7 @@ mergePlantSurveysPlantInfo <- function(Plant_Surveys, Plant_Info) {
 			N.PlotPlantIDs, 
 			Easting, 
 			Northing,
-			ReproductiveMode
+			RecruitmentMode
 		) %>%
 		merge(Plant_Surveys, by = "PlotPlantID")
 	return(Plant_Surveys)

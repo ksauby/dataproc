@@ -23,7 +23,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		Z[[i]][, "Species"] 			<- L$Species[1]
 		Z[[i]][, "Easting"] 			<- L$Easting[1]
 		Z[[i]][, "Northing"] 			<- L$Northing[1]
-		Z[[i]][, "ReproductiveMode"]	<- L$ReproductiveMode %>%
+		Z[[i]][, "RecruitmentMode"]	<- L$RecruitmentMode %>%
 												.[which(. != "NA")] %>%
 												.[which(!is.na(.))] %>%
 												unique(.) %>%
@@ -133,7 +133,7 @@ mergePlantRecordsfromMultiplePlots <- function(Plant_Surveys) {
 		Easting,
 		Northing, 
 		Species, 
-		ReproductiveMode,
+		RecruitmentMode,
 		# insects
 		CA_t, 
 		ME_t, 
