@@ -172,9 +172,8 @@ calculateInsectLags3 <- function(
 calculateSizeLags <- function(
 	x=x,
 	arrange.variable, 
-	grouping.variable
-){
-	vars <- c(
+	grouping.variable,
+	vars = c(
 		"Size_t", 
 		"Height_t", 
 		"Cone_t", 
@@ -188,6 +187,7 @@ calculateSizeLags <- function(
 		"Cylinder_Tall_max_t",
 		"Cylinder_Tall_min_t"
 	)
+){
 	x %>% calculateLagGroupedDF(
 		vars, 
 		arrange.variable, 
