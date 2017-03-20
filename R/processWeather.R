@@ -432,7 +432,7 @@ calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", D
 		A = as.data.frame(x) %>%
 			group_by(Date, Location, Species) %>%
 			# to make sure that this group all share the same Previous_Survey_Date Date
-			summarise(PrevSurvD = paste(Maximum(Previous_Survey_Date))) %>%
+			summarise(PrevSurvD = paste(max(Previous_Survey_Date, na.rm=T))) %>%
 			as.data.frame %>%
 			arrange(Location, Date)
 		#----------------- Fill in Missing Previous Survey Date for Survey 1 --#
