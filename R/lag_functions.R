@@ -22,7 +22,12 @@ calculateLagGroupedDF <- function(
 		if (vars[i] %in% names(x)) {
 			# select columns
 			mycols <- c(arrange.variable, vars[i])
-			z <- x %>% dplyr::select(PlantID, match(mycols, names(.)))
+			z <- x %>% dplyr::select_(
+				.dots = c(
+					grouping.variable,
+					names(.)[match(mycols, names(x))]
+				)
+			)
 			# set new variable name
 			var.names <- setNames(vars[i], paste0(vars[i], "_1"))
 			# calculate new lag variable
