@@ -14,7 +14,6 @@ Variance <- function(x, round_n=3) stats::var(x, na.rm=TRUE) %>% round(round_n)
 #' @description Written for use in the tables::tabular function to create publication-ready tables.
 #' @export
 
-PopVariance <- function(x, round_n=3) {
+PopVariance <- function(x) {
 	temp <- sum((x-mean(x))^2)/length(x)
-	round(temp, round_n)
 }

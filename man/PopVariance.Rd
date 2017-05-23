@@ -4,7 +4,7 @@
 \alias{PopVariance}
 \title{Return the population variance of a vector, after removing NAs, and round.}
 \usage{
-PopVariance(x, round_n = 3)
+PopVariance(x)
 }
 \arguments{
 \item{x}{Vectors of data.}

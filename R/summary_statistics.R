@@ -36,7 +36,7 @@ Maximum <- function(x) {
 #'
 #' @export
 
-Mean <- function(x) base::mean(x, na.rm=TRUE) %>% round(3)
+Mean <- function(x) base::mean(x, na.rm=TRUE)
 
 #' Return the percentage of a vector with up to one decimal places, after removing NAs.
 #' 
@@ -95,3 +95,20 @@ mysum2 <- function(x) {
 #' @export
 
 Sum <- function(x) {sum(x, na.rm=TRUE)}
+
+#' Population Coefficient of Variation
+#' 
+#' @param x Vectors of data.
+#'
+#' @export
+
+popCV <- function(x) {sqrt(PopVariance(x))/Mean(x)}
+
+#' Sample Coefficient of Variation
+#' 
+#' @param x Vectors of data.
+#'
+#' @export
+
+sampleCV <- function(x) {sqrt(var(x, na.rm=T))/Mean(x)}
+
