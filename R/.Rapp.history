@@ -1,57 +1,3 @@
-21.4*.813
-21.4 -21.4*.813
-library(lubridaste)
-library(lubrida=te)
-library(lubridate)
--v
-install.packages("rgeos", repos="http://R-Forge.R-project.org")#
-require(rgeos)
-library(rgeos)
-require(rgeos)
-library(rgeos)
-install.packages("rgdal", repos="http://R-Forge.R-project.org")#
-require(rgdal)
-R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config#
- --with-proj-include=/Library/Frameworks/PROJ.framework/Headers#
- --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
-R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config--with-proj-include=/Library/Frameworks/PROJ.framework/Headers--with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
-library(lme3)
-library(lme4)
-300/241
-.244*30
-1.25*300
-1.25*240
-7*12
-7849-7527
-322/1353
-8028-7527
-501/1353
-8028-7957
-1353-501
-852/71
-7956-7878
-8176-8029
-8176-8092
-250*.75
-250*.25
-42*2 + 17*2
-118/19
-21/6.2
-59.5*.75
-59.5*.5 + 59.5
-71/12
-597/80
-597/8
-432/8
-15*8 + 9*3
-?seq_len
-7.25/3
-7.25/4
-for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
-install.packages("ProjectTemplate")
-install.packages("dplyr")
-install.packages("ggplot2")
-install.packages("data.table")
 install.packages("corrgram")
 install.packages("survival")
 install.packages("shapefiles")
@@ -157,663 +103,283 @@ install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulation
 49/900
 29/40
 1/25
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
+8/25
+10/25
+(7.5 + 3.75)/15
+12*0.75
+11 * 0.75
+11/15
+11*0.25
+11/15 * 6
+32/41 +0.03.5
+32/41 + 0.035
+(32/41 + 0.035)*100
+100/41
+23/40 * 100
+(23/40 * 100)+5
+(164 + 13.5 + 6)
+(164 + 13.5 + 6)/365
+(164 + 13.5 + 6 + (50))/365
+(164 + 13.5 + 6 + (60))/365
+(164 + 13.5 + 6 + (70))/365
+(164 + 13.5 + 6 + (75))/365
+102/40
+102/41
+?table
+9.49/2
+12.75+8.25
+(10.5 + 6.5)/(12.75+8.25)
+.25^2 * 2
+(.25^2 * 2)^0.5
+(.25^2 * 2)^0.5 * 2
+3/8
+5/8
+6/8
+30*1.5
+40*15
+40*1.5
+13.25 - 4.5
+(276.29+8.75)/365
+16*3
+16*4
+84/12
+9/12
+9/12*14
+22+60+78+80+88+98
+22+38+18+2+8+10
+239/785
+(239+53)/785
+.492+.139
+.412+.166+.002
+.412/.58
+.166/.58
+.412*.58
+.71*.58
+98-54
+22+49+43+33+36+44
+60-11
+78-26
+80-35
+88-47
+98-52
+22+49+52+45+41+46
+library(RMark)
+?test_ddl
+data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    release.gof(dipper.processed)
+4+19+7+12
+4+17.83+7+12
+40.83/42
+40.83/42*14
+14
+(11.25+5)/(25.5 + 10.25 - 14)
+365*0.6666
+365*0.6666 - 75.89
+5/6 * 2
+5/6 * 2 + 75.89
+365*0.6666 -77.55667
+365*0.6666 -77.55667 - 6 - 13 - 1
+145.7523/2
+15*3
+11*5
+8/12*14
+4+15.33+5.5+12
+(4+15.33+5.5+12)
+(4+15.33+5.5+12)/(4+19+7+12)
+(4+19+7+12)
+(4+15.33+5.5+12)/(4+19+7+12)*14
+2.5+17.5+12
+32/42
+32/42 * 14
+4+12+6.5+12
+(4+12+6.5+12)/42 * 14
+5/6*2
+5/6*2 + 0.25
+5/6*2 + 0.5
+2577.77/12
+15/20
+15/20*6
+300 - 4*50
+300 - 4*40
+4.5/12*14
+9+9+7+9
+33.5/34 * 14
+32/34 * 14
+32/34*14
+7+8.5+7+7
+(7+8.5+7+7)/34 * 14
+(7+5.5+5.5+8.5)/34 * 14
+(7+5.5+5.5+8.5)/(9+7+9+9) * 14
+9+7+9+9
+(14.25+7.25)/(24.75+10.25-9)
+(16.5+7.75)/(24.75+10.25)
+(16.5+7.75)/(24.75+10.25)*6
+(5.25+5.5)/(22.5+10.5)
+(5.25+5.5)/(22.5+10.5)*6
+(9.75+5.5)/(24.7+10.25-5)*6
+(9.75+5.5)/(24.7+10.25-5)
+3.98/6
+(9.75+5.5)/(24.7+10.25-10)
+(9.75+5.5)/(24.7+10.25-10)*6
+5/6*2
+1.83-5/6*2
+1.83-4/6*2
+5/6*2 + 0.5
+4/6*2 + 0.5
+4/6*2
+4/6 + 0.5
+4/6*2 + 0.5
+33/34 * 14
+17.5*4
+24*4 + 1.75*4
+library(dplyr)
+library(plyr)
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series')
 library(ProjectTemplate)#
-#
-# when working on a Windows computer#
-# setwd("C:/Users/KSauby/Dropbox/gradschool/Research/Projects/sampling")#
-#
+#setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
 # load project#
 load.project()
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------------- Shorten names#
-Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
-Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
-Plant_Surveys <- Demographic.Plant.Surveys#
-Plant_Info <- Demographic.Plant.Info#
-D_Plot_Surveys <- Demographic.Plot.Surveys#
-Original_Plant_Data <- Original.Demographic.Plant.Data#
-Seed_Abundance <- Seed.Abundance#
-Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
-GIS_data_updated <- GIS.data.updated
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------- Demographic Plot Surveys --------------------------------- ##
-# --------------------------------------------------------------------------- ##
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series/munge')
+timeseries <- timeseries.8jun17KS.mod#
 #
-########################## ERROR MESSAGE#
-# check first duplicate data entries#
-dups <- Plant_Surveys %>% #
-	group_by(PlantID, DateSurveyed) %>%#
-	summarise(n.obs = length(Plant_collected)) %>%#
-	filter(n.obs > 1)#
+timeseries <- processData(timeseries)#
+timeseries_obs_after_USDA <- keepUSDAData(timeseries)#
+timeseries <- removeData(timeseries)#
 #
-if (dim(dups)[1] > 0) {#
-		stop("Duplicates observations for a PlantID, Date combination are #
-			present in the dataset.")#
-}#
+# climate_data <- processWeather()#
 #
-# check for PlantID = NA#
-dups <- Plant_Surveys %>% #
-	filter(is.na(PlantID))#
+################################################################################
+# timeseries_survival#
+################################################################################
+timeseries_survival <- createSurvivalDataset(timeseries)#
 #
-if (dim(dups)[1] > 0) {#
-		stop("NA values for PlantID.")#
-}#
-# --------------------------------------------------------------------------- ##
-#
-D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
-#
-Plant_Surveys %<>% processPlantSurveys#
-#
-# --------------------------------------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-Plant_Info %<>% processPlantInfo(Plot_Info)#
-#
-Plant_Info_Analysis <- Plant_Info %>%#
-	group_by(PlantID) %>%#
-	summarise(#
-		Island = Island[1],#
-		Network = Network[1],#
-		Species = Species[1],#
-		ReproductiveMode = ReproductiveMode[1],#
-		Parent = Parent[1],#
-		DaysAlive = DaysAlive[1],#
-		Dead = min(ConfirmedDeadMissing)#
-	) %>%#
-	filter(DaysAlive!=0) %>%#
-	filter(!is.na(Network))#
-Plant_Info_Analysis %<>% mutate(#
-	Parent = replace(#
-		Parent,#
-		which(is.na(Parent)),#
-		"Unknown"#
-	),#
-	ReproductiveMode = replace(#
-		ReproductiveMode,#
-		which(is.na(ReproductiveMode)),#
-		"Unknown"#
-	)#
-)	#
-Plant_Info_Analysis %<>% arrange(desc(Island), desc(Parent))#
-# --------------------------------------------------------------------------- ##
-Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info)#
-Plant_Surveys %<>% processPlantSurveysafterMergewPlantInfo#
-Plant_Surveys_by_Plant <- Plant_Surveys %>% processSurveysMergedbyPlant#
-# create Fecundity and RGR dataset - only measured size during the spring and summer#
-Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% #
-	group_by(SamplingYear, PlantID) %>%#
-	summarise(#
-		Species = Species[1],#
-		Network = Network[1],#
-		Island = Island[1],#
-		ReproductiveMode = ReproductiveMode[1],#
-		Date = min(Date),#
-		FruitPres_t = max(FruitPres_t, na.rm=T),#
-		Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),#
-		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
-		Size_t = max(Size_t, na.rm=T),#
-		Height_t = max(Height_t, na.rm=T),#
-		Fruit_t = max(Fruit_t, na.rm=T),#
-		FruitPres_t = max(FruitPres_t, na.rm=T),#
-		CA_t = max(CA_t, na.rm=T),#
-		ME_t = max(ME_t, na.rm=T),#
-		DA_t = max(DA_t, na.rm=T),#
-		CH_t = max(CH_t, na.rm=T),#
-		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),#
-		Dead = max(Dead, na.rm=T),#
-		Missing = max(Missing, na.rm=T)#
-	) %>% #
-	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
-	# lag variables#
-#	calculateSizeLags(#
-#		arrange.variable="Date", #
-#		grouping.variable="PlantID"#
-#	) %>%#
-#	calculateDateLags %>%#
-	createNewInsectVariables(#
-		arrange.variable="Date", #
-		grouping.variable="PlantID"#
-	) %>%#
-#	calculateInsectLags(#
-#		arrange.variable="Date", #
-#		grouping.variable="PlantID"#
-#	) %>%#
-	as.data.frame #%>%#
-#	calculateRGR ## this leads to a few values with PlantID = NA#
-# --------------------------------------------------------------------------- ##
-########################## ERROR MESSAGE#
-	# check for PlantID = NA#
-	dups <- Plant_Surveys_by_Year %>% #
-		filter(is.na(PlantID))#
-#
-	if (dim(dups)[1] > 0) {#
-			stop("NA values for PlantID.")#
-	}#
-	# should not be any non-NA values for RGR for SamplingYear 2012#
-	#dups <- Plant_Surveys_by_Year %>% #
-	#	filter(SamplingYear==2012) %>%#
-	#	filter(!is.na(RGR_Height))#
-#
-	#if (dim(dups)[1] > 0) {#
-	#		stop("Non-NA values for RGR for first Sampling Year.")#
-	#}#
-# --------------------------------------------------------------------------- ##
-#Plant_Surveys_by_Year$Size_t_1 %<>% as.numeric#
-Plant_Surveys_by_Year[,c(#
-	"Old_Moth_Evidence_t",#
-	"NatInsect_t",#
-	"Insect_t",#
-	"DA_t",#
-	"CH_t",#
-	"ME_t",#
-	"CA_t",                #
-	"Size_t",#
-	"FruitPres_t",#
-	"FruitFlowerPres_t"#,#
-	#"Fruit_t",#
-	#"Size_t_1",#
-	#"DaysSincePrevSurvey",#
-	#"DaysSinceStart",#
-	#"CA_t_1",#
-	#"ME_t_1",#
-	#"CH_t_1",#
-	#"DA_t_1",#
-	#"Insect_t_1",#
-	#"NatInsect_t_1",#
-	#"Old_Moth_Evidence_t_1"#
-)] %<>% apply(., 2, as.integer)#
-Plant_Surveys_by_Year[,c(#
-	"Height_t"#,#
-	#"Height_t_1",#
-	#"RGR_Height",#
-	#"RGR_Height365",#
-	#"RGR_Size",#
-	#"RGR_Size365"#
-)] %<>% as.numeric #apply(., 2, as.numeric)#
-Plant_Surveys_by_Year$PlantID %<>% as.factor	#
-Plant_Surveys_by_Year$SamplingYear %<>% as.factor#
-Plant_Surveys_by_Year$Species %<>% as.factor#
-Plant_Surveys_by_Year$Network %<>% as.factor#
-Plant_Surveys_by_Year$Island %<>% as.factor#
-Plant_Surveys_by_Year$Year <- year(Plant_Surveys_by_Year$Date)#
-#Plant_Surveys_by_Year$PrevYear <- year(Plant_Surveys_by_Year$Date) - 1#
-#
-# Stage#
-Plant_Surveys_by_Year$Stage <- Plant_Surveys_by_Year$ReproductiveMode#
-Plant_Surveys_by_Year[which(Plant_Surveys_by_Year$Stage!="Seedling"), ]$Stage <- "Adult"#
-Plant_Surveys_by_Year[which(is.na(Plant_Surveys_by_Year$Stage)), ]$Stage <- "Adult"#
-Plant_Surveys_by_Year[which(Plant_Surveys_by_Year$Dead==1), ]$Stage <- "Dead"#
-Plant_Surveys_by_Year[which(Plant_Surveys_by_Year$Missing==1), ]$Stage <- "Dead"#
-#Plant_Surveys_by_Year$ReproductiveMode %<>% as.factor#
-#Plant_Surveys_by_Year$Stage %<>% as.factor#
-#
-Plant_Surveys_analysis %<>% group_by(Network) %>%#
-mutate(#
-	Invasive_Moth_Present = ifelse(#
-		sum(CA_t, na.rm=T) > 0,#
-		1,#
-		0#
-	),#
-	n_Plants = length(unique(PlantID))#
-)#
-#
-Plant_Surveys_analysis <- Plant_Surveys_by_Year %>% 	#
+# rescale, drop levels, reorder#
+timeseries_survival_stricta = timeseries_survival %>% #
 	as.data.frame %>%#
- 	droplevels %>% #
- 	#mutate(Ln_Size_t_1_st = arm::rescale(log(Size_t_1))) %>%#
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		Stage,#
- 		Date,#
-		Year,#
-		#PrevYear,#
- 		Network,#
- 		Island,#
-		Size_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		#Size_t_1,#
- 		#Height_t_1,#
- 		#CA_t_1,#
- 		#ME_t_1,#
- 		#Old_Moth_Evidence_t_1,#
- 		#RGR_Size,#
- 		#RGR_Height,#
- 		#Ln_Size_t_1_st,#
- 		#FruitPres_t,#
- 		#Fruit_t,#
-		Fruit_Flowers_t#
- 	) %>%#
- 	.[complete.cases(.),]#
-Original_Plant_Data %<>% processOriginalPlantData#
+	filter(Species=="Opuntia stricta") %>%#
+	droplevels#
+timeseries_survival_stricta$PlantID2 %<>% factor#
 #
-Plant_Surveys_stricta <- Plant_Surveys_analysis %>% 	filter(Species=="Opuntia stricta")#
-Plant_Surveys_stricta %>% write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/Plant_Surveys_stricta.csv")#
-#
-Plant_Surveys_pusilla <- Plant_Surveys_analysis %>% #
-	filter(Species=="Opuntia pusilla")#
-Plant_Surveys_pusilla %>% write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/Plant_Surveys_pusilla.csv")#
-# setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling/data')#
-# write.csv(Plant_Surveys_stricta_analysis, "Plant_Surveys_stricta.csv")#
-# setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling')#
-# cache("Plant_Surveys_stricta")#
-################################################################################
-# Save modified timeseries dataset - just pusilla#
-################################################################################
-# Plant_Surveys_pusilla =	Plant_Surveys_by_Year %>% #
-# 	filter(Species=="Opuntia pusilla")#
-# Plant_Surveys_pusilla$Species %<>% droplevels#
-#
-# setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling')#
-# cache("Plant_Surveys_pusilla")#
-#
-# Survival Data#
-temp_summary <- Plant_Surveys_by_Year %>%#
-	group_by(PlantID) %>%#
-	summarise(#
-		Old_Moth_Evidence = max(Old_Moth_Evidence_t, na.rm=T),#
-		Insect = max(Insect_t, na.rm=T),#
-		ME = max(ME_t, na.rm=T),#
-		CA = max(CA_t, na.rm=T)#
-	)#
-Plant_Info_Analysis %<>% merge(temp_summary, by="PlantID")#
-#
-write.csv(Plant_Info_Analysis, "/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/Plant_Info_Analysis.csv")
-setwd('/Users/KSauby/Documents/Projects')
-setwd("./dataproc")#
-#setwd("./modresproc")#
-#devtools::test()#
-devtools::document()#
-devtools::install()
-library(dataproc)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# ---------------------------------------------------------- Shorten names#
-Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
-Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
-Plant_Surveys <- Demographic.Plant.Surveys#
-Plant_Info <- Demographic.Plant.Info#
-D_Plot_Surveys <- Demographic.Plot.Surveys#
-Original_Plant_Data <- Original.Demographic.Plant.Data#
-Seed_Abundance <- Seed.Abundance#
-Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
-GIS_data_updated <- GIS.data.updated
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-# --------------------------------------------------------------------------- ##
-# --------------- Demographic Plot Surveys --------------------------------- ##
-# --------------------------------------------------------------------------- ##
-#
-########################## ERROR MESSAGE#
-# check first duplicate data entries#
-dups <- Plant_Surveys %>% #
-	group_by(PlantID, DateSurveyed) %>%#
-	summarise(n.obs = length(Plant_collected)) %>%#
-	filter(n.obs > 1)#
-#
-if (dim(dups)[1] > 0) {#
-		stop("Duplicates observations for a PlantID, Date combination are #
-			present in the dataset.")#
-}#
-#
-# check for PlantID = NA#
-dups <- Plant_Surveys %>% #
-	filter(is.na(PlantID))#
-#
-if (dim(dups)[1] > 0) {#
-		stop("NA values for PlantID.")#
-}#
-# --------------------------------------------------------------------------- ##
-#
-D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y")#
-#
-Plant_Surveys %<>% processPlantSurveys#
-#
-# --------------------------------------------------------------------------- ##
-# --------------------------------------------------------------------------- ##
-Plant_Info %<>% processPlantInfo(Plot_Info)
-setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
-Plant_Info_Analysis <- Plant_Info %>%#
-	group_by(PlantID) %>%#
-	summarise(#
-		Island = Island[1],#
-		Network = Network[1],#
-		Species = Species[1],#
-		ReproductiveMode = ReproductiveMode[1],#
-		Parent = Parent[1],#
-		DaysAlive = DaysAlive[1],#
-		Dead = min(ConfirmedDeadMissing)#
-	) %>%#
-	filter(DaysAlive!=0) %>%#
-	filter(!is.na(Network))#
-Plant_Info_Analysis %<>% mutate(#
-	Parent = replace(#
-		Parent,#
-		which(is.na(Parent)),#
-		"Unknown"#
-	),#
-	ReproductiveMode = replace(#
-		ReproductiveMode,#
-		which(is.na(ReproductiveMode)),#
-		"Unknown"#
-	)#
-)	#
-Plant_Info_Analysis %<>% arrange(desc(Island), desc(Parent))#
-# --------------------------------------------------------------------------- ##
-Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info)#
-Plant_Surveys %<>% processPlantSurveysafterMergewPlantInfo#
-Plant_Surveys_by_Plant <- Plant_Surveys %>% processSurveysMergedbyPlant#
-# create Fecundity and RGR dataset - only measured size during the spring and summer#
-Plant_Surveys_by_Year <- Plant_Surveys_by_Plant %>% #
-	group_by(SamplingYear, PlantID) %>%#
-	summarise(#
-		Species = Species[1],#
-		Network = Network[1],#
-		Island = Island[1],#
-		ReproductiveMode = ReproductiveMode[1],#
-		Date = min(Date),#
-		FruitPres_t = max(FruitPres_t, na.rm=T),#
-		Fruit_Flowers_t = max(Fruit_Flowers_t, na.rm=T),#
-		FruitFlowerPres_t = max(FruitFlowerPres_t, na.rm=T),#
-		Size_t = max(Size_t, na.rm=T),#
-		Height_t = max(Height_t, na.rm=T),#
-		Fruit_t = max(Fruit_t, na.rm=T),#
-		FruitPres_t = max(FruitPres_t, na.rm=T),#
-		CA_t = max(CA_t, na.rm=T),#
-		ME_t = max(ME_t, na.rm=T),#
-		DA_t = max(DA_t, na.rm=T),#
-		CH_t = max(CH_t, na.rm=T),#
-		Old_Moth_Evidence_t = max(Old_Moth_Evidence_t, na.rm=T),#
-		Dead = max(Dead, na.rm=T),#
-		Missing = max(Missing, na.rm=T)#
-	) %>% #
-	mutate(PrevSamplingYear = SamplingYear - 1) %>%#
-	# lag variables#
-#	calculateSizeLags(#
-#		arrange.variable="Date", #
-#		grouping.variable="PlantID"#
-#	) %>%#
-#	calculateDateLags %>%#
-	createNewInsectVariables(#
-		arrange.variable="Date", #
-		grouping.variable="PlantID"#
-	) %>%#
-#	calculateInsectLags(#
-#		arrange.variable="Date", #
-#		grouping.variable="PlantID"#
-#	) %>%#
-	as.data.frame #%>%#
-#	calculateRGR ## this leads to a few values with PlantID = NA#
-# --------------------------------------------------------------------------- ##
-########################## ERROR MESSAGE#
-	# check for PlantID = NA#
-	dups <- Plant_Surveys_by_Year %>% #
-		filter(is.na(PlantID))#
-#
-	if (dim(dups)[1] > 0) {#
-			stop("NA values for PlantID.")#
-	}#
-	# should not be any non-NA values for RGR for SamplingYear 2012#
-	#dups <- Plant_Surveys_by_Year %>% #
-	#	filter(SamplingYear==2012) %>%#
-	#	filter(!is.na(RGR_Height))#
-#
-	#if (dim(dups)[1] > 0) {#
-	#		stop("Non-NA values for RGR for first Sampling Year.")#
-	#}#
-# --------------------------------------------------------------------------- ##
-#Plant_Surveys_by_Year$Size_t_1 %<>% as.numeric#
-Plant_Surveys_by_Year[,c(#
-	"Old_Moth_Evidence_t",#
-	"NatInsect_t",#
-	"Insect_t",#
-	"DA_t",#
-	"CH_t",#
-	"ME_t",#
-	"CA_t",                #
-	"Size_t",#
-	"FruitPres_t",#
-	"FruitFlowerPres_t"#,#
-	#"Fruit_t",#
-	#"Size_t_1",#
-	#"DaysSincePrevSurvey",#
-	#"DaysSinceStart",#
-	#"CA_t_1",#
-	#"ME_t_1",#
-	#"CH_t_1",#
-	#"DA_t_1",#
-	#"Insect_t_1",#
-	#"NatInsect_t_1",#
-	#"Old_Moth_Evidence_t_1"#
-)] %<>% apply(., 2, as.integer)#
-Plant_Surveys_by_Year[,c(#
-	"Height_t"#,#
-	#"Height_t_1",#
-	#"RGR_Height",#
-	#"RGR_Height365",#
-	#"RGR_Size",#
-	#"RGR_Size365"#
-)] %<>% as.numeric #apply(., 2, as.numeric)#
-Plant_Surveys_by_Year$PlantID %<>% as.factor	#
-Plant_Surveys_by_Year$SamplingYear %<>% as.factor#
-Plant_Surveys_by_Year$Species %<>% as.factor#
-Plant_Surveys_by_Year$Network %<>% as.factor#
-Plant_Surveys_by_Year$Island %<>% as.factor#
-Plant_Surveys_by_Year$Year <- year(Plant_Surveys_by_Year$Date)#
-#Plant_Surveys_by_Year$PrevYear <- year(Plant_Surveys_by_Year$Date) - 1#
-#
-# Stage#
-Plant_Surveys_by_Year$Stage <- Plant_Surveys_by_Year$ReproductiveMode#
-Plant_Surveys_by_Year[which(Plant_Surveys_by_Year$Stage!="Seedling"), ]$Stage <- "Adult"#
-Plant_Surveys_by_Year[which(is.na(Plant_Surveys_by_Year$Stage)), ]$Stage <- "Adult"#
-Plant_Surveys_by_Year[which(Plant_Surveys_by_Year$Dead==1), ]$Stage <- "Dead"#
-Plant_Surveys_by_Year[which(Plant_Surveys_by_Year$Missing==1), ]$Stage <- "Dead"#
-#Plant_Surveys_by_Year$ReproductiveMode %<>% as.factor#
-#Plant_Surveys_by_Year$Stage %<>% as.factor#
-#
-Plant_Surveys_analysis %<>% group_by(Network) %>%#
-mutate(#
-	Invasive_Moth_Present = ifelse(#
-		sum(CA_t, na.rm=T) > 0,#
-		1,#
-		0#
-	),#
-	n_Plants = length(unique(PlantID))#
-)#
-#
-Plant_Surveys_analysis <- Plant_Surveys_by_Year %>% 	#
+timeseries_survival_humifusa = timeseries_survival %>% #
 	as.data.frame %>%#
- 	droplevels %>% #
- 	#mutate(Ln_Size_t_1_st = arm::rescale(log(Size_t_1))) %>%#
- 	dplyr::select(#
- 		Species,#
-		PlantID,#
-		Stage,#
- 		Date,#
-		Year,#
-		#PrevYear,#
- 		Network,#
- 		Island,#
-		Size_t,#
- 		CA_t,#
-		ME_t,#
-		Old_Moth_Evidence_t,#
-		#Size_t_1,#
- 		#Height_t_1,#
- 		#CA_t_1,#
- 		#ME_t_1,#
- 		#Old_Moth_Evidence_t_1,#
- 		#RGR_Size,#
- 		#RGR_Height,#
- 		#Ln_Size_t_1_st,#
- 		#FruitPres_t,#
- 		#Fruit_t,#
-		Fruit_Flowers_t#
- 	) %>%#
- 	.[complete.cases(.),]#
-Original_Plant_Data %<>% processOriginalPlantData#
+	filter(Species=="Opuntia humifusa") %>%#
+	droplevels#
+timeseries_survival_humifusa$PlantID2 %<>% factor#
 #
-Plant_Surveys_stricta <- Plant_Surveys_analysis %>% 	filter(Species=="Opuntia stricta")#
-Plant_Surveys_stricta %>% write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/Plant_Surveys_stricta.csv")#
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
+cache("timeseries_survival_stricta")#
+cache("timeseries_survival_humifusa")#
 #
-Plant_Surveys_pusilla <- Plant_Surveys_analysis %>% #
-	filter(Species=="Opuntia pusilla")#
-Plant_Surveys_pusilla %>% write.csv("/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/Plant_Surveys_pusilla.csv")#
-# setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling/data')#
-# write.csv(Plant_Surveys_stricta_analysis, "Plant_Surveys_stricta.csv")#
-# setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling')#
-# cache("Plant_Surveys_stricta")#
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series/data')#
+write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
+write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
 ################################################################################
-# Save modified timeseries dataset - just pusilla#
+# timeseries_all_surveys#
 ################################################################################
-# Plant_Surveys_pusilla =	Plant_Surveys_by_Year %>% #
-# 	filter(Species=="Opuntia pusilla")#
-# Plant_Surveys_pusilla$Species %<>% droplevels#
+timeseries_all_surveys <- createAllSurveysDataset(timeseries)
+?mutate_at
+setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
+FirstSurveyPlantIDs <- #
+		timeseries[which(timeseries$VisitNum==1), ]$PlantID %>% #
+		unique#
+	# filter out plants not surveyed during the first survey; filter out plants hacked by the USDA#
+	timeseries_survival = timeseries %>%#
+		as.data.frame %>%#
+		filter(#
+			PlantID != "HBSPOS10" &#
+			PlantID != "HBSPOS11" &#
+			PlantID != "HBSPOS12" &#
+			PlantID != "HBSPOS15" &#
+			PlantID != "HBSPOS16" &#
+			PlantID != "HBSPOS17" &#
+			PlantID != "HBSPOS18" &#
+			PlantID != "HBSPOS5"#
+		) %>%#
+		filter(PlantID %in% FirstSurveyPlantIDs)#
+		# lag_size_fruit_function %>%#
+		# lag_dates_function %>%#
+		# lag_insects_function#
+	# create "Dead_numeric" variable with values 0, 1#
+	# create "Dead" variable with values "Dead", "Alive"			#
+	# timeseries_survival$Dead_numeric <- timeseries_survival$Dead#
+	# timeseries_survival$Dead %<>% #
+	#	as.factor %>% #
+	#	revalue(c("0"="Alive", "1"="Dead"))#
+	# summarise whether plant was every infested with an insect#
+	# summarise whether a plant died during the s
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series/munge')
+timeseries <- timeseries.8jun17KS.mod#
 #
-# setwd('/Users/KSauby/Documents/Dropbox/GradSchool/Research/Projects/sampling')#
-# cache("Plant_Surveys_pusilla")#
+timeseries <- processData(timeseries)#
+timeseries_obs_after_USDA <- keepUSDAData(timeseries)#
+timeseries <- removeData(timeseries)#
 #
-# Survival Data#
-temp_summary <- Plant_Surveys_by_Year %>%#
-	group_by(PlantID) %>%#
-	summarise(#
-		Old_Moth_Evidence = max(Old_Moth_Evidence_t, na.rm=T),#
-		Insect = max(Insect_t, na.rm=T),#
-		ME = max(ME_t, na.rm=T),#
-		CA = max(CA_t, na.rm=T)#
-	)#
-Plant_Info_Analysis %<>% merge(temp_summary, by="PlantID")#
+# climate_data <- processWeather()#
 #
-write.csv(Plant_Info_Analysis, "/Users/KSauby/Documents/Projects/GTMNERR_analysis/data/Plant_Info_Analysis.csv")
-Plant_Surveys %<>%#
-		mergePlantRecordsfromMultiplePlots
+################################################################################
+# timeseries_survival#
+################################################################################
+timeseries_survival <- createSurvivalDataset(timeseries)
+setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
+timeseries_all_surveys <- timeseries
+setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
+arrange.variable="Date"
+setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
+grouping.variable="PlantID"
+x <- timeseries_all_surveys
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)#
-	Z = list()
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-for (i in 1:length(unique(temp_A$PlantID))) {#
-		# pull all records for this Tag Number from plot surveys#
-		L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])#
-		Z[[i]] 	<- as.data.frame(matrix(NA,length(unique(L$Date)),1))	#
-		Z[[i]][, 1] 					<- L$PlantID[1]#
-		Z[[i]][, "Date"] 				<- unique(L$Date)#
-		# can't include unique Tag_Number because some plants are in more than one plot#
-		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]#
-		Z[[i]][, "Network"] 			<- L$Network[1]#
-		Z[[i]][, "Island"] 				<- L$Island[1]#
-		Z[[i]][, "Species"] 			<- L$Species[1]#
-		Z[[i]][, "Easting"] 			<- L$Easting[1]#
-		Z[[i]][, "Northing"] 			<- L$Northing[1]#
-		Z[[i]][, "ReproductiveMode"]	<- L$ReproductiveMode %>%#
-												.[which(. != "NA")] %>%#
-												.[which(!is.na(.))] %>%#
-												unique(.) %>%#
-												paste(collapse="")#
-		# for each date#
-		for (j in 1:length(unique(L$Date))) {#
-			# pull all plant survey records for this date from plant surveys#
-			M = filter(L, Date==unique(L$Date)[j])#
-			# get list of PlotPlantIDs#
-			N = filter(#
-				Plant_Info, #
-				PlantID==L$PlantID[1], #
-				# only include plants that are listed as having been added to Plant_Info on or after Date#
-				First.Survey.Date <= unique(L$Date)[j],#
-				# exclude dead plants (including date plant was first recorded as dead)#
-				FirstDeadMissingObservation > unique(L$Date)[j] | #
-					is.na(FirstDeadMissingObservation)==T#
-			)#
-			# if all PlotPlantIDs were surveyed for a given date:#
-			if (identical(M$PlotPlantID[order(M$PlotPlantID)], #
-				N$PlotPlantID[order(N$PlotPlantID)])==T) {#
-				Z[[i]][j, "CA_t"] 					<- mysum(M$CA_t)#
-				Z[[i]][j, "ME_t"] 					<- mysum(M$ME_t)#
-				Z[[i]][j, "CH_t"] 					<- mysum(M$CH_t)#
-				Z[[i]][j, "DA_t"] 					<- mysum(M$DA_t)#
-				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum(M$Unknown_Moth_t)#
-				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum(M$Old_Moth_Evidence_t)#
-				# Dead or missing - has to be dead or missing in all plots#
-				# (1) if the sum of Dead = # of PlotPlantIDs, the plant is dead in all plots#
-				if (sum(M$Dead, na.rm=T)==dim(N)[1]) #
-					{Z[[i]][j, "Dead"] <- 1} #
-					else {Z[[i]][j, "Dead"] <- 0}#
-				# Missing#
-				if (sum(M$Missing, na.rm=T)==dim(N)[1]) #
-					{Z[[i]][j, "Missing"] <- 1} #
-					else {Z[[i]][j, "Missing"] <- 0}#
-				# all surveyed = TRUE#
-				Z[[i]][j, "AllSurveyed"] 			<- "TRUE"#
-			}#
-			else {#
-				# if all PlotPlantIDs were NOT surveyed on this date consider the insect to be detected if the sum is greater than zero#
-				Z[[i]][j, "CA_t"] 					<- mysum1(M$CA_t)#
-				Z[[i]][j, "ME_t"] 					<- mysum1(M$ME_t)#
-				Z[[i]][j, "CH_t"] 					<- mysum1(M$CH_t)#
-				Z[[i]][j, "DA_t"] 					<- mysum1(M$DA_t)#
-				Z[[i]][j, "Unknown_Moth_t"] 		<- mysum1(M$Unknown_Moth_t)#
-				Z[[i]][j, "Old_Moth_Evidence_t"]<- mysum1(M$Old_Moth_Evidence_t)#
-				# all surveyed = FALSE#
-				Z[[i]][j, "AllSurveyed"] 			<- "FALSE"#
-			}#
-			# Number of segments#
-			Z[[i]][j, "Size_t"] 					<- mysum(M$Size_t)#
-			Z[[i]][j, "Plant_Segments_w_leaves"] <- #
-				mysum(M$Plant_Segments_w_leaves)#
-			Z[[i]][j, "Plant_Segments_wo_leaves"] <-#
-			 	mysum(M$Plant_Segments_wo_leaves)#
-			Z[[i]][j, "Plant_Segments_woody"] <- mysum(M$Plant_Segments_woody)#
-			# Size#
-			Z[[i]][j, "Height_t"] 					<- max(M$Height_t)#
-			Z[[i]][j, "Width_t"] 					<- max(M$Width_t)#
-			Z[[i]][j, "Perpen_Width"] 				<- max(M$Perpen_Width)#
-			# Fruit	and Flowers#
-			Z[[i]][j, "Num_FlowerBuds"] 			<- mysum(M$Num_FlowerBuds)#
-			Z[[i]][j, "Num_Fruit_red"] 				<- mysum(M$Num_Fruit_red)#
-			Z[[i]][j, "Num_Fruit_green"] 			<- mysum(M$Num_Fruit_green)#
-			Z[[i]][j, "Num_Flowers"] 				<- mysum(M$Num_Flowers)#
-			Z[[i]][j, "Fruit_t"] 					<- mysum(M$Fruit_t)#
-			Z[[i]][j, "Fruit_Flowers_t"] 			<- mysum(M$Fruit_Flowers_t)#
-			Z[[i]][j, "DemographicSurvey"] 			<- M$DemographicSurvey[1]#
-			Z[[i]][j, "SamplingYear"] 				<- M$SamplingYear[1]#
-			# Paste PlotPlantIDs together to know which plants were surveyed on this date#
-			Z[[i]][j, "PlantsSurveyed"] <- paste(M$PlotPlantID, collapse=",")#
-		}#
-	}
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-temp_B <- do.call(rbind.data.frame, Z)#
-	names(temp_B)[1] <- "PlantID"#
-	# max(NA, NA, na.rm=T) returns "-Inf"#
-	temp_B[,c(#
-		"Perpen_Width",#
-		"Width_t",#
-		"Height_t")] %<>% #
-		apply(., 2, NA_Function#
+vars = c(#
+		"Size_t", #
+		"Height_t", #
+		"Cone_t", #
+		"Cylinder_Tall_t", #
+		"Cylinder_t", #
+		"Elliptic_Cylinder_t",#
+		"Size_max_t",#
+		"Size_min_t",#
+		"Cone_max_t",#
+		"Cone_min_t",#
+		"Cylinder_Tall_max_t",#
+		"Cylinder_Tall_min_t"#
 	)
-dim(temp_B)
-dim(Z)
-str(Z)
-? rbind.data.frame
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-temp_A <- filter(Plant_Surveys, N.PlotPlantIDs > 1)#
-	Z = list()
+x %<>% #
+		arrange_(.dots = arrange.variable) %>%#
+		group_by_(.dots = grouping.variable)#
+		# make a copy to use in the iterations#
+	y <- x
 i=1
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-L = filter(temp_A, PlantID==unique(temp_A$PlantID)[i])#
-		Z[[i]] 	<- as.data.frame(matrix(NA,length(unique(L$Date)),1))	#
-		Z[[i]][, 1] 					<- L$PlantID[1]#
-		Z[[i]][, "Date"] 				<- unique(L$Date)#
-		# can't include unique Tag_Number because some plants are in more than one plot#
-		Z[[i]][, "ClusterID"] 			<- L$ClusterID[1]#
-		Z[[i]][, "Network"] 			<- L$Network[1]#
-		Z[[i]][, "Island"] 				<- L$Island[1]#
-		Z[[i]][, "Species"] 			<- L$Species[1]#
-		Z[[i]][, "Easting"] 			<- L$Easting[1]#
-		Z[[i]][, "Northing"] 			<- L$Northing[1]#
-		Z[[i]][, "ReproductiveMode"]	<- L$ReproductiveMode %>%#
-												.[which(. != "NA")] %>%#
-												.[which(!is.na(.))] %>%#
-												unique(.) %>%#
-												paste(collapse="")#
-		# for each date
-j=1
+vars[i] %in% names(x)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+mycols <- c(arrange.variable, vars[i])
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+z <- x %>% dplyr::select_(#
+				.dots = c(#
+					grouping.variable,#
+					names(.)[match(mycols, names(x))]#
+				)#
+			)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+vars[i]
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+var.names <- setNames(vars[i], paste0(vars[i], "_1"))
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+var.names
+sgtr(var.names)
+str(var.names)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+funs(lag)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+z %<>% mutate_at(funs(lag), var.names)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+var.names <- setNames(vars[i], paste0(vars[i], "_1")) %>% as.vector
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+z %<>% mutate_at(funs(lag), var.names)
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+var.names
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+mutate_at(funs(lag), var.names)
+?lag
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+z %<>% mutate_at(funs(dplyr::lag), var.names)
+str(z)
