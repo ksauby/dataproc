@@ -31,7 +31,7 @@ calculateLagGroupedDF <- function(
 			# set new variable name
 			var.names <- setNames(vars[i], paste0(vars[i], "_1"))
 			# calculate new lag variable
-			z %<>% mutate_each_(funs(lag), var.names)
+			z %<>% mutate_at(vars(var.names), funs(lag))
 			y <- merge(y, z, by=c(grouping.variable, arrange.variable, vars[i]))
 		}
 	}
