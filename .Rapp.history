@@ -1,50 +1,3 @@
-21.4 -21.4*.813
-library(lubridaste)
-library(lubrida=te)
-library(lubridate)
--v
-install.packages("rgeos", repos="http://R-Forge.R-project.org")#
-require(rgeos)
-library(rgeos)
-require(rgeos)
-library(rgeos)
-install.packages("rgdal", repos="http://R-Forge.R-project.org")#
-require(rgdal)
-R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config#
- --with-proj-include=/Library/Frameworks/PROJ.framework/Headers#
- --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
-R CMD INSTALL ~/Downloads/rgdal_0.9-1.tar.gz --configure-args='--with-gdal-config=/Library/Frameworks/GDAL.framework/Programs/gdal-config--with-proj-include=/Library/Frameworks/PROJ.framework/Headers--with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib'
-library(lme3)
-library(lme4)
-300/241
-.244*30
-1.25*300
-1.25*240
-7*12
-7849-7527
-322/1353
-8028-7527
-501/1353
-8028-7957
-1353-501
-852/71
-7956-7878
-8176-8029
-8176-8092
-250*.75
-250*.25
-42*2 + 17*2
-118/19
-21/6.2
-59.5*.75
-59.5*.5 + 59.5
-71/12
-597/80
-597/8
-432/8
-15*8 + 9*3
-?seq_len
-7.25/3
 7.25/4
 for(i in 0:9){x=cos(2*pi/10*i);y=x+1;z=(y-2)*22;pie(c(y,8-y),col=c(0,7),init.angl=135-z,bo=F,la=NA)}
 install.packages("ProjectTemplate")
@@ -286,6 +239,118 @@ data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    releas
 24*4 + 1.75*4
 library(dplyr)
 library(plyr)
+600*.22
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
+library(ProjectTemplate)#
+#
+# when working on a Windows computer#
+# setwd("C:/Users/KSauby/Dropbox/gradschool/Research/Projects/sampling")#
+#
+# load project#
+load.project()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>%#
+		addSamplingPeriods
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+SeasonStarts=seasons
+lapply(Plant_Surveys $Date,#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)#
+				}#
+			)
+SeasonStarts[which(year(Plant_Surveys $Date)==year(SeasonStarts$WS)), ]
+SeasonStarts[which(year(Plant_Surveys $Date[1])==year(SeasonStarts$WS)), ]
+head(Plant_Surveys $Date)
+?findInterval
+x <- 2:18#
+v <- c(5, 10, 15) # create two bins [5,10) and [10,15)#
+cbind(x, findInterval(x, v))
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series')
+library(ProjectTemplate)#
+#setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
+# load project#
+load.project()
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series/munge')
+timeseries <- timeseries.12jun17KS.mod#
+#
+timeseries <- processData(timeseries)
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series/munge')
+timeseries <- timeseries.25Jan2015JK.mod
+setwd('/Users/KSauby/Documents/Projects/marsico-time-series/munge')
+timeseries <- processData(timeseries)
+setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
+timeseries %<>% as.data.frame %>% assignSeason
+setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
+timeseries$Date %<>%#
+		strptime("%Y-%m-%d") %>%#
+		as.POSIXct(format="%Y-%m-%d")#
+	timeseries %<>% as.data.frame %>% assignSeason
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys
+class(Plant_Surveys$Date)
+head(Plant_Surveys$Date)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys$Date %<>%#
+		strptime("%Y-%m-%d") %>%#
+		as.POSIXct(format="%Y-%m-%d")
+lapply(head(Plant_Surveys$Date),#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)#
+				}#
+			)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>%#
+		addSamplingPeriods %>%#
+		assignSeason
+head(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>%#
+		#addSamplingPeriods %>%#
+		#assignSeason %>%#
+		createFecundityYear %>%#
+		as.data.frame
 setwd('/Users/KSauby/Documents/Projects')
 setwd("./dataproc")#
 #setwd("./modresproc")#

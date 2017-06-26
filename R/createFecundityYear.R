@@ -27,7 +27,7 @@ createFecundityYear <- function(timeseries) {
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
-					Year 	== 2009 
+					year(Date) 	== 2009 
 				), 
 				2009
 			),
@@ -37,7 +37,7 @@ createFecundityYear <- function(timeseries) {
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
-					Year 	== 2010 
+					year(Date)== 2010 
 				), 
 				2010
 			),
@@ -47,7 +47,7 @@ createFecundityYear <- function(timeseries) {
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
-					Year 	== 2011
+					year(Date)== 2011
 				), 
 				2011
 			),
@@ -57,7 +57,7 @@ createFecundityYear <- function(timeseries) {
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
-					Year 	== 2012
+					year(Date)== 2012
 				), 
 				2012
 			),
@@ -67,7 +67,7 @@ createFecundityYear <- function(timeseries) {
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
-					Year 	== 2013
+					year(Date)== 2013
 				), 
 				2013
 			),
@@ -77,7 +77,7 @@ createFecundityYear <- function(timeseries) {
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
-					Year 	== 2014
+					year(Date)== 2014
 				), 
 				2014
 			),
@@ -87,7 +87,7 @@ createFecundityYear <- function(timeseries) {
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
 					Season 	== "Fall") &
-					Year 	== 2015
+					year(Date)== 2015
 				), 
 				2015
 			),

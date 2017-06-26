@@ -1,87 +1,3 @@
-install.packages("corrgram")
-install.packages("survival")
-install.packages("shapefiles")
-install.packages("rgdal")
-install.packages("PBSmapping")
-install.packages("sp")
-install.packages("gdistance")
-install.packages("chron")
-install.packages("unmarked")
-install.packages("lme4")
-install.packages("rgeos", repos="http://R-Forge.R-project.org", type="source")#
-require(rgeos)
-install.packages('rgdal',repos="http://www.stats.ox.ac.uk/pub/RWin")
-library(rgdal)
-install.packages("http://cran.r-project.org/src/contrib/rgdal_0.9-1.tar.gz", repos = NULL, type="source", configure.args = "--with-gdal-config=/Library/Frameworks/GDAL.framework/Versions/1.10/unix/bin/gdal-config --with-proj-include=/Library/Frameworks/PROJ.framework/unix/include --with-proj-lib=/Library/Frameworks/PROJ.framework/unix/lib")
-18/1.618
-189+114
-library(lubridate)
-library(magrittr)
-seasons <- data.frame(#
-	   SE = as.POSIXct(c("2009-3-20", "2010-3-20", "2011-3-20", "2012-3-20", #
-            "2013-3-20", "2014-3-20"), format="%Y-%m-%d"),#
-	   SS = as.POSIXct(c("2009-6-21", "2010-6-21", "2011-6-21", "2012-6-20",#
-            "2013-6-20", "2014-6-20"), format="%Y-%m-%d"),#
-	   FE = as.POSIXct(c("2009-9-22", "2010-9-23", "2011-9-23", "2012-9-22",#
-            "2013-9-22", "2014-9-22"), format="%Y-%m-%d"),#
-	   WS = as.POSIXct(c("2009-12-21", "2010-12-21", "2011-12-22", "2012-12-21", #
-            "2013-12-21", "2014-12-21"), format="%Y-%m-%d")#
-    )#
-#
-    assignSeason <- function(dat, SeasonStarts=seasons) {#
-	    dat %<>% mutate(#
-		    Season = lapply(Date,#
-				function(x) {#
-					findInterval(#
-						x, #
-						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
-					)#
-				}#
-			) %>% unlist	#
-		)#
-	    dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"#
-	    dat[which(dat$Season==1), ]$Season 					<- "Spring"#
-	    dat[which(dat$Season==2), ]$Season 					<- "Summer"#
-	    dat[which(dat$Season==3), ]$Season 					<- "Fall"#
-	    return(dat)#
-    }
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(dplyr)
-dat = data.frame(#
-	    Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + #
-            (0:10)*30, format="%Y-%m-%d" ))#
-    )#
-    dat %>% assignSeason
-library(devtoolks)
-library(devtools)
-?install_github
-devtools::install_github("ksauby/ACSampling", auth_token="2ab30a602e52fae481f4249cc25e892c0a9ccfc7", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install_github("ksauby/ACSampling", auth_token="2794c3f10db92f525181a0b1f6c19064fe3a2ef3", subdir="/code/Restricted_ACS_Simulations/ACSampling", repos=NULL)
-devtools::install("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="~/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-library(devtools)
-devtools::install_local(path="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-devtools::install(pkg="/Users/KSauby/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-install.packages("~/Documents/Projects/ACSampling/code/Restricted_ACS_Simulations/ACSampling_0.0.0.9000.tar.gz")
-??limit
-37-13
-24/37
-37-13
-26/37
-25/37
-23/37
-29/37
-30/37
-22/37
-30/37
 29/37
 28/37
 27/37
@@ -233,153 +149,378 @@ data(dipper)    dipper.processed=process.data(dipper,groups=("sex"))    releas
 24*4 + 1.75*4
 library(dplyr)
 library(plyr)
-setwd('/Users/KSauby/Documents/Projects/marsico-time-series')
+600*.22
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis')
 library(ProjectTemplate)#
-#setwd("/Users/KSauby/Documents/Dropbox/gradschool/Research/Projects/marsico-time-series")#
+#
+# when working on a Windows computer#
+# setwd("C:/Users/KSauby/Dropbox/gradschool/Research/Projects/sampling")#
+#
 # load project#
 load.project()
-setwd('/Users/KSauby/Documents/Projects/marsico-time-series/munge')
-timeseries <- timeseries.8jun17KS.mod#
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% processPlantSurveysafterMergewPlantInfo %>%#
+	filter(InDemographicStudy=="yes")#
+	# cached here#
+Plant_Surveys_by_Plant <- Plant_Surveys %>% #
+	processSurveysMergedbyPlant#
+Plant_Surveys_by_Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
 #
-timeseries <- processData(timeseries)#
-timeseries_obs_after_USDA <- keepUSDAData(timeseries)#
-timeseries <- removeData(timeseries)#
+Plant_Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
 #
-# climate_data <- processWeather()#
+h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
+Plant_Surveys_by_Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant_Surveys_by_Plant),#
+	warning = h#
+)#
+# create Fecundity and RGR dataset#
+Plant_Surveys_by_Year <- createPlantSurveysbyYear(Plant_Surveys_by_Plant) %>%#
+	renamePatches #%>%#
+	#createMothOccupancytVariable %>%#
+	#createMothOccupancyVariable %>%#
+	#createDeadFactorVariable#
+# Second Plant ID#
+Plant_Surveys_by_Year %<>% mutate(#
+	PlantIDb = paste(#
+		Island,#
+		PlantID,#
+		sep=", "#
+	),#
+	PlantIDc = paste(#
+		Island,#
+		PlantID,#
+		sep="\n"#
+	)#
+)
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% processPlantSurveysafterMergewPlantInfo %>%#
+	filter(InDemographicStudy=="yes")#
+	# cached here#
+Plant_Surveys_by_Plant <- Plant_Surveys %>% #
+	processSurveysMergedbyPlant#
+Plant_Surveys_by_Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
 #
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival <- createSurvivalDataset(timeseries)#
+Plant_Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
 #
-# rescale, drop levels, reorder#
-timeseries_survival_stricta = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia stricta") %>%#
-	droplevels#
-timeseries_survival_stricta$PlantID2 %<>% factor#
+h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
+Plant_Surveys_by_Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant_Surveys_by_Plant),#
+	warning = h#
+)#
+# create Fecundity and RGR dataset#
+Plant_Surveys_by_Year <- createPlantSurveysbyYear(Plant_Surveys_by_Plant) %>%#
+	renamePatches #%>%#
+	#createMothOccupancytVariable %>%#
+	#createMothOccupancyVariable %>%#
+	#createDeadFactorVariable#
+# Second Plant ID#
+Plant_Surveys_by_Year %<>% mutate(#
+	PlantIDb = paste(#
+		Island,#
+		PlantID,#
+		sep=", "#
+	),#
+	PlantIDc = paste(#
+		Island,#
+		PlantID,#
+		sep="\n"#
+	)#
+)
+seasons
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./GTMNERRproc")#
+#setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects')
+setwd("./dataproc")#
+#setwd("./modresproc")#
+#setwd("./unmarked")#
+#setwd("./RPresence")#
+#devtools::test()#
+devtools::document()#
+devtools::install()
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% processPlantSurveysafterMergewPlantInfo %>%#
+	filter(InDemographicStudy=="yes")#
+	# cached here#
+Plant_Surveys_by_Plant <- Plant_Surveys %>% #
+	processSurveysMergedbyPlant#
+Plant_Surveys_by_Plant %>% filter(AllSurveyed==F) %>% write.csv("incompletesurveys.csv")#
 #
-timeseries_survival_humifusa = timeseries_survival %>% #
-	as.data.frame %>%#
-	filter(Species=="Opuntia humifusa") %>%#
-	droplevels#
-timeseries_survival_humifusa$PlantID2 %<>% factor#
+Plant_Surveys %>% filter(N.PlotPlantIDs > 1) %>% filter(Dead==1 | Missing == 1) %>% write.csv("deadmissing.csv")#
 #
-setwd('/Users/KSauby/Documents/Projects/marsico-time-series')#
-cache("timeseries_survival_stricta")#
-cache("timeseries_survival_humifusa")#
-#
-setwd('/Users/KSauby/Documents/Projects/marsico-time-series/data')#
-write.csv(timeseries_survival_stricta, "timeseries_survival_stricta.csv")#
-write.csv(timeseries_survival_humifusa, "timeseries_survival_humifusa.csv")#
-################################################################################
-# timeseries_all_surveys#
-################################################################################
-timeseries_all_surveys <- createAllSurveysDataset(timeseries)
-?mutate_at
-setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
-FirstSurveyPlantIDs <- #
-		timeseries[which(timeseries$VisitNum==1), ]$PlantID %>% #
-		unique#
-	# filter out plants not surveyed during the first survey; filter out plants hacked by the USDA#
-	timeseries_survival = timeseries %>%#
-		as.data.frame %>%#
-		filter(#
-			PlantID != "HBSPOS10" &#
-			PlantID != "HBSPOS11" &#
-			PlantID != "HBSPOS12" &#
-			PlantID != "HBSPOS15" &#
-			PlantID != "HBSPOS16" &#
-			PlantID != "HBSPOS17" &#
-			PlantID != "HBSPOS18" &#
-			PlantID != "HBSPOS5"#
+h <- function(w) if( any( grepl( "no non-missing arguments to max", w) ) ) invokeRestart( "muffleWarning" )#
+Plant_Surveys_by_Plant <- withCallingHandlers(#
+	createPlantInsectPresence(Plant_Surveys_by_Plant),#
+	warning = h#
+)#
+# create Fecundity and RGR dataset#
+Plant_Surveys_by_Year <- createPlantSurveysbyYear(Plant_Surveys_by_Plant) %>%#
+	renamePatches #%>%#
+	#createMothOccupancytVariable %>%#
+	#createMothOccupancyVariable %>%#
+	#createDeadFactorVariable#
+# Second Plant ID#
+Plant_Surveys_by_Year %<>% mutate(#
+	PlantIDb = paste(#
+		Island,#
+		PlantID,#
+		sep=", "#
+	),#
+	PlantIDc = paste(#
+		Island,#
+		PlantID,#
+		sep="\n"#
+	)#
+)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>%#
+		addSamplingPeriods %>%#
+		assignSeason
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>%#
+		addSamplingPeriods
+setwd('/Users/KSauby/Documents/Projects/dataproc/R')
+SeasonStarts=seasons
+head(Plant_Surveys)
+str(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys$DemographicSurvey <- "NA"#
+	Plant_Surveys %<>% #
+		group_by(Date) %>% #
+		mutate(#
+			# SURVEY 0#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date < "2013-05-14"), "0"),#
+			# SURVEY 1 - SPRING/SUMMER 2013#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2013-05-14" & Date <= "2013-08-06"), "1"),#
+			# SURVEY 2 - FALL/WINTER 2013/2014#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2013-12-13" & Date <= "2014-01-28"), "2"),#
+			# SURVEY 3 - SPRING/SUMMER 2014#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2014-05-06" & Date <= "2014-09-24"), "3"),#
+			# SURVEY 4 - WINTER 2015#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2015-01-08" & Date <= "2015-02-21"), "4"),#
+			# SURVEY 5 - SPRING/SUMMER 2015#
+			DemographicSurvey = replace(DemographicSurvey, #
+				which(Date >= "2015-05-01"), "5")#
 		) %>%#
-		filter(PlantID %in% FirstSurveyPlantIDs)#
-		# lag_size_fruit_function %>%#
-		# lag_dates_function %>%#
-		# lag_insects_function#
-	# create "Dead_numeric" variable with values 0, 1#
-	# create "Dead" variable with values "Dead", "Alive"			#
-	# timeseries_survival$Dead_numeric <- timeseries_survival$Dead#
-	# timeseries_survival$Dead %<>% #
-	#	as.factor %>% #
-	#	revalue(c("0"="Alive", "1"="Dead"))#
-	# summarise whether plant was every infested with an insect#
-	# summarise whether a plant died during the s
-setwd('/Users/KSauby/Documents/Projects/marsico-time-series/munge')
-timeseries <- timeseries.8jun17KS.mod#
-#
-timeseries <- processData(timeseries)#
-timeseries_obs_after_USDA <- keepUSDAData(timeseries)#
-timeseries <- removeData(timeseries)#
-#
-# climate_data <- processWeather()#
-#
-################################################################################
-# timeseries_survival#
-################################################################################
-timeseries_survival <- createSurvivalDataset(timeseries)
-setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
-timeseries_all_surveys <- timeseries
-setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
-arrange.variable="Date"
-setwd('/Users/KSauby/Documents/Projects/Panhandleproc/R')
-grouping.variable="PlantID"
-x <- timeseries_all_surveys
+		ungroup()
+str(Plant_Surveys)
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>%#
+		#addSamplingPeriods %>%#
+		assignSeason
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-vars = c(#
-		"Size_t", #
-		"Height_t", #
-		"Cone_t", #
-		"Cylinder_Tall_t", #
-		"Cylinder_t", #
-		"Elliptic_Cylinder_t",#
-		"Size_max_t",#
-		"Size_min_t",#
-		"Cone_max_t",#
-		"Cone_min_t",#
-		"Cylinder_Tall_max_t",#
-		"Cylinder_Tall_min_t"#
-	)
+SeasonStarts=seasons
+dat <- Plant_Surveys
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-x %<>% #
-		arrange_(.dots = arrange.variable) %>%#
-		group_by_(.dots = grouping.variable)#
-		# make a copy to use in the iterations#
-	y <- x
-i=1
+dat %<>% mutate(#
+		Season = lapply(Date,#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)#
+				}#
+			) %>% unlist	#
+		)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-vars[i] %in% names(x)
+dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-mycols <- c(arrange.variable, vars[i])
+dat[which(dat$Season==1), ]$Season 					<- "Spring"
+unique(dat$Season)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-z <- x %>% dplyr::select_(#
-				.dots = c(#
-					grouping.variable,#
-					names(.)[match(mycols, names(x))]#
-				)#
-			)
+SeasonStarts$WS
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-vars[i]
+year(SeasonStarts$WS)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-var.names <- setNames(vars[i], paste0(vars[i], "_1"))
+SeasonStarts
+?findInterval
+dat$Date %>% head
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-var.names
-sgtr(var.names)
-str(var.names)
+dat %<>% mutate(#
+		Season = lapply(Date,#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)#
+				}#
+			) %>% unlist	#
+		)
+unique(dat$Season)
+str(dat)
+dat %<>% as.data.frame
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-funs(lag)
+dat %<>% mutate(#
+		Season = lapply(Date,#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)#
+				}#
+			) %>% unlist	#
+		)
+unique(dat$Season)
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+# ---------------------------------------------------------- Shorten names#
+Plot_Info <- OccupancySRSWOR.Plot.Surveys.Info#
+Plot_Surveys <- OccupancySRSWOR.Plot.Surveys#
+Plant_Surveys <- Demographic.Plant.Surveys#
+Plant_Info <- Demographic.Plant.Info#
+Plant_Surveys_All <- Demographic.Plant.Surveys#
+Plant_Info_All <- Demographic.Plant.Info#
+D_Plot_Surveys <- Demographic.Plot.Surveys#
+Original_Plant_Data <- Original.Demographic.Plant.Data#
+Seed_Abundance <- Seed.Abundance#
+Seed_Abundance_Surveys <- Seed.Abundance.Surveys#
+GIS_data_updated <- GIS.data.updated
+setwd('/Users/KSauby/Documents/Projects/GTMNERR_analysis/munge')
+D_Plot_Surveys$Date %<>% as.Date("%m/%d/%Y") # Demographic Plot Surveys#
+Plant_Surveys %<>% processPlantSurveys(Plant_Info) # Plant Surveys#
+Plant_Surveys %<>% fixInconsistentDeadMissingRecords#
+Plant_Info %<>% processPlantInfo(Plot_Info) # Plant Info#
+Plant_Surveys %<>% mergePlantSurveysPlantInfo(Plant_Info) # Plant Surveys
+setwd('/Users/KSauby/Documents/Projects/GTMNERRproc/R')
+Plant_Surveys %<>%#
+		addSamplingPeriods
+str(Plant_Surveys)
+Plant_Surveys %<>% as.data.frame
+str(Plant_Surveys)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-z %<>% mutate_at(funs(lag), var.names)
+SeasonStarts=seasons
+dat <- Plant_Surveys
+unique(dat$Date)
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-var.names <- setNames(vars[i], paste0(vars[i], "_1")) %>% as.vector
+dat %<>% head %>% mutate(#
+		Season = lapply(Date,#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)#
+				}#
+			) %>% unlist	#
+		) %$% unique(Season)
+dat
+dat <- Plant_Surveys
+?lapply
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-z %<>% mutate_at(funs(lag), var.names)
+SeasonStarts
 setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-var.names
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-mutate_at(funs(lag), var.names)
-?lag
-setwd('/Users/KSauby/Documents/Projects/dataproc/R')
-z %<>% mutate_at(funs(dplyr::lag), var.names)
-str(z)
+dat %>% head
+dat %>% head %>% year(Date)
+dat %>% head %>% mutate(year(Date))
+year(dat$Date) %>% head
+year(dat$Date) %>% tail
+head(dat$Date)
+lapply(head(dat$Date),#
+				function(x) {#
+					findInterval(#
+						x, #
+						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]#
+					)
+}
+)

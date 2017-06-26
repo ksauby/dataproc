@@ -14,7 +14,7 @@
 
 
 assignSeason <- function(dat, SeasonStarts=seasons) {
-	dat %<>% mutate(
+	dat %>% mutate(
 		Season = lapply(Date,
 				function(x) {
 					findInterval(
@@ -22,11 +22,26 @@ assignSeason <- function(dat, SeasonStarts=seasons) {
 						SeasonStarts[which(year(x)==year(SeasonStarts$WS)), ]
 					)
 				}
-			) %>% unlist	
+		) %>% unlist,
+		Season = replace(
+		Season,
+			which(Season==0 | Season==4),
+			"Winter"
+		),
+		Season = replace(
+			Season,
+			which(Season==1),
+			"Spring"
+		),
+		Season = replace(
+			Season,
+			which(Season==2),
+			"Summer"
+		),
+		Season = replace(
+			Season,
+			which(Season==3),
+			"Fall"
 		)
-	dat[which(dat$Season==0 | dat$Season==4), ]$Season 	<- "Winter"
-	dat[which(dat$Season==1), ]$Season 					<- "Spring"
-	dat[which(dat$Season==2), ]$Season 					<- "Summer"
-	dat[which(dat$Season==3) ,]$Season 					<- "Fall"
-	return(dat)
+	)
 }
