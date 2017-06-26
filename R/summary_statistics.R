@@ -87,6 +87,15 @@ mysum2 <- function(x) {
 			0
 }
 
+#' Return 1 for sums greater than 0, as well as for when vector is all NA.
+#' 
+#' @param x Vector of data.
+#' @references inspired by: http://tolstoy.newcastle.edu.au/R/help/02a/3218.html
+#'
+#' @export
+
+mysum3 <- function(x) {if (sum(x,na.rm=T) > 0) 1 else 0}
+
 #' Return the sum of a vector, after removing NAs.
 #' 
 #' @param x Vectors of data.
