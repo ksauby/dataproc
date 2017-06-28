@@ -54,7 +54,13 @@ Percentage <- function(x) base::mean(x, na.rm=TRUE) %>% round(3)*100
 #'
 #' @export
 
-Minimum <- function(x) {min(x, na.rm=TRUE)}
+Minimum <- function(x) {
+	ifelse(
+		!all(is.na(x)),
+		min(x, na.rm=TRUE),
+		NA
+	)
+}
 
 #' Return NA for vector of NAs
 #' 
