@@ -50,26 +50,22 @@ calculateLagGroupedDF <- function(
 calculateDateLags <- function(x){
 	# print warning about duplicates in the dataset
 	duplicates <- x %>% 
-		group_by(PlantID, Date) %>%
+		group_by(PlantID, SurveyDate_SpringSummer, FecundityYear) %>%
 		summarise(n.obs = length(Species)) %>%
 		filter(n.obs > 1)
 	if (dim(duplicates)[1] > 0) {
-		stop("Duplicates observations for a PlantID, Date combination are present in the dataset.")
-	} else {
-		x %<>% 
-			arrange(Date) %>%
-			group_by(PlantID) %>%
-			mutate(
-				# previous dates
-				# Previous_Survey_Date = as.Date(c(NA, utils::head(Date, -1))),
-				Previous_Survey_Date = as.Date(c(NA, Date[-length(Date)]), origin="1970-01-01"),
-				DaysSincePrevSurvey 	= Date - Previous_Survey_Date,
-				DaysSinceStart 			= Date - Date[1]
-			)
-		x$DaysSincePrevSurvey 	%<>% as.numeric
-		x$DaysSinceStart 		%<>% as.numeric
-		return(x)
+		stop("Duplicates observations for a PlantID, SurveyDate_SpringSummer combination are present in the dataset.")
 	}
+	x %<>% 
+		arrange(FecundityYear, SurveyDate_SpringSummer) %>%
+		group_by(PlantID) %>%
+		mutate(
+			Prev_SurveyDate_SpringSummer = lag(SurveyDate_SpringSummer),
+			DaysSincePrevSurvey = 
+				SurveyDate_SpringSummer - Prev_SurveyDate_SpringSummer
+		)
+	x$DaysSincePrevSurvey %<>% as.numeric
+	return(x)
 }
 
 #' Calculate insect presence at previous time step
