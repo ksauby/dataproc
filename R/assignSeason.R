@@ -14,7 +14,9 @@
 
 
 assignSeason <- function(dat, SeasonStarts=seasons) {
-	dat %>% mutate(
+	dat %>% 
+		rowwise() %>%
+		mutate(
 		Season = lapply(Date,
 				function(x) {
 					findInterval(
