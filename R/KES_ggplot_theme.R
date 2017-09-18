@@ -29,7 +29,7 @@ KEStheme <- function(base_size = 10, base_family = "") {
         legend.title =      element_text(size = base_size * 2, face = "bold", 
 							hjust = 0),
         legend.position =   "right",
-		legend.margin = unit(0.1, "lines"),
+		legend.spacing = unit(0.1, "lines"),
         panel.background =  element_rect(fill = "white", colour = NA),
         panel.border =      element_rect(fill=NA, colour="black", size=1.2),
         panel.grid.major =  element_blank(),
