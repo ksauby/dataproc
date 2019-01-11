@@ -29,6 +29,20 @@ Maximum <- function(x) {
 	)
 }
 
+#' Return the maximum value of a vector, after removing NAs. If all NAs, return a zero.
+#' 
+#' @param x Vectors of data.
+#'
+#' @export
+
+Maximum2 <- function(x) {
+	ifelse(
+		!all(is.na(x)),
+		max(x, na.rm=TRUE),
+		0
+	)
+}
+
 #' Return the mean of a vector with up to two decimal places, after removing NAs.
 #' 
 #' @param x Vectors of data.
