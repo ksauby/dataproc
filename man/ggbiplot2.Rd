@@ -6,12 +6,12 @@
 \usage{
 ggbiplot2(pcobj, choices = 1:2, scale = 1, pc.biplot = TRUE,
   obs.scale = 1 - scale, var.scale = scale, groups = NULL,
-  ellipse = FALSE, ellipse.prob = 0.68, labels = NULL, labels.size = 3,
-  alpha = 1, var.axes = TRUE, circle = FALSE, circle.prob = 0.69,
-  varname.size = 3, varname.adjust = 1.5, varname.abbrev = FALSE,
-  color = muted("red"), linetype = "solid", alpha_arrow = 1,
-  unit.circle.color = muted("white"), varname.color = "darkred",
-  point.size = 1, line.size = line.size,
+  ellipse = FALSE, ellipse.prob = 0.68, labels = NULL,
+  labels.size = 3, alpha = 1, var.axes = TRUE, circle = FALSE,
+  circle.prob = 0.69, varname.size = 3, varname.adjust = 1.5,
+  varname.abbrev = FALSE, color = muted("red"), linetype = "solid",
+  alpha_arrow = 1, unit.circle.color = muted("white"),
+  varname.color = "darkred", point.size = 1, line.size = line.size,
   scale_shape_manual = scale_shape_manual,
   scale_linetype_manual = scale_linetype_manual, axis.text.size = 15,
   axis.title.size = 20, xlim = xlim, ylim = ylim, border.size = 2,
@@ -94,4 +94,3 @@ Function to control graphics when plotting PCA results produced in R.}
 \description{
 PCA Plotting Function
 }
-

@@ -16,4 +16,3 @@ calculateInsectLags(x = x, arrange.variable, grouping.variable)
 \description{
 calculate lag insects.
 }
-

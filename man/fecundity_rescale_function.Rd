@@ -12,4 +12,3 @@ fecundity_rescale_function(x = x)
 \description{
 Only rescale once the fecundity dataset is final (missing values have been removed)
 }
-

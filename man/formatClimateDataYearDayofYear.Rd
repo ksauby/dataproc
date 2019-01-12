@@ -12,4 +12,3 @@ formatClimateDataYearDayofYear(climate_data)
 \description{
 Create Year and Day of Year variables.
 }
-

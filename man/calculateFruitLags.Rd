@@ -16,4 +16,3 @@ calculateFruitLags(x = x, arrange.variable, grouping.variable)
 \description{
 calculate lag size and fruit.
 }
-

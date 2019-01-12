@@ -12,4 +12,3 @@ change_weather_names_function1(y)
 \description{
 Abbreviate weather variable names
 }
-

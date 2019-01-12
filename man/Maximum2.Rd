@@ -12,4 +12,3 @@ Maximum2(x)
 \description{
 Return the maximum value of a vector, after removing NAs. If all NAs, return a zero.
 }
-

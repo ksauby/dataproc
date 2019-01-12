@@ -12,4 +12,3 @@ process_temp_PCA_data(data)
 \description{
 For use with SAS data.
 }
-

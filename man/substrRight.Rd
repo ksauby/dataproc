@@ -14,4 +14,3 @@ substrRight(x, n)
 \description{
 Saves the last n characters in a string. Copied from http://stackoverflow.com/questions/7963898/extracting-the-last-n-characters-from-a-string-in-r.
 }
-

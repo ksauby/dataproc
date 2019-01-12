@@ -17,4 +17,3 @@ x = c(1,2,3,4," ", "Not Recorded")
 NA_Function(x)
 
 }
-

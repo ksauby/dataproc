@@ -20,4 +20,3 @@ Replace data with NA if it is of questionable quality.
 		}
 }
 }
-

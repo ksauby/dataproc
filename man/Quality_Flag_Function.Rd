@@ -24,4 +24,3 @@ Table 2 (Quality Flag/Attribute) from the NOAA documentation:
  \item O = failed climatological outlier check
 	}
 }
-

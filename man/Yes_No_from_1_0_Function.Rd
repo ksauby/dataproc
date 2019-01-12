@@ -12,4 +12,3 @@ Yes_No_from_1_0_Function(x)
 \description{
 Rename Convert 1/0 to Yes/No
 }
-

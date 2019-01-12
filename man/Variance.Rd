@@ -14,4 +14,3 @@ Variance(x, round_n = 3)
 \description{
 Written for use in the tables::tabular function to create publication-ready tables.
 }
-

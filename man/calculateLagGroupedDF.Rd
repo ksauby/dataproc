@@ -19,4 +19,3 @@ calculateLagGroupedDF(x, vars, arrange.variable = "Date",
 \description{
 the function first arranges by Date
 }
-

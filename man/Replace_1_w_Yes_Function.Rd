@@ -12,4 +12,3 @@ Replace_1_w_Yes_Function(x)
 \description{
 Replace 1 with "Yes".
 }
-

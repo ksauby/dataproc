@@ -12,4 +12,3 @@ Unique(x)
 \description{
 Return unique values of a vector after removal of NA
 }
-

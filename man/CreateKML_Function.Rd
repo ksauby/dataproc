@@ -4,8 +4,9 @@
 \alias{CreateKML_Function}
 \title{Create a KML from a dataframe}
 \usage{
-CreateKML_Function(dataset = dataset, proj4stringdata = proj4stringdata,
-  CRSdata = CRSdata, NameField = NameField, filename = filename)
+CreateKML_Function(dataset = dataset,
+  proj4stringdata = proj4stringdata, CRSdata = CRSdata,
+  NameField = NameField, filename = filename)
 }
 \arguments{
 \item{dataset}{Dataset}
@@ -37,4 +38,3 @@ filename="unsurveyed_7sept14")
 \references{
 # inspired by the answer from rcs on http://stackoverflow.com/questions/7813141/how-to-create-a-kml-file-using-r
 }
-

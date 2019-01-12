@@ -12,4 +12,3 @@ Dead_Missing_Function(x)
 \description{
 A plant has been observed to be dead/missing if there is at least 1 observation of it being dead or missing.
 }
-

@@ -12,4 +12,3 @@ Replace_Blank_w_Okay_Function(x)
 \description{
 Replace blank values (quality is okay) with "Okay"
 }
-

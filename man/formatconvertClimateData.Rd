@@ -21,4 +21,3 @@ For each location, compile weather data from the closest weather stations.
 	}
 }
 }
-

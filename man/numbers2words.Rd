@@ -18,4 +18,3 @@ numbers2words(x)
 \description{
 Function found here: https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r. Function originally created by John Fox (http://tolstoy.newcastle.edu.au/R/help/05/04/2715.html) and then edited by AJH (added commas and "and").
 }
-

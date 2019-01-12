@@ -13,4 +13,3 @@ formatWeatherStationInfo(wstations, Start_Date = "2014-01-17",
 \description{
 Format Weather Station Info
 }
-

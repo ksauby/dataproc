@@ -12,4 +12,3 @@ Format_Date_Function(x)
 \description{
 The date format changes sometimes when I export the data from Access, sometimes exported as, for example, 1/28/13 0:00.
 }
-

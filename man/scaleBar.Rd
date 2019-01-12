@@ -4,11 +4,11 @@
 \alias{scaleBar}
 \title{Create a Scale Bar}
 \usage{
-scaleBar(lon, lat, distanceLon, distanceLat, distanceLegend, dist.unit = "km",
-  rec.fill = "white", rec.colour = "black", rec2.fill = "black",
-  rec2.colour = "black", legend.colour = "black", legend.size = 3,
-  orientation = TRUE, arrow.length = 500, arrow.distance = 300,
-  arrow.North.size = 6)
+scaleBar(lon, lat, distanceLon, distanceLat, distanceLegend,
+  dist.unit = "km", rec.fill = "white", rec.colour = "black",
+  rec2.fill = "black", rec2.colour = "black",
+  legend.colour = "black", legend.size = 3, orientation = TRUE,
+  arrow.length = 500, arrow.distance = 300, arrow.North.size = 6)
 }
 \arguments{
 \item{lon}{longitude of the bottom left point of the first rectangle to draw #' @param lat latitude of the bottom left point of the first rectangle to draw}
@@ -44,4 +44,3 @@ scaleBar(lon, lat, distanceLon, distanceLat, distanceLegend, dist.unit = "km",
 \description{
 This function enables to draw a scale bar on a ggplot object, and optionally an orientation arrow
 }
-

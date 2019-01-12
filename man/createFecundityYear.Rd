@@ -22,4 +22,3 @@ The years are defined as follows:
 \item Year 2015 - Spring, Summer, Fall, Winter 2015 - 2016
 }
 }
-

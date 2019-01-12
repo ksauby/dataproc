@@ -14,4 +14,3 @@ Transform(data, Name)
 \description{
 Transform variable.
 }
-

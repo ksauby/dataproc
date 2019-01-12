@@ -12,4 +12,3 @@ sampleCV(x)
 \description{
 Sample Coefficient of Variation
 }
-

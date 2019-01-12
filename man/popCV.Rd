@@ -12,4 +12,3 @@ popCV(x)
 \description{
 Population Coefficient of Variation
 }
-

@@ -12,4 +12,3 @@ Sum(x)
 \description{
 Written for use in the tables::tabular function to create publication-ready tables.
 }
-

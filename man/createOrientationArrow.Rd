@@ -4,7 +4,8 @@
 \alias{createOrientationArrow}
 \title{Create an Orientation Arrow}
 \usage{
-createOrientationArrow(scaleBar, length, distance = 1, dist.units = "km")
+createOrientationArrow(scaleBar, length, distance = 1,
+  dist.units = "km")
 }
 \arguments{
 \item{scaleBar}{result of createScaleBar()}
@@ -20,4 +21,3 @@ Returns a list containing:
 res : coordinates to draw an arrow
 coordinates of the middle of the arrow (where the "N" will be plotted)
 }
-

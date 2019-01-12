@@ -400,7 +400,6 @@ calculateDegreeDays <- function(climate_data, DegreeDay_list) {
 #' @description Create Year and Day of Year variables.
 #'
 #' @export
-#' @importFrom lubridate year
 
 formatClimateDataYearDayofYear <- function(climate_data) {
 	climate_data %>% 

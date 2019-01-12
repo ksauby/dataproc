@@ -14,4 +14,3 @@ formatasFactors(x, factors)
 \description{
 Format variables as factors.
 }
-

@@ -14,4 +14,3 @@ KEStheme(base_size = 10, base_family = "")
 \description{
 My personal ggplot2 theme.
 }
-

@@ -12,4 +12,3 @@ Confirmed_Dead_Missing_Function(x)
 \description{
 A plant is confirmed dead/missing if there area at least 2 observations (> 1) of the plant being dead and/or missing.
 }
-

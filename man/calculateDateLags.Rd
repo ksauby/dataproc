@@ -12,4 +12,3 @@ calculateDateLags(x)
 \description{
 calculate lag dates.
 }
-

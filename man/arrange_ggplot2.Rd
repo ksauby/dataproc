@@ -16,4 +16,3 @@ arrange_ggplot2(..., nrow = NULL, ncol = NULL, as.table = FALSE)
 \description{
 Arrange multiple ggplot figures in one window.
 }
-

@@ -15,4 +15,3 @@ Return 1 for sums greater than 0, as well as for when vector is all NA.
 \references{
 inspired by: http://tolstoy.newcastle.edu.au/R/help/02a/3218.html
 }
-

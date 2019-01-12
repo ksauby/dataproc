@@ -17,4 +17,3 @@ calculateClimateVariables(x, climate_data, calculate_dates = "TRUE",
 \description{
 Calculate climate variables from weather data
 }
-

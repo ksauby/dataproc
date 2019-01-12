@@ -20,4 +20,3 @@ dat = data.frame(
 dat \%>\% assignSeason
 
 }
-

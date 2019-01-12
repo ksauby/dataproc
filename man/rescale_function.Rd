@@ -12,4 +12,3 @@ rescale_function(x = x)
 \description{
 Only rescale once the dataset is final (missing values have been removed)
 }
-

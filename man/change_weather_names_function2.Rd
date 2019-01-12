@@ -12,4 +12,3 @@ change_weather_names_function2(y)
 \description{
 Abbreviate weather variable names to two characters
 }
-

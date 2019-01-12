@@ -16,4 +16,3 @@ safe.ifelse(cond, yes, no)
 \description{
 Retain the class of a variable when using ifelse. Copied from http://stackoverflow.com/questions/6668963/how-to-prevent-ifelse-from-turning-date-objects-into-numeric-objects.
 }
-

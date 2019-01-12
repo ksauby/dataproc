@@ -12,4 +12,3 @@ Replace_NA_w_Period_Function(x)
 \description{
 Replace NAs with no text so they are not printed on datasheets.
 }
-

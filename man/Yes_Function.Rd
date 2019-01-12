@@ -12,4 +12,3 @@ Yes_Function(x)
 \description{
 Standardize "Yes" values.
 }
-

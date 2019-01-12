@@ -14,4 +14,3 @@ calculateDegreeDays(climate_data, DegreeDay_list)
 \description{
 I used this website to calculate growing degree days: http://www.ipm.ucdavis.edu/WEATHER/ddretrievetext.html. This function merges them together with the \code{climate_data} dataframe.
 }
-

@@ -12,4 +12,3 @@ saveConfirmedDeadMissing(Plant_Info)
 \description{
 write csv with dead/missing plants - remove them from the maps
 }
-

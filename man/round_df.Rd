@@ -14,4 +14,3 @@ round_df(df, digits)
 \description{
 Round multiple columns in a dataframe
 }
-

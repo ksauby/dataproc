@@ -5,9 +5,10 @@
 \title{Calculate size variables at the previous time step}
 \usage{
 calculateSizeLags(x = x, arrange.variable, grouping.variable,
-  vars = c("Size_t", "Height_t", "Cone_t", "Cylinder_Tall_t", "Cylinder_t",
-  "Elliptic_Cylinder_t", "Size_max_t", "Size_min_t", "Cone_max_t", "Cone_min_t",
-  "Cylinder_Tall_max_t", "Cylinder_Tall_min_t"))
+  vars = c("Size_t", "Height_t", "Cone_t", "Cylinder_Tall_t",
+  "Cylinder_t", "Elliptic_Cylinder_t", "Size_max_t", "Size_min_t",
+  "Cone_max_t", "Cone_min_t", "Cylinder_Tall_max_t",
+  "Cylinder_Tall_min_t"))
 }
 \arguments{
 \item{x}{Dataset}
@@ -19,4 +20,3 @@ calculateSizeLags(x = x, arrange.variable, grouping.variable,
 \description{
 calculate lag size and fruit.
 }
-

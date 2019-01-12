@@ -12,4 +12,3 @@ getClimateDataByLocationDate(Datalist)
 \description{
 For each date and location, get weather data from the closest available weather station.
 }
-
