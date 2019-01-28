@@ -58,6 +58,7 @@ formatWeatherStationInfo <- function(wstations, Start_Date = "2014-01-17", End_D
 #' @description For each variable, NOAA uses generic column names "Measurement.Flag", "Quality.Flag", "Source.Flag", "Time.of.Observation" to ensure that the appropriate columns are merged together. This function renames these columns by pasting the name with the name of the variable to which it refers e.g., the "Measurement.Flag" column directly after "PRCP" will become "PRCP.Measurement.Flag" for each weather variable, take weather variable name and paste it to the names of the 4 following columns.
 #'
 #' @export
+#' @importFrom plyr rbind.fill
 
 mergeClimateFiles <- function(climate_file_names) {
 	X <- list()

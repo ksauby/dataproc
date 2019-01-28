@@ -12,6 +12,7 @@
 #' @export
 #' @importFrom lubridate year
 #' @importFrom rlang .data
+#' @importFrom dplyr rowwise
 
 
 assignSeason <- function(dat, SeasonStarts) {
