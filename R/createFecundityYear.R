@@ -19,10 +19,10 @@ createFecundityYear <- function(timeseries) {
 	timeseries$FecundityYear <- NA
 	timeseries %>% 
 		as.data.frame %>%
-		group_by(Date) %>% 
+		group_by(.data$Date) %>% 
 		mutate(
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
@@ -32,7 +32,7 @@ createFecundityYear <- function(timeseries) {
 				2009
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
@@ -42,7 +42,7 @@ createFecundityYear <- function(timeseries) {
 				2010
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
@@ -52,7 +52,7 @@ createFecundityYear <- function(timeseries) {
 				2011
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
@@ -62,7 +62,7 @@ createFecundityYear <- function(timeseries) {
 				2012
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
@@ -72,7 +72,7 @@ createFecundityYear <- function(timeseries) {
 				2013
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
@@ -82,7 +82,7 @@ createFecundityYear <- function(timeseries) {
 				2014
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					(Season == "Spring" | 
 					Season 	== "Summer" | 
@@ -92,7 +92,7 @@ createFecundityYear <- function(timeseries) {
 				2015
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					Date 	>= "2009-12-21" &
 					Date 	< "2010-3-20"
@@ -100,7 +100,7 @@ createFecundityYear <- function(timeseries) {
 				2009
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					Date 	>= "2010-12-21" &
 					Date 	< "2011-3-20"
@@ -108,7 +108,7 @@ createFecundityYear <- function(timeseries) {
 				2010
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					Date 	>= "2011-12-22" &
 					Date 	< "2012-3-20"
@@ -116,7 +116,7 @@ createFecundityYear <- function(timeseries) {
 				2011
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					Date 	>= "2012-12-21" &
 					Date 	< "2013-3-20"
@@ -124,7 +124,7 @@ createFecundityYear <- function(timeseries) {
 				2012
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					Date 	>= "2013-12-21" &
 					Date 	< "2014-3-20"
@@ -132,7 +132,7 @@ createFecundityYear <- function(timeseries) {
 				2013
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					Date 	>= "2014-12-21" &
 					Date 	< "2015-3-20"
@@ -140,7 +140,7 @@ createFecundityYear <- function(timeseries) {
 				2014
 			),
 			FecundityYear = replace(
-				FecundityYear, 
+				.data$FecundityYear, 
 				which(
 					Date 	>= "2015-12-21" &
 					Date 	< "2016-3-20"

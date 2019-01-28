@@ -4,7 +4,7 @@
 \alias{assignSeason}
 \title{Assign Season based on Date}
 \usage{
-assignSeason(dat, SeasonStarts = seasons)
+assignSeason(dat, SeasonStarts)
 }
 \arguments{
 \item{dat}{dataframe including "Date" in \code{POSIXct} format.}

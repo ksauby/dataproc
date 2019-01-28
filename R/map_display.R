@@ -6,30 +6,74 @@
 #' @param scaleBar result of createScaleBar()
 #' @param length desired length of the arrow
 #' @param distance distance between legend rectangles and the bottom of the arrow
-#' @param dist.units units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
+#' @param dist.unit units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
 #' 
 #' @export
 
-createOrientationArrow <- function(scaleBar, length, distance = 1, dist.units = "km"){
+createOrientationArrow <- function(scaleBar, length, distance = 1, dist.unit = "km"){
 	lon <- scaleBar$rectangle2[1,1]
 	lat <- scaleBar$rectangle2[1,2]
 
 	# Bottom point of the arrow
-	begPoint <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = distance, dist.units = dist.units, model = "WGS84")
+	begPoint <- gcDestination(
+		lon = lon, 
+		lat = lat, 
+		bearing = 0, 
+		dist = distance, 
+		dist.unit = dist.unit, 
+		model = "WGS84"
+	)
 	lon <- begPoint[1,"long"]
 	lat <- begPoint[1,"lat"]
 
 	# Let us create the endpoint
-	onTop <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = length, dist.units = dist.units, model = "WGS84")
+	onTop <- gcDestination(
+		lon = lon, 
+		lat = lat, 
+		bearing = 0, 
+		dist = length, 
+		dist.unit = dist.unit, 
+		model = "WGS84"
+	)
 
-	leftArrow <- gcDestination(lon = onTop[1,"long"], lat = onTop[1,"lat"], bearing = 225, dist = length/5, dist.units = dist.units, model = "WGS84")
+	leftArrow <- gcDestination(
+		lon = onTop[1,"long"], 
+		lat = onTop[1,"lat"], 
+		bearing = 225, 
+		dist = length/5, 
+		dist.unit = dist.unit,
+		model = "WGS84"
+	)
 
-	rightArrow <- gcDestination(lon = onTop[1,"long"], lat = onTop[1,"lat"], bearing = 135, dist = length/5, dist.units = dist.units, model = "WGS84")
+	rightArrow <- gcDestination(
+		lon = onTop[1,"long"], 
+		lat = onTop[1,"lat"], 
+		bearing = 135, 
+		dist = length/5, 
+		dist.unit = dist.unit, 
+		model = "WGS84"
+	)
 
 	res <- rbind(
-			cbind(x = lon, y = lat, xend = onTop[1,"long"], yend = onTop[1,"lat"]),
-			cbind(x = leftArrow[1,"long"], y = leftArrow[1,"lat"], xend = onTop[1,"long"], yend = onTop[1,"lat"]),
-			cbind(x = rightArrow[1,"long"], y = rightArrow[1,"lat"], xend = onTop[1,"long"], yend = onTop[1,"lat"]))
+			cbind(
+				x = lon, 
+				y = lat, 
+				xend = onTop[1,"long"], 
+				yend = onTop[1,"lat"]
+			),
+			cbind(
+				x = leftArrow[1,"long"], 
+				y = leftArrow[1,"lat"], 
+				xend = onTop[1,"long"], 
+				yend = onTop[1,"lat"]
+			),
+			cbind(
+				x = rightArrow[1,"long"], 
+				y = rightArrow[1,"lat"], 
+				xend = onTop[1,"long"], 
+				yend = onTop[1,"lat"]
+			)
+		)
 
 	res <- as.data.frame(res, stringsAsFactors = FALSE)
 
@@ -45,31 +89,32 @@ createOrientationArrow <- function(scaleBar, length, distance = 1, dist.units = 
 #' @param distanceLon length of each rectangle
 #' @param distanceLat width of each rectangle
 #' @param distanceLegend distance between rectangles and legend texts
-#' @param dist.units units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
+#' @param dist.unit units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
 #' @description Return a list whose elements are:
 #' rectangle - a data.frame containing the coordinates to draw the first rectangle
 #' rectangle2 - a data.frame containing the coordinates to draw the second rectangle
 #' legend - a data.frame containing the coordinates of the legend texts, and the texts as well
 #' 
 #' @export
+#' @importFrom ggplot2 geom_polygon aes annotate
 
-createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.units = "km"){
+createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.unit = "km"){
 	# First rectangle
-	bottomRight <- gcDestination(lon = lon, lat = lat, bearing = 90, dist = distanceLon, dist.units = dist.units, model = "WGS84")
+	bottomRight <- gcDestination(lon = lon, lat = lat, bearing = 90, dist = distanceLon, dist.unit = dist.unit, model = "WGS84")
 
-	topLeft <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = distanceLat, dist.units = dist.units, model = "WGS84")
+	topLeft <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = distanceLat, dist.unit = dist.unit, model = "WGS84")
 	rectangle <- cbind(lon=c(lon, lon, bottomRight[1,"long"], bottomRight[1,"long"], lon),
 	lat = c(lat, topLeft[1,"lat"], topLeft[1,"lat"],lat, lat))
 	rectangle <- data.frame(rectangle, stringsAsFactors = FALSE)
 
 	# Second rectangle t right of the first rectangle
-	bottomRight2 <- gcDestination(lon = lon, lat = lat, bearing = 90, dist = distanceLon*2, dist.units = dist.units, model = "WGS84")
+	bottomRight2 <- gcDestination(lon = lon, lat = lat, bearing = 90, dist = distanceLon*2, dist.unit = dist.unit, model = "WGS84")
 	rectangle2 <- cbind(lon = c(bottomRight[1,"long"], bottomRight[1,"long"], bottomRight2[1,"long"], bottomRight2[1,"long"], bottomRight[1,"long"]),
 	lat=c(lat, topLeft[1,"lat"], topLeft[1,"lat"], lat, lat))
 	rectangle2 <- data.frame(rectangle2, stringsAsFactors = FALSE)
 
 	# Now let's deal with the text
-	onTop <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = distanceLegend, dist.units = dist.units, model = "WGS84")
+	onTop <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = distanceLegend, dist.unit = dist.unit, model = "WGS84")
 	onTop2 <- onTop3 <- onTop
 	onTop2[1,"long"] <- bottomRight[1,"long"]
 	onTop3[1,"long"] <- bottomRight2[1,"long"]
@@ -85,7 +130,7 @@ createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.
 #' @param distanceLon length of each rectangle
 #' @param distanceLat width of each rectangle
 #' @param distanceLegend distance between rectangles and legend texts
-#' @param dist.units units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
+#' @param dist.unit units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
 #' @param rec.fill filling colour of the rectangles (default to white, and black, resp.)
 #' @param rec2.fill filling colour of the rectangles (default to white, and black, resp.)
 #' @param rec.colour colour of the rectangles (default to black for both)

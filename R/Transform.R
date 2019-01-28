@@ -9,12 +9,12 @@
 Transform <- function(data, Name) {
 	data %<>%
 		mutate(
-			sqrt(.[, 1])
+			sqrt(.data[, 1])
 		) %>%
-		setnames(., dim(.)[2], paste("square root of ", Name, sep="")) %>%
+		setnames(.data, dim(.data)[2], paste("square root of ", Name, sep="")) %>%
 		mutate(
-			log(.[, 1])
+			log(.data[, 1])
 		) %>%
-		setnames(., dim(.)[2], paste("ln(", Name, ")", sep=""))
+		setnames(.data, dim(.data)[2], paste("ln(", Name, ")", sep=""))
 	return(data)
 }

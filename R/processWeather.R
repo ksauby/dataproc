@@ -419,21 +419,21 @@ formatClimateDataYearDayofYear <- function(climate_data) {
 
 calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", Dates_dataframe=NULL, first.year=2009) {
 	climate_data %<>% 
-		renameLocations %>%
-		formatClimateDataYearDayofYear %>%
+		renameLocations(.data) %>%
+		formatClimateDataYearDayofYear(.data) %>%
 		mutate(
-			Precip_Presence = ifelse(Precip>0, 1, 0),
-			MinTemp_lt_equal_0 = ifelse(MinTemp<=0, 1, 0)
+			Precip_Presence = ifelse(.data$Precip>0, 1, 0),
+			MinTemp_lt_equal_0 = ifelse(.data$MinTemp<=0, 1, 0)
 		)			
 	# create list of dates
 	if (calculate_dates=="TRUE") {
 		# get unique Date and DaysSincePrevSurvey combos
 		A = as.data.frame(x) %>%
-			group_by(Date, Location, Species) %>%
+			group_by(.data$Date, .data$Location, .data$Species) %>%
 			# to make sure that this group all share the same Previous_Survey_Date Date
-			summarise(PrevSurvD = paste(max(Previous_Survey_Date, na.rm=T))) %>%
+			summarise(PrevSurvD = paste(max(.data$Previous_Survey_Date, na.rm=T))) %>%
 			as.data.frame %>%
-			arrange(Location, Date)
+			arrange(.data$Location, .data$Date)
 		#----------------- Fill in Missing Previous Survey Date for Survey 1 --#
 		# Generate fake "PrevSurvD" based on the average number of days 
 		#		between surveys
@@ -556,7 +556,7 @@ calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", D
 		"sd_Consecutive_Freezing_Days")] %<>% 
 		apply(., 2, NA_Function
 	)
-	A1 %<>% dplyr::select(-PrevSurvD)
+	A1 %<>% dplyr::select(-.data$PrevSurvD)
 	return(A1)
 }
 

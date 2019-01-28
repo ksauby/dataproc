@@ -18,7 +18,13 @@ Imports:
     utils,
     data.table,
     reshape2,
-	rgdal
+	rgdal,
+	ggplot2,
+	lubridate,
+	sp,
+	rlang,
+	scales,
+	plyr
 Suggests:
     testthat
 RoxygenNote: 6.1.1

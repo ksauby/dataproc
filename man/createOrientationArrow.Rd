@@ -5,7 +5,7 @@
 \title{Create an Orientation Arrow}
 \usage{
 createOrientationArrow(scaleBar, length, distance = 1,
-  dist.units = "km")
+  dist.unit = "km")
 }
 \arguments{
 \item{scaleBar}{result of createScaleBar()}
@@ -14,7 +14,7 @@ createOrientationArrow(scaleBar, length, distance = 1,
 
 \item{distance}{distance between legend rectangles and the bottom of the arrow}
 
-\item{dist.units}{units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)}
+\item{dist.unit}{units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)}
 }
 \description{
 Returns a list containing:

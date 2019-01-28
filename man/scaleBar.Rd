@@ -19,6 +19,8 @@ scaleBar(lon, lat, distanceLon, distanceLat, distanceLegend,
 
 \item{distanceLegend}{distance between rectangles and legend texts}
 
+\item{dist.unit}{units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)}
+
 \item{rec.fill}{filling colour of the rectangles (default to white, and black, resp.)}
 
 \item{rec.colour}{colour of the rectangles (default to black for both)}
@@ -38,8 +40,6 @@ scaleBar(lon, lat, distanceLon, distanceLat, distanceLegend,
 \item{arrow.distance}{distance between the scale bar and the bottom of the arrow (default to 300 km)}
 
 \item{arrow.North.size}{size of the "N" letter (default to 6)}
-
-\item{dist.units}{units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)}
 }
 \description{
 This function enables to draw a scale bar on a ggplot object, and optionally an orientation arrow

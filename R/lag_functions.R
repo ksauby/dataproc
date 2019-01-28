@@ -5,6 +5,7 @@
 #' @param grouping.variable is the variable that groups the data. Defaults to "PlantID".
 #' @description the function first arranges by Date
 #' @export
+#' @importFrom dplyr mutate_at ungroup group_by_ arrange_
 
 calculateLagGroupedDF <- function(
 	x, 
@@ -44,25 +45,24 @@ calculateLagGroupedDF <- function(
 #' @param x Dataset
 #' @description calculate lag dates.
 #' @importFrom utils head
-#' @import chron
 #' @export
 
 calculateDateLags <- function(x){
 	# print warning about duplicates in the dataset
 	duplicates <- x %>% 
-		group_by(PlantID, SurveyDate_SpringSummer, FecundityYear) %>%
-		summarise(n.obs = length(Species)) %>%
+		group_by(.data$PlantID, .data$SurveyDate_SpringSummer, .data$FecundityYear) %>%
+		summarise(n.obs = length(.data$Species)) %>%
 		filter(n.obs > 1)
 	if (dim(duplicates)[1] > 0) {
 		stop("Duplicates observations for a PlantID, SurveyDate_SpringSummer combination are present in the dataset.")
 	}
 	x %<>% 
-		arrange(FecundityYear, SurveyDate_SpringSummer) %>%
-		group_by(PlantID) %>%
+		arrange(.data$FecundityYear, .data$SurveyDate_SpringSummer) %>%
+		group_by(.data$PlantID) %>%
 		mutate(
-			Prev_SurveyDate_SpringSummer = lag(SurveyDate_SpringSummer),
+			Prev_SurveyDate_SpringSummer = lag(.data$SurveyDate_SpringSummer),
 			DaysSincePrevSurvey = 
-				SurveyDate_SpringSummer - Prev_SurveyDate_SpringSummer
+				.data$SurveyDate_SpringSummer - .data$Prev_SurveyDate_SpringSummer
 		)
 	x$DaysSincePrevSurvey %<>% as.numeric
 	return(x)

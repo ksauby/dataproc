@@ -5,7 +5,7 @@
 \title{Create a Scale Bar for a ggmap}
 \usage{
 createScaleBar(lon, lat, distanceLon, distanceLat, distanceLegend,
-  dist.units = "km")
+  dist.unit = "km")
 }
 \arguments{
 \item{lon}{longitude of the bottom left point of the first rectangle to draw #' @param lat latitude of the bottom left point of the first rectangle to draw}
@@ -16,7 +16,7 @@ createScaleBar(lon, lat, distanceLon, distanceLat, distanceLegend,
 
 \item{distanceLegend}{distance between rectangles and legend texts}
 
-\item{dist.units}{units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)}
+\item{dist.unit}{units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)}
 }
 \description{
 Return a list whose elements are:

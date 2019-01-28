@@ -11,13 +11,14 @@
 #' 
 #' @export
 #' @importFrom lubridate year
+#' @importFrom rlang .data
 
 
-assignSeason <- function(dat, SeasonStarts=seasons) {
+assignSeason <- function(dat, SeasonStarts) {
 	dat %>% 
-		rowwise() %>%
+		rowwise(.data) %>%
 		mutate(
-		Season = lapply(Date,
+		Season = lapply(.data$Date,
 				function(x) {
 					findInterval(
 						x, 
@@ -26,23 +27,23 @@ assignSeason <- function(dat, SeasonStarts=seasons) {
 				}
 		) %>% unlist,
 		Season = replace(
-		Season,
-			which(Season==0 | Season==4),
+		.data$Season,
+			which(.data$Season==0 | .data$Season==4),
 			"Winter"
 		),
 		Season = replace(
-			Season,
-			which(Season==1),
+			.data$Season,
+			which(.data$Season==1),
 			"Spring"
 		),
 		Season = replace(
-			Season,
-			which(Season==2),
+			.data$Season,
+			which(.data$Season==2),
 			"Summer"
 		),
 		Season = replace(
-			Season,
-			which(Season==3),
+			.data$Season,
+			which(.data$Season==3),
 			"Fall"
 		)
 	)

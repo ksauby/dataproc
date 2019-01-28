@@ -3,6 +3,7 @@
 #' @param base_size Base font size. Defaults to 10.
 #' @param base_family Defaults to default.
 #' @description My personal ggplot2 theme.
+#' @importFrom ggplot2 theme_bw theme element_blank element_text margin element_line unit element_rect
 #' 
 #' @export
 

@@ -27,30 +27,30 @@ calculateRGR <- function(x=x){
 	)
 	if ("Height_t" %in% names(x)) {
 		x %<>% mutate(
-			RGR_Height		= (Height_t - Height_t_1) /
-								(DaysSincePrevSurvey*Height_t_1),
-			RGR_Height365 	= RGR_Height*365		
+			RGR_Height		= (.data$Height_t - .data$Height_t_1) /
+								(.data$DaysSincePrevSurvey*.data$Height_t_1),
+			RGR_Height365 	= .data$RGR_Height*365		
 		)
 	}
 	if ("Size_t" %in% names(x)) {
 		x %<>% mutate(
-			RGR_Size		= (Size_t - Size_t_1) /
-								(DaysSincePrevSurvey*Size_t_1),
-			RGR_Size365 	= RGR_Size*365				
+			RGR_Size		= (.data$Size_t - .data$Size_t_1) /
+								(.data$DaysSincePrevSurvey*.data$Size_t_1),
+			RGR_Size365 	= .data$RGR_Size*365				
 		)
 	}
 	if ("Cone_t" %in% names(x)) {
 		x %<>% mutate(
-			RGR_Cone		= (Cone_t - Cone_t_1) / 
-								(DaysSincePrevSurvey*Cone_t_1),
-			RGR_Cone365 	= RGR_Cone*365				
+			RGR_Cone		= (.data$Cone_t - .data$Cone_t_1) / 
+								(.data$DaysSincePrevSurvey*.data$Cone_t_1),
+			RGR_Cone365 	= .data$RGR_Cone*365				
 		)
 	}
 	if ("Cylinder_Tall_t" %in% names(x)) {
 		x %<>% mutate(
-			RGR_Cylinder_Tall = (Cylinder_Tall_t - Cylinder_Tall_t_1) / 
-									(DaysSincePrevSurvey*Cylinder_Tall_t_1),
-			RGR_CylinderTall365 = RGR_Cylinder_Tall*365
+			RGR_Cylinder_Tall = (.data$Cylinder_Tall_t - .data$Cylinder_Tall_t_1) / 
+									(.data$DaysSincePrevSurvey*.data$Cylinder_Tall_t_1),
+			RGR_CylinderTall365 = .data$RGR_Cylinder_Tall*365
 		)
 	}
 	
