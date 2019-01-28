@@ -71,12 +71,12 @@ mergeClimateFiles <- function(climate_file_names) {
 		X[[h]] <- list()
 		# select weather station info to keep
 		X[[h]][[1]] <- Y %>% dplyr::select(
-			STATION, 
-			STATION_NAME, 
-			ELEVATION, 
-			LATITUDE, 
-			LONGITUDE, 
-			DATE
+			.data$STATION, 
+			.data$STATION_NAME, 
+			.data$ELEVATION, 
+			.data$LATITUDE, 
+			.data$LONGITUDE, 
+			.data$DATE
 		)
 		# counter for weather variable (have to count because not all files have all weather variables)
 		k=2 # start at 2 because weather station info goes in [[1]]
@@ -184,7 +184,7 @@ filterClimateDataByQuality <- function(climate_data) {
 		"PRCP.Quality.Flag", 
 		"TMIN.Quality.Flag",
 		"TMAX.Quality.Flag"
-	)] %<>% apply(., 2, Replace_Blank_w_Okay_Function)
+	)] %<>% apply(.data, 2, Replace_Blank_w_Okay_Function)
 	# Replace -999 and blanks with NAs
 	climate_data[,c(
 		"STATION", 
@@ -208,7 +208,7 @@ filterClimateDataByQuality <- function(climate_data) {
 		"TMAX.Quality.Flag",
 		"TMAX.Source.Flag",
 		"TMAX.Time.Flag"
-	)] %<>% apply(., 2, NA_Function)
+	)] %<>% apply(.data, 2, NA_Function)
 	return(climate_data)
 }
 
@@ -233,15 +233,15 @@ formatconvertClimateData <- function(climate_data) {
 		"PRCP",
 		"TMIN",
 		"TMAX"
-	)] %<>% apply(., 2, as.numeric)
+	)] %<>% apply(.data, 2, as.numeric)
 	climate_data %<>% mutate(
-			MinTemp = TMIN/10, # convert tenths of Celcius to Celsius
-			MaxTemp = TMAX/10, # convert tenths of Celcius to Celsius
-			Precip = PRCP/100, # convert PRCP (in tenths of mm) to cm
-			Date = as.Date(as.character(DATE), "%Y%m%d")
+			MinTemp = .data$TMIN/10, # convert tenths of Celcius to Celsius
+			MaxTemp = .data$TMAX/10, # convert tenths of Celcius to Celsius
+			Precip = .data$PRCP/100, # convert PRCP (in tenths of mm) to cm
+			Date = as.Date(as.character(.data$DATE), "%Y%m%d")
 		)
 	# replace NAs again just in case
-	climate_data[,c("MinTemp","MaxTemp","Precip")] %<>% apply(., 2, NA_Function)
+	climate_data[,c("MinTemp","MaxTemp","Precip")] %<>% apply(.data, 2, NA_Function)
 	# replace NA for precip
 	climate_data$Precip[which(climate_data$Precip < 0)] <- NA
 	return(climate_data)

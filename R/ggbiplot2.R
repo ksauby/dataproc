@@ -43,6 +43,7 @@
 #' @importFrom ggplot2 geom_path geom_segment geom_text geom_point xlab ylab coord_equal
 #' @importFrom scales muted
 #' @importFrom plyr ddply
+#' @importFrom utils getFromNamespace
 
 ggbiplot2 <- function (
 	pcobj, 
@@ -83,6 +84,8 @@ ggbiplot2 <- function (
 	pct_y_buffer=0.5
 ) 
 {
+	angle = getFromNamespace("angle", "ggplot2")
+	hjust = getFromNamespace("hjust", "ggplot2")
     stopifnot(length(choices) == 2)
     if (inherits(pcobj, "prcomp")) {
         nobs.factor <- sqrt(nrow(pcobj$x) - 1)

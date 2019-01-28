@@ -5,7 +5,7 @@
 #' @param grouping.variable is the variable that groups the data. Defaults to "PlantID".
 #' @description the function first arranges by Date
 #' @export
-#' @importFrom dplyr mutate_at ungroup group_by_ arrange_
+#' @importFrom dplyr mutate_at ungroup group_by_ arrange_ lag funs
 
 calculateLagGroupedDF <- function(
 	x, 

@@ -6,9 +6,8 @@
 #' @export
 	
 saveConfirmedDeadMissing <- function(Plant_Info) {
-	Plant_Info_Dead <- filter(
-		Plant_Info, 
-		ConfirmedDead=="1" | ConfirmedMissing=="1"
+	Plant_Info_Dead <- Plant_Info %>% filter( 
+		.data$ConfirmedDead=="1" | .data$ConfirmedMissing=="1"
 	)
-	Plant_Info_Dead %<>% arrange(Tag_Number, PlantID)
+	Plant_Info_Dead %<>% arrange(.data$Tag_Number, .data$PlantID)
 }

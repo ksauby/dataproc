@@ -22,7 +22,7 @@ process_temp_PCA_data <- function(data) {
 #' @export
 
 process_FWtemp_PCA_data <- function(data) {
-	data %<>% mutate(ObsYear = year(Date) - 1)
+	data %<>% mutate(ObsYear = year(.data$Date) - 1)
 	data$Date %<>% as.Date
 	data$Location %<>% factor
 	data %>%

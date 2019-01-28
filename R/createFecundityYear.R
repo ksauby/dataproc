@@ -24,126 +24,126 @@ createFecundityYear <- function(timeseries) {
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					(Season == "Spring" | 
-					Season 	== "Summer" | 
-					Season 	== "Fall") &
-					year(Date) 	== 2009 
+					(.data$Season == "Spring" | 
+					.data$Season 	== "Summer" | 
+					.data$Season 	== "Fall") &
+					year(.data$Date) 	== 2009 
 				), 
 				2009
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					(Season == "Spring" | 
-					Season 	== "Summer" | 
-					Season 	== "Fall") &
-					year(Date)== 2010 
+					(.data$Season == "Spring" | 
+					.data$Season 	== "Summer" | 
+					.data$Season 	== "Fall") &
+					.data$year(Date)== 2010 
 				), 
 				2010
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					(Season == "Spring" | 
-					Season 	== "Summer" | 
-					Season 	== "Fall") &
-					year(Date)== 2011
+					(.data$Season == "Spring" | 
+					.data$Season 	== "Summer" | 
+					.data$Season 	== "Fall") &
+					year(.data$Date)== 2011
 				), 
 				2011
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					(Season == "Spring" | 
-					Season 	== "Summer" | 
-					Season 	== "Fall") &
-					year(Date)== 2012
+					(.data$Season == "Spring" | 
+					.data$Season 	== "Summer" | 
+					.data$Season 	== "Fall") &
+					year(.data$Date)== 2012
 				), 
 				2012
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					(Season == "Spring" | 
-					Season 	== "Summer" | 
-					Season 	== "Fall") &
-					year(Date)== 2013
+					(.data$Season == "Spring" | 
+					.data$Season 	== "Summer" | 
+					.data$Season 	== "Fall") &
+					year(.data$Date)== 2013
 				), 
 				2013
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					(Season == "Spring" | 
-					Season 	== "Summer" | 
-					Season 	== "Fall") &
-					year(Date)== 2014
+					(.data$Season == "Spring" | 
+					.data$Season 	== "Summer" | 
+					.data$Season 	== "Fall") &
+					year(.data$Date)== 2014
 				), 
 				2014
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					(Season == "Spring" | 
-					Season 	== "Summer" | 
-					Season 	== "Fall") &
-					year(Date)== 2015
+					(.data$Season == "Spring" | 
+					.data$Season 	== "Summer" | 
+					.data$Season 	== "Fall") &
+					year(.data$Date)== 2015
 				), 
 				2015
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					Date 	>= "2009-12-21" &
-					Date 	< "2010-3-20"
+					.data$Date 	>= "2009-12-21" &
+					.data$Date 	< "2010-3-20"
 				), 
 				2009
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					Date 	>= "2010-12-21" &
-					Date 	< "2011-3-20"
+					.data$Date 	>= "2010-12-21" &
+					.data$Date 	< "2011-3-20"
 				), 
 				2010
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					Date 	>= "2011-12-22" &
-					Date 	< "2012-3-20"
+					.data$Date 	>= "2011-12-22" &
+					.data$Date 	< "2012-3-20"
 				), 
 				2011
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					Date 	>= "2012-12-21" &
-					Date 	< "2013-3-20"
+					.data$Date 	>= "2012-12-21" &
+					.data$Date 	< "2013-3-20"
 				), 
 				2012
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					Date 	>= "2013-12-21" &
-					Date 	< "2014-3-20"
+					.data$Date 	>= "2013-12-21" &
+					.data$Date 	< "2014-3-20"
 				), 
 				2013
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					Date 	>= "2014-12-21" &
-					Date 	< "2015-3-20"
+					.data$Date 	>= "2014-12-21" &
+					.data$Date 	< "2015-3-20"
 				), 
 				2014
 			),
 			FecundityYear = replace(
 				.data$FecundityYear, 
 				which(
-					Date 	>= "2015-12-21" &
-					Date 	< "2016-3-20"
+					.data$Date 	>= "2015-12-21" &
+					.data$Date 	< "2016-3-20"
 				), 
 				2015
 			)
