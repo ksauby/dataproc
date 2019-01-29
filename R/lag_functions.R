@@ -6,6 +6,7 @@
 #' @description the function first arranges by Date
 #' @export
 #' @importFrom dplyr mutate_at ungroup group_by_ arrange_ lag funs
+#' @importFrom stats setNames
 
 calculateLagGroupedDF <- function(
 	x, 
@@ -26,7 +27,7 @@ calculateLagGroupedDF <- function(
 			z <- x %>% dplyr::select_(
 				.dots = c(
 					grouping.variable,
-					names(.)[match(mycols, names(x))]
+					names(.data)[match(mycols, names(x))]
 				)
 			)
 			# set new variable name

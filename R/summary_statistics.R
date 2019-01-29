@@ -138,6 +138,7 @@ popCV <- function(x) {sqrt(PopVariance(x))/Mean(x)}
 #' @param x Vectors of data.
 #'
 #' @export
+#' @importFrom stats var
 
 sampleCV <- function(x) {sqrt(var(x, na.rm=T))/Mean(x)}
 

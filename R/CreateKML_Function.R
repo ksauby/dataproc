@@ -15,12 +15,16 @@
 #' # create KML of unsurveyed plots - dataset "Unsurveyed"
 #' # The points should be named based on the column "Tag_Number"
 #' # give the KML file the name "unsurveyed_7sept14"
-#' CreateKML(dataset=Unsurveyed, proj4stringdata="+proj=utm +zone=17 +datum=WGS84",
-#'	CRSdata="+proj=longlat +datum=WGS84", NameField="Tag_Number", 
-#'	filename="unsurveyed_7sept14")
+#' CreateKML(
+#'	dataset=Unsurveyed, 
+#'	proj4stringdata="+proj=utm +zone=17 +datum=WGS84",
+#'	CRSdata="+proj=longlat +datum=WGS84", 
+#'	NameField="Tag_Number", 
+#'	filename="unsurveyed_7sept14"
+#')
 #' 
 #' @export
-#' @importFrom sp coordinates spTransform
+#' @importFrom sp coordinates spTransform CRS proj4string
 #' @importFrom rgdal writeOGR
 
 CreateKML_Function <- function(

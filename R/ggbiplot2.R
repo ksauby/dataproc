@@ -44,6 +44,7 @@
 #' @importFrom scales muted
 #' @importFrom plyr ddply
 #' @importFrom utils getFromNamespace
+#' @importFrom stats qchisq predict
 
 ggbiplot2 <- function (
 	pcobj, 

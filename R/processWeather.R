@@ -557,7 +557,7 @@ calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", D
 		"Mean_Consecutive_Freezing_Days",
 		"Max_Consecutive_Freezing_Days",
 		"sd_Consecutive_Freezing_Days")] %<>% 
-		apply(., 2, NA_Function
+		apply(.data, 2, NA_Function
 	)
 	A1 %<>% dplyr::select(-.data$PrevSurvD)
 	return(A1)
