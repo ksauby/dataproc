@@ -1,6 +1,7 @@
 #' Convert the format of multiple columns
 #' 
-#' @param x Vectors of data.
+#' @param obj obj
+#' @param type type
 #' @references found function here on 9sep13: http://stackoverflow.com/questions/11261399/function-for-converting-dataframe-column-type
 #' 
 #' @export

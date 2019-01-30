@@ -7,7 +7,7 @@
 process_temp_PCA_data(data)
 }
 \arguments{
-\item{x}{Output PCA data (from SAS).}
+\item{data}{Output PCA data (from SAS).}
 }
 \description{
 For use with SAS data.

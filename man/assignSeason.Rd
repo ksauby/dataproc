@@ -8,6 +8,8 @@ assignSeason(dat, SeasonStarts)
 }
 \arguments{
 \item{dat}{dataframe including "Date" in \code{POSIXct} format.}
+
+\item{SeasonStarts}{SeasonStarts}
 }
 \description{
 Assign seasons based on date.

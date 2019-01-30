@@ -9,6 +9,10 @@ formatWeatherStationInfo(wstations, Start_Date = "2014-01-17",
 }
 \arguments{
 \item{wstations}{List of weather stations, downloaded from the NOAA NCDC site}
+
+\item{Start_Date}{Start_Date}
+
+\item{End_Date}{End_Date}
 }
 \description{
 Format Weather Station Info

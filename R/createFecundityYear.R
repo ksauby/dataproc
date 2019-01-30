@@ -148,5 +148,5 @@ createFecundityYear <- function(timeseries) {
 				2015
 			)
 		) %>%
-		ungroup
+		ungroup(.data)
 }

@@ -192,7 +192,7 @@ calculateSizeLags <- function(
 	)
 ){
 	x %>% calculateLagGroupedDF(
-		vars, 
+		.data$vars, 
 		arrange.variable, 
 		grouping.variable
 	)

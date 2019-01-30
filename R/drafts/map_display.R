@@ -9,6 +9,7 @@
 #' @param dist.unit units of distance "km" (kilometers) (default), "nm" (nautical miles), "mi" (statute miles)
 #' 
 #' @export
+#' @importFrom maptools gcDestination
 
 createOrientationArrow <- function(scaleBar, length, distance = 1, dist.unit = "km"){
 	lon <- scaleBar$rectangle2[1,1]
@@ -100,28 +101,78 @@ createOrientationArrow <- function(scaleBar, length, distance = 1, dist.unit = "
 
 createScaleBar <- function(lon,lat,distanceLon,distanceLat,distanceLegend, dist.unit = "km"){
 	# First rectangle
-	bottomRight <- gcDestination(lon = lon, lat = lat, bearing = 90, dist = distanceLon, dist.unit = dist.unit, model = "WGS84")
-
-	topLeft <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = distanceLat, dist.unit = dist.unit, model = "WGS84")
-	rectangle <- cbind(lon=c(lon, lon, bottomRight[1,"long"], bottomRight[1,"long"], lon),
-	lat = c(lat, topLeft[1,"lat"], topLeft[1,"lat"],lat, lat))
+	bottomRight <- gcDestination(
+		lon = lon, 
+		lat = lat, 
+		bearing = 90, 
+		dist = distanceLon, 
+		dist.unit = dist.unit, 
+		model = "WGS84"
+	)
+	topLeft <- gcDestination(
+		lon = lon, 
+		lat = lat, 
+		bearing = 0, 
+		dist = distanceLat, 
+		dist.unit = dist.unit, 
+		model = "WGS84"
+	)
+	rectangle <- cbind(
+		lon=c(lon, lon, bottomRight[1,"long"], bottomRight[1,"long"], lon),
+		lat = c(lat, topLeft[1,"lat"], topLeft[1,"lat"], lat, lat)
+	)
 	rectangle <- data.frame(rectangle, stringsAsFactors = FALSE)
 
 	# Second rectangle t right of the first rectangle
-	bottomRight2 <- gcDestination(lon = lon, lat = lat, bearing = 90, dist = distanceLon*2, dist.unit = dist.unit, model = "WGS84")
-	rectangle2 <- cbind(lon = c(bottomRight[1,"long"], bottomRight[1,"long"], bottomRight2[1,"long"], bottomRight2[1,"long"], bottomRight[1,"long"]),
+	bottomRight2 <- gcDestination(
+		lon = lon, 
+		lat = lat, 
+		bearing = 90, 
+		dist = distanceLon*2, 
+		dist.unit = dist.unit, 
+		model = "WGS84"
+	)
+	rectangle2 <- cbind(
+		lon = c(bottomRight[1,"long"], 
+		bottomRight[1,"long"], 
+		bottomRight2[1,"long"], 
+		bottomRight2[1,"long"], 
+		bottomRight[1,"long"]
+	),
 	lat=c(lat, topLeft[1,"lat"], topLeft[1,"lat"], lat, lat))
 	rectangle2 <- data.frame(rectangle2, stringsAsFactors = FALSE)
 
 	# Now let's deal with the text
-	onTop <- gcDestination(lon = lon, lat = lat, bearing = 0, dist = distanceLegend, dist.unit = dist.unit, model = "WGS84")
+	onTop <- gcDestination(
+		lon = lon, 
+		lat = lat, 
+		bearing = 0, 
+		dist = distanceLegend, 
+		dist.unit = dist.unit, 
+		model = "WGS84"
+	)
 	onTop2 <- onTop3 <- onTop
 	onTop2[1,"long"] <- bottomRight[1,"long"]
 	onTop3[1,"long"] <- bottomRight2[1,"long"]
 
 	legend <- rbind(onTop, onTop2, onTop3)
-	legend <- data.frame(cbind(legend, text = c(0, distanceLon, distanceLon*2)), stringsAsFactors = FALSE, row.names = NULL)
-	return(list(rectangle = rectangle, rectangle2 = rectangle2, legend = legend))
+	legend <- data.frame(
+		cbind(
+			legend, 
+			text = c(
+				0, 
+				distanceLon, 
+				distanceLon*2
+			)
+		), 
+		stringsAsFactors = FALSE, 
+		row.names = NULL
+	)
+	return(list(
+		rectangle = rectangle, 
+		rectangle2 = rectangle2, 
+		legend = legend
+	))
 }
 
 #' Create a Scale Bar

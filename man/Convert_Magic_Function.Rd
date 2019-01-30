@@ -7,7 +7,9 @@
 Convert_Magic_Function(obj, type)
 }
 \arguments{
-\item{x}{Vectors of data.}
+\item{obj}{obj}
+
+\item{type}{type}
 }
 \description{
 Convert the format of multiple columns

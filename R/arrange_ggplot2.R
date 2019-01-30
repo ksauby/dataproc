@@ -3,6 +3,7 @@
 #' @param nrow Number of rows of plots. Defaults to \code{NULL}.
 #' @param ncol Number of columns of plots. Defaults to \code{NULL}.
 #' @param as.table I don't remember what this means. Defaults to \code{NULL}.
+#' @param ... additional functions
 #' @description Arrange multiple ggplot figures in one window.
 #' 
 #' @export

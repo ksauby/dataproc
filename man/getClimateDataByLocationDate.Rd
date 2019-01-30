@@ -4,10 +4,12 @@
 \alias{getClimateDataByLocationDate}
 \title{Choose closest weather variable measurement for each Location/Date combo}
 \usage{
-getClimateDataByLocationDate(Datalist)
+getClimateDataByLocationDate(Datalist, Location_list)
 }
 \arguments{
 \item{Datalist}{Output (list format) from the \code{findClosestWeatherStations} function.}
+
+\item{Location_list}{Location_list}
 }
 \description{
 For each date and location, get weather data from the closest available weather station.

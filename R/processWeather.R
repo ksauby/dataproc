@@ -35,6 +35,8 @@ Replace_Blank_w_Okay_Function <- function(x){
 #' Format Weather Station Info
 #' 
 #' @param wstations List of weather stations, downloaded from the NOAA NCDC site
+#' @param Start_Date Start_Date
+#' @param End_Date End_Date
 #'
 #' @export
 
@@ -54,7 +56,7 @@ formatWeatherStationInfo <- function(wstations, Start_Date = "2014-01-17", End_D
 
 #' Merge Weather Data Files and Format Column Names
 #' 
-#' @param climate_data Climate dataset
+#' @param climate_file_names Climate dataset
 #' @description For each variable, NOAA uses generic column names "Measurement.Flag", "Quality.Flag", "Source.Flag", "Time.of.Observation" to ensure that the appropriate columns are merged together. This function renames these columns by pasting the name with the name of the variable to which it refers e.g., the "Measurement.Flag" column directly after "PRCP" will become "PRCP.Measurement.Flag" for each weather variable, take weather variable name and paste it to the names of the 4 following columns.
 #'
 #' @export
@@ -252,10 +254,12 @@ formatconvertClimateData <- function(climate_data) {
 #' 
 #' @description For each date and location, get weather data from the closest available weather station.
 #' @param Datalist Output (list format) from the \code{findClosestWeatherStations} function.
+#' @param Location_list Location_list
 #'
 #' @export
+#' @importFrom plyr join_all
 
-getClimateDataByLocationDate <- function(Datalist) {
+getClimateDataByLocationDate <- function(Datalist, Location_list) {
 	X <- list()
 	# for each LOCATION
 	for (i in 1:length(Location_list)) {
@@ -268,7 +272,7 @@ getClimateDataByLocationDate <- function(Datalist) {
 			sep=""
 		)))
 		# PRECIPITATION
-		P 			<- data %>% filter(!is.na(Precip))
+		P 			<- data %>% filter(!is.na(.data$Precip))
 		X[[i]][[1]] <- as.data.frame(matrix(NA, length(unique(P$Date)), 6))
 		names(X[[i]][[1]]) <- c(
 			"Precip_STATION_NAME", 
@@ -282,18 +286,18 @@ getClimateDataByLocationDate <- function(Datalist) {
 		for (j in 1:length(unique(P$Date))) {
 			# pull climate data associated with that location
 			X[[i]][[1]][j, ] = P %>% 
-				filter(Date == unique(Date)[j]) %>%
-				filter(Distance == min(Distance)) %>%
+				filter(.data$Date == unique(.data$Date)[j]) %>%
+				filter(.data$Distance == min(.data$Distance)) %>%
 				summarise(
-					Precip_STATION_NAME 	= STATION_NAME,
-					Precip_STATION 			= Station.ID,
-					Precip_STATION_Distance = Distance,
-					Date 					= Date[1],
-					Precip 					= Precip
+					Precip_STATION_NAME 	= .data$STATION_NAME,
+					Precip_STATION 			= .data$Station.ID,
+					Precip_STATION_Distance = .data$Distance,
+					Date 					= .data$Date[1],
+					Precip 					= .data$Precip
 				)
 		}
 		# MIN TEMPERATURE
-		Min 		<- data %>% filter(!is.na(MinTemp))
+		Min 		<- data %>% filter(!is.na(.data$MinTemp))
 		X[[i]][[2]] <- as.data.frame(
 			matrix(NA, length(unique(Min$Date)), 6)
 		)
@@ -309,18 +313,18 @@ getClimateDataByLocationDate <- function(Datalist) {
 		for (j in 1:length(unique(Min$Date))) {
 			# pull climate data associated with that location
 			X[[i]][[2]][j, ] = Min %>% 
-				filter(Date == unique(Date)[j]) %>%
-				filter(Distance == min(Distance)) %>%
+				filter(.data$Date == unique(.data$Date)[j]) %>%
+				filter(.data$Distance == min(.data$Distance)) %>%
 				summarise(
-					MinTemp_STATION_NAME 		= STATION_NAME,
-					MinTemp_STATION 			= Station.ID,
-					MinTemp_STATION_Distance 	= Distance,
-					Date 						= Date,
-					MinTemp 					= MinTemp
+					MinTemp_STATION_NAME 		= .data$STATION_NAME,
+					MinTemp_STATION 			= .data$Station.ID,
+					MinTemp_STATION_Distance 	= .data$Distance,
+					Date 						= .data$Date,
+					MinTemp 					= .data$MinTemp
 				)
 		}
 		# MAX TEMPERATURE
-		Max <- data %>% filter(!is.na(MaxTemp))
+		Max <- data %>% filter(!is.na(.data$MaxTemp))
 		X[[i]][[3]] <- as.data.frame(
 			matrix(NA, length(unique(Max$Date)), 6)
 		)
@@ -339,11 +343,11 @@ getClimateDataByLocationDate <- function(Datalist) {
 				filter(Date == unique(Date)[j]) %>%
 				filter(Distance == min(Distance)) %>%
 				summarise(
-					MaxTemp_STATION_NAME 		= STATION_NAME,
-					MaxTemp_STATION 			= Station.ID,
-					MaxTemp_STATION_Distance 	= Distance,
-					Date 						= Date,
-					MaxTemp 					= MaxTemp
+					MaxTemp_STATION_NAME 		= .data$STATION_NAME,
+					MaxTemp_STATION 			= .data$Station.ID,
+					MaxTemp_STATION_Distance 	= .data$Distance,
+					Date 						= .data$Date,
+					MaxTemp 					= .data$MaxTemp
 				)
 		}
 		X[[i]][[1]]$Date %<>% as.Date(origin="1970-01-01")
@@ -405,8 +409,8 @@ calculateDegreeDays <- function(climate_data, DegreeDay_list) {
 formatClimateDataYearDayofYear <- function(climate_data) {
 	climate_data %>% 
 		mutate(
-			Year = year(Date),
-			Day_of_year = as.numeric(strftime(Date, format = "%j"))
+			Year = year(.data$Date),
+			Day_of_year = as.numeric(strftime(.data$Date, format = "%j"))
 		)			
 }
 
@@ -415,10 +419,12 @@ formatClimateDataYearDayofYear <- function(climate_data) {
 #' @param x survey data
 #' @param climate_data climate data
 #' @param calculate_dates Default is \code{TRUE}. Either \code{x} is a dataframe of survey dates from which to calculate dates for climate variables or \code{x} is a list of pre-determined dates and their locations, in which case \code{calculate_dates} should be \code{FALSE}.
+#' @param Dates_dataframe Dates_dataframe
+#' @param first.year first.year
 #'
 #' @export
 #' @importFrom dplyr group_by summarise arrange filter
-
+#' @importFrom stats sd
 
 calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", Dates_dataframe=NULL, first.year=2009) {
 	climate_data %<>% 
@@ -496,10 +502,10 @@ calculateClimateVariables <- function(x, climate_data, calculate_dates="TRUE", D
 		A1$Daily_Precip_SD[i] 	<- sd(temp$Precip, na.rm=T)
 		#		length of precip > 0 / length of precip != NA
 		A1$Perc_Days_w_Rain[i] 	<- 
-			length(filter(temp, Precip>0)$Precip) / length(!is.na(temp$Precip))
+			length(filter(temp, .data$Precip>0)$Precip) / length(!is.na(temp$Precip))
 		#		length of MinTemp <= 0 / length of MinTemp != NA
 		A1$Perc_Days_w_Freeze[i] <- 
-			length(filter(temp, MinTemp<=0)$MinTemp) / 
+			length(filter(temp, .data$MinTemp<=0)$MinTemp) / 
 			length(!is.na(temp$MinTemp))
 		A1$mean_Max_Temp[i] 		<- mean(temp$MaxTemp, na.rm=T)
 		A1$sd_Max_Temp[i] 		<- sd(temp$MaxTemp, na.rm=T)

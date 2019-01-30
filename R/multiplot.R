@@ -2,6 +2,7 @@
 #'
 #' @param plotlist Defaults to \code{NULL}.
 #' @param file Data
+#' @param ... extra arguments
 #' @param cols Number of columns in layout. Defaults to \code{1}.
 #' @param layout A matrix specifying the layout. If present, 'cols' is ignored.. Defaults to \code{NULL}.
 #' @description ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)

@@ -7,6 +7,8 @@
 arrange_ggplot2(..., nrow = NULL, ncol = NULL, as.table = FALSE)
 }
 \arguments{
+\item{...}{additional functions}
+
 \item{nrow}{Number of rows of plots. Defaults to \code{NULL}.}
 
 \item{ncol}{Number of columns of plots. Defaults to \code{NULL}.}

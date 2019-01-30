@@ -2,6 +2,7 @@
 #' 
 #' @description Assign seasons based on date.
 #' @param dat dataframe including "Date" in \code{POSIXct} format.
+#' @param SeasonStarts SeasonStarts
 #' @examples
 #' dat = data.frame(
 #'     Date = as.POSIXct(strptime(as.Date("2011-12-01", format = "%Y-%m-%d") + 

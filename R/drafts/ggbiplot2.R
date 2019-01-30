@@ -1,6 +1,5 @@
 #'  PCA Plotting Function
 #' 
-#' @param DATES I don't remember what this is
 #' @param pcobj PCA objects?
 #' @param choices Defaults to \code{1:2}
 #' @param scale Defaults to \code{1}

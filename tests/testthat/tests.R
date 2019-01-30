@@ -139,8 +139,9 @@ test_that("calculateLagGroupedDF", {
 			70
 		)
 	) %>% 
-		arrange(Date) %>% 
-		calculateLagGroupedDF(
+		arrange(.data$Date) 
+	test <- calculateLagGroupedDF(
+			x = test,
 			vars = c(
 				"Size_t", 
 				"Height_t", 

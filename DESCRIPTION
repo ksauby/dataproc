@@ -24,7 +24,8 @@ Imports:
 	sp,
 	rlang,
 	scales,
-	plyr
+	plyr,
+	maptools
 Suggests:
     testthat
 RoxygenNote: 6.1.1

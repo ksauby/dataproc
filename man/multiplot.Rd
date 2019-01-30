@@ -7,6 +7,8 @@
 multiplot(..., plotlist = NULL, file, cols = 1, layout = NULL)
 }
 \arguments{
+\item{...}{extra arguments}
+
 \item{plotlist}{Defaults to \code{NULL}.}
 
 \item{file}{Data}

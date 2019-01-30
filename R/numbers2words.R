@@ -1,9 +1,6 @@
-#' Multiple plot function
+#' Numbers to words
 #'
-#' @param plotlist Defaults to \code{NULL}.
-#' @param file Data
-#' @param cols Number of columns in layout. Defaults to \code{1}.
-#' @param layout A matrix specifying the layout. If present, 'cols' is ignored.. Defaults to \code{NULL}.
+#' @param x
 #' @description Function found here: https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r. Function originally created by John Fox (http://tolstoy.newcastle.edu.au/R/help/05/04/2715.html) and then edited by AJH (added commas and "and"). 
 #'
 #' @export

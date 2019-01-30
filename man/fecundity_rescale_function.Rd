@@ -7,7 +7,7 @@
 fecundity_rescale_function(x = x)
 }
 \arguments{
-\item{x}{}
+\item{x}{data?}
 }
 \description{
 Only rescale once the fecundity dataset is final (missing values have been removed)

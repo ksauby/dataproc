@@ -2,18 +2,9 @@
 % Please edit documentation in R/numbers2words.R
 \name{numbers2words}
 \alias{numbers2words}
-\title{Multiple plot function}
+\title{Numbers to words}
 \usage{
 numbers2words(x)
-}
-\arguments{
-\item{plotlist}{Defaults to \code{NULL}.}
-
-\item{file}{Data}
-
-\item{cols}{Number of columns in layout. Defaults to \code{1}.}
-
-\item{layout}{A matrix specifying the layout. If present, 'cols' is ignored.. Defaults to \code{NULL}.}
 }
 \description{
 Function found here: https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r. Function originally created by John Fox (http://tolstoy.newcastle.edu.au/R/help/05/04/2715.html) and then edited by AJH (added commas and "and").
